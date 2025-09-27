@@ -1,7 +1,7 @@
 (function(){
-  // Quantity Select Manager using event delegation so ALL selectors work
-  const BTN_SELECTOR = 'button[id^="product_card_quantity_select_"], button[id*="quantity_select"]';
-  const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
+  // Disabled Quantity Selector script for debugging
+  // Returning early to prevent any click interception
+  return;
 
   function getId(btn, idx){
     if (!btn.id) btn.id = `gd_qty_${Date.now()}_${idx ?? Math.floor(Math.random()*1e6)}`;
