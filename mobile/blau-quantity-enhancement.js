@@ -18,7 +18,7 @@
     <style>
       :host{ all: initial; }
       *{ box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:none; }
+      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:auto; }
       .panel{ position:fixed; background:#fff; color:#111; border:1px solid rgba(0,0,0,.12); border-radius:10px; box-shadow:0 18px 42px rgba(0,0,0,.22); min-width:120px; max-height:260px; overflow:auto; z-index:1; }
       .list{ list-style:none; margin:0; padding:6px 0; }
       .item{ padding:10px 14px; cursor:pointer; font-size:15px; }
@@ -154,10 +154,10 @@
     const t = e.target;
     const btn = t && t.closest && t.closest(BTN_SELECTOR);
     if (!btn) return;
-    // Do not prevent default site handlers; just also open our selector
-    // e.preventDefault();
-    // e.stopPropagation();
-    // if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+    // Prevent site handlers from reacting to this interaction
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
 
     if (currentBtn && currentBtn === btn){
       // already open for this button: just reposition
@@ -168,7 +168,7 @@
   }
 
   // Attach opener
-  document.addEventListener('click', maybeOpen, false);
+  document.addEventListener('click', maybeOpen, true);
 
   // Outside click handled via overlay pass-through
 
