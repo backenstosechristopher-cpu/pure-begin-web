@@ -217,15 +217,11 @@
     document.addEventListener(evt, onDocCaptureBlock, true);
   });
 
-  // Bubble click-away closer with guard
-  function onDocClickBubble(e){
-    if (Date.now() < ignoreClicksUntil) return;
-    const t = e.target;
-    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
-    const inDropdown = t && t.closest && t.closest('ul[role="listbox"]');
-    if (!onBtn && !inDropdown) closeAll(null);
-  }
-  document.addEventListener('click', onDocClickBubble, false);
+  // Remove bubble outside-closer; rely on overlay click only to close
+  // Previously we listened on document 'click' in bubble phase to close.
+  // This caused instant closing due to site-level click handlers.
+  // Now outside closing is handled solely by the transparent overlay we show when open.
+
 
   // Ensure ARIA base for any existing matching buttons
   function primeExisting(){
