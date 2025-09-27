@@ -1,6 +1,6 @@
 (function(){
   // Quantity Select Manager using event delegation so ALL selectors work
-  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"]';
+  const BTN_SELECTOR = 'button[id^="product_card_quantity_select_"], button[id*="quantity_select"]';
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
 
   function getId(btn, idx){
@@ -221,25 +221,18 @@
       
       // Force check for any missed selectors with alternative patterns
       const altSelectors = [
-        'button:contains("Quantity")',
-        'button:contains("Anzahl")', 
-        '[class*="quantity"] button',
-        '[class*="select"] button[role="combobox"]',
-        'button[aria-expanded]'
+        // Kept for reference; not used directly as CSS selectors
       ];
       
-      altSelectors.forEach(selector => {
+      altSelectors.forEach(() => {
         try {
           const buttons = Array.from(document.querySelectorAll('button')).filter(btn => {
-            const text = btn.textContent || '';
-            const classes = btn.className || '';
-            const ariaLabel = btn.getAttribute('aria-label') || '';
-            return text.toLowerCase().includes('quantity') || 
-                   text.toLowerCase().includes('anzahl') ||
-                   classes.toLowerCase().includes('quantity') ||
-                   classes.toLowerCase().includes('select') ||
-                   ariaLabel.toLowerCase().includes('quantity') ||
-                   ariaLabel.toLowerCase().includes('anzahl');
+            const text = (btn.textContent || '').toLowerCase();
+            const ariaLabel = (btn.getAttribute('aria-label') || '').toLowerCase();
+            const idAttr = (btn.id || '').toLowerCase();
+            return idAttr.includes('quantity') ||
+                   ariaLabel.includes('quantity') || ariaLabel.includes('anzahl') ||
+                   text.includes('quantity') || text.includes('anzahl');
           });
           
           buttons.forEach(btn => {
