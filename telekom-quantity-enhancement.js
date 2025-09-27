@@ -171,6 +171,20 @@
     }
   }
 
+  // While open, block all site events outside dropdown/button to prevent auto-close
+  function blockWhileOpen(e){
+    if (!openFor) return;
+    const t = e.target;
+    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
+    const inDropdown = t && t.closest && t.closest('#gd_qty_dropdown');
+    const onOverlay = t && (t === overlay || (t.closest && t.closest('#gd_qty_overlay')));
+    if (!onBtn && !inDropdown && !onOverlay){
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+    }
+  }
+
   // Main pointerdown (capture): open or select; outside handled by overlay
   function onDocClickCapture(e){
     if (e._qtyHandled) return;
@@ -262,9 +276,15 @@
   }
 
   // Listeners (capture-phase to beat site handlers)
-  ['pointerdown','mousedown','mouseup','touchstart','touchend','dblclick'].forEach(evt => {
+  const evtTypes = ['click','pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','dblclick'];
+  evtTypes.forEach(evt => {
     document.addEventListener(evt, blockInsideControls, true);
     window.addEventListener(evt, blockInsideControls, true);
+    // While open, block everything outside dropdown/button (capture and bubble)
+    document.addEventListener(evt, blockWhileOpen, true);
+    window.addEventListener(evt, blockWhileOpen, true);
+    document.addEventListener(evt, blockWhileOpen, false);
+    window.addEventListener(evt, blockWhileOpen, false);
   });
   // Suppress site click handlers briefly after opening
   document.addEventListener('click', suppressClicks, true);
