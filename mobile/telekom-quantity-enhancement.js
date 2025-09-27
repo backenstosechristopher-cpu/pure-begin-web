@@ -111,12 +111,18 @@
     return inst;
   }
 
+  let isToggling = false;
+  
   // Delegated clicks (capture) to beat MUI handlers
   function onDocClickCapture(e){
     const target = e.target;
     const btn = (target && (target.closest && target.closest(BTN_SELECTOR))) || null;
     // Click on a quantity button toggles its dropdown
     if (btn){
+      if (isToggling) return;
+      isToggling = true;
+      setTimeout(() => isToggling = false, 50);
+      
       const inst = getOrInit(btn);
       e.preventDefault();
       e.stopPropagation();
@@ -166,7 +172,6 @@
     }
   }
 
-  document.addEventListener('mousedown', onDocClickCapture, true);
   document.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
 
