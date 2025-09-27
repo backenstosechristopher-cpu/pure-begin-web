@@ -83,10 +83,35 @@
     console.log('[QTY] Opening dropdown for:', inst.btn.id);
     inst.isOpen = true;
     positionDropdown(inst);
-    ignoreOutsideUntil = Date.now() + 700;
+    ignoreOutsideUntil = Date.now() + 900;
     inst.dropdown.style.display = 'block';
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
+
+    // Temporary global guard to block outside click-away handlers
+    const guard = (ev) => {
+      if (Date.now() < ignoreOutsideUntil) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
+      } else {
+        document.removeEventListener('mousedown', guard, true);
+        document.removeEventListener('pointerdown', guard, true);
+        document.removeEventListener('click', guard, true);
+        document.removeEventListener('touchstart', guard, true);
+        document.removeEventListener('touchend', guard, true);
+        document.removeEventListener('mouseup', guard, true);
+        document.removeEventListener('pointerup', guard, true);
+      }
+    };
+    document.addEventListener('mousedown', guard, true);
+    document.addEventListener('pointerdown', guard, true);
+    document.addEventListener('click', guard, true);
+    document.addEventListener('touchstart', guard, true);
+    document.addEventListener('touchend', guard, true);
+    document.addEventListener('mouseup', guard, true);
+    document.addEventListener('pointerup', guard, true);
+
     console.log('[QTY] Dropdown opened, ignoring outside clicks until:', new Date(ignoreOutsideUntil));
   }
 
@@ -209,7 +234,7 @@
     document.querySelectorAll(BTN_SELECTOR).forEach((b, idx) => {
       const inst = getOrInit(b);
       b.setAttribute('aria-haspopup','listbox');
-      b.setAttribute('aria-expanded','false');
+      b.setAttribute('aria-expanded', inst.isOpen ? 'true' : 'false');
       // sync once to reflect current title
       syncSelectionUI(inst);
     });
