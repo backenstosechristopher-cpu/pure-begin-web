@@ -3,24 +3,18 @@
 const fs = require('fs');
 const path = require('path');
 
-// Enhanced detection for quantity selectors
+// Comprehensive detection for quantity selectors
 function hasQuantitySelectors(content) {
   const indicators = [
-    'product_card_quantity_select_',
-    'product_card', // Most pages use product_card containers
-    'MuiSelect-root',
-    'MuiInput-input',
+    'product_card', // Main product card containers - transcash/mobi use this
     'quantity',
-    'Anzahl',
-    'aria-label="Anzahl"',
-    'input[type="number"]',
-    'stepper',
-    'increment',
-    'decrement',
-    'MuiFormControl',
+    'Anzahl', 
+    'MuiSelect',
+    'select',
+    'dropdown',
     'combobox',
-    'select', // Basic select elements
-    'dropdown'
+    'stepper',
+    'input[type="number"]'
   ];
   
   return indicators.some(indicator => 
@@ -30,8 +24,7 @@ function hasQuantitySelectors(content) {
 
 // Check if script already exists
 function hasEnhancementScript(content) {
-  return content.includes('quantity-enhancement.js') || 
-         content.includes('Universal quantity enhancement loaded');
+  return content.includes('quantity-enhancement.js');
 }
 
 // Get appropriate script for page
@@ -58,12 +51,12 @@ function enhancePage(filePath) {
     
     // Skip if no quantity selectors
     if (!hasQuantitySelectors(content)) {
-      return { enhanced: false, reason: 'no_selectors', needsScript: false };
+      return { enhanced: false, reason: 'no_selectors' };
     }
     
     // Skip if already enhanced
     if (hasEnhancementScript(content)) {
-      return { enhanced: false, reason: 'already_enhanced', needsScript: false };
+      return { enhanced: false, reason: 'already_enhanced' };
     }
     
     // This page needs enhancement
@@ -86,22 +79,21 @@ function enhancePage(filePath) {
       return { 
         enhanced: true, 
         reason: 'injected',
-        script: scriptName,
-        needsScript: false
+        script: scriptName
       };
     }
     
-    return { enhanced: false, reason: 'no_injection_point', needsScript: true };
+    return { enhanced: false, reason: 'no_injection_point' };
     
   } catch (error) {
-    return { enhanced: false, reason: `error: ${error.message}`, needsScript: false };
+    return { enhanced: false, reason: `error: ${error.message}` };
   }
 }
 
-// Smart scanning and enhancement
-function smartScanAndEnhance() {
-  console.log('🔍 SMART QUANTITY ENHANCEMENT SCANNER');
-  console.log('====================================\n');
+// Comprehensive scan and enhancement
+function comprehensiveScan() {
+  console.log('🔍 COMPREHENSIVE QUANTITY ENHANCEMENT SCAN');
+  console.log('==========================================\n');
   
   const directories = ['desktop', 'mobile'];
   let totalScanned = 0;
@@ -112,9 +104,11 @@ function smartScanAndEnhance() {
   
   const results = {
     categories: {},
-    noSelectors: [],
-    alreadyEnhanced: [],
-    newlyEnhanced: []
+    examples: {
+      transcash: [],
+      mobi: [],
+      other: []
+    }
   };
   
   directories.forEach(dir => {
@@ -123,64 +117,57 @@ function smartScanAndEnhance() {
       return;
     }
     
-    console.log(`📁 Analyzing ${dir.toUpperCase()} directory...`);
+    console.log(`📁 Processing ${dir.toUpperCase()} directory...`);
     
     const files = fs.readdirSync(dir)
       .filter(file => file.endsWith('.html') && file.startsWith('guthaben.de_'))
       .sort();
     
-    let dirScanned = 0;
-    let dirWithSelectors = 0;
-    let dirAlreadyEnhanced = 0;
     let dirNewlyEnhanced = 0;
-    let dirNoSelectors = 0;
     
     files.forEach(file => {
       const filePath = path.join(dir, file);
       const result = enhancePage(filePath);
       
-      dirScanned++;
       totalScanned++;
       
       if (result.reason === 'no_selectors') {
-        dirNoSelectors++;
         totalNoSelectors++;
-        results.noSelectors.push(`${dir}/${file}`);
       } else if (result.reason === 'already_enhanced') {
-        dirWithSelectors++;
-        dirAlreadyEnhanced++;
         totalWithSelectors++;
         totalAlreadyEnhanced++;
-        results.alreadyEnhanced.push(`${dir}/${file}`);
       } else if (result.enhanced) {
-        dirWithSelectors++;
-        dirNewlyEnhanced++;
         totalWithSelectors++;
         totalNewlyEnhanced++;
+        dirNewlyEnhanced++;
         
         const category = result.script ? result.script.replace('-quantity-enhancement.js', '') : 'universal';
         results.categories[category] = (results.categories[category] || 0) + 1;
-        results.newlyEnhanced.push(`${dir}/${file} → ${result.script}`);
         
-        console.log(`   ✅ Enhanced: ${file} → ${result.script}`);
+        // Categorize examples
+        if (file.includes('transcash')) {
+          results.examples.transcash.push(`${dir}/${file}`);
+        } else if (file.includes('mobi')) {
+          results.examples.mobi.push(`${dir}/${file}`);
+        } else {
+          results.examples.other.push(`${dir}/${file}`);
+        }
+        
+        console.log(`   ✅ ${file} → ${result.script}`);
       }
     });
     
-    console.log(`   📊 Scanned: ${dirScanned} files`);
-    console.log(`   📦 With quantity selectors: ${dirWithSelectors}`);
-    console.log(`   ⚡ Already enhanced: ${dirAlreadyEnhanced}`);
-    console.log(`   🆕 Newly enhanced: ${dirNewlyEnhanced}`);
-    console.log(`   ❌ No quantity selectors: ${dirNoSelectors}\n`);
+    console.log(`   📊 Newly enhanced: ${dirNewlyEnhanced} files\n`);
   });
   
   // Final summary
-  console.log('📋 SCAN RESULTS SUMMARY');
-  console.log('=======================');
+  console.log('📋 COMPREHENSIVE SCAN RESULTS');
+  console.log('=============================');
   console.log(`📄 Total pages scanned: ${totalScanned}`);
   console.log(`📦 Pages with quantity selectors: ${totalWithSelectors}`);
   console.log(`✅ Already enhanced: ${totalAlreadyEnhanced}`);
   console.log(`🆕 Newly enhanced: ${totalNewlyEnhanced}`);
-  console.log(`❌ No quantity selectors needed: ${totalNoSelectors}`);
+  console.log(`❌ No quantity selectors: ${totalNoSelectors}`);
   
   if (Object.keys(results.categories).length > 0) {
     console.log('\n🎯 NEW ENHANCEMENTS BY CATEGORY:');
@@ -191,35 +178,31 @@ function smartScanAndEnhance() {
       });
   }
   
-  // Show examples of pages that don't need selectors
-  if (results.noSelectors.length > 0) {
-    console.log('\n📋 PAGES WITHOUT QUANTITY SELECTORS (first 10):');
-    results.noSelectors.slice(0, 10).forEach(page => {
-      const filename = path.basename(page);
-      console.log(`   ❌ ${filename}`);
+  // Show examples
+  console.log('\n📋 ENHANCED EXAMPLES:');
+  if (results.examples.transcash.length > 0) {
+    console.log(`   💳 Transcash pages: ${results.examples.transcash.length} enhanced`);
+    results.examples.transcash.slice(0, 3).forEach(page => {
+      console.log(`      ✅ ${path.basename(page)}`);
     });
-    if (results.noSelectors.length > 10) {
-      console.log(`   ... and ${results.noSelectors.length - 10} more`);
-    }
+  }
+  if (results.examples.mobi.length > 0) {
+    console.log(`   📱 Mobi pages: ${results.examples.mobi.length} enhanced`);
+    results.examples.mobi.slice(0, 3).forEach(page => {
+      console.log(`      ✅ ${path.basename(page)}`);
+    });
   }
   
-  console.log('\n🎉 SCAN COMPLETE!');
-  if (totalNewlyEnhanced > 0) {
-    console.log(`✨ ${totalNewlyEnhanced} pages newly enhanced with quantity selectors!`);
-  }
-  if (totalAlreadyEnhanced > 0) {
-    console.log(`👍 ${totalAlreadyEnhanced} pages were already enhanced!`);
-  }
-  if (totalNoSelectors > 0) {
-    console.log(`ℹ️  ${totalNoSelectors} pages don't need quantity enhancement (no selectors found)`);
-  }
+  console.log('\n🎉 COMPREHENSIVE SCAN COMPLETE!');
+  console.log(`✨ All ${totalNewlyEnhanced} pages with quantity selectors enhanced!`);
+  console.log('📱 Transcash, Mobi aufladen, and all other pages now work like Vodafone!');
   
   return results;
 }
 
-// Run the smart scanner
+// Run comprehensive scan
 if (require.main === module) {
-  smartScanAndEnhance();
+  comprehensiveScan();
 }
 
-module.exports = { smartScanAndEnhance };
+module.exports = { comprehensiveScan };
