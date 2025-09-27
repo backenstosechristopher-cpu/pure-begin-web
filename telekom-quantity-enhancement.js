@@ -165,6 +165,13 @@
     document.addEventListener(evt, whileOpenBlocker, false);
   });
 
+  // Open listeners (capture) so we beat site handlers
+  ['pointerdown','click'].forEach(evt => {
+    window.addEventListener(evt, maybeOpen, true);
+    document.addEventListener(evt, maybeOpen, true);
+  });
+
+
   // ESC to close
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && currentBtn){
@@ -173,17 +180,39 @@
     }
   }, true);
 
+  // Hide blocking overlays from static export (MUI backdrops)
+  function hideBlockingOverlays(){
+    try {
+      if (!document.getElementById('lovable-overlay-fix')){
+        const style = document.createElement('style');
+        style.id = 'lovable-overlay-fix';
+        style.textContent = `
+          .mui-style-1jtyhdp{ display:none !important; pointer-events:none !important; }
+          .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"]{ display:none !important; pointer-events:none !important; }
+        `;
+        document.head.appendChild(style);
+      }
+      document.querySelectorAll('.mui-style-1jtyhdp, .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"]').forEach(el => {
+        el.style.setProperty('display','none','important');
+        el.style.setProperty('pointer-events','none','important');
+      });
+    } catch(_){}
+  }
 
-  // Keep buttons primed for ARIA
+  // Keep buttons primed for ARIA and hide overlays
   function prime(){
+    hideBlockingOverlays();
     document.querySelectorAll(BTN_SELECTOR).forEach(b => {
       b.setAttribute('aria-haspopup','listbox');
       b.setAttribute('aria-expanded', currentBtn && currentBtn === b ? 'true' : 'false');
     });
   }
-  prime();
+  // Initial run
+  prime(); hideBlockingOverlays();
   if (window.MutationObserver){
-    const mo = new MutationObserver(prime);
+    const mo = new MutationObserver(() => { prime(); hideBlockingOverlays(); });
     mo.observe(document.body, { childList:true, subtree:true });
   }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { prime(); hideBlockingOverlays(); }, { once:true });
+  window.addEventListener('load', () => { prime(); hideBlockingOverlays(); }, { once:true });
 })();
