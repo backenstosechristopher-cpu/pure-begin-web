@@ -120,10 +120,12 @@
     const btn = (target && target.closest && target.closest(BTN_SELECTOR)) || null;
     if (btn){
       const inst = getOrInit(btn);
+      try { console.debug('[qty] button capture', btn.id, { isOpen: inst.isOpen }); } catch(_) {}
       e.preventDefault();
       e.stopPropagation();
       if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
       inst.isOpen ? close(inst) : open(inst);
+      try { console.debug('[qty] toggled', { isOpen: inst.isOpen }); } catch(_) {}
       return;
     }
 
@@ -188,10 +190,15 @@
   }
 
   // Global listeners
+  // Capture at window AND document to beat any global stopPropagation in capture
+  window.addEventListener('pointerdown', onDocClickCapture, true);
+  window.addEventListener('mousedown', onDocClickCapture, true);
+  window.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('mousedown', onDocClickCapture, true);
   document.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('click', onDocClick);
+  window.addEventListener('keydown', onKeydownCapture, true);
   document.addEventListener('keydown', onKeydownCapture, true);
   window.addEventListener('scroll', () => closeAll(null), { passive:true });
   window.addEventListener('resize', () => closeAll(null));
