@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Mirrored Site</title>
-<script>
-if (/Mobi|Android|iPhone|iPad|Tablet/i.test(navigator.userAgent)) {
-  window.location.href = "mobile/guthaben.de.html";
-} else {
-  window.location.href = "desktop/guthaben.de.html";
-}
-</script>
-</head><body>
-<noscript>
-<p><a href="desktop/index.html">View Desktop Version</a></p>
-<p><a href="mobile/index.html">View Mobile Version</a></p>
-</noscript>
-</body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/placeholder.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mirrored Site</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
