@@ -12,6 +12,7 @@
   let openFor = null;        // { btn, value }
   const instances = new Map(); // btn.id -> { btn, value }
   let cancelClicksUntil = 0; // suppress site clicks briefly after opening
+  let overlayActivateAt = 0; // delay overlay activation to avoid closing on initial click
 
   // Utility
   function getId(btn){
@@ -24,8 +25,9 @@
     const div = document.createElement('div');
     div.id = 'gd_qty_overlay';
     div.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0);display:none;';
-    // Capture outside clicks only
+    // Capture outside clicks only (after activation delay)
     div.addEventListener('click', (e) => {
+      if (Date.now() < overlayActivateAt) return; // ignore the click that opened it
       e.preventDefault(); e.stopPropagation();
       if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
       closeDropdown();
@@ -122,6 +124,9 @@
     positionDropdownFor(inst);
     dropdown.style.display = 'block';
     overlay.style.display = 'block';
+    overlay.style.pointerEvents = 'none';
+    overlayActivateAt = Date.now() + 400; // activate after initial click finishes
+    setTimeout(() => { if (overlay) overlay.style.pointerEvents = 'auto'; }, 400);
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', dropdown.id);
     cancelClicksUntil = Date.now() + 500; // suppress closers for 500ms
