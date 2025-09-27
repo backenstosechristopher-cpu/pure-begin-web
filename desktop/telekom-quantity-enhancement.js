@@ -4,6 +4,7 @@
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
   // transient guards to avoid immediate auto-close after open
   let ignoreClicksUntil = 0;
+  let ignoreScrollUntil = 0, ignoreResizeUntil = 0;
   let lastOpenScrollX = 0, lastOpenScrollY = 0;
  
   function getId(btn){
@@ -101,8 +102,11 @@
     inst.isOpen = true;
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
-    // guard against immediate click-away from other libs
-    ignoreClicksUntil = Date.now() + 300;
+    // guard against immediate close from other events
+    const now = Date.now();
+    ignoreClicksUntil = now + 300;
+    ignoreScrollUntil = now + 500;
+    ignoreResizeUntil = now + 500;
     lastOpenScrollX = window.scrollX;
     lastOpenScrollY = window.scrollY;
   }
@@ -214,6 +218,7 @@
   let scrollTimeout;
   window.addEventListener('scroll', () => {
     if (!anyOpen()) return; // nothing open, ignore
+    if (Date.now() < ignoreScrollUntil) { try { console.debug('[qty] scroll suppressed right after open'); } catch(_) {} ; return; }
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       const dx = Math.abs(window.scrollX - lastOpenScrollX);
@@ -227,6 +232,7 @@
   let resizeTimeout;
   window.addEventListener('resize', () => {
     if (!anyOpen()) return;
+    if (Date.now() < ignoreResizeUntil) { try { console.debug('[qty] resize suppressed right after open'); } catch(_) {} ; return; }
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       try { console.debug('[qty] resize timeout, closing all'); } catch(_) {}
