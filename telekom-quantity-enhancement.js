@@ -181,7 +181,28 @@
     });
   }
 
-  const run = () => requestAnimationFrame(primeExisting);
+  // Hide blocking overlays on desktop (MUI full-screen backdrop rendered by the static export)
+  function hideBlockingOverlays(){
+    try {
+      // Inject once
+      if (!document.getElementById('lovable-overlay-fix')){
+        const style = document.createElement('style');
+        style.id = 'lovable-overlay-fix';
+        style.textContent = `
+          /* Force-hide the fixed full-screen overlay that blocks clicks on desktop */
+          .mui-style-1jtyhdp { display: none !important; pointer-events: none !important; }
+        `;
+        document.head.appendChild(style);
+      }
+      // Also directly hide any existing instances just in case
+      document.querySelectorAll('.mui-style-1jtyhdp').forEach(el => {
+        el.style.setProperty('display','none','important');
+        el.style.setProperty('pointer-events','none','important');
+      });
+    } catch(e) {}
+  }
+
+  const run = () => requestAnimationFrame(() => { hideBlockingOverlays(); primeExisting(); });
   run();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
   window.addEventListener('load', run);
