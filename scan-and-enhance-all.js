@@ -25,8 +25,7 @@ function hasQuantitySelectors(content) {
 
 // Function to check if script already exists
 function hasEnhancementScript(content) {
-  return content.includes('quantity-enhancement.js') || 
-         content.includes('Universal quantity enhancement loaded');
+  return content.includes('universal-quantity-enhancement.js');
 }
 
 // Function to inject script
@@ -44,27 +43,8 @@ function injectScript(filePath, category = 'universal') {
       return { processed: true, enhanced: false, reason: 'no_quantity_selectors' };
     }
     
-    // Determine script name based on category
-    let scriptName = 'universal-quantity-enhancement.js';
-    const fileName = path.basename(filePath).toLowerCase();
-    
-    if (fileName.includes('amazon')) {
-      scriptName = 'amazon-quantity-enhancement.js';
-    } else if (fileName.includes('google-play')) {
-      scriptName = 'google-play-quantity-enhancement.js';
-    } else if (fileName.includes('apple')) {
-      scriptName = 'apple-quantity-enhancement.js';
-    } else if (fileName.includes('vodafone')) {
-      scriptName = 'vodafone-quantity-enhancement.js';
-    } else if (fileName.includes('telekom')) {
-      scriptName = 'telekom-quantity-enhancement.js';
-    } else if (fileName.includes('lebara')) {
-      scriptName = 'lebara-quantity-enhancement.js';
-    } else if (fileName.includes('congstar')) {
-      scriptName = 'congstar-quantity-enhancement.js';
-    } else if (fileName.includes('klarmobil')) {
-      scriptName = 'klarmobil-quantity-enhancement.js';
-    }
+    // Use universal script for all pages
+    const scriptName = 'universal-quantity-enhancement.js';
     
     // Inject script
     const scriptTag = `<script src="${scriptName}" defer></script>`;
