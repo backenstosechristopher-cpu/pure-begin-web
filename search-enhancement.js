@@ -1,6 +1,38 @@
 // Enhanced search functionality for existing guthaben.de search input with ID 'search-field-input'
 console.debug('[search-enhancement] loaded');
+
+// Function to apply enhanced input styling
+function applyInputStyling() {
+    const inputEl = document.getElementById('search-field-input');
+    if (inputEl) {
+        inputEl.style.cssText += `
+            padding: 16px 20px !important;
+            font-size: 16px !important;
+            line-height: 1.4 !important;
+            min-height: 48px !important;
+            box-sizing: border-box !important;
+        `;
+        
+        // Also style the wrapper if it exists
+        const wrapper = inputEl.closest('.MuiInputBase-root');
+        if (wrapper) {
+            wrapper.style.cssText += `
+                padding: 0 !important;
+                min-height: 48px !important;
+            `;
+        }
+    }
+}
 document.addEventListener('DOMContentLoaded', function() {
+    // Apply input styling on load
+    applyInputStyling();
+    
+    // Reapply styling when input appears (for dynamic content)
+    const observer = new MutationObserver(() => {
+        applyInputStyling();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    
     // Product database from guthaben.de
     const productDatabase = {
         // Mobile Top-ups
