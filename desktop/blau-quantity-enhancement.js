@@ -116,9 +116,11 @@
 
   // Outside click (overlay) - only after min open window
   overlayEl.addEventListener('click', (e) => {
-    e.preventDefault(); e.stopPropagation();
     if (Date.now() < minOpenUntil) return; // ignore the click that opened it
+    const x = e.clientX, y = e.clientY;
     close();
+    const target = document.elementFromPoint(x, y);
+    if (target && typeof target.click === 'function') target.click();
   }, { capture: true });
 
   // While open, block all site events outside our UI to prevent auto-close
@@ -156,16 +158,7 @@
     openFor(btn);
   }
 
-  // Outside click anywhere in document to close (no global blockers)
-  document.addEventListener('click', (e) => {
-    if (!currentBtn) return;
-    const t = e.target;
-    const inShadow = t && ((t.getRootNode && t.getRootNode() === root) || (t.closest && t.closest('#qty-shadow-host')));
-    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
-    if (!inShadow && !onBtn && Date.now() >= minOpenUntil) {
-      close();
-    }
-  }, true);
+  // Outside click handled via overlay pass-through
 
   // Open listener on click only (capture)
   document.addEventListener('click', maybeOpen, true);
