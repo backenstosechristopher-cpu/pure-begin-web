@@ -9,8 +9,8 @@
     const style = document.createElement('style');
     style.id = 'custom-blau-quantity';
     style.textContent = `
-/* Neutralize potential blocking overlays */
-.MuiBackdrop-root, .MuiModal-backdrop { pointer-events: none !important; }
+/* Neutralize potential blocking overlays only during our dropdown */
+body.__blauQtyOpen .MuiBackdrop-root, body.__blauQtyOpen .MuiModal-backdrop { pointer-events: none !important; }
 /* Ensure our dropdown sits on top and is opaque */
 .custom-quantity-selector { position: relative; display: inline-block; margin: 8px 0; }
 .custom-quantity-btn { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 8px 16px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; min-width: 140px; font-size: 14px; transition: all 0.2s ease; }
@@ -47,6 +47,7 @@
     const closeAll = () => {
       document.querySelectorAll('.custom-quantity-dropdown.open').forEach(d => d.classList.remove('open'));
       document.querySelectorAll('.custom-quantity-btn.open').forEach(b => b.classList.remove('open'));
+      document.body.classList.remove('__blauQtyOpen');
     };
 
     const open = safe((e) => {
@@ -56,6 +57,7 @@
       dropdown.classList.add('open');
       btn.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('__blauQtyOpen');
     });
 
     const choose = safe((e) => {
