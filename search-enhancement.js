@@ -227,11 +227,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle focus
     searchInput.addEventListener('focus', function() {
+        showOverlay();
         const query = this.value;
         if (query.length >= 2) {
             const results = searchProducts(query, allProducts);
             showResults(results);
+        } else {
+            isOpen = true;
         }
+    });
+
+    // Handle blur
+    searchInput.addEventListener('blur', function(e) {
+        // Small delay to allow clicking on results
+        setTimeout(() => {
+            if (!searchInput.matches(':focus') && (!resultsContainer || !resultsContainer.matches(':hover'))) {
+                hideResults();
+            }
+        }, 150);
     });
 
     // Handle clicks outside
