@@ -124,8 +124,13 @@
       e.preventDefault();
       e.stopPropagation();
       if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      // Keep menu open on button re-click; only close on outside click or selection
       closeAll(inst.btn.id);
-      inst.isOpen ? close(inst) : open(inst);
+      if (!inst.isOpen) {
+        open(inst);
+      } else {
+        positionDropdown(inst);
+      }
       return;
     }
     // Click on an option inside any dropdown
