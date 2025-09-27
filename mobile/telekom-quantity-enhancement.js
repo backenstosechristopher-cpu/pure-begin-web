@@ -1,7 +1,6 @@
 (function(){
-  // Lightweight Quantity Selector - rebuilt from scratch to avoid interfering with page
+  // Minimal, safe Quantity Selector with capture-based delegation (no global overlays)
   const BTN_SELECTOR = 'button[id^="product_card_quantity_select_"], button[id*="quantity_select"]';
-
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
 
   function getId(btn){
@@ -17,11 +16,11 @@
       'position:absolute',
       'top:0',
       'left:0',
-      'background:#fff', // ensure non-transparent background
+      'background:#fff',
       'border:1px solid #e5e7eb',
       'border-radius:8px',
       'box-shadow:0 12px 24px rgba(0,0,0,0.18)',
-      'z-index:2147483646', // very high, but below any important app-specific layers
+      'z-index:2147483646',
       'min-width:100px',
       'max-height:240px',
       'overflow-y:auto',
@@ -44,12 +43,8 @@
       } else {
         li.setAttribute('aria-selected','false');
       }
-      li.addEventListener('mouseenter', () => {
-        if (li.getAttribute('aria-selected') !== 'true') li.style.background = '#f9fafb';
-      });
-      li.addEventListener('mouseleave', () => {
-        if (li.getAttribute('aria-selected') !== 'true') li.style.background = '';
-      });
+      li.addEventListener('mouseenter', () => { if (li.getAttribute('aria-selected') !== 'true') li.style.background = '#f9fafb'; });
+      li.addEventListener('mouseleave', () => { if (li.getAttribute('aria-selected') !== 'true') li.style.background = ''; });
       ul.appendChild(li);
     }
 
@@ -119,46 +114,62 @@
     return inst;
   }
 
-  function onButtonClick(e){
-    const btn = e.currentTarget;
-    const inst = getOrInit(btn);
-    e.preventDefault();
-    e.stopPropagation(); // only stop for this button click
-    inst.isOpen ? close(inst) : open(inst);
+  // Capture-phase handler to outrun MUI handlers
+  function onDocClickCapture(e){
+    const target = e.target;
+    const btn = (target && target.closest && target.closest(BTN_SELECTOR)) || null;
+    if (btn){
+      const inst = getOrInit(btn);
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      inst.isOpen ? close(inst) : open(inst);
+      return;
+    }
+
+    const anyDropdown = (target && target.closest && target.closest('ul[role="listbox"]'));
+    if (anyDropdown){
+      const inst = Array.from(instances.values()).find(x => x.dropdown === anyDropdown);
+      if (inst){
+        const opt = target.closest('[role="option"]');
+        if (opt && opt.dataset.value){
+          e.preventDefault();
+          e.stopPropagation();
+          if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+          selectValue(inst, parseInt(opt.dataset.value,10));
+        }
+      }
+      return;
+    }
+
+    // Outside click closes all
+    closeAll(null);
   }
 
-  function onOptionClick(e){
-    const opt = e.target.closest('[role="option"]');
-    if (!opt) return;
-    const ul = opt.closest('ul[role="listbox"]');
-    const inst = Array.from(instances.values()).find(x => x.dropdown === ul);
-    if (!inst) return;
-    e.preventDefault();
-    e.stopPropagation();
-    const val = parseInt(opt.dataset.value||'1',10);
-    selectValue(inst, val);
-  }
-
+  // Bubble fallback (no prevent/stop here)
   function onDocClick(e){
     const target = e.target;
-    // if click inside any dropdown or on its button, ignore
     const insideDropdown = target && target.closest && target.closest('ul[role="listbox"]');
     const onButton = target && target.closest && target.closest(BTN_SELECTOR);
     if (insideDropdown || onButton) return;
     closeAll(null);
   }
 
-  function onKeydown(e){
+  function onKeydownCapture(e){
     const active = document.activeElement;
     if (!active || !active.matches || !active.matches(BTN_SELECTOR)) return;
     const inst = getOrInit(active);
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
       inst.isOpen ? close(inst) : open(inst);
     } else if (e.key === 'Escape') {
       close(inst);
     } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){
       e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
       if (!inst.isOpen) open(inst);
       const opts = Array.from(inst.dropdown.querySelectorAll('[role="option"]'));
       const curIdx = opts.findIndex(o => o.getAttribute('aria-selected') === 'true');
@@ -167,39 +178,31 @@
     }
   }
 
-  function attach(){
+  function primeExisting(){
     document.querySelectorAll(BTN_SELECTOR).forEach(btn => {
       const inst = getOrInit(btn);
       btn.setAttribute('aria-haspopup','listbox');
       btn.setAttribute('aria-expanded','false');
-      // bind once
-      if (!btn.dataset.qtyBound){
-        btn.addEventListener('click', onButtonClick);
-        btn.addEventListener('keydown', onKeydown);
-        btn.dataset.qtyBound = 'true';
-      }
-      // bind dropdown click once
-      if (!inst.dropdown.dataset.qtyBound){
-        inst.dropdown.addEventListener('click', onOptionClick);
-        inst.dropdown.dataset.qtyBound = 'true';
-      }
+      syncUI(inst);
     });
   }
 
-  // Global, but passive/harmless listeners
+  // Global listeners
+  document.addEventListener('pointerdown', onDocClickCapture, true);
+  document.addEventListener('mousedown', onDocClickCapture, true);
+  document.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('click', onDocClick);
+  document.addEventListener('keydown', onKeydownCapture, true);
   window.addEventListener('scroll', () => closeAll(null), { passive:true });
   window.addEventListener('resize', () => closeAll(null));
 
-  // Initial and mutation-driven attach
-  const init = () => attach();
+  const init = () => primeExisting();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   window.addEventListener('load', init);
   init();
 
   if (window.MutationObserver){
-    const mo = new MutationObserver(() => attach());
+    const mo = new MutationObserver(() => primeExisting());
     mo.observe(document.body, { childList:true, subtree:true });
   }
 })();
-
