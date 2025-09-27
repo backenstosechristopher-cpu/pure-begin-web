@@ -67,4 +67,27 @@ console.log('\nAdding enhancement scripts...');
 desktopFiles.forEach(file => addEnhancementScript('desktop', file));
 mobileFiles.forEach(file => addEnhancementScript('mobile', file));
 
+// Also ensure desktop versions of recently enhanced mobile pages have the script
+const recentlyEnhancedMobile = [
+  'guthaben.de_lycamobile-aufladen.html',
+  'guthaben.de_ay-yildiz-aufladen.html', 
+  'guthaben.de_klarmobil-aufladen.html',
+  'guthaben.de_bildmobil-aufladen.html',
+  'guthaben.de_einfach-prepaid-aufladen.html'
+];
+
+recentlyEnhancedMobile.forEach(filename => {
+  const desktopPath = `desktop/${filename}`;
+  if (require('fs').existsSync(desktopPath)) {
+    const content = require('fs').readFileSync(desktopPath, 'utf8');
+    const hasQuantitySelector = content.includes('product_card_quantity_select') || 
+                                content.includes('role="combobox"');
+    const hasEnhancement = content.includes('universal-quantity-enhancement.js');
+    
+    if (hasQuantitySelector && !hasEnhancement) {
+      addEnhancementScript('desktop', filename);
+    }
+  }
+});
+
 console.log(`\nCompleted! Enhanced ${desktopFiles.length + mobileFiles.length} files total.`);
