@@ -127,14 +127,34 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.addEventListener('click', function() {
             hideResults();
             hideOverlay();
-            searchInput.blur();
+            const inputEl = document.getElementById('search-field-input');
+            if (inputEl) inputEl.blur();
         });
+    }
+
+    function elevateWrapper() {
+        const inputEl = document.getElementById('search-field-input');
+        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        if (wrapper) {
+            wrapper.style.position = 'relative';
+            wrapper.style.zIndex = '10002';
+        }
+    }
+
+    function resetWrapper() {
+        const inputEl = document.getElementById('search-field-input');
+        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        if (wrapper) {
+            wrapper.style.zIndex = '';
+            // keep position as-is to avoid layout jumps
+        }
     }
 
     // Show overlay
     function showOverlay() {
         if (!overlay) createOverlay();
         overlay.style.display = 'block';
+        elevateWrapper();
         try { console.debug('[search] overlay shown'); } catch (_) {}
     }
 
@@ -142,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideOverlay() {
         if (overlay) {
             overlay.style.display = 'none';
+            resetWrapper();
             try { console.debug('[search] overlay hidden'); } catch (_) {}
         }
     }
@@ -294,6 +315,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!inside) {
             hideResults();
             hideOverlay();
+        }
+    });
+
+    // Show overlay early on pointer down inside wrapper (before focus)
+    document.addEventListener('mousedown', function(e) {
+        const inputEl = document.getElementById('search-field-input');
+        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        if (wrapper && wrapper.contains(e.target)) {
+            showOverlay();
+            isOpen = true;
         }
     });
 
