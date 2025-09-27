@@ -104,26 +104,10 @@
 
   function selectValue(val){
     if (!currentBtn) return;
-    // Update button display
-    const valueEl = currentBtn.querySelector('[aria-expanded]') || 
-                   currentBtn.querySelector('span') ||
-                   currentBtn;
-    
-    if (valueEl) {
-        const currentText = valueEl.textContent || valueEl.innerText || '';
-        const newText = currentText.replace(/\d+/, val);
-        
-        if (valueEl.textContent !== undefined) {
-            valueEl.textContent = newText;
-        } else {
-            valueEl.innerText = newText;
-        }
-    }
-    
-    // Also update small element and title
+    // Update only known quantity markers to avoid breaking markup
     const small = currentBtn.querySelector('small');
     if (small) small.textContent = String(val);
-    currentBtn.title = String(val);
+    try { currentBtn.setAttribute('title', String(val)); } catch(_){}
 
     // Fire event for integrations
     try {
