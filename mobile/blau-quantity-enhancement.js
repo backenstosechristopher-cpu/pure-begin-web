@@ -156,14 +156,16 @@
     openFor(btn);
   }
 
-  // Global blockers while open (capture and bubble)
-  const blockEvents = ['click','pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','focusin','focusout'];
-  blockEvents.forEach(evt => {
-    window.addEventListener(evt, whileOpenBlocker, true);
-    document.addEventListener(evt, whileOpenBlocker, true);
-    window.addEventListener(evt, whileOpenBlocker, false);
-    document.addEventListener(evt, whileOpenBlocker, false);
-  });
+  // Outside click anywhere in document to close (no global blockers)
+  document.addEventListener('click', (e) => {
+    if (!currentBtn) return;
+    const t = e.target;
+    const inShadow = t && ((t.getRootNode && t.getRootNode() === root) || (t.closest && t.closest('#qty-shadow-host')));
+    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
+    if (!inShadow && !onBtn && Date.now() >= minOpenUntil) {
+      close();
+    }
+  }, true);
 
   // Open listeners (capture) so we beat site handlers
   ['pointerdown','click'].forEach(evt => {
