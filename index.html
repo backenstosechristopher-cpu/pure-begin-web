@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Mirrored Site</title>
-<script>
-// Only redirect if we're on the root page, not already in a device directory
-if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-  if (/Mobi|Android|iPhone|iPad|Tablet/i.test(navigator.userAgent)) {
-    window.location.href = "mobile/guthaben.de.html";
-  } else {
-    window.location.href = "desktop/guthaben.de.html";
-  }
-}
-</script>
-</head><body>
-<noscript>
-<p><a href="desktop/guthaben.de.html">View Desktop Version</a></p>
-<p><a href="mobile/guthaben.de.html">View Mobile Version</a></p>
-</noscript>
-</body></html>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guthaben.de - Guthabenkarten, Geschenkkarten und mehr</title>
+    <meta name="description" content="Finden Sie Guthabenkarten, Geschenkkarten, Gaming Cards und mobile Top-ups bei Guthaben.de. Über 500 Produkte verfügbar." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
