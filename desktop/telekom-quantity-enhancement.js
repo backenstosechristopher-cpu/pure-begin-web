@@ -1,6 +1,6 @@
 (function(){
   // Quantity Select Manager using event delegation so ALL selectors work
-  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
+  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"]';
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
 
   function getId(btn, idx){
@@ -20,7 +20,7 @@
       'border:1px solid #ddd',
       'border-radius:8px',
       'box-shadow:0 12px 24px rgba(0,0,0,0.2)',
-      'z-index:99999',
+      'z-index:2147483647',
       'min-width:100px',
       'max-height:240px',
       'overflow-y:auto',
@@ -166,6 +166,7 @@
     }
   }
 
+  document.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('mousedown', onDocClickCapture, true);
   document.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
@@ -189,14 +190,22 @@
         const style = document.createElement('style');
         style.id = 'lovable-overlay-fix';
         style.textContent = `
-          /* Force-hide the fixed full-screen overlay that blocks clicks on desktop */
-          .mui-style-1jtyhdp { display: none !important; pointer-events: none !important; }
+          /* Disable pointer events on common MUI/Next overlays that can block clicks in static export */
+          .mui-style-1jtyhdp,
+          .MuiBackdrop-root,
+          .MuiModal-backdrop,
+          [class*="Backdrop"],
+          [class*="backdrop"],
+          .MuiPopover-root > .MuiBackdrop-root,
+          .MuiPopper-root > .MuiBackdrop-root,
+          .MuiDrawer-root > .MuiBackdrop-root {
+            pointer-events: none !important;
+          }
         `;
         document.head.appendChild(style);
       }
       // Also directly hide any existing instances just in case
-      document.querySelectorAll('.mui-style-1jtyhdp').forEach(el => {
-        el.style.setProperty('display','none','important');
+      document.querySelectorAll('.mui-style-1jtyhdp, .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"], [class*="backdrop"], .MuiPopover-root > .MuiBackdrop-root, .MuiPopper-root > .MuiBackdrop-root, .MuiDrawer-root > .MuiBackdrop-root').forEach(el => {
         el.style.setProperty('pointer-events','none','important');
       });
     } catch(e) {}
