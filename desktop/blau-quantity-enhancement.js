@@ -1,343 +1,235 @@
-/**
- * Blau Guthaben Enhanced Quantity Selector
- * Shadow DOM-based quantity selector with solid background and high z-index
- */
-(function() {
-    'use strict';
-    
-    console.log('Blau quantity enhancement loading...');
-    
-    // Create shadow host with ultra-high z-index
-    const shadowHost = document.createElement('div');
-    shadowHost.id = 'blau-qty-shadow-host';
-    shadowHost.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 999999;
-    `;
-    document.body.appendChild(shadowHost);
-    
-    // Attach shadow root
-    const shadow = shadowHost.attachShadow({ mode: 'closed' });
-    
-    // Enhanced CSS with solid backgrounds and high z-index
-    shadow.innerHTML = `
-        <style>
-            :host {
-                all: initial;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 999999;
-            }
-            
-            .qty-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: rgba(0, 0, 0, 0.2);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.2s ease;
-                pointer-events: none;
-                z-index: 999998;
-            }
-            
-            .qty-overlay.open {
-                opacity: 1;
-                visibility: visible;
-                pointer-events: auto;
-            }
-            
-            .qty-panel {
-                position: absolute;
-                background: #ffffff;
-                border: 1px solid #e0e0e0;
-                border-radius: 8px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-                min-width: 120px;
-                opacity: 0;
-                transform: translateY(-10px);
-                transition: all 0.2s ease;
-                z-index: 999999;
-                pointer-events: auto;
-            }
-            
-            .qty-panel.open {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            
-            .qty-list {
-                list-style: none;
-                margin: 0;
-                padding: 4px 0;
-                background: #ffffff;
-                border-radius: 8px;
-            }
-            
-            .qty-option {
-                display: block;
-                width: 100%;
-                padding: 12px 16px;
-                margin: 0;
-                background: #ffffff;
-                border: none;
-                text-align: left;
-                cursor: pointer;
-                font-size: 14px;
-                font-family: sofia-pro, sans-serif;
-                color: #333333;
-                transition: background-color 0.15s ease;
-                border-radius: 0;
-            }
-            
-            .qty-option:hover {
-                background-color: #f5f5f5;
-                color: #0066cc;
-            }
-            
-            .qty-option:first-child {
-                border-top-left-radius: 8px;
-                border-top-right-radius: 8px;
-            }
-            
-            .qty-option:last-child {
-                border-bottom-left-radius: 8px;
-                border-bottom-right-radius: 8px;
-            }
-            
-            .qty-option.selected {
-                background-color: #0066cc;
-                color: #ffffff;
-                font-weight: 600;
-            }
-            
-            .qty-option.selected:hover {
-                background-color: #0052a3;
-            }
-            
-            /* High contrast mode support */
-            @media (prefers-contrast: high) {
-                .qty-panel {
-                    border: 2px solid #000000;
-                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-                }
-                .qty-option {
-                    border-bottom: 1px solid #cccccc;
-                }
-                .qty-option:last-child {
-                    border-bottom: none;
-                }
-            }
-        </style>
-        
-        <div class="qty-overlay"></div>
-        <div class="qty-panel">
-            <ul class="qty-list"></ul>
-        </div>
-    `;
-    
-    // Get DOM elements
-    const overlayEl = shadow.querySelector('.qty-overlay');
-    const panelEl = shadow.querySelector('.qty-panel');
-    const listEl = shadow.querySelector('.qty-list');
-    
-    let currentBtn = null;
-    let minOpenUntil = 0;
-    
-    // Extract current quantity value
-    function getCurrentValue(btn) {
-        const valueEl = btn.querySelector('[aria-expanded]') || 
-                       btn.querySelector('span') ||
-                       btn;
-        const text = valueEl.textContent || valueEl.innerText || '';
-        const match = text.match(/(\d+)/);
-        return match ? parseInt(match[1]) : 1;
+(function(){
+  // Universal Shadow DOM based Quantity Selector for Blau pages
+  // - Works on any page with MUI quantity selectors
+  // - Opens on button click, stays open until selection or outside click
+  // - Fully isolated via Shadow DOM
+  // - Auto-detects and enhances all quantity buttons on page load
+
+  const BTN_SELECTOR = '[id*="quantity"], [class*="quantity"], .MuiSelect-root, [role="combobox"], button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
+
+  // Host (fixed, top layer)
+  const host = document.createElement('div');
+  host.id = 'qty-shadow-host';
+  host.style.cssText = 'position:fixed;inset:0;z-index:2147483647;display:none;pointer-events:none;';
+  document.documentElement.appendChild(host);
+
+  const root = host.attachShadow({ mode: 'open' });
+  root.innerHTML = `
+    <style>
+      :host{ all: initial; }
+      *{ box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:auto; }
+      .panel{ position:fixed; background:#fff; color:#111; border:1px solid rgba(0,0,0,.12); border-radius:10px; box-shadow:0 18px 42px rgba(0,0,0,.22); min-width:120px; max-height:260px; overflow:auto; z-index:1; }
+      .list{ list-style:none; margin:0; padding:6px 0; }
+      .item{ padding:10px 14px; cursor:pointer; font-size:15px; }
+      .item:hover{ background:#f5f5f5; }
+      .item[selected]{ background:#f0f0f0; font-weight:600; }
+    </style>
+    <div class="overlay" part="overlay"></div>
+    <div class="panel" part="panel" style="left:0;top:0;display:none">
+      <ul class="list"></ul>
+    </div>
+  `;
+
+  const overlayEl = root.querySelector('.overlay');
+  const panelEl = root.querySelector('.panel');
+  const listEl = root.querySelector('.list');
+
+  let currentBtn = null;
+  let minOpenUntil = 0;
+  function getCurrentValue(btn){
+    const title = btn.getAttribute('title') || '';
+    const small = btn.querySelector('small');
+    const valueEl = btn.querySelector('[aria-expanded]') || btn.querySelector('span') || btn;
+    const text = valueEl.textContent || valueEl.innerText || '';
+    const txt = small?.textContent || title || text || '1';
+    const v = parseInt(String(txt).replace(/[^0-9]/g,''), 10);
+    return Number.isFinite(v) && v > 0 ? v : 1;
+  }
+
+  function renderOptions(selected){
+    listEl.innerHTML = '';
+    for(let i=1;i<=10;i++){
+      const li = document.createElement('li');
+      li.className = 'item';
+      li.textContent = String(i);
+      if (i === selected) li.setAttribute('selected','');
+      li.addEventListener('click', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        selectValue(i);
+      }, { capture: true });
+      listEl.appendChild(li);
     }
+  }
+
+  function positionPanelNear(btn){
+    const rect = btn.getBoundingClientRect();
+    const top = Math.round(rect.bottom + 6);
+    const left = Math.round(rect.left);
+    panelEl.style.top = `${top}px`;
+    panelEl.style.left = `${left}px`;
+    panelEl.style.minWidth = `${Math.max(rect.width, 120)}px`;
+  }
+
+  function openFor(btn){
+    currentBtn = btn;
+    const val = getCurrentValue(btn);
+    renderOptions(val);
+    positionPanelNear(btn);
+
+    // Show host and panel; disable outside close for a short time
+    host.style.display = 'block';
+    host.style.pointerEvents = 'auto';
+    panelEl.style.display = 'block';
+    // delay overlay activation so the initial click cannot close it
+    overlayEl.style.pointerEvents = 'none';
+    minOpenUntil = Date.now() + 700; // prevent instant close
+    setTimeout(() => { overlayEl.style.pointerEvents = 'auto'; }, 350);
+
+    // ARIA
+    try {
+      btn.setAttribute('aria-expanded', 'true');
+    } catch(_){}
+  }
+
+  function close(){
+    panelEl.style.display = 'none';
+    host.style.display = 'none';
+    host.style.pointerEvents = 'none';
+    try { currentBtn?.setAttribute('aria-expanded','false'); } catch(_){}
+    currentBtn = null;
+  }
+
+  function selectValue(val){
+    if (!currentBtn) return;
+    // Update button display
+    const valueEl = currentBtn.querySelector('[aria-expanded]') || 
+                   currentBtn.querySelector('span') ||
+                   currentBtn;
     
-    // Render quantity options
-    function renderOptions(selected) {
-        listEl.innerHTML = '';
-        for (let i = 1; i <= 10; i++) {
-            const option = document.createElement('button');
-            option.className = `qty-option ${i === selected ? 'selected' : ''}`;
-            option.textContent = i;
-            option.setAttribute('data-value', i);
-            option.addEventListener('click', () => selectValue(i));
-            listEl.appendChild(option);
+    if (valueEl) {
+        const currentText = valueEl.textContent || valueEl.innerText || '';
+        const newText = currentText.replace(/\d+/, val);
+        
+        if (valueEl.textContent !== undefined) {
+            valueEl.textContent = newText;
+        } else {
+            valueEl.innerText = newText;
         }
     }
     
-    // Position panel near button
-    function positionPanelNear(btn) {
-        const rect = btn.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const viewportWidth = window.innerWidth;
-        
-        let top = rect.bottom + 5;
-        let left = rect.left;
-        
-        // Adjust if panel would go off-screen
-        if (top + 300 > viewportHeight) {
-            top = rect.top - 305;
-        }
-        
-        if (left + 120 > viewportWidth) {
-            left = viewportWidth - 125;
-        }
-        
-        if (left < 5) {
-            left = 5;
-        }
-        
-        panelEl.style.top = top + 'px';
-        panelEl.style.left = left + 'px';
+    // Also update small element and title
+    const small = currentBtn.querySelector('small');
+    if (small) small.textContent = String(val);
+    currentBtn.title = String(val);
+
+    // Fire event for integrations
+    try {
+      currentBtn.dispatchEvent(new CustomEvent('quantitychange', { detail:{ value: val }, bubbles: true }));
+    } catch(_){}
+
+    close();
+  }
+
+  // Outside click (overlay) - only after min open window
+  overlayEl.addEventListener('click', (e) => {
+    e.preventDefault(); e.stopPropagation();
+    if (Date.now() < minOpenUntil) return; // ignore the click that opened it
+    close();
+  }, { capture: true });
+
+  // While open, block all site events outside our UI to prevent auto-close
+  function whileOpenBlocker(e){
+    if (!currentBtn) return;
+    const t = e.target;
+    // allow interactions inside our shadow UI
+    if (t && (t === host || (t.getRootNode && t.getRootNode() === root) || (t.closest && t.closest('#qty-shadow-host')))){
+      return;
     }
-    
-    // Open quantity selector
-    function openFor(btn) {
-        currentBtn = btn;
-        minOpenUntil = Date.now() + 300;
-        
-        const currentValue = getCurrentValue(btn);
-        renderOptions(currentValue);
-        positionPanelNear(btn);
-        
-        overlayEl.classList.add('open');
-        panelEl.classList.add('open');
-        
-        console.log('Blau quantity selector opened for:', btn);
+    // allow interactions on the source button
+    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
+    if (onBtn) return;
+    // otherwise, swallow the event while open
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+  }
+
+  // Open on pointerdown or click (capture)
+  function maybeOpen(e){
+    const t = e.target;
+    const btn = t && t.closest && t.closest(BTN_SELECTOR);
+    if (!btn) return;
+    // Prevent site handlers from reacting to this interaction
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+
+    if (currentBtn && currentBtn === btn){
+      // already open for this button: just reposition
+      positionPanelNear(btn);
+      return;
     }
-    
-    // Close quantity selector
-    function close() {
-        overlayEl.classList.remove('open');
-        panelEl.classList.remove('open');
-        currentBtn = null;
-        minOpenUntil = 0;
+    openFor(btn);
+  }
+
+  // Global blockers while open (capture and bubble)
+  const blockEvents = ['click','pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','focusin','focusout'];
+  blockEvents.forEach(evt => {
+    window.addEventListener(evt, whileOpenBlocker, true);
+    document.addEventListener(evt, whileOpenBlocker, true);
+    window.addEventListener(evt, whileOpenBlocker, false);
+    document.addEventListener(evt, whileOpenBlocker, false);
+  });
+
+  // Open listeners (capture) so we beat site handlers
+  ['pointerdown','click'].forEach(evt => {
+    window.addEventListener(evt, maybeOpen, true);
+    document.addEventListener(evt, maybeOpen, true);
+  });
+
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && currentBtn){
+      e.preventDefault(); e.stopPropagation();
+      close();
     }
-    
-    // Select quantity value
-    function selectValue(val) {
-        if (!currentBtn) return;
-        
-        // Update button display
-        const valueEl = currentBtn.querySelector('[aria-expanded]') || 
-                       currentBtn.querySelector('span') ||
-                       currentBtn;
-        
-        if (valueEl) {
-            const currentText = valueEl.textContent || valueEl.innerText || '';
-            const newText = currentText.replace(/\d+/, val);
-            
-            if (valueEl.textContent !== undefined) {
-                valueEl.textContent = newText;
-            } else {
-                valueEl.innerText = newText;
-            }
-        }
-        
-        // Dispatch change event
-        const event = new CustomEvent('quantitychange', {
-            detail: { value: val, button: currentBtn },
-            bubbles: true,
-            cancelable: true
-        });
-        currentBtn.dispatchEvent(event);
-        
-        close();
-        console.log('Blau quantity selected:', val);
-    }
-    
-    // Handle clicks outside panel to close
-    document.addEventListener('click', (e) => {
-        if (!overlayEl.classList.contains('open')) return;
-        
-        // Don't close if clicking inside panel or on current button
-        if (panelEl.contains(e.target) || currentBtn?.contains(e.target)) return;
-        
-        // Allow normal page interaction and close menu
-        close();
-    });
-    
-    // Detect quantity button clicks to open
-    function maybeOpen(e) {
-        const btn = e.target.closest('[id*="quantity"], [class*="quantity"], .MuiSelect-root, [role="combobox"]');
-        if (btn && (btn.id?.includes('quantity') || btn.className?.includes('quantity') || 
-                   btn.className?.includes('MuiSelect') || btn.getAttribute('role') === 'combobox')) {
-            
-            e.preventDefault();
-            e.stopPropagation();
-            openFor(btn);
-            return false;
-        }
-    }
-    
-    // Add event listeners for opening
-    document.addEventListener('pointerdown', maybeOpen, { capture: true, passive: false });
-    document.addEventListener('click', maybeOpen, { capture: true, passive: false });
-    
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && overlayEl.classList.contains('open')) {
-            e.preventDefault();
-            close();
-        }
-    });
-    
-    // Hide interfering overlays
-    function hideBlockingOverlays() {
-        const css = `
-            .MuiBackdrop-root, .MuiModal-backdrop {
-                display: none !important;
-                pointer-events: none !important;
-            }
+  }, true);
+
+  // Hide blocking overlays from static export (MUI backdrops)
+  function hideBlockingOverlays(){
+    try {
+      if (!document.getElementById('lovable-overlay-fix')){
+        const style = document.createElement('style');
+        style.id = 'lovable-overlay-fix';
+        style.textContent = `
+          .mui-style-1jtyhdp{ display:none !important; pointer-events:none !important; }
+          .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"]{ display:none !important; pointer-events:none !important; }
         `;
-        
-        let styleEl = document.getElementById('blau-qty-blocker');
-        if (!styleEl) {
-            styleEl = document.createElement('style');
-            styleEl.id = 'blau-qty-blocker';
-            document.head.appendChild(styleEl);
-        }
-        styleEl.textContent = css;
-    }
-    
-    // Initialize
-    function prime() {
-        const buttons = document.querySelectorAll('[id*="quantity"], [class*="quantity"], .MuiSelect-root, [role="combobox"]');
-        buttons.forEach(btn => {
-            btn.setAttribute('aria-haspopup', 'listbox');
-            btn.setAttribute('aria-expanded', 'false');
-        });
-        
-        hideBlockingOverlays();
-        console.log(`Blau quantity enhancement loaded for ${buttons.length} buttons`);
-    }
-    
-    // Setup observer for dynamic content
-    const observer = new MutationObserver(() => {
-        prime();
-        hideBlockingOverlays();
+        document.head.appendChild(style);
+      }
+      document.querySelectorAll('.mui-style-1jtyhdp, .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"]').forEach(el => {
+        el.style.setProperty('display','none','important');
+        el.style.setProperty('pointer-events','none','important');
+      });
+    } catch(_){}
+  }
+
+  // Keep buttons primed for ARIA and hide overlays
+  function prime(){
+    hideBlockingOverlays();
+    document.querySelectorAll(BTN_SELECTOR).forEach(b => {
+      b.setAttribute('aria-haspopup','listbox');
+      b.setAttribute('aria-expanded', currentBtn && currentBtn === b ? 'true' : 'false');
     });
-    
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', prime);
-    } else {
-        prime();
-    }
-    
-    window.addEventListener('load', prime);
-    observer.observe(document.body, { childList: true, subtree: true });
+  }
+  // Initial run
+  prime(); hideBlockingOverlays();
+  if (window.MutationObserver){
+    const mo = new MutationObserver(() => { prime(); hideBlockingOverlays(); });
+    mo.observe(document.body, { childList:true, subtree:true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { prime(); hideBlockingOverlays(); }, { once:true });
+  window.addEventListener('load', () => { prime(); hideBlockingOverlays(); }, { once:true });
 })();
