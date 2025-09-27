@@ -1,6 +1,6 @@
 (function(){
   // Quantity Select Manager using event delegation so ALL selectors work
-  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"]';
+  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
 
   function getId(btn, idx){
@@ -67,7 +67,6 @@
   }
 
   function closeAll(exceptId){
-    console.log('[QTY] Closing all dropdowns except:', exceptId);
     instances.forEach((inst, id) => {
       if (id === exceptId) return;
       if (inst.isOpen){
@@ -80,47 +79,14 @@
   }
 
   function open(inst){
-    console.log('[QTY] Opening dropdown for:', inst.btn.id);
     inst.isOpen = true;
     positionDropdown(inst);
-    ignoreOutsideUntil = Date.now() + 900;
     inst.dropdown.style.display = 'block';
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
-
-    // Temporary global guard to block outside click-away handlers
-    const guard = (ev) => {
-      if (Date.now() < ignoreOutsideUntil) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
-      } else {
-        document.removeEventListener('mousedown', guard, true);
-        document.removeEventListener('pointerdown', guard, true);
-        document.removeEventListener('click', guard, true);
-        document.removeEventListener('touchstart', guard, true);
-        document.removeEventListener('touchend', guard, true);
-        document.removeEventListener('mouseup', guard, true);
-        document.removeEventListener('pointerup', guard, true);
-        document.removeEventListener('focusin', guard, true);
-        document.removeEventListener('focusout', guard, true);
-      }
-    };
-    document.addEventListener('mousedown', guard, true);
-    document.addEventListener('pointerdown', guard, true);
-    document.addEventListener('click', guard, true);
-    document.addEventListener('touchstart', guard, true);
-    document.addEventListener('touchend', guard, true);
-    document.addEventListener('mouseup', guard, true);
-    document.addEventListener('pointerup', guard, true);
-    document.addEventListener('focusin', guard, true);
-    document.addEventListener('focusout', guard, true);
-
-    console.log('[QTY] Dropdown opened, ignoring outside clicks until:', new Date(ignoreOutsideUntil));
   }
 
   function close(inst){
-    console.log('[QTY] Closing dropdown for:', inst.btn.id);
     inst.isOpen = false;
     inst.dropdown.style.display = 'none';
     inst.btn.setAttribute('aria-expanded','false');
@@ -145,34 +111,12 @@
     return inst;
   }
 
-  let isToggling = false;
-  let ignoreOutsideUntil = 0;
-  let suppressClicksUntil = 0;
-  
   // Delegated clicks (capture) to beat MUI handlers
   function onDocClickCapture(e){
-    // Suppress duplicate click after pointerdown and run earlier than other libs
-    if (e.type === 'pointerdown') {
-      suppressClicksUntil = Date.now() + 600;
-    } else if (e.type === 'click' && Date.now() < suppressClicksUntil) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
-      return;
-    }
-    console.log('[QTY] Click detected on:', e.target, 'at time:', Date.now(), 'type:', e.type);
     const target = e.target;
     const btn = (target && (target.closest && target.closest(BTN_SELECTOR))) || null;
     // Click on a quantity button toggles its dropdown
     if (btn){
-      console.log('[QTY] Button click detected:', btn.id);
-      if (isToggling) {
-        console.log('[QTY] Still toggling, ignoring click');
-        return;
-      }
-      isToggling = true;
-      setTimeout(() => isToggling = false, 50);
-      
       const inst = getOrInit(btn);
       e.preventDefault();
       e.stopPropagation();
@@ -184,7 +128,6 @@
     // Click on an option inside any dropdown
     const anyDropdown = (target && target.closest && target.closest('ul[role="listbox"]'));
     if (anyDropdown){
-      console.log('[QTY] Dropdown option click detected');
       // find instance owning this dropdown
       const inst = Array.from(instances.values()).find(x => x.dropdown === anyDropdown);
       if (inst){
@@ -199,12 +142,6 @@
       return;
     }
     // Otherwise: close all if clicking outside
-    console.log('[QTY] Outside click, current time:', Date.now(), 'ignore until:', ignoreOutsideUntil);
-    if (Date.now() < ignoreOutsideUntil) {
-      console.log('[QTY] Ignoring outside click due to recent open');
-      return;
-    }
-    console.log('[QTY] Processing outside click - closing all');
     closeAll(null);
   }
 
@@ -229,7 +166,7 @@
     }
   }
 
-  document.addEventListener('pointerdown', onDocClickCapture, true);
+  document.addEventListener('mousedown', onDocClickCapture, true);
   document.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
 
@@ -238,16 +175,86 @@
     document.querySelectorAll(BTN_SELECTOR).forEach((b, idx) => {
       const inst = getOrInit(b);
       b.setAttribute('aria-haspopup','listbox');
-      b.setAttribute('aria-expanded', inst.isOpen ? 'true' : 'false');
+      b.setAttribute('aria-expanded','false');
       // sync once to reflect current title
       syncSelectionUI(inst);
     });
   }
 
-  const run = () => requestAnimationFrame(primeExisting);
+  // Hide blocking overlays on desktop (MUI full-screen backdrop rendered by the static export)
+  function hideBlockingOverlays(){
+    try {
+      // Inject once
+      if (!document.getElementById('lovable-overlay-fix')){
+        const style = document.createElement('style');
+        style.id = 'lovable-overlay-fix';
+        style.textContent = `
+          /* Force-hide the fixed full-screen overlay that blocks clicks on desktop */
+          .mui-style-1jtyhdp { display: none !important; pointer-events: none !important; }
+        `;
+        document.head.appendChild(style);
+      }
+      // Also directly hide any existing instances just in case
+      document.querySelectorAll('.mui-style-1jtyhdp').forEach(el => {
+        el.style.setProperty('display','none','important');
+        el.style.setProperty('pointer-events','none','important');
+      });
+    } catch(e) {}
+  }
+
+  const run = () => requestAnimationFrame(() => { hideBlockingOverlays(); primeExisting(); });
+  
+  // Enhanced initialization with multiple triggers
+  const initQuantitySelectors = () => {
+    try {
+      hideBlockingOverlays();
+      primeExisting();
+      
+      // Force check for any missed selectors with alternative patterns
+      const altSelectors = [
+        'button:contains("Quantity")',
+        'button:contains("Anzahl")', 
+        '[class*="quantity"] button',
+        '[class*="select"] button[role="combobox"]',
+        'button[aria-expanded]'
+      ];
+      
+      altSelectors.forEach(selector => {
+        try {
+          const buttons = Array.from(document.querySelectorAll('button')).filter(btn => {
+            const text = btn.textContent || '';
+            const classes = btn.className || '';
+            const ariaLabel = btn.getAttribute('aria-label') || '';
+            return text.toLowerCase().includes('quantity') || 
+                   text.toLowerCase().includes('anzahl') ||
+                   classes.toLowerCase().includes('quantity') ||
+                   classes.toLowerCase().includes('select') ||
+                   ariaLabel.toLowerCase().includes('quantity') ||
+                   ariaLabel.toLowerCase().includes('anzahl');
+          });
+          
+          buttons.forEach(btn => {
+            if (!btn.dataset.quantityEnhanced) {
+              btn.dataset.quantityEnhanced = 'true';
+              getOrInit(btn);
+            }
+          });
+        } catch(e) { console.log('Alt selector check failed:', e); }
+      });
+    } catch(e) {
+      console.log('Quantity selector init failed:', e);
+    }
+  };
+  
   run();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
   window.addEventListener('load', run);
+  
+  // Additional fallback checks
+  setTimeout(() => { initQuantitySelectors(); }, 100);
+  setTimeout(() => { initQuantitySelectors(); }, 500);
+  setTimeout(() => { initQuantitySelectors(); }, 1000);
+  setTimeout(() => { initQuantitySelectors(); }, 2000);
   if (window.MutationObserver){
     const mo = new MutationObserver(run);
     mo.observe(document.body,{ childList:true, subtree:true });

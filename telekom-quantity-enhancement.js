@@ -1,6 +1,6 @@
 (function(){
   // Quantity Select Manager using event delegation so ALL selectors work
-  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"]';
+  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
 
   function getId(btn, idx){
@@ -203,9 +203,58 @@
   }
 
   const run = () => requestAnimationFrame(() => { hideBlockingOverlays(); primeExisting(); });
+  
+  // Enhanced initialization with multiple triggers
+  const initQuantitySelectors = () => {
+    try {
+      hideBlockingOverlays();
+      primeExisting();
+      
+      // Force check for any missed selectors with alternative patterns
+      const altSelectors = [
+        'button:contains("Quantity")',
+        'button:contains("Anzahl")', 
+        '[class*="quantity"] button',
+        '[class*="select"] button[role="combobox"]',
+        'button[aria-expanded]'
+      ];
+      
+      altSelectors.forEach(selector => {
+        try {
+          const buttons = Array.from(document.querySelectorAll('button')).filter(btn => {
+            const text = btn.textContent || '';
+            const classes = btn.className || '';
+            const ariaLabel = btn.getAttribute('aria-label') || '';
+            return text.toLowerCase().includes('quantity') || 
+                   text.toLowerCase().includes('anzahl') ||
+                   classes.toLowerCase().includes('quantity') ||
+                   classes.toLowerCase().includes('select') ||
+                   ariaLabel.toLowerCase().includes('quantity') ||
+                   ariaLabel.toLowerCase().includes('anzahl');
+          });
+          
+          buttons.forEach(btn => {
+            if (!btn.dataset.quantityEnhanced) {
+              btn.dataset.quantityEnhanced = 'true';
+              getOrInit(btn);
+            }
+          });
+        } catch(e) { console.log('Alt selector check failed:', e); }
+      });
+    } catch(e) {
+      console.log('Quantity selector init failed:', e);
+    }
+  };
+  
   run();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
   window.addEventListener('load', run);
+  
+  // Additional fallback checks
+  setTimeout(() => { initQuantitySelectors(); }, 100);
+  setTimeout(() => { initQuantitySelectors(); }, 500);
+  setTimeout(() => { initQuantitySelectors(); }, 1000);
+  setTimeout(() => { initQuantitySelectors(); }, 2000);
   if (window.MutationObserver){
     const mo = new MutationObserver(run);
     mo.observe(document.body,{ childList:true, subtree:true });
