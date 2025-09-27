@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>Mirrored Site</title>
 <script>
-if (/Mobi|Android|iPhone|iPad|Tablet/i.test(navigator.userAgent)) {
-  window.location.href = "mobile/guthaben.de.html";
-} else {
-  window.location.href = "desktop/guthaben.de.html";
+// Only redirect if we're on the root page, not already in a device directory
+if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+  if (/Mobi|Android|iPhone|iPad|Tablet/i.test(navigator.userAgent)) {
+    window.location.href = "mobile/guthaben.de.html";
+  } else {
+    window.location.href = "desktop/guthaben.de.html";
+  }
 }
 </script>
 </head><body>
 <noscript>
-<p><a href="desktop/index.html">View Desktop Version</a></p>
-<p><a href="mobile/index.html">View Mobile Version</a></p>
+<p><a href="desktop/guthaben.de.html">View Desktop Version</a></p>
+<p><a href="mobile/guthaben.de.html">View Mobile Version</a></p>
 </noscript>
 </body></html>
