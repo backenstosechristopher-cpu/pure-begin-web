@@ -2,7 +2,10 @@
   // Minimal, safe Quantity Selector with capture-based delegation (no global overlays)
   const BTN_SELECTOR = 'button[id^="product_card_quantity_select_"], button[id*="quantity_select"]';
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
-
+  // transient guards to avoid immediate auto-close after open
+  let ignoreClicksUntil = 0;
+  let lastOpenScrollX = 0, lastOpenScrollY = 0;
+ 
   function getId(btn){
     if (!btn.id) btn.id = `gd_qty_${Date.now()}_${Math.floor(Math.random()*1e6)}`;
     return btn.id;
@@ -86,6 +89,10 @@
   function closeAll(except){
     instances.forEach((inst, id) => { if (id !== except) close(inst); });
   }
+  function anyOpen(){
+    for (const inst of instances.values()){ if (inst.isOpen) return true; }
+    return false;
+  }
 
   function open(inst){
     closeAll(inst.btn.id);
@@ -94,6 +101,10 @@
     inst.isOpen = true;
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
+    // guard against immediate click-away from other libs
+    ignoreClicksUntil = Date.now() + 300;
+    lastOpenScrollX = window.scrollX;
+    lastOpenScrollY = window.scrollY;
   }
 
   function selectValue(inst, val){
@@ -151,6 +162,10 @@
 
   // Bubble fallback (no prevent/stop here)
   function onDocClick(e){
+    if (Date.now() < ignoreClicksUntil) {
+      try { console.debug('[qty] suppressing immediate click-away'); } catch(_) {}
+      return;
+    }
     const target = e.target;
     const insideDropdown = target && target.closest && target.closest('ul[role="listbox"]');
     const onButton = target && target.closest && target.closest(BTN_SELECTOR);
@@ -195,23 +210,28 @@
   document.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('click', onDocClick);
   document.addEventListener('keydown', onKeydownCapture, true);
-  // Close on significant scroll or resize with debounce
+  // Close on significant scroll or resize with debounce and thresholds
   let scrollTimeout;
   window.addEventListener('scroll', () => {
+    if (!anyOpen()) return; // nothing open, ignore
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
+      const dx = Math.abs(window.scrollX - lastOpenScrollX);
+      const dy = Math.abs(window.scrollY - lastOpenScrollY);
+      if (dx + dy < 16) { try { console.debug('[qty] small scroll ignored'); } catch(_) {} ; return; }
       try { console.debug('[qty] scroll timeout, closing all'); } catch(_) {}
       closeAll(null);
-    }, 100);
+    }, 120);
   }, { passive:true });
   
   let resizeTimeout;
   window.addEventListener('resize', () => {
+    if (!anyOpen()) return;
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       try { console.debug('[qty] resize timeout, closing all'); } catch(_) {}
       closeAll(null);
-    }, 150);
+    }, 200);
   });
 
   const init = () => primeExisting();
