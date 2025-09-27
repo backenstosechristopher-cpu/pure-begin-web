@@ -9,7 +9,7 @@
 
   // Host (fixed, top layer)
   const host = document.createElement('div');
-  host.id = 'qty-shadow-host';
+  host.id = 'qty-shadow-host-universal';
   host.style.cssText = 'position:fixed;inset:0;z-index:2147483647;display:none;pointer-events:none;';
   document.documentElement.appendChild(host);
 
@@ -82,19 +82,20 @@
     panelEl.style.display = 'block';
     // delay overlay activation so the initial click cannot close it
     overlayEl.style.pointerEvents = 'none';
-    minOpenUntil = Date.now() + 700; // prevent instant close
+    minOpenUntil = Date.now() + 700;
     setTimeout(() => { overlayEl.style.pointerEvents = 'auto'; }, 350);
 
     // ARIA
     try {
       btn.setAttribute('aria-expanded', 'true');
-    } catch(_){}}
+    } catch(_){};
+  }
 
   function close(){
     panelEl.style.display = 'none';
     host.style.display = 'none';
     host.style.pointerEvents = 'none';
-    try { currentBtn?.setAttribute('aria-expanded','false'); } catch(_){}}
+    try { currentBtn?.setAttribute('aria-expanded','false'); } catch(_){};
     currentBtn = null;
   }
 
@@ -108,7 +109,7 @@
     // Fire event for integrations
     try {
       currentBtn.dispatchEvent(new CustomEvent('quantitychange', { detail:{ value: val }, bubbles: true }));
-    } catch(_){}}
+    } catch(_){};
 
     close();
   }
@@ -116,7 +117,7 @@
   // Outside click (overlay) - only after min open window
   overlayEl.addEventListener('click', (e) => {
     e.preventDefault(); e.stopPropagation();
-    if (Date.now() < minOpenUntil) return; // ignore the click that opened it
+    if (Date.now() < minOpenUntil) return;
     close();
   }, { capture: true });
 
@@ -125,7 +126,7 @@
     if (!currentBtn) return;
     const t = e.target;
     // allow interactions inside our shadow UI
-    if (t && (t === host || (t.getRootNode && t.getRootNode() === root) || (t.closest && t.closest('#qty-shadow-host')))){
+    if (t && (t === host || (t.getRootNode && t.getRootNode() === root) || (t.closest && t.closest('#qty-shadow-host-universal')))){
       return;
     }
     // allow interactions on the source button
@@ -170,7 +171,6 @@
     document.addEventListener(evt, maybeOpen, true);
   });
 
-
   // ESC to close
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && currentBtn){
@@ -182,9 +182,9 @@
   // Hide blocking overlays from static export (MUI backdrops)
   function hideBlockingOverlays(){
     try {
-      if (!document.getElementById('lovable-overlay-fix')){
+      if (!document.getElementById('universal-overlay-fix')){
         const style = document.createElement('style');
-        style.id = 'lovable-overlay-fix';
+        style.id = 'universal-overlay-fix';
         style.textContent = `
           .mui-style-1jtyhdp{ display:none !important; pointer-events:none !important; }
           .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"]{ display:none !important; pointer-events:none !important; }
@@ -195,7 +195,8 @@
         el.style.setProperty('display','none','important');
         el.style.setProperty('pointer-events','none','important');
       });
-    } catch(_){}}
+    } catch(_){};
+  }
 
   // Keep buttons primed for ARIA and hide overlays
   function prime(){
@@ -205,12 +206,20 @@
       b.setAttribute('aria-expanded', currentBtn && currentBtn === b ? 'true' : 'false');
     });
   }
-  // Initial run
-  prime(); hideBlockingOverlays();
+
+  // Auto-run when page loads
+  function initialize(){
+    prime();
+    hideBlockingOverlays();
+    console.log('Universal quantity enhancement loaded for', document.querySelectorAll(BTN_SELECTOR).length, 'buttons');
+  }
+
+  // Initial run and setup observers
+  initialize();
   if (window.MutationObserver){
     const mo = new MutationObserver(() => { prime(); hideBlockingOverlays(); });
     mo.observe(document.body, { childList:true, subtree:true });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { prime(); hideBlockingOverlays(); }, { once:true });
-  window.addEventListener('load', () => { prime(); hideBlockingOverlays(); }, { once:true });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialize, { once:true });
+  window.addEventListener('load', initialize, { once:true });
 })();

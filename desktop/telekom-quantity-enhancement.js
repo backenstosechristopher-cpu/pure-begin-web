@@ -1,9 +1,9 @@
 (function(){
-  // Shadow DOM based Quantity Selector for Telekom pages
-  // - Opens on button click
-  // - Stays open (won't auto-close) unless: a) an option is selected, or b) user taps outside after a short delay
-  // - Fully isolated via Shadow DOM (no site CSS or handlers can affect it)
-  // - High z-index and solid background to avoid see-through
+  // Universal Shadow DOM based Quantity Selector for all guthaben.de pages
+  // - Works on any page with MUI quantity selectors
+  // - Opens on button click, stays open until selection or outside click
+  // - Fully isolated via Shadow DOM
+  // - Auto-detects and enhances all quantity buttons on page load
 
   const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
 
