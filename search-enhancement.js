@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px;">
                                 ${pi.brand}
                             </div>
-                            <div style="font-size: 14px; color: #666;">
+                            <div style="font-size: 14px; color: #666; transform: translateY(-10px);">
                                 ${pi.category}
                             </div>
                         </div>
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px;">
                                 ${p.brand} <span style="color:#657080; font-weight:500;">• ${p.price}</span>
                             </div>
-                            <div style="font-size: 14px; color: #666;">
+                            <div style="font-size: 14px; color: #666; transform: translateY(-10px);">
                                 ${p.category}
                             </div>
                         </div>
