@@ -316,10 +316,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle search input (delegated)
     let searchTimeout;
     document.addEventListener('input', function(e) {
-        const target = e.target;
-        if (!(target && target.id === 'search-field-input')) return;
-        searchInput = target;
-        const query = target.value;
+        const inputEl = getInputEl();
+        if (!inputEl) return;
+        const wrapper = getWrapperEl(inputEl);
+        const isEventOnSearch = (e.target === inputEl) || (wrapper && wrapper.contains(e.target));
+        if (!isEventOnSearch) return;
+        searchInput = inputEl;
+        const query = inputEl.value || '';
 
         clearTimeout(searchTimeout);
         showOverlay();
@@ -337,28 +340,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle focus (delegated)
     document.addEventListener('focusin', function(e) {
-        const target = e.target;
-        if (!(target && target.id === 'search-field-input')) return;
-        searchInput = target;
+        const inputEl = getInputEl();
+        const wrapper = getWrapperEl(inputEl);
+        if (!inputEl) return;
+        if (!(e.target === inputEl || (wrapper && wrapper.contains(e.target)))) return;
+        searchInput = inputEl;
         showOverlay();
         
-        // Show popular items immediately on focus
-        showResults([]);
-        
-        const query = target.value || '';
+        // Show popular items immediately on focus when query is short
+        const query = inputEl.value || '';
         if (query.length >= 2) {
             const results = searchProducts(query, allProducts);
             showResults(results);
         } else {
+            showResults([]);
             isOpen = true;
         }
     });
 
-    // Handle click
-    searchInput.addEventListener('click', function() {
-        showOverlay();
-        isOpen = true;
-    });
+    // Handle direct input click (guarded)
+    const directInputEl = getInputEl();
+    if (directInputEl) {
+        directInputEl.addEventListener('click', function() {
+            showOverlay();
+            isOpen = true;
+        });
+    }
 
     // Also show overlay when clicking anywhere on the wrapper (icon, field, etc.)
     document.addEventListener('click', function(e) {
