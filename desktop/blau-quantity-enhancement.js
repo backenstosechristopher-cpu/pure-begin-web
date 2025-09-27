@@ -126,6 +126,25 @@
     if (e.key === 'Escape' && currentBtn) close();
   }, true);
 
+  // Hide MUI backdrops that can block the page
+  function hideBlockingOverlays(){
+    try {
+      if (!document.getElementById('lovable-overlay-fix')){
+        const style = document.createElement('style');
+        style.id = 'lovable-overlay-fix';
+        style.textContent = `
+          .mui-style-1jtyhdp{ display:none !important; pointer-events:none !important; }
+          .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"]{ display:none !important; pointer-events:none !important; }
+        `;
+        document.head.appendChild(style);
+      }
+      document.querySelectorAll('.mui-style-1jtyhdp, .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"]').forEach(el => {
+        el.style.setProperty('display','none','important');
+        el.style.setProperty('pointer-events','none','important');
+      });
+    } catch(_){ }
+  }
+
   // Prime: bind click handlers to buttons and set ARIA
   function bindButton(b){
     if (b.dataset.blauQtyBound) return;
@@ -134,10 +153,12 @@
       e.preventDefault();
       e.stopPropagation();
       if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      hideBlockingOverlays();
       openFor(b);
     }, true);
   }
   function prime(){
+    hideBlockingOverlays();
     document.querySelectorAll(BTN_SELECTOR).forEach(b => {
       b.setAttribute('aria-haspopup','listbox');
       b.setAttribute('aria-expanded', currentBtn && currentBtn === b ? 'true' : 'false');
