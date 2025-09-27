@@ -206,6 +206,31 @@
       document.querySelectorAll('.mui-style-1jtyhdp, .MuiBackdrop-root, .MuiModal-backdrop, .MuiPopover-root > .MuiBackdrop-root, .MuiPopper-root > .MuiBackdrop-root, .MuiDrawer-root > .MuiBackdrop-root').forEach(el => {
         el.style.setProperty('pointer-events','none','important');
       });
+      // Heuristic: neutralize full-screen backdrops/overlays that may block clicks
+      try {
+        const nodes = Array.from(document.querySelectorAll('body *'));
+        nodes.forEach(el => {
+          if (!(el instanceof HTMLElement)) return;
+          // skip our own dropdowns
+          if (el.tagName === 'UL' && el.getAttribute('role') === 'listbox') return;
+          const cs = getComputedStyle(el);
+          if (cs.pointerEvents === 'none') return;
+          const z = parseInt(cs.zIndex || '0', 10);
+          const pos = cs.position;
+          const w = el.offsetWidth;
+          const h = el.offsetHeight;
+          const covers = (pos === 'fixed' || pos === 'absolute') && w >= window.innerWidth * 0.95 && h >= window.innerHeight * 0.95;
+          if (!covers) return;
+          const cls = (el.className || '').toString().toLowerCase();
+          const id = (el.id || '').toLowerCase();
+          const isBackdropish = cls.includes('backdrop') || cls.includes('overlay') || cls.includes('modal') || id.includes('backdrop') || id.includes('overlay');
+          const ariaHidden = el.getAttribute('aria-hidden') === 'true';
+          if ((isBackdropish || ariaHidden) && z >= 1000) {
+            el.style.setProperty('pointer-events','none','important');
+          }
+        });
+      } catch(e) {}
+
     } catch(e) {}
   }
 
