@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 2147483647;
+            z-index: 10001;
             max-height: 400px;
             overflow-y: auto;
             display: none;
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 2147483646;
+            z-index: 10000;
             display: none;
             pointer-events: auto;
         `;
@@ -248,6 +248,17 @@ document.addEventListener('DOMContentLoaded', function() {
     searchInput.addEventListener('click', function() {
         showOverlay();
         isOpen = true;
+    });
+
+    // Also show overlay when clicking anywhere on the wrapper (icon, field, etc.)
+    (function() {
+        const wrapper = searchInput.closest('.MuiInputBase-root') || searchInput.parentElement;
+        if (wrapper) {
+            wrapper.addEventListener('click', function() {
+                showOverlay();
+            });
+        }
+    })();
 
     // Global focus within search wrapper
     document.addEventListener('focusin', function(e) {
