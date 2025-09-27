@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 9999;
+            z-index: 2147483647;
             max-height: 400px;
             overflow-y: auto;
             display: none;
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 9998;
+            z-index: 2147483646;
             display: none;
             pointer-events: none;
         `;
@@ -213,6 +213,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         clearTimeout(searchTimeout);
         
+        showOverlay();
+        
         if (query.length >= 2) {
             searchTimeout = setTimeout(() => {
                 const results = searchProducts(query, allProducts);
@@ -233,6 +235,12 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             isOpen = true;
         }
+    });
+
+    // Handle click
+    searchInput.addEventListener('click', function() {
+        showOverlay();
+        isOpen = true;
     });
 
     // Handle blur
