@@ -53,10 +53,9 @@
       li.className = 'item';
       li.textContent = String(i);
       if (i === selected) li.setAttribute('selected','');
-      li.addEventListener('click', (e) => {
-        e.preventDefault(); e.stopPropagation();
+      li.addEventListener('click', () => {
         selectValue(i);
-      }, { capture: true });
+      });
       listEl.appendChild(li);
     }
   }
@@ -80,6 +79,7 @@
     host.style.display = 'block';
     host.style.pointerEvents = 'none';
     panelEl.style.display = 'block';
+    console.log('[Blau Qty] open');
     // minimal guard to avoid instant close
     minOpenUntil = Date.now() + 300;
 
@@ -95,6 +95,7 @@
     host.style.pointerEvents = 'none';
     try { currentBtn?.setAttribute('aria-expanded','false'); } catch(_){}
     currentBtn = null;
+    console.log('[Blau Qty] close');
   }
 
   function selectValue(val){
@@ -170,7 +171,7 @@
     if (!inPanel && !onBtn && Date.now() >= minOpenUntil) {
       close();
     }
-  }, true);
+  }, false);
 
 
   // ESC to close
