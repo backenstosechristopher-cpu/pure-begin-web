@@ -71,6 +71,7 @@
     instances.forEach((inst, id) => {
       if (id === exceptId) return;
       if (inst.isOpen){
+        try { console.debug('[qty] closeAll', id); } catch(_){}
         inst.isOpen = false;
         inst.dropdown.style.display = 'none';
         inst.btn.setAttribute('aria-expanded','false');
@@ -87,6 +88,7 @@
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
     // guard against immediate outside click-away
     ignoreClicksUntil = Date.now() + 600;
+    try { console.debug('[qty] open', inst.btn.id); } catch(_){}
   }
 
   function close(inst){
@@ -94,6 +96,7 @@
     inst.dropdown.style.display = 'none';
     inst.btn.setAttribute('aria-expanded','false');
     inst.btn.removeAttribute('aria-controls');
+    try { console.debug('[qty] close', inst.btn.id, 'close()'); } catch(_){}
   }
 
   function selectValue(inst, val){
@@ -177,8 +180,8 @@
   document.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
 
-  // Block site-level click handlers for buttons/dropdown without re-toggling
-  function onDocClickCaptureClick(e){
+  // Block site-level handlers for buttons/dropdown to prevent instant close
+  function onDocCaptureBlock(e){
     const t = e.target;
     const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
     const inDropdown = t && t.closest && t.closest('ul[role="listbox"]');
@@ -186,10 +189,11 @@
       e.preventDefault();
       e.stopPropagation();
       if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
-      return;
     }
   }
-  document.addEventListener('click', onDocClickCaptureClick, true);
+  ['click','mousedown','mouseup','touchstart','touchend'].forEach(evt => {
+    document.addEventListener(evt, onDocCaptureBlock, true);
+  });
 
   // Bubble click-away closer with guard
   function onDocClickBubble(e){
