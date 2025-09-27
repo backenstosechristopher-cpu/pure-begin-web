@@ -5,7 +5,7 @@
   // - Fully isolated via Shadow DOM
   // - Auto-detects and enhances all quantity buttons on page load
 
-  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
+  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, [id^="product_card_quantity_select_"], [aria-label*="Quantity"], [aria-label*="quantity"], [aria-label*="Anzahl"], [data-testid*="quantity"], .MuiSelect-select[role="combobox"], .MuiInputBase-root .MuiSelect-select, [role="combobox"].MuiSelect-select, button.MuiButtonBase-root:has(+ .MuiSelect-icon), [role="button"][id^="product_card_quantity_select_"], button:has(.MuiSelect-icon)';
 
   // Host (fixed, top layer)
   const host = document.createElement('div');
