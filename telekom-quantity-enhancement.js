@@ -80,7 +80,10 @@
     host.style.display = 'block';
     host.style.pointerEvents = 'auto';
     panelEl.style.display = 'block';
+    // delay overlay activation so the initial click cannot close it
+    overlayEl.style.pointerEvents = 'none';
     minOpenUntil = Date.now() + 700; // prevent instant close
+    setTimeout(() => { overlayEl.style.pointerEvents = 'auto'; }, 350);
 
     // ARIA
     try {
@@ -118,15 +121,24 @@
     close();
   }, { capture: true });
 
-  // ESC to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && currentBtn){
-      e.preventDefault(); e.stopPropagation();
-      close();
+  // While open, block all site events outside our UI to prevent auto-close
+  function whileOpenBlocker(e){
+    if (!currentBtn) return;
+    const t = e.target;
+    // allow interactions inside our shadow UI
+    if (t && (t === host || (t.getRootNode && t.getRootNode() === root) || (t.closest && t.closest('#qty-shadow-host')))){
+      return;
     }
-  }, true);
+    // allow interactions on the source button
+    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
+    if (onBtn) return;
+    // otherwise, swallow the event while open
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+  }
 
-  // Open on pointerdown or click (capture) to beat site handlers regardless of order
+  // Open on pointerdown or click (capture)
   function maybeOpen(e){
     const t = e.target;
     const btn = t && t.closest && t.closest(BTN_SELECTOR);
@@ -144,10 +156,23 @@
     openFor(btn);
   }
 
-  ['pointerdown','click'].forEach(evt => {
-    window.addEventListener(evt, maybeOpen, true);
-    document.addEventListener(evt, maybeOpen, true);
+  // Global blockers while open (capture and bubble)
+  const blockEvents = ['click','pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','focusin','focusout'];
+  blockEvents.forEach(evt => {
+    window.addEventListener(evt, whileOpenBlocker, true);
+    document.addEventListener(evt, whileOpenBlocker, true);
+    window.addEventListener(evt, whileOpenBlocker, false);
+    document.addEventListener(evt, whileOpenBlocker, false);
   });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && currentBtn){
+      e.preventDefault(); e.stopPropagation();
+      close();
+    }
+  }, true);
+
 
   // Keep buttons primed for ARIA
   function prime(){
