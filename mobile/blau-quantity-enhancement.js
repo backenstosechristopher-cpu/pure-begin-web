@@ -1,11 +1,11 @@
 (function(){
-  // Universal Shadow DOM based Quantity Selector for Blau pages
+  // Universal Shadow DOM based Quantity Selector for all guthaben.de pages
   // - Works on any page with MUI quantity selectors
   // - Opens on button click, stays open until selection or outside click
   // - Fully isolated via Shadow DOM
   // - Auto-detects and enhances all quantity buttons on page load
 
-  const BTN_SELECTOR = '[id*="quantity"], [class*="quantity"], [id*="qty"], [class*="qty"], [id*="menge"], [class*="menge"], .MuiSelect-root, .MuiSelect-select[role="combobox"], [role="combobox"], [role="button"][aria-haspopup="listbox"], button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[aria-label*="Menge"], button[aria-label*="Stück"], [data-testid*="quantity"], [data-testid*="qty"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
+  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
 
   // Host (fixed, top layer)
   const host = document.createElement('div');
@@ -34,7 +34,6 @@
   const overlayEl = root.querySelector('.overlay');
   const panelEl = root.querySelector('.panel');
   const listEl = root.querySelector('.list');
-  try { console.log('[Blau Qty] script loaded'); } catch(_){}
 
   let currentBtn = null;
   let minOpenUntil = 0;
@@ -42,9 +41,7 @@
   function getCurrentValue(btn){
     const title = btn.getAttribute('title') || '';
     const small = btn.querySelector('small');
-    const valueEl = btn.querySelector('[aria-expanded]') || btn.querySelector('span') || btn;
-    const text = valueEl.textContent || valueEl.innerText || '';
-    const txt = small?.textContent || title || text || '1';
+    const txt = small?.textContent || title || '1';
     const v = parseInt(String(txt).replace(/[^0-9]/g,''), 10);
     return Number.isFinite(v) && v > 0 ? v : 1;
   }
@@ -83,7 +80,6 @@
     host.style.display = 'block';
     host.style.pointerEvents = 'auto';
     panelEl.style.display = 'block';
-    try { console.log('[Blau Qty] opened for:', btn); } catch(_){}
     // delay overlay activation so the initial click cannot close it
     overlayEl.style.pointerEvents = 'none';
     minOpenUntil = Date.now() + 700; // prevent instant close
@@ -105,10 +101,10 @@
 
   function selectValue(val){
     if (!currentBtn) return;
-    // Update only known quantity markers to avoid breaking markup
+    // Reflect on button
     const small = currentBtn.querySelector('small');
     if (small) small.textContent = String(val);
-    try { currentBtn.setAttribute('title', String(val)); } catch(_){}
+    currentBtn.title = String(val);
 
     // Fire event for integrations
     try {
@@ -122,7 +118,6 @@
   overlayEl.addEventListener('click', (e) => {
     e.preventDefault(); e.stopPropagation();
     if (Date.now() < minOpenUntil) return; // ignore the click that opened it
-    try { console.log('[Blau Qty] overlay click -> close'); } catch(_){}
     close();
   }, { capture: true });
 
@@ -148,7 +143,6 @@
     const t = e.target;
     const btn = t && t.closest && t.closest(BTN_SELECTOR);
     if (!btn) return;
-    try { console.log('[Blau Qty] trigger clicked:', btn); } catch(_){}
     // Prevent site handlers from reacting to this interaction
     e.preventDefault();
     e.stopPropagation();
@@ -208,9 +202,7 @@
   // Keep buttons primed for ARIA and hide overlays
   function prime(){
     hideBlockingOverlays();
-    const nodes = document.querySelectorAll(BTN_SELECTOR);
-    try { console.log('[Blau Qty] primed buttons:', nodes.length); } catch(_){}
-    nodes.forEach(b => {
+    document.querySelectorAll(BTN_SELECTOR).forEach(b => {
       b.setAttribute('aria-haspopup','listbox');
       b.setAttribute('aria-expanded', currentBtn && currentBtn === b ? 'true' : 'false');
     });
