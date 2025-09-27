@@ -125,28 +125,35 @@ document.addEventListener('DOMContentLoaded', function() {
             background: rgba(0, 0, 0, 0.5);
             z-index: 2147483646;
             display: none;
-            pointer-events: none;
+            pointer-events: auto;
         `;
         document.body.appendChild(overlay);
+        overlay.addEventListener('click', function() {
+            hideResults();
+            hideOverlay();
+            searchInput.blur();
+        });
     }
 
     // Show overlay
     function showOverlay() {
         if (!overlay) createOverlay();
         overlay.style.display = 'block';
+        try { console.debug('[search] overlay shown'); } catch (_) {}
     }
 
     // Hide overlay
     function hideOverlay() {
         if (overlay) {
             overlay.style.display = 'none';
+            try { console.debug('[search] overlay hidden'); } catch (_) {}
         }
     }
 
     // Show results
     function showResults(results) {
         if (!resultsContainer) createResultsContainer();
-        
+        showOverlay();
         if (results.length === 0) {
             resultsContainer.innerHTML = `
                 <div style="padding: 16px; text-align: center; color: #666; font-size: 14px;">
@@ -241,7 +248,27 @@ document.addEventListener('DOMContentLoaded', function() {
     searchInput.addEventListener('click', function() {
         showOverlay();
         isOpen = true;
+
+    // Global focus within search wrapper
+    document.addEventListener('focusin', function(e) {
+        const wrapper = searchInput.closest('.MuiInputBase-root') || searchInput.parentElement;
+        if (e.target === searchInput || (wrapper && wrapper.contains(e.target))) {
+            showOverlay();
+        }
     });
+
+    document.addEventListener('focusout', function() {
+        setTimeout(() => {
+            const active = document.activeElement;
+            const wrapper = searchInput.closest('.MuiInputBase-root') || searchInput.parentElement;
+            const stillInside = active === searchInput || (wrapper && wrapper.contains(active)) || (resultsContainer && resultsContainer.contains(active));
+            if (!stillInside) {
+                hideResults();
+                hideOverlay();
+            }
+        }, 100);
+    });
+
 
     // Handle blur
     searchInput.addEventListener('blur', function(e) {
