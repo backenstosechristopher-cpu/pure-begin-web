@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const allProducts = generateProducts();
     let resultsContainer = null;
-    let overlay = null;
+    let overlay = null; // scrim capturing outside clicks
+    let spotlight = null; // visual black fill with hole around input
     let isOpen = false;
 
     // Create results container
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 10001;
+            z-index: 10002;
             max-height: 400px;
             overflow-y: auto;
             display: none;
@@ -108,63 +109,81 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Create overlay
+    // Create overlay (scrim)
     function createOverlay() {
         overlay = document.createElement('div');
-        overlay.id = 'search-overlay';
+        overlay.id = 'search-overlay-scrim';
         overlay.style.cssText = `
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
+            inset: 0;
+            background: transparent;
+            z-index: 9999;
             display: none;
             pointer-events: auto;
         `;
-        document.body.appendChild(overlay);
         overlay.addEventListener('click', function() {
             hideResults();
             hideOverlay();
             const inputEl = document.getElementById('search-field-input');
             if (inputEl) inputEl.blur();
         });
+        document.body.appendChild(overlay);
     }
 
-    function elevateWrapper() {
+    // Create spotlight (visual black fill with hole around input)
+    function createSpotlight() {
+        spotlight = document.createElement('div');
+        spotlight.id = 'search-spotlight-hole';
+        spotlight.style.cssText = `
+            position: fixed;
+            top: 0; left: 0; width: 0; height: 0;
+            box-shadow: 0 0 0 9999px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            z-index: 10000; /* above scrim, below dropdown */
+            pointer-events: none; /* allow interactions with input */
+            display: none;
+        `;
+        document.body.appendChild(spotlight);
+    }
+
+    let repositionSpotlightHandler = null;
+    function positionSpotlight() {
         const inputEl = document.getElementById('search-field-input');
         const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
-        if (wrapper) {
-            wrapper.style.position = 'relative';
-            wrapper.style.zIndex = '10002';
-        }
+        if (!wrapper || !spotlight) return;
+        const rect = wrapper.getBoundingClientRect();
+        spotlight.style.top = `${Math.max(rect.top, 0)}px`;
+        spotlight.style.left = `${Math.max(rect.left, 0)}px`;
+        spotlight.style.width = `${rect.width}px`;
+        spotlight.style.height = `${rect.height}px`;
+        spotlight.style.display = 'block';
     }
 
-    function resetWrapper() {
-        const inputEl = document.getElementById('search-field-input');
-        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
-        if (wrapper) {
-            wrapper.style.zIndex = '';
-            // keep position as-is to avoid layout jumps
-        }
-    }
-
-    // Show overlay
+    // Show overlay (scrim + spotlight)
     function showOverlay() {
         if (!overlay) createOverlay();
+        if (!spotlight) createSpotlight();
         overlay.style.display = 'block';
-        elevateWrapper();
+        positionSpotlight();
+        // keep spotlight aligned on scroll/resize while active
+        if (!repositionSpotlightHandler) {
+            repositionSpotlightHandler = () => positionSpotlight();
+            window.addEventListener('resize', repositionSpotlightHandler, true);
+            window.addEventListener('scroll', repositionSpotlightHandler, true);
+        }
         try { console.debug('[search] overlay shown'); } catch (_) {}
     }
 
     // Hide overlay
     function hideOverlay() {
-        if (overlay) {
-            overlay.style.display = 'none';
-            resetWrapper();
-            try { console.debug('[search] overlay hidden'); } catch (_) {}
+        if (overlay) overlay.style.display = 'none';
+        if (spotlight) spotlight.style.display = 'none';
+        if (repositionSpotlightHandler) {
+            window.removeEventListener('resize', repositionSpotlightHandler, true);
+            window.removeEventListener('scroll', repositionSpotlightHandler, true);
+            repositionSpotlightHandler = null;
         }
+        try { console.debug('[search] overlay hidden'); } catch (_) {}
     }
 
     // Show results
