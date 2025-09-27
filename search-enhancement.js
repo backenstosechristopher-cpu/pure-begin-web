@@ -104,14 +104,14 @@ document.addEventListener('DOMContentLoaded', function() {
             left: 0;
             right: 0;
             background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid #e1e7eb;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
             z-index: 10002;
             max-height: 400px;
             overflow-y: auto;
             display: none;
-            margin-top: 4px;
+            margin-top: 8px;
         `;
 
         // Find the parent container of the search input
@@ -207,40 +207,57 @@ document.addEventListener('DOMContentLoaded', function() {
     function showResults(results) {
         if (!resultsContainer) createResultsContainer();
         showOverlay();
+        
+        // Create header section
+        const headerHtml = `
+            <div style="padding: 16px 16px 8px 16px; border-bottom: 1px solid #f0f0f0;">
+                <div style="font-weight: 600; font-size: 14px; color: #666; margin-bottom: 12px;">
+                    Am beliebtesten
+                </div>
+            </div>
+        `;
+        
         if (results.length === 0) {
-            resultsContainer.innerHTML = `
+            resultsContainer.innerHTML = headerHtml + `
                 <div style="padding: 16px; text-align: center; color: #666; font-size: 14px;">
                     Keine Produkte gefunden
                 </div>
             `;
         } else {
-            const html = results.map(product => `
+            const popularItems = [
+                { brand: 'PaysafeCard', category: 'Popular products', color: '#0066cc', icon: '💳' },
+                { brand: 'Google Play', category: 'Gamecards', color: '#4285f4', icon: '🎮' },
+                { brand: 'Apple', category: 'Entertainment cards', color: '#000000', icon: '🍎' },
+                { brand: 'Amazon', category: 'Shopping cards', color: '#ff9900', icon: '📦' },
+                { brand: 'Steam', category: 'Gaming cards', color: '#171a21', icon: '🎯' }
+            ];
+
+            const itemsHtml = popularItems.slice(0, 5).map(item => `
                 <div class="search-result-item" 
-                     style="padding: 12px 16px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background-color 0.2s;"
-                     data-slug="${product.slug}"
-                     onmouseover="this.style.backgroundColor='#f5f5f5'"
+                     style="padding: 12px 16px; border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: space-between;"
+                     data-slug="${item.brand.toLowerCase().replace(/\s+/g, '-')}"
+                     onmouseover="this.style.backgroundColor='#f8f9fa'"
                      onmouseout="this.style.backgroundColor='transparent'">
-                    <div style="display: flex; justify-content: space-between; align-items: start;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600; font-size: 14px; color: #032e33; margin-bottom: 4px;">
-                                ${product.brand}
-                            </div>
-                            <div style="font-size: 12px; color: #666;">
-                                ${product.category}
-                            </div>
+                    <div style="display: flex; align-items: center; flex: 1;">
+                        <div style="width: 40px; height: 40px; background: ${item.color}; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 18px;">
+                            ${item.icon}
                         </div>
-                        <div style="text-align: right; margin-left: 12px;">
-                            <div style="font-weight: 600; color: #ffa81e; font-size: 14px;">
-                                ${product.price}
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px;">
+                                ${item.brand}
                             </div>
-                            <div style="font-size: 11px; color: #4caf50; margin-top: 2px;">
-                                Verfügbar
+                            <div style="font-size: 14px; color: #666;">
+                                ${item.category}
                             </div>
                         </div>
                     </div>
+                    <div style="color: #ccc; font-size: 18px;">
+                        ›
+                    </div>
                 </div>
             `).join('');
-            resultsContainer.innerHTML = html;
+            
+            resultsContainer.innerHTML = headerHtml + itemsHtml;
 
             // Add click handlers
             resultsContainer.querySelectorAll('.search-result-item').forEach(item => {
@@ -283,7 +300,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 showResults(results);
             }, 300);
         } else {
-            hideResults();
+            // Show popular items when query is short
+            showResults([]);
         }
     });
 
@@ -293,6 +311,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!(target && target.id === 'search-field-input')) return;
         searchInput = target;
         showOverlay();
+        
+        // Show popular items immediately on focus
+        showResults([]);
+        
         const query = target.value || '';
         if (query.length >= 2) {
             const results = searchProducts(query, allProducts);
