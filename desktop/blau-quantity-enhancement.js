@@ -259,9 +259,9 @@
         console.log('Blau quantity selected:', val);
     }
     
-    // Handle overlay clicks
+    // Handle overlay clicks - close when clicking outside panel
     overlayEl.addEventListener('click', (e) => {
-        if (Date.now() > minOpenUntil && e.target === overlayEl) {
+        if (Date.now() > minOpenUntil && !panelEl.contains(e.target)) {
             close();
         }
     });
