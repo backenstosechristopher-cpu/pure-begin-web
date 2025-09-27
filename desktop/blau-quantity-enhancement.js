@@ -5,7 +5,7 @@
   // - Fully isolated via Shadow DOM
   // - Auto-detects and enhances all quantity buttons on page load
 
-  const BTN_SELECTOR = '[aria-haspopup="listbox"], [role="combobox"], .MuiSelect-root, .MuiSelect-select[role="combobox"], button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], [aria-label*="Quantity" i], [aria-label*="Anzahl" i], [data-testid*="quantity" i], [id*="quantity" i], [class*="quantity" i], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
+  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
 
   // Host (fixed, top layer)
   const host = document.createElement('div');
@@ -18,7 +18,7 @@
     <style>
       :host{ all: initial; }
       *{ box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:none; }
+      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:auto; }
       .panel{ position:fixed; background:#fff; color:#111; border:1px solid rgba(0,0,0,.12); border-radius:10px; box-shadow:0 18px 42px rgba(0,0,0,.22); min-width:120px; max-height:260px; overflow:auto; z-index:1; }
       .list{ list-style:none; margin:0; padding:6px 0; }
       .item{ padding:10px 14px; cursor:pointer; font-size:15px; }
@@ -75,9 +75,9 @@
     renderOptions(val);
     positionPanelNear(btn);
 
-    // Show host (no pointer capture) and panel
+    // Show host and panel
     host.style.display = 'block';
-    host.style.pointerEvents = 'none';
+    host.style.pointerEvents = 'auto';
     panelEl.style.display = 'block';
     console.log('[Blau Qty] open');
     // minimal guard to avoid instant close
@@ -153,18 +153,14 @@
   // Attach opener
   document.addEventListener('click', maybeOpen, false);
 
-  // Outside click handled via overlay pass-through
-
-  // Close on any outside click (capture), while allowing clicks inside panel or on source button
-  document.addEventListener('click', (e) => {
-    if (!currentBtn) return;
-    const t = e.target;
-    const inPanel = t && (t === panelEl || (panelEl.contains && panelEl.contains(t)));
-    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
-    if (!inPanel && !onBtn && Date.now() >= minOpenUntil) {
-      close();
-    }
-  }, false);
+  // Close via overlay click and pass-through
+  overlayEl.addEventListener('click', (e) => {
+    if (Date.now() < minOpenUntil) return; // ignore the click that opened it
+    const x = e.clientX, y = e.clientY;
+    close();
+    const target = document.elementFromPoint(x, y);
+    if (target && typeof target.click === 'function') target.click();
+  }, { capture: true });
 
 
   // ESC to close
