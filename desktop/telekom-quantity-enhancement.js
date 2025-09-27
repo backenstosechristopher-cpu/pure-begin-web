@@ -1,14 +1,15 @@
 (function(){
-  // Disabled Quantity Selector script for debugging
-  // Returning early to prevent any click interception
-  return;
+  // Lightweight Quantity Selector - rebuilt from scratch to avoid interfering with page
+  const BTN_SELECTOR = 'button[id^="product_card_quantity_select_"], button[id*="quantity_select"]';
 
-  function getId(btn, idx){
-    if (!btn.id) btn.id = `gd_qty_${Date.now()}_${idx ?? Math.floor(Math.random()*1e6)}`;
+  const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
+
+  function getId(btn){
+    if (!btn.id) btn.id = `gd_qty_${Date.now()}_${Math.floor(Math.random()*1e6)}`;
     return btn.id;
   }
 
-  function createDropdown(id){
+  function createDropdown(id, initial){
     const ul = document.createElement('ul');
     ul.setAttribute('role','listbox');
     ul.id = id + '_listbox';
@@ -16,11 +17,11 @@
       'position:absolute',
       'top:0',
       'left:0',
-      'background:#fff',
-      'border:1px solid #ddd',
+      'background:#fff', // ensure non-transparent background
+      'border:1px solid #e5e7eb',
       'border-radius:8px',
-      'box-shadow:0 12px 24px rgba(0,0,0,0.2)',
-      'z-index:2147483647',
+      'box-shadow:0 12px 24px rgba(0,0,0,0.18)',
+      'z-index:2147483646', // very high, but below any important app-specific layers
       'min-width:100px',
       'max-height:240px',
       'overflow-y:auto',
@@ -29,26 +30,39 @@
       'list-style:none',
       'display:none'
     ].join(';');
+
     for(let i=1;i<=10;i++){
       const li = document.createElement('li');
       li.setAttribute('role','option');
       li.dataset.value = String(i);
       li.textContent = String(i);
-      li.style.cssText = 'padding:10px 14px;cursor:pointer;font-size:15px;color:#333;';
-      li.addEventListener('mouseenter', () => { if (li.getAttribute('aria-selected') !== 'true') li.style.background = '#f5f5f5'; });
-      li.addEventListener('mouseleave', () => { if (li.getAttribute('aria-selected') !== 'true') li.style.background = ''; });
+      li.style.cssText = 'padding:10px 14px;cursor:pointer;font-size:15px;color:#111827;';
+      if (i === initial) {
+        li.setAttribute('aria-selected','true');
+        li.style.fontWeight = '600';
+        li.style.background = '#f3f4f6';
+      } else {
+        li.setAttribute('aria-selected','false');
+      }
+      li.addEventListener('mouseenter', () => {
+        if (li.getAttribute('aria-selected') !== 'true') li.style.background = '#f9fafb';
+      });
+      li.addEventListener('mouseleave', () => {
+        if (li.getAttribute('aria-selected') !== 'true') li.style.background = '';
+      });
       ul.appendChild(li);
     }
+
     document.body.appendChild(ul);
     return ul;
   }
 
-  function syncSelectionUI(inst){
+  function syncUI(inst){
     const { btn, dropdown, value } = inst;
     dropdown.querySelectorAll('[role="option"]').forEach(opt => {
       const isSel = parseInt(opt.dataset.value||'0',10) === value;
       opt.setAttribute('aria-selected', isSel ? 'true' : 'false');
-      opt.style.background = isSel ? '#f0f0f0' : '';
+      opt.style.background = isSel ? '#f3f4f6' : '';
       opt.style.fontWeight = isSel ? '600' : '400';
     });
     const small = btn.querySelector('small');
@@ -56,7 +70,7 @@
     btn.title = String(value);
   }
 
-  function positionDropdown(inst){
+  function position(inst){
     const { btn, dropdown } = inst;
     const rect = btn.getBoundingClientRect();
     const top = rect.bottom + window.scrollY + 6;
@@ -66,36 +80,30 @@
     dropdown.style.minWidth = `${rect.width}px`;
   }
 
-  function closeAll(exceptId){
-    instances.forEach((inst, id) => {
-      if (id === exceptId) return;
-      if (inst.isOpen){
-        inst.isOpen = false;
-        inst.dropdown.style.display = 'none';
-        inst.btn.setAttribute('aria-expanded','false');
-        inst.btn.removeAttribute('aria-controls');
-      }
-    });
-  }
-
-  function open(inst){
-    inst.isOpen = true;
-    positionDropdown(inst);
-    inst.dropdown.style.display = 'block';
-    inst.btn.setAttribute('aria-expanded','true');
-    inst.btn.setAttribute('aria-controls', inst.dropdown.id);
-  }
-
   function close(inst){
+    if (!inst || !inst.isOpen) return;
     inst.isOpen = false;
     inst.dropdown.style.display = 'none';
     inst.btn.setAttribute('aria-expanded','false');
     inst.btn.removeAttribute('aria-controls');
   }
 
+  function closeAll(except){
+    instances.forEach((inst, id) => { if (id !== except) close(inst); });
+  }
+
+  function open(inst){
+    closeAll(inst.btn.id);
+    position(inst);
+    inst.dropdown.style.display = 'block';
+    inst.isOpen = true;
+    inst.btn.setAttribute('aria-expanded','true');
+    inst.btn.setAttribute('aria-controls', inst.dropdown.id);
+  }
+
   function selectValue(inst, val){
     inst.value = val;
-    syncSelectionUI(inst);
+    syncUI(inst);
     close(inst);
     inst.btn.dispatchEvent(new CustomEvent('quantitychange',{ detail:{ value: val }, bubbles:true }));
   }
@@ -103,186 +111,95 @@
   function getOrInit(btn){
     const id = getId(btn);
     if (instances.has(id)) return instances.get(id);
-    const dropdown = createDropdown(id);
     const value = parseInt((btn.getAttribute('title')||'1').replace(/[^0-9]/g,''),10) || 1;
+    const dropdown = createDropdown(id, value);
     const inst = { btn, dropdown, isOpen:false, value };
-    syncSelectionUI(inst);
+    syncUI(inst);
     instances.set(id, inst);
     return inst;
   }
 
-  // Delegated clicks (capture) to beat MUI handlers
-  function onDocClickCapture(e){
+  function onButtonClick(e){
+    const btn = e.currentTarget;
+    const inst = getOrInit(btn);
+    e.preventDefault();
+    e.stopPropagation(); // only stop for this button click
+    inst.isOpen ? close(inst) : open(inst);
+  }
+
+  function onOptionClick(e){
+    const opt = e.target.closest('[role="option"]');
+    if (!opt) return;
+    const ul = opt.closest('ul[role="listbox"]');
+    const inst = Array.from(instances.values()).find(x => x.dropdown === ul);
+    if (!inst) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const val = parseInt(opt.dataset.value||'1',10);
+    selectValue(inst, val);
+  }
+
+  function onDocClick(e){
     const target = e.target;
-    const btn = (target && (target.closest && target.closest(BTN_SELECTOR))) || null;
-    // Click on a quantity button toggles its dropdown
-    if (btn){
-      const inst = getOrInit(btn);
-      e.preventDefault();
-      e.stopPropagation();
-      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
-      closeAll(inst.btn.id);
-      inst.isOpen ? close(inst) : open(inst);
-      return;
-    }
-    // Click on an option inside any dropdown
-    const anyDropdown = (target && target.closest && target.closest('ul[role="listbox"]'));
-    if (anyDropdown){
-      // find instance owning this dropdown
-      const inst = Array.from(instances.values()).find(x => x.dropdown === anyDropdown);
-      if (inst){
-        const opt = target.closest('[role="option"]');
-        if (opt && opt.dataset.value){
-          e.preventDefault();
-          e.stopPropagation();
-          if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
-          selectValue(inst, parseInt(opt.dataset.value,10));
-        }
-      }
-      return;
-    }
-    // Otherwise: close all if clicking outside
+    // if click inside any dropdown or on its button, ignore
+    const insideDropdown = target && target.closest && target.closest('ul[role="listbox"]');
+    const onButton = target && target.closest && target.closest(BTN_SELECTOR);
+    if (insideDropdown || onButton) return;
     closeAll(null);
   }
 
-  // Keyboard handling (capture) for focused buttons
-  function onDocKeydownCapture(e){
+  function onKeydown(e){
     const active = document.activeElement;
-    if (!active) return;
-    if (!active.matches || !active.matches(BTN_SELECTOR)) return;
+    if (!active || !active.matches || !active.matches(BTN_SELECTOR)) return;
     const inst = getOrInit(active);
-    if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      inst.isOpen ? close(inst) : open(inst);
+    } else if (e.key === 'Escape') {
+      close(inst);
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){
       e.preventDefault();
       if (!inst.isOpen) open(inst);
       const opts = Array.from(inst.dropdown.querySelectorAll('[role="option"]'));
       const curIdx = opts.findIndex(o => o.getAttribute('aria-selected') === 'true');
       const nextIdx = e.key === 'ArrowDown' ? Math.min(curIdx + 1, opts.length - 1) : Math.max(curIdx - 1, 0);
       if (nextIdx !== curIdx) selectValue(inst, parseInt(opts[nextIdx].dataset.value||'1',10));
-    } else if (e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      inst.isOpen ? close(inst) : open(inst);
-    } else if (e.key === 'Escape'){
-      close(inst);
     }
   }
 
-  document.addEventListener('pointerdown', onDocClickCapture, true);
-  document.addEventListener('mousedown', onDocClickCapture, true);
-  document.addEventListener('click', onDocClickCapture, true);
-  document.addEventListener('keydown', onDocKeydownCapture, true);
-
-  // Ensure ARIA base for any existing matching buttons
-  function primeExisting(){
-    document.querySelectorAll(BTN_SELECTOR).forEach((b, idx) => {
-      const inst = getOrInit(b);
-      b.setAttribute('aria-haspopup','listbox');
-      b.setAttribute('aria-expanded','false');
-      // sync once to reflect current title
-      syncSelectionUI(inst);
+  function attach(){
+    document.querySelectorAll(BTN_SELECTOR).forEach(btn => {
+      const inst = getOrInit(btn);
+      btn.setAttribute('aria-haspopup','listbox');
+      btn.setAttribute('aria-expanded','false');
+      // bind once
+      if (!btn.dataset.qtyBound){
+        btn.addEventListener('click', onButtonClick);
+        btn.addEventListener('keydown', onKeydown);
+        btn.dataset.qtyBound = 'true';
+      }
+      // bind dropdown click once
+      if (!inst.dropdown.dataset.qtyBound){
+        inst.dropdown.addEventListener('click', onOptionClick);
+        inst.dropdown.dataset.qtyBound = 'true';
+      }
     });
   }
 
-  // Hide blocking overlays on desktop (MUI full-screen backdrop rendered by the static export)
-  function hideBlockingOverlays(){
-    try {
-      // Inject once
-      if (!document.getElementById('lovable-overlay-fix')){
-        const style = document.createElement('style');
-        style.id = 'lovable-overlay-fix';
-        style.textContent = `
-          /* Disable pointer events on common MUI overlays that can block clicks in static export */
-          .mui-style-1jtyhdp,
-          .MuiBackdrop-root,
-          .MuiModal-backdrop,
-          .MuiPopover-root > .MuiBackdrop-root,
-          .MuiPopper-root > .MuiBackdrop-root,
-          .MuiDrawer-root > .MuiBackdrop-root {
-            pointer-events: none !important;
-          }
-        `;
-        document.head.appendChild(style);
-      }
-      // Also directly hide any existing instances just in case
-      document.querySelectorAll('.mui-style-1jtyhdp, .MuiBackdrop-root, .MuiModal-backdrop, .MuiPopover-root > .MuiBackdrop-root, .MuiPopper-root > .MuiBackdrop-root, .MuiDrawer-root > .MuiBackdrop-root').forEach(el => {
-        el.style.setProperty('pointer-events','none','important');
-      });
-      // Heuristic: neutralize full-screen backdrops/overlays that may block clicks
-      try {
-        const nodes = Array.from(document.querySelectorAll('body *'));
-        nodes.forEach(el => {
-          if (!(el instanceof HTMLElement)) return;
-          // skip our own dropdowns
-          if (el.tagName === 'UL' && el.getAttribute('role') === 'listbox') return;
-          const cs = getComputedStyle(el);
-          if (cs.pointerEvents === 'none') return;
-          const z = parseInt(cs.zIndex || '0', 10);
-          const pos = cs.position;
-          const w = el.offsetWidth;
-          const h = el.offsetHeight;
-          const covers = (pos === 'fixed' || pos === 'absolute') && w >= window.innerWidth * 0.95 && h >= window.innerHeight * 0.95;
-          if (!covers) return;
-          const cls = (el.className || '').toString().toLowerCase();
-          const id = (el.id || '').toLowerCase();
-          const isBackdropish = cls.includes('backdrop') || cls.includes('overlay') || cls.includes('modal') || id.includes('backdrop') || id.includes('overlay');
-          const ariaHidden = el.getAttribute('aria-hidden') === 'true';
-          if ((isBackdropish || ariaHidden) && z >= 1000) {
-            el.style.setProperty('pointer-events','none','important');
-          }
-        });
-      } catch(e) {}
+  // Global, but passive/harmless listeners
+  document.addEventListener('click', onDocClick);
+  window.addEventListener('scroll', () => closeAll(null), { passive:true });
+  window.addEventListener('resize', () => closeAll(null));
 
-    } catch(e) {}
-  }
+  // Initial and mutation-driven attach
+  const init = () => attach();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  window.addEventListener('load', init);
+  init();
 
-  const run = () => requestAnimationFrame(() => { hideBlockingOverlays(); primeExisting(); });
-  
-  // Enhanced initialization with multiple triggers
-  const initQuantitySelectors = () => {
-    try {
-      hideBlockingOverlays();
-      primeExisting();
-      
-      // Force check for any missed selectors with alternative patterns
-      const altSelectors = [
-        // Kept for reference; not used directly as CSS selectors
-      ];
-      
-      altSelectors.forEach(() => {
-        try {
-          const buttons = Array.from(document.querySelectorAll('button')).filter(btn => {
-            const text = (btn.textContent || '').toLowerCase();
-            const ariaLabel = (btn.getAttribute('aria-label') || '').toLowerCase();
-            const idAttr = (btn.id || '').toLowerCase();
-            return idAttr.includes('quantity') ||
-                   ariaLabel.includes('quantity') || ariaLabel.includes('anzahl') ||
-                   text.includes('quantity') || text.includes('anzahl');
-          });
-          
-          buttons.forEach(btn => {
-            if (!btn.dataset.quantityEnhanced) {
-              btn.dataset.quantityEnhanced = 'true';
-              getOrInit(btn);
-            }
-          });
-        } catch(e) { console.log('Alt selector check failed:', e); }
-      });
-    } catch(e) {
-      console.log('Quantity selector init failed:', e);
-    }
-  };
-  
-  run();
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-  window.addEventListener('load', run);
-  
-  // Additional fallback checks
-  setTimeout(() => { initQuantitySelectors(); }, 100);
-  setTimeout(() => { initQuantitySelectors(); }, 500);
-  setTimeout(() => { initQuantitySelectors(); }, 1000);
-  setTimeout(() => { initQuantitySelectors(); }, 2000);
   if (window.MutationObserver){
-    const mo = new MutationObserver(run);
-    mo.observe(document.body,{ childList:true, subtree:true });
+    const mo = new MutationObserver(() => attach());
+    mo.observe(document.body, { childList:true, subtree:true });
   }
-  setTimeout(run,100); setTimeout(run,400); setTimeout(run,1000);
 })();
+
