@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const allProducts = generateProducts();
     let resultsContainer = null;
+    let overlay = null;
     let isOpen = false;
 
     // Create results container
@@ -111,9 +112,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Create overlay
+    function createOverlay() {
+        overlay = document.createElement('div');
+        overlay.id = 'search-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            display: none;
+            pointer-events: none;
+        `;
+        document.body.appendChild(overlay);
+    }
+
+    // Show overlay
+    function showOverlay() {
+        if (!overlay) createOverlay();
+        overlay.style.display = 'block';
+    }
+
+    // Hide overlay
+    function hideOverlay() {
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
+    }
+
     // Show results
     function showResults(results) {
         if (!resultsContainer) createResultsContainer();
+        showOverlay();
         
         if (results.length === 0) {
             resultsContainer.innerHTML = `
@@ -171,6 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (resultsContainer) {
             resultsContainer.style.display = 'none';
         }
+        hideOverlay();
         isOpen = false;
     }
 
