@@ -141,8 +141,15 @@
   // Open on pointerdown or click (capture)
   function maybeOpen(e){
     const t = e.target;
-    const btn = t && t.closest && t.closest(BTN_SELECTOR);
+    const path = (typeof e.composedPath === 'function') ? e.composedPath() : [];
+    let btn = null;
+    // Try event path first for deeply nested icons/spans
+    for (const n of path){
+      if (n && n.matches && n.matches(BTN_SELECTOR)) { btn = n; break; }
+    }
+    if (!btn && t && t.closest) btn = t.closest(BTN_SELECTOR);
     if (!btn) return;
+
     // Prevent site handlers from reacting to this interaction
     e.preventDefault();
     e.stopPropagation();
