@@ -123,10 +123,12 @@
     overlay.style.display = 'block';
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', dropdown.id);
+    console.log('[QTY] Opened dropdown for:', inst.btn.id, 'at', Date.now());
   }
 
   function closeDropdown(){
     if (!dropdown) return;
+    console.log('[QTY] Closing dropdown, openFor was:', openFor?.btn?.id, 'at', Date.now());
     dropdown.style.display = 'none';
     if (overlay) overlay.style.display = 'none';
     if (openFor){
@@ -160,6 +162,13 @@
     const btn = t && t.closest && t.closest(BTN_SELECTOR);
     const inDropdown = t && t.closest && t.closest('#gd_qty_dropdown');
 
+    console.log('[QTY] Click captured:', {
+      target: t?.tagName + '.' + (t?.className || ''),
+      btn: btn?.id || 'none',
+      inDropdown: !!inDropdown,
+      openFor: openFor?.btn?.id || 'none'
+    });
+
     if (btn){
       const inst = getInst(btn);
       // stay open on re-click; only reposition
@@ -183,6 +192,7 @@
 
     // Outside click closes
     if (openFor){
+      console.log('[QTY] Outside click - closing dropdown');
       closeDropdown();
     }
   }
