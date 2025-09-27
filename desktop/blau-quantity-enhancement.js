@@ -143,10 +143,10 @@
     const t = e.target;
     const btn = t && t.closest && t.closest(BTN_SELECTOR);
     if (!btn) return;
-    // Prevent site handlers from reacting to this interaction
-    e.preventDefault();
-    e.stopPropagation();
-    if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+    // Do not prevent default site handlers; just also open our selector
+    // e.preventDefault();
+    // e.stopPropagation();
+    // if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
 
     if (currentBtn && currentBtn === btn){
       // already open for this button: just reposition
@@ -167,11 +167,8 @@
     }
   }, true);
 
-  // Open listeners (capture) so we beat site handlers
-  ['pointerdown','click'].forEach(evt => {
-    window.addEventListener(evt, maybeOpen, true);
-    document.addEventListener(evt, maybeOpen, true);
-  });
+  // Open listener on click only (capture)
+  document.addEventListener('click', maybeOpen, true);
 
 
   // ESC to close
