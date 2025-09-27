@@ -190,12 +190,10 @@
         const style = document.createElement('style');
         style.id = 'lovable-overlay-fix';
         style.textContent = `
-          /* Disable pointer events on common MUI/Next overlays that can block clicks in static export */
+          /* Disable pointer events on common MUI overlays that can block clicks in static export */
           .mui-style-1jtyhdp,
           .MuiBackdrop-root,
           .MuiModal-backdrop,
-          [class*="Backdrop"],
-          [class*="backdrop"],
           .MuiPopover-root > .MuiBackdrop-root,
           .MuiPopper-root > .MuiBackdrop-root,
           .MuiDrawer-root > .MuiBackdrop-root {
@@ -205,7 +203,7 @@
         document.head.appendChild(style);
       }
       // Also directly hide any existing instances just in case
-      document.querySelectorAll('.mui-style-1jtyhdp, .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"], [class*="backdrop"], .MuiPopover-root > .MuiBackdrop-root, .MuiPopper-root > .MuiBackdrop-root, .MuiDrawer-root > .MuiBackdrop-root').forEach(el => {
+      document.querySelectorAll('.mui-style-1jtyhdp, .MuiBackdrop-root, .MuiModal-backdrop, .MuiPopover-root > .MuiBackdrop-root, .MuiPopper-root > .MuiBackdrop-root, .MuiDrawer-root > .MuiBackdrop-root').forEach(el => {
         el.style.setProperty('pointer-events','none','important');
       });
     } catch(e) {}
