@@ -145,6 +145,7 @@
     }
 
     // Outside click closes all
+    try { console.debug('[qty] outside click detected, closing all'); } catch(_) {}
     closeAll(null);
   }
 
@@ -154,6 +155,7 @@
     const insideDropdown = target && target.closest && target.closest('ul[role="listbox"]');
     const onButton = target && target.closest && target.closest(BTN_SELECTOR);
     if (insideDropdown || onButton) return;
+    try { console.debug('[qty] fallback click detected, closing all'); } catch(_) {}
     closeAll(null);
   }
 
@@ -189,28 +191,27 @@
     });
   }
 
-  // Global listeners
-  // Capture at window AND document to beat any global stopPropagation in capture
-  window.addEventListener('pointerdown', onDocClickCapture, true);
-  window.addEventListener('mousedown', onDocClickCapture, true);
-  window.addEventListener('click', onDocClickCapture, true);
+  // Global listeners - simplified to avoid conflicts
   document.addEventListener('pointerdown', onDocClickCapture, true);
-  document.addEventListener('mousedown', onDocClickCapture, true);
-  document.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('click', onDocClick);
-  window.addEventListener('keydown', onKeydownCapture, true);
   document.addEventListener('keydown', onKeydownCapture, true);
   // Close on significant scroll or resize with debounce
   let scrollTimeout;
   window.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => closeAll(null), 100);
+    scrollTimeout = setTimeout(() => {
+      try { console.debug('[qty] scroll timeout, closing all'); } catch(_) {}
+      closeAll(null);
+    }, 100);
   }, { passive:true });
   
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => closeAll(null), 150);
+    resizeTimeout = setTimeout(() => {
+      try { console.debug('[qty] resize timeout, closing all'); } catch(_) {}
+      closeAll(null);
+    }, 150);
   });
 
   const init = () => primeExisting();
