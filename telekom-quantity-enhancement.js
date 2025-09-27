@@ -248,7 +248,7 @@
   }
 
   // Listeners (capture-phase to beat site handlers)
-  ['pointerdown','mousedown','mouseup','touchstart','touchend','dblclick','click'].forEach(evt => {
+  ['pointerdown','mousedown','mouseup','touchstart','touchend','dblclick'].forEach(evt => {
     document.addEventListener(evt, blockInsideControls, true);
   });
   document.addEventListener('click', onDocClickCapture, true);
