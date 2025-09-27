@@ -166,8 +166,8 @@
     }
   }
 
-  document.addEventListener('mousedown', onDocClickCapture, true);
-  document.addEventListener('click', onDocClickCapture, true);
+  // Use pointerdown only to avoid double-toggling (mousedown+click)
+  document.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
 
   // Ensure ARIA base for any existing matching buttons
