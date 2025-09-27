@@ -68,12 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ).slice(0, 10); // Limit to 10 results
     }
 
-    // Find the existing search input
-    const searchInput = document.getElementById('search-field-input');
-    if (!searchInput) {
-        console.warn('Search input not found');
-        return;
-    }
+    // Find the existing search input (may be injected later by the app)
+    let searchInput = document.getElementById('search-field-input') || null;
 
     const allProducts = generateProducts();
     let resultsContainer = null;
@@ -213,15 +209,17 @@ document.addEventListener('DOMContentLoaded', function() {
         isOpen = false;
     }
 
-    // Handle search input
+    // Handle search input (delegated)
     let searchTimeout;
-    searchInput.addEventListener('input', function(e) {
-        const query = e.target.value;
-        
+    document.addEventListener('input', function(e) {
+        const target = e.target;
+        if (!(target && target.id === 'search-field-input')) return;
+        searchInput = target;
+        const query = target.value;
+
         clearTimeout(searchTimeout);
-        
         showOverlay();
-        
+
         if (query.length >= 2) {
             searchTimeout = setTimeout(() => {
                 const results = searchProducts(query, allProducts);
@@ -232,10 +230,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Handle focus
-    searchInput.addEventListener('focus', function() {
+    // Handle focus (delegated)
+    document.addEventListener('focusin', function(e) {
+        const target = e.target;
+        if (!(target && target.id === 'search-field-input')) return;
+        searchInput = target;
         showOverlay();
-        const query = this.value;
+        const query = target.value || '';
         if (query.length >= 2) {
             const results = searchProducts(query, allProducts);
             showResults(results);
@@ -251,19 +252,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Also show overlay when clicking anywhere on the wrapper (icon, field, etc.)
-    (function() {
-        const wrapper = searchInput.closest('.MuiInputBase-root') || searchInput.parentElement;
-        if (wrapper) {
-            wrapper.addEventListener('click', function() {
-                showOverlay();
-            });
+    document.addEventListener('click', function(e) {
+        const inputEl = document.getElementById('search-field-input');
+        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        if (wrapper && wrapper.contains(e.target)) {
+            showOverlay();
+            isOpen = true;
         }
-    })();
+    });
 
     // Global focus within search wrapper
     document.addEventListener('focusin', function(e) {
-        const wrapper = searchInput.closest('.MuiInputBase-root') || searchInput.parentElement;
-        if (e.target === searchInput || (wrapper && wrapper.contains(e.target))) {
+        const inputEl = document.getElementById('search-field-input');
+        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        if (e.target === inputEl || (wrapper && wrapper.contains(e.target))) {
             showOverlay();
         }
     });
@@ -271,8 +273,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('focusout', function() {
         setTimeout(() => {
             const active = document.activeElement;
-            const wrapper = searchInput.closest('.MuiInputBase-root') || searchInput.parentElement;
-            const stillInside = active === searchInput || (wrapper && wrapper.contains(active)) || (resultsContainer && resultsContainer.contains(active));
+            const inputEl = document.getElementById('search-field-input');
+            const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+            const stillInside = (active === inputEl) || (wrapper && wrapper.contains(active)) || (resultsContainer && resultsContainer.contains(active));
             if (!stillInside) {
                 hideResults();
                 hideOverlay();
@@ -280,21 +283,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     });
 
+    // Removed direct blur handler; using global focusout above for robustness
 
-    // Handle blur
-    searchInput.addEventListener('blur', function(e) {
-        // Small delay to allow clicking on results
-        setTimeout(() => {
-            if (!searchInput.matches(':focus') && (!resultsContainer || !resultsContainer.matches(':hover'))) {
-                hideResults();
-                hideOverlay();
-            }
-        }, 150);
-    });
 
     // Handle clicks outside
     document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && (!resultsContainer || !resultsContainer.contains(e.target))) {
+        const inputEl = document.getElementById('search-field-input');
+        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        const inside = (inputEl && inputEl.contains(e.target)) || (wrapper && wrapper.contains(e.target)) || (resultsContainer && resultsContainer.contains(e.target));
+        if (!inside) {
             hideResults();
             hideOverlay();
         }
@@ -302,11 +299,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle keyboard navigation
     let highlightedIndex = -1;
-    searchInput.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function(e) {
+        const active = document.activeElement;
+        if (!(active && active.id === 'search-field-input')) return;
         if (!isOpen) return;
 
         const items = resultsContainer ? resultsContainer.querySelectorAll('.search-result-item') : [];
-        
         switch (e.key) {
             case 'ArrowDown':
                 e.preventDefault();
@@ -327,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'Escape':
                 hideResults();
                 hideOverlay();
-                searchInput.blur();
+                if (active && typeof active.blur === 'function') active.blur();
                 break;
         }
     });
