@@ -102,6 +102,8 @@
         document.removeEventListener('touchend', guard, true);
         document.removeEventListener('mouseup', guard, true);
         document.removeEventListener('pointerup', guard, true);
+        document.removeEventListener('focusin', guard, true);
+        document.removeEventListener('focusout', guard, true);
       }
     };
     document.addEventListener('mousedown', guard, true);
@@ -111,6 +113,8 @@
     document.addEventListener('touchend', guard, true);
     document.addEventListener('mouseup', guard, true);
     document.addEventListener('pointerup', guard, true);
+    document.addEventListener('focusin', guard, true);
+    document.addEventListener('focusout', guard, true);
 
     console.log('[QTY] Dropdown opened, ignoring outside clicks until:', new Date(ignoreOutsideUntil));
   }
