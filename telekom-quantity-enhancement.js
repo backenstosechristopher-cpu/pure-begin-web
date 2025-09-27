@@ -11,6 +11,7 @@
   let overlay = null;        // full-screen invisible overlay to capture outside clicks
   let openFor = null;        // { btn, value }
   const instances = new Map(); // btn.id -> { btn, value }
+  let cancelClicksUntil = 0; // suppress site clicks briefly after opening
 
   // Utility
   function getId(btn){
@@ -123,6 +124,7 @@
     overlay.style.display = 'block';
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', dropdown.id);
+    cancelClicksUntil = Date.now() + 500; // suppress closers for 500ms
     console.log('[QTY] Opened dropdown for:', inst.btn.id, 'at', Date.now());
   }
 
@@ -156,8 +158,23 @@
     }
   }
 
-  // Main click (capture): open, select, or outside-close
+  // Suppress clicks briefly after opening to avoid site closers
+  function suppressClicks(e){
+    if (Date.now() < cancelClicksUntil){
+      // allow overlay clicks through
+      if (e.target && (e.target === overlay || (e.target.closest && e.target.closest('#gd_qty_overlay')))){
+        return;
+      }
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+    }
+  }
+
+  // Main pointerdown (capture): open or select; outside handled by overlay
   function onDocClickCapture(e){
+    if (e._qtyHandled) return;
+    e._qtyHandled = true;
     const t = e.target;
     const btn = t && t.closest && t.closest(BTN_SELECTOR);
     const inDropdown = t && t.closest && t.closest('#gd_qty_dropdown');
@@ -190,11 +207,8 @@
       return;
     }
 
-    // Outside click closes
-    if (openFor){
-      console.log('[QTY] Outside click - closing dropdown');
-      closeDropdown();
-    }
+    // Outside clicks handled via overlay only to avoid race conditions
+    return;
   }
 
   function onKeydownCapture(e){
@@ -250,8 +264,14 @@
   // Listeners (capture-phase to beat site handlers)
   ['pointerdown','mousedown','mouseup','touchstart','touchend','dblclick'].forEach(evt => {
     document.addEventListener(evt, blockInsideControls, true);
+    window.addEventListener(evt, blockInsideControls, true);
   });
-  document.addEventListener('click', onDocClickCapture, true);
+  // Suppress site click handlers briefly after opening
+  document.addEventListener('click', suppressClicks, true);
+  window.addEventListener('click', suppressClicks, true);
+  // Open on pointerdown capture (earliest reliable point)
+  document.addEventListener('pointerdown', onDocClickCapture, true);
+  window.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('keydown', onKeydownCapture, true);
 
   // Init + observe DOM changes
