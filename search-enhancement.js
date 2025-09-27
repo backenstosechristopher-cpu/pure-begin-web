@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const popularHeader = `
                 <div style="padding: 16px 16px 8px 16px; border-bottom: 1px solid #f0f0f0;">
                     <div style="font-weight: 600; font-size: 14px; color: #666; margin-bottom: 12px;">
-                        Am beliebtesten
+                        Popular
                     </div>
                 </div>
             `;
