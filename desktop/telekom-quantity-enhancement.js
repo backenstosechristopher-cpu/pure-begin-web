@@ -200,8 +200,18 @@
   document.addEventListener('click', onDocClick);
   window.addEventListener('keydown', onKeydownCapture, true);
   document.addEventListener('keydown', onKeydownCapture, true);
-  window.addEventListener('scroll', () => closeAll(null), { passive:true });
-  window.addEventListener('resize', () => closeAll(null));
+  // Close on significant scroll or resize with debounce
+  let scrollTimeout;
+  window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => closeAll(null), 100);
+  }, { passive:true });
+  
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => closeAll(null), 150);
+  });
 
   const init = () => primeExisting();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
