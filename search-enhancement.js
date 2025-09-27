@@ -1,4 +1,5 @@
 // Enhanced search functionality for existing guthaben.de search input with ID 'search-field-input'
+console.debug('[search-enhancement] loaded');
 document.addEventListener('DOMContentLoaded', function() {
     // Product database from guthaben.de
     const productDatabase = {
@@ -71,6 +72,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Find the existing search input (may be injected later by the app)
     let searchInput = document.getElementById('search-field-input') || null;
 
+    // Robust getters for input and wrapper (desktop/mobile)
+    function getInputEl() {
+        return (
+            document.getElementById('search-field-input') ||
+            document.querySelector('input[placeholder*="Suche" i]') ||
+            document.querySelector('input[role="combobox"][aria-autocomplete="list"]') ||
+            document.querySelector('input.MuiAutocomplete-input') ||
+            null
+        );
+    }
+    function getWrapperEl(inputEl) {
+        const el = inputEl || getInputEl();
+        if (!el) return null;
+        return el.closest('[class*="MuiInputBase-root"], [class*="MuiAutocomplete-root"], .search, header, form') || el.parentElement;
+    }
+
     const allProducts = generateProducts();
     let resultsContainer = null;
     let overlay = null; // scrim capturing outside clicks
@@ -98,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 
         // Find the parent container of the search input
-        const searchContainer = searchInput.closest('.MuiInputBase-root') || searchInput.parentElement;
+        const searchContainer = getWrapperEl();
         if (searchContainer) {
             // Make sure parent has relative positioning
             const parentContainer = searchContainer.parentElement;
@@ -303,8 +320,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Global focus within search wrapper
     document.addEventListener('focusin', function(e) {
-        const inputEl = document.getElementById('search-field-input');
-        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        const inputEl = getInputEl();
+        const wrapper = getWrapperEl(inputEl);
         if (e.target === inputEl || (wrapper && wrapper.contains(e.target))) {
             showOverlay();
         }
@@ -313,8 +330,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('focusout', function() {
         setTimeout(() => {
             const active = document.activeElement;
-            const inputEl = document.getElementById('search-field-input');
-            const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+            const inputEl = getInputEl();
+            const wrapper = getWrapperEl(inputEl);
             const stillInside = (active === inputEl) || (wrapper && wrapper.contains(active)) || (resultsContainer && resultsContainer.contains(active));
             if (!stillInside) {
                 hideResults();
@@ -328,8 +345,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle clicks outside
     document.addEventListener('click', function(e) {
-        const inputEl = document.getElementById('search-field-input');
-        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        const inputEl = getInputEl();
+        const wrapper = getWrapperEl(inputEl);
         const inside = (inputEl && inputEl.contains(e.target)) || (wrapper && wrapper.contains(e.target)) || (resultsContainer && resultsContainer.contains(e.target));
         if (!inside) {
             hideResults();
@@ -339,8 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Show overlay early on pointer down inside wrapper (before focus)
     document.addEventListener('mousedown', function(e) {
-        const inputEl = document.getElementById('search-field-input');
-        const wrapper = inputEl ? (inputEl.closest('.MuiInputBase-root') || inputEl.parentElement) : null;
+        const wrapper = getWrapperEl();
         if (wrapper && wrapper.contains(e.target)) {
             showOverlay();
             isOpen = true;
@@ -351,7 +367,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let highlightedIndex = -1;
     document.addEventListener('keydown', function(e) {
         const active = document.activeElement;
-        if (!(active && active.id === 'search-field-input')) return;
+        const isSearch = !!active && (
+            active.id === 'search-field-input' ||
+            (active.matches && active.matches('input[placeholder*="Suche" i], input[role="combobox"][aria-autocomplete="list"], input.MuiAutocomplete-input'))
+        );
+        if (!isSearch) return;
         if (!isOpen) return;
 
         const items = resultsContainer ? resultsContainer.querySelectorAll('.search-result-item') : [];
