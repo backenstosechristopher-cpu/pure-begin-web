@@ -3,6 +3,7 @@
   const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
   let ignoreClicksUntil = 0;
+  let overlay = null;
 
   function getId(btn, idx){
     if (!btn.id) btn.id = `gd_qty_${Date.now()}_${idx ?? Math.floor(Math.random()*1e6)}`;
@@ -71,13 +72,31 @@
     instances.forEach((inst, id) => {
       if (id === exceptId) return;
       if (inst.isOpen){
-        try { console.debug('[qty] closeAll', id); } catch(_){}
+        try { console.debug('[qty] closeAll', id); } catch(_){ }
         inst.isOpen = false;
         inst.dropdown.style.display = 'none';
         inst.btn.setAttribute('aria-expanded','false');
         inst.btn.removeAttribute('aria-controls');
       }
     });
+    const anyOpen = Array.from(instances.values()).some(x => x.isOpen);
+    if (!anyOpen && overlay) overlay.style.display = 'none';
+  }
+
+  function ensureOverlay(){
+    if (overlay) return overlay;
+    const div = document.createElement('div');
+    div.id = 'gd_qty_overlay';
+    div.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0);display:none;';
+    div.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      closeAll(null);
+    }, true);
+    document.body.appendChild(div);
+    overlay = div;
+    return overlay;
   }
 
   function open(inst){
@@ -86,6 +105,9 @@
     inst.dropdown.style.display = 'block';
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
+    // show overlay to capture outside clicks only
+    ensureOverlay();
+    if (overlay) overlay.style.display = 'block';
     // guard against immediate outside click-away
     ignoreClicksUntil = Date.now() + 600;
     try { console.debug('[qty] open', inst.btn.id); } catch(_){}
@@ -130,7 +152,7 @@
       // Keep menu open on button re-click; only close on outside click or selection
       closeAll(inst.btn.id);
       if (!inst.isOpen) {
-        open(inst);
+        setTimeout(() => { open(inst); }, 0);
       } else {
         positionDropdown(inst);
       }
