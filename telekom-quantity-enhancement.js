@@ -172,6 +172,20 @@
   document.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
 
+  // Block site-level click handlers for buttons/dropdown without re-toggling
+  function onDocClickCaptureClick(e){
+    const t = e.target;
+    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
+    const inDropdown = t && t.closest && t.closest('ul[role="listbox"]');
+    if (onBtn || inDropdown){
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      return;
+    }
+  }
+  document.addEventListener('click', onDocClickCaptureClick, true);
+
   // Bubble click-away closer with guard
   function onDocClickBubble(e){
     if (Date.now() < ignoreClicksUntil) return;
