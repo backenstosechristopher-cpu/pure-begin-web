@@ -2,6 +2,7 @@
   // Quantity Select Manager using event delegation so ALL selectors work
   const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
+  let ignoreClicksUntil = 0;
 
   function getId(btn, idx){
     if (!btn.id) btn.id = `gd_qty_${Date.now()}_${idx ?? Math.floor(Math.random()*1e6)}`;
@@ -84,6 +85,8 @@
     inst.dropdown.style.display = 'block';
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
+    // guard against immediate outside click-away
+    ignoreClicksUntil = Date.now() + 600;
   }
 
   function close(inst){
@@ -128,7 +131,6 @@
     // Click on an option inside any dropdown
     const anyDropdown = (target && target.closest && target.closest('ul[role="listbox"]'));
     if (anyDropdown){
-      // find instance owning this dropdown
       const inst = Array.from(instances.values()).find(x => x.dropdown === anyDropdown);
       if (inst){
         const opt = target.closest('[role="option"]');
@@ -141,8 +143,8 @@
       }
       return;
     }
-    // Otherwise: close all if clicking outside
-    closeAll(null);
+    // Otherwise: defer outside-close to bubble phase to avoid racing
+    return;
   }
 
   // Keyboard handling (capture) for focused buttons
@@ -169,6 +171,16 @@
   // Use pointerdown only to avoid double-toggling (mousedown+click)
   document.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
+
+  // Bubble click-away closer with guard
+  function onDocClickBubble(e){
+    if (Date.now() < ignoreClicksUntil) return;
+    const t = e.target;
+    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
+    const inDropdown = t && t.closest && t.closest('ul[role="listbox"]');
+    if (!onBtn && !inDropdown) closeAll(null);
+  }
+  document.addEventListener('click', onDocClickBubble, false);
 
   // Ensure ARIA base for any existing matching buttons
   function primeExisting(){
