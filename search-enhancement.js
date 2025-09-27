@@ -146,7 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show results
     function showResults(results) {
         if (!resultsContainer) createResultsContainer();
-        showOverlay();
         
         if (results.length === 0) {
             resultsContainer.innerHTML = `
@@ -204,7 +203,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (resultsContainer) {
             resultsContainer.style.display = 'none';
         }
-        hideOverlay();
         isOpen = false;
     }
 
@@ -243,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             if (!searchInput.matches(':focus') && (!resultsContainer || !resultsContainer.matches(':hover'))) {
                 hideResults();
+                hideOverlay();
             }
         }, 150);
     });
@@ -251,6 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && (!resultsContainer || !resultsContainer.contains(e.target))) {
             hideResults();
+            hideOverlay();
         }
     });
 
@@ -280,6 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             case 'Escape':
                 hideResults();
+                hideOverlay();
                 searchInput.blur();
                 break;
         }
