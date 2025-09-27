@@ -18,7 +18,7 @@
     <style>
       :host{ all: initial; }
       *{ box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:auto; }
+      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:none; }
       .panel{ position:fixed; background:#fff; color:#111; border:1px solid rgba(0,0,0,.12); border-radius:10px; box-shadow:0 18px 42px rgba(0,0,0,.22); min-width:120px; max-height:260px; overflow:auto; z-index:1; }
       .list{ list-style:none; margin:0; padding:6px 0; }
       .item{ padding:10px 14px; cursor:pointer; font-size:15px; }
@@ -103,12 +103,22 @@
     // Reflect on button
     const small = currentBtn.querySelector('small');
     if (small) small.textContent = String(val);
-    currentBtn.title = String(val);
+    try { currentBtn.title = String(val); } catch(_){}
+
+    // Fallback: update a visible text node containing the quantity number
+    const textEl = currentBtn.querySelector('[data-qty], .quantity, .MuiTypography-root, span');
+    if (textEl){
+      const txt = textEl.textContent || '';
+      if (/\d+/.test(txt)) textEl.textContent = txt.replace(/\d+/, String(val));
+      else textEl.textContent = String(val);
+    }
 
     // Fire event for integrations
     try {
       currentBtn.dispatchEvent(new CustomEvent('quantitychange', { detail:{ value: val }, bubbles: true }));
-    } catch(_){}
+      currentBtn.dispatchEvent(new Event('change', { bubbles:true }));
+      currentBtn.dispatchEvent(new Event('input', { bubbles:true }));
+    } catch(_){ }
 
     close();
   }
@@ -153,14 +163,14 @@
   // Attach opener
   document.addEventListener('click', maybeOpen, false);
 
-  // Close via overlay click and pass-through
-  overlayEl.addEventListener('click', (e) => {
-    if (Date.now() < minOpenUntil) return; // ignore the click that opened it
-    const x = e.clientX, y = e.clientY;
-    close();
-    const target = document.elementFromPoint(x, y);
-    if (target && typeof target.click === 'function') target.click();
-  }, { capture: true });
+  // Close on outside click (bubble), overlay allows pass-through
+  document.addEventListener('click', (e) => {
+    if (!currentBtn) return;
+    const t = e.target;
+    const inPanel = t && (t === panelEl || (panelEl.contains && panelEl.contains(t)));
+    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
+    if (!inPanel && !onBtn && Date.now() >= minOpenUntil) close();
+  }, false);
 
 
   // ESC to close
