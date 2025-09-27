@@ -67,6 +67,7 @@
   }
 
   function closeAll(exceptId){
+    console.log('[QTY] Closing all dropdowns except:', exceptId);
     instances.forEach((inst, id) => {
       if (id === exceptId) return;
       if (inst.isOpen){
@@ -79,15 +80,18 @@
   }
 
   function open(inst){
+    console.log('[QTY] Opening dropdown for:', inst.btn.id);
     inst.isOpen = true;
     positionDropdown(inst);
     ignoreOutsideUntil = Date.now() + 700;
     inst.dropdown.style.display = 'block';
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
+    console.log('[QTY] Dropdown opened, ignoring outside clicks until:', new Date(ignoreOutsideUntil));
   }
 
   function close(inst){
+    console.log('[QTY] Closing dropdown for:', inst.btn.id);
     inst.isOpen = false;
     inst.dropdown.style.display = 'none';
     inst.btn.setAttribute('aria-expanded','false');
@@ -117,11 +121,16 @@
   
   // Delegated clicks (capture) to beat MUI handlers
   function onDocClickCapture(e){
+    console.log('[QTY] Click detected on:', e.target, 'at time:', Date.now());
     const target = e.target;
     const btn = (target && (target.closest && target.closest(BTN_SELECTOR))) || null;
     // Click on a quantity button toggles its dropdown
     if (btn){
-      if (isToggling) return;
+      console.log('[QTY] Button click detected:', btn.id);
+      if (isToggling) {
+        console.log('[QTY] Still toggling, ignoring click');
+        return;
+      }
       isToggling = true;
       setTimeout(() => isToggling = false, 50);
       
@@ -136,6 +145,7 @@
     // Click on an option inside any dropdown
     const anyDropdown = (target && target.closest && target.closest('ul[role="listbox"]'));
     if (anyDropdown){
+      console.log('[QTY] Dropdown option click detected');
       // find instance owning this dropdown
       const inst = Array.from(instances.values()).find(x => x.dropdown === anyDropdown);
       if (inst){
@@ -150,7 +160,12 @@
       return;
     }
     // Otherwise: close all if clicking outside
-    if (Date.now() < ignoreOutsideUntil) return;
+    console.log('[QTY] Outside click, current time:', Date.now(), 'ignore until:', ignoreOutsideUntil);
+    if (Date.now() < ignoreOutsideUntil) {
+      console.log('[QTY] Ignoring outside click due to recent open');
+      return;
+    }
+    console.log('[QTY] Processing outside click - closing all');
     closeAll(null);
   }
 
