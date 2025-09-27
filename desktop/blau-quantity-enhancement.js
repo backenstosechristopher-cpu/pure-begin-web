@@ -113,14 +113,7 @@
     close();
   }
 
-  // Outside click (overlay) - only after min open window
-  overlayEl.addEventListener('click', (e) => {
-    if (Date.now() < minOpenUntil) return; // ignore the click that opened it
-    const x = e.clientX, y = e.clientY;
-    close();
-    const target = document.elementFromPoint(x, y);
-    if (target && typeof target.click === 'function') target.click();
-  }, { capture: true });
+  // overlay click handler removed to avoid intercepting page clicks
 
   // While open, block all site events outside our UI to prevent auto-close
   function whileOpenBlocker(e){
@@ -158,7 +151,7 @@
   }
 
   // Attach opener
-  document.addEventListener('click', maybeOpen, true);
+  document.addEventListener('click', maybeOpen, false);
 
   // Outside click handled via overlay pass-through
 

@@ -158,7 +158,7 @@
   }
 
   // Attach opener
-  document.addEventListener('click', maybeOpen, true);
+  document.addEventListener('click', maybeOpen, false);
 
   // Outside click handled via overlay pass-through
 
