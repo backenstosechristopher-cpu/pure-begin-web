@@ -110,7 +110,7 @@
     if (currentBtn && currentBtn === btn){ positionPanelNear(btn); return; }
     openFor(btn);
   }
-  document.addEventListener('click', maybeOpen, true);
+  // opener bound per-button via prime()
 
   // Close on outside click (bubble). Do not stop the page's click.
   document.addEventListener('click', (e) => {
@@ -126,11 +126,22 @@
     if (e.key === 'Escape' && currentBtn) close();
   }, true);
 
-  // Prime ARIA on existing buttons (optional)
+  // Prime: bind click handlers to buttons and set ARIA
+  function bindButton(b){
+    if (b.dataset.blauQtyBound) return;
+    b.dataset.blauQtyBound = '1';
+    b.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      openFor(b);
+    }, true);
+  }
   function prime(){
     document.querySelectorAll(BTN_SELECTOR).forEach(b => {
       b.setAttribute('aria-haspopup','listbox');
       b.setAttribute('aria-expanded', currentBtn && currentBtn === b ? 'true' : 'false');
+      bindButton(b);
     });
   }
   prime();
