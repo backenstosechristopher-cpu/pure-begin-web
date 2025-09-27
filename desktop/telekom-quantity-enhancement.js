@@ -81,6 +81,7 @@
   function open(inst){
     inst.isOpen = true;
     positionDropdown(inst);
+    ignoreOutsideUntil = Date.now() + 700;
     inst.dropdown.style.display = 'block';
     inst.btn.setAttribute('aria-expanded','true');
     inst.btn.setAttribute('aria-controls', inst.dropdown.id);
@@ -112,6 +113,7 @@
   }
 
   let isToggling = false;
+  let ignoreOutsideUntil = 0;
   
   // Delegated clicks (capture) to beat MUI handlers
   function onDocClickCapture(e){
@@ -148,6 +150,7 @@
       return;
     }
     // Otherwise: close all if clicking outside
+    if (Date.now() < ignoreOutsideUntil) return;
     closeAll(null);
   }
 
