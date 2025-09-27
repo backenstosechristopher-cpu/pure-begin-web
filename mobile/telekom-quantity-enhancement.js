@@ -118,10 +118,20 @@
 
   let isToggling = false;
   let ignoreOutsideUntil = 0;
+  let suppressClicksUntil = 0;
   
   // Delegated clicks (capture) to beat MUI handlers
   function onDocClickCapture(e){
-    console.log('[QTY] Click detected on:', e.target, 'at time:', Date.now());
+    // Suppress duplicate click after pointerdown and run earlier than other libs
+    if (e.type === 'pointerdown') {
+      suppressClicksUntil = Date.now() + 600;
+    } else if (e.type === 'click' && Date.now() < suppressClicksUntil) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      return;
+    }
+    console.log('[QTY] Click detected on:', e.target, 'at time:', Date.now(), 'type:', e.type);
     const target = e.target;
     const btn = (target && (target.closest && target.closest(BTN_SELECTOR))) || null;
     // Click on a quantity button toggles its dropdown
@@ -190,6 +200,7 @@
     }
   }
 
+  document.addEventListener('pointerdown', onDocClickCapture, true);
   document.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
 
