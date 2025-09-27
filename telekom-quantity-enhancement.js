@@ -4,6 +4,7 @@
   const instances = new Map(); // id -> { btn, dropdown, isOpen, value }
   let ignoreClicksUntil = 0;
   let overlay = null;
+  let lastToggleAt = 0;
 
   function getId(btn, idx){
     if (!btn.id) btn.id = `gd_qty_${Date.now()}_${idx ?? Math.floor(Math.random()*1e6)}`;
@@ -141,6 +142,14 @@
 
   // Delegated clicks (capture) to beat MUI handlers
   function onDocClickCapture(e){
+    const now = Date.now();
+    if (now - lastToggleAt < 350) {
+      // ignore rapid double/triple clicks
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      return;
+    }
     const target = e.target;
     const btn = (target && (target.closest && target.closest(BTN_SELECTOR))) || null;
     // Click on a quantity button toggles its dropdown
@@ -152,10 +161,11 @@
       // Keep menu open on button re-click; only close on outside click or selection
       closeAll(inst.btn.id);
       if (!inst.isOpen) {
-        setTimeout(() => { open(inst); }, 0);
+        open(inst);
       } else {
         positionDropdown(inst);
       }
+      lastToggleAt = now;
       return;
     }
     // Click on an option inside any dropdown
@@ -169,11 +179,12 @@
           e.stopPropagation();
           if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
           selectValue(inst, parseInt(opt.dataset.value,10));
+          lastToggleAt = now;
         }
       }
       return;
     }
-    // Otherwise: defer outside-close to bubble phase to avoid racing
+    // Otherwise: defer outside-close to overlay only
     return;
   }
 
@@ -198,8 +209,8 @@
     }
   }
 
-  // Use pointerdown only to avoid double-toggling (mousedown+click)
-  document.addEventListener('pointerdown', onDocClickCapture, true);
+  // Use click (not pointerdown) to avoid double toggle, with capture
+  document.addEventListener('click', onDocClickCapture, true);
   document.addEventListener('keydown', onDocKeydownCapture, true);
 
   // Block site-level handlers for buttons/dropdown to prevent instant close
@@ -213,7 +224,7 @@
       if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
     }
   }
-  ['click','mousedown','mouseup','touchstart','touchend'].forEach(evt => {
+  ['click','dblclick','mousedown','mouseup','pointerdown','pointerup','touchstart','touchend'].forEach(evt => {
     document.addEventListener(evt, onDocCaptureBlock, true);
   });
 
