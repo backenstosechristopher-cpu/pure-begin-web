@@ -259,25 +259,18 @@
         console.log('Blau quantity selected:', val);
     }
     
-    // Handle overlay clicks - close when clicking outside panel
-    overlayEl.addEventListener('click', (e) => {
-        if (Date.now() > minOpenUntil && !panelEl.contains(e.target)) {
-            close();
-        }
-    });
-    
-    // Block interactions while open
-    function whileOpenBlocker(e) {
+    // Handle clicks outside panel to close
+    document.addEventListener('click', (e) => {
         if (!overlayEl.classList.contains('open')) return;
+        
+        // Don't close if clicking inside panel or on current button
         if (panelEl.contains(e.target) || currentBtn?.contains(e.target)) return;
         
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        return false;
-    }
+        // Allow normal page interaction and close menu
+        close();
+    });
     
-    // Detect quantity button clicks
+    // Detect quantity button clicks to open
     function maybeOpen(e) {
         const btn = e.target.closest('[id*="quantity"], [class*="quantity"], .MuiSelect-root, [role="combobox"]');
         if (btn && (btn.id?.includes('quantity') || btn.className?.includes('quantity') || 
@@ -290,9 +283,7 @@
         }
     }
     
-    // Add event listeners
-    window.addEventListener('pointerdown', whileOpenBlocker, { capture: true, passive: false });
-    window.addEventListener('click', whileOpenBlocker, { capture: true, passive: false });
+    // Add event listeners for opening
     document.addEventListener('pointerdown', maybeOpen, { capture: true, passive: false });
     document.addEventListener('click', maybeOpen, { capture: true, passive: false });
     
