@@ -18,7 +18,7 @@
     <style>
       :host{ all: initial; }
       *{ box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:auto; }
+      .overlay{ position:fixed; inset:0; background: transparent; pointer-events:none; }
       .panel{ position:fixed; background:#fff; color:#111; border:1px solid rgba(0,0,0,.12); border-radius:10px; box-shadow:0 18px 42px rgba(0,0,0,.22); min-width:120px; max-height:260px; overflow:auto; z-index:1; }
       .list{ list-style:none; margin:0; padding:6px 0; }
       .item{ padding:10px 14px; cursor:pointer; font-size:15px; }
@@ -76,14 +76,12 @@
     renderOptions(val);
     positionPanelNear(btn);
 
-    // Show host and panel; disable outside close for a short time
+    // Show host (no pointer capture) and panel
     host.style.display = 'block';
-    host.style.pointerEvents = 'auto';
+    host.style.pointerEvents = 'none';
     panelEl.style.display = 'block';
-    // delay overlay activation so the initial click cannot close it
-    overlayEl.style.pointerEvents = 'none';
-    minOpenUntil = Date.now() + 700; // prevent instant close
-    setTimeout(() => { overlayEl.style.pointerEvents = 'auto'; }, 350);
+    // minimal guard to avoid instant close
+    minOpenUntil = Date.now() + 300;
 
     // ARIA
     try {
@@ -158,10 +156,21 @@
     openFor(btn);
   }
 
+  // Attach opener
+  document.addEventListener('click', maybeOpen, true);
+
   // Outside click handled via overlay pass-through
 
-  // Open listener on click only (capture)
-  document.addEventListener('click', maybeOpen, true);
+  // Close on any outside click (capture), while allowing clicks inside panel or on source button
+  document.addEventListener('click', (e) => {
+    if (!currentBtn) return;
+    const t = e.target;
+    const inPanel = t && (t === panelEl || (panelEl.contains && panelEl.contains(t)));
+    const onBtn = t && t.closest && t.closest(BTN_SELECTOR);
+    if (!inPanel && !onBtn && Date.now() >= minOpenUntil) {
+      close();
+    }
+  }, true);
 
 
   // ESC to close
