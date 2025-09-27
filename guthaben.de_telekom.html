@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>Redirecting to Telekom Page</title>
 <script>
-if (/Mobi|Android|iPhone|iPad|Tablet/i.test(navigator.userAgent)) {
-  window.location.href = "mobile/guthaben.de_telekom.html";
-} else {
-  window.location.href = "desktop/guthaben.de_telekom.html";
+// Only redirect if we're not already in a device-specific directory
+if (!window.location.pathname.includes('/desktop/') && !window.location.pathname.includes('/mobile/')) {
+  if (/Mobi|Android|iPhone|iPad|Tablet/i.test(navigator.userAgent)) {
+    window.location.href = "mobile/guthaben.de_telekom.html";
+  } else {
+    window.location.href = "desktop/guthaben.de_telekom.html";
+  }
 }
 </script>
 </head><body>
