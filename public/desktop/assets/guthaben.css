@@ -1,0 +1,34 @@
+/* begin label specific colors */
+
+.cookie_input input:checked+.slider {
+  background-color: #FFA81E !important;
+}
+
+.cookie_input input:focus+.slider {
+  box-shadow: 0 0 1px #FFA81E !important;
+}
+
+.cookie_button_1 {
+  background: #FFA81E !important;
+  border: 0 !important;
+  color: #1F2226 !important;
+}
+
+.cookie_button_2 {
+  background: #ffffff;
+  border: solid 1px #FFA81E !important;
+  color: #FFA81E !important;
+}
+
+.cookie_button_3 {
+  background: #ffffff  !important;
+  border: solid 1px #ffffff !important;
+  color: #FFA81E !important;
+}
+
+/* end label specific colors */
+
+/* button border radius - different for recharge2.0 and local labels  */
+.cookie_button_1, .cookie_button_2, .cookie_button_3 {
+  border-radius: 8px !important;
+}
