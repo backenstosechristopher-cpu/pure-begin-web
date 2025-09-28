@@ -36,14 +36,14 @@
             return;
         }
 
-        // Store original state
-        const originalText = textContainer.innerHTML;
-        const isExpanded = textContainer.getAttribute('data-expanded') === 'true';
-
         // Make button clickable
         button.style.cursor = 'pointer';
         button.style.userSelect = 'none';
 
+        // Determine initial state based on button text
+        const buttonText = button.textContent.trim().toLowerCase();
+        const isWeniger = buttonText.includes('weniger') || buttonText.includes('schließen') || buttonText.includes('zuklappen');
+        
         // Add click handler
         button.addEventListener('click', function(e) {
             e.preventDefault();
@@ -52,10 +52,15 @@
             toggleTextContent(button, textContainer);
         });
 
-        // Handle initial state
-        if (!isExpanded) {
-            // If text is currently collapsed, store full text and show truncated version
+        // Setup initial state
+        if (!isWeniger) {
+            // This is a "Weiterlesen" button - setup collapsed state
             setupCollapsedState(button, textContainer);
+        } else {
+            // This is a "Weniger lesen" button - text is already expanded
+            const fullText = textContainer.innerHTML;
+            textContainer.setAttribute('data-full-text', fullText);
+            textContainer.setAttribute('data-expanded', 'true');
         }
     }
 
@@ -137,14 +142,31 @@
 
         if (isExpanded) {
             // Collapse: show truncated text
-            textContainer.innerHTML = truncatedText || textContainer.innerHTML;
+            if (truncatedText) {
+                textContainer.innerHTML = truncatedText;
+            }
             textContainer.setAttribute('data-expanded', 'false');
-            button.textContent = button.textContent.replace(/weniger lesen|schließen|zuklappen/i, 'Weiterlesen');
+            // Change button text to "Weiterlesen"
+            const newText = button.textContent.replace(/(weniger lesen|schließen|zuklappen)/i, 'Weiterlesen');
+            button.textContent = newText;
         } else {
+            // Store full text if not already stored
+            if (!fullText) {
+                textContainer.setAttribute('data-full-text', textContainer.innerHTML);
+            }
+            
+            // Create truncated version if needed
+            if (!truncatedText) {
+                setupCollapsedState(button, textContainer);
+                return; // setupCollapsedState will handle the initial display
+            }
+            
             // Expand: show full text
-            textContainer.innerHTML = fullText || textContainer.innerHTML;
+            textContainer.innerHTML = textContainer.getAttribute('data-full-text');
             textContainer.setAttribute('data-expanded', 'true');
-            button.textContent = button.textContent.replace(/weiterlesen/i, 'Weniger lesen');
+            // Change button text to "Weniger lesen"  
+            const newText = button.textContent.replace(/weiterlesen/i, 'Weniger lesen');
+            button.textContent = newText;
         }
 
         // Smooth scroll to button after expansion
