@@ -126,6 +126,24 @@ document.addEventListener('DOMContentLoaded', function() {
     let spotlight = null; // visual black fill with hole around input
     let isOpen = false;
 
+    // Inject CSS to disable any native site backdrops/overlays while search is active
+    let backdropStyleEl = null;
+    function ensureBackdropOverride() {
+        if (backdropStyleEl) return;
+        backdropStyleEl = document.createElement('style');
+        backdropStyleEl.id = 'search-backdrop-override';
+        backdropStyleEl.textContent = `
+            .MuiBackdrop-root, .MuiModal-backdrop, .mui-style-1jtyhdp {
+                display: none !important;
+                background: transparent !important;
+            }
+        `;
+        backdropStyleEl.disabled = true;
+        document.head.appendChild(backdropStyleEl);
+    }
+    function enableBackdropOverride() { ensureBackdropOverride(); backdropStyleEl.disabled = false; }
+    function disableBackdropOverride() { if (backdropStyleEl) backdropStyleEl.disabled = true; }
+
     // Create results container
     function createResultsContainer() {
         resultsContainer = document.createElement('div');
@@ -211,6 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show overlay (scrim only, no spotlight)
     function showOverlay() {
         if (!overlay) createOverlay();
+        enableBackdropOverride();
         // Keep spotlight hidden to avoid black fill around input
         if (spotlight) spotlight.style.display = 'none';
         overlay.style.display = 'block';
@@ -227,6 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideOverlay() {
         if (overlay) overlay.style.display = 'none';
         if (spotlight) spotlight.style.display = 'none';
+        disableBackdropOverride();
         if (repositionSpotlightHandler) {
             window.removeEventListener('resize', repositionSpotlightHandler, true);
             window.removeEventListener('scroll', repositionSpotlightHandler, true);
