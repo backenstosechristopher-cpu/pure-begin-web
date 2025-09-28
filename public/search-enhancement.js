@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Product database from guthaben.de - Complete catalog
     const productDatabase = {
-        // Mobile Top-ups
+        // Mobile Top-ups Germany
         'telekom': { brand: 'Deutsche Telekom', category: 'Mobile Top-up', prices: ['5€', '10€', '15€', '20€', '25€', '30€', '50€'] },
         'vodafone': { brand: 'Vodafone', category: 'Mobile Top-up', prices: ['5€', '10€', '15€', '20€', '25€', '30€', '50€'] },
         'o2': { brand: 'O2', category: 'Mobile Top-up', prices: ['5€', '10€', '15€', '20€', '25€', '30€', '50€'] },
@@ -111,6 +111,15 @@ document.addEventListener('DOMContentLoaded', function() {
         'einfach-prepaid': { brand: 'Einfach Prepaid', category: 'Mobile Top-up', prices: ['15€', '20€', '30€'] },
         'klarmobil': { brand: 'Klarmobil', category: 'Mobile Top-up', prices: ['15€', '30€', '50€'] },
         'gt-mobile': { brand: 'GT Mobile', category: 'Mobile Top-up', prices: ['5€', '40€'] },
+        'ortel-mobile': { brand: 'Ortel Mobile', category: 'Mobile Top-up', prices: ['15€', '30€'] },
+        'otelo': { brand: 'Otelo', category: 'Mobile Top-up', prices: ['15€', '30€'] },
+        'simyo': { brand: 'Simyo', category: 'Mobile Top-up', prices: ['15€', '30€'] },
+        'toneo-first': { brand: 'Toneo First', category: 'Mobile Top-up', prices: ['15€', '30€'] },
+        'rossmann-mobil': { brand: 'Rossmann Mobil', category: 'Mobile Top-up', prices: ['15€', '30€'] },
+        'nettokom': { brand: 'NettoKOM', category: 'Mobile Top-up', prices: ['15€', '30€'] },
+        'netzclub': { brand: 'Netzclub', category: 'Mobile Top-up', prices: ['15€', '30€'] },
+        'mobi': { brand: 'Mobi', category: 'Mobile Top-up', prices: ['15€', '30€'] },
+        'turk-telekom': { brand: 'Türk Telekom', category: 'Mobile Top-up', prices: ['15€', '30€'] },
         
         // Austrian Mobile
         'bob-wertkarte': { brand: 'BOB Wertkarte', category: 'Mobile Top-up Austria', prices: ['15€', '30€'] },
@@ -119,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'lycamobile-oesterreich': { brand: 'Lycamobile Österreich', category: 'Mobile Top-up Austria', prices: ['10€', '15€', '20€'] },
         'lifecell': { brand: 'LifeCell', category: 'Mobile Top-up Ukraine', prices: ['5€', '15€', '30€'] },
         
-        // Gift Cards
+        // Gift Cards Germany
         'amazon': { brand: 'Amazon', category: 'Shopping Gift Cards', prices: ['10€', '15€', '25€', '40€', '50€', '75€', '100€', '150€', '200€', '250€'] },
         'apple': { brand: 'Apple', category: 'Tech Gift Cards', prices: ['15€', '25€', '50€', '100€'] },
         'google-play': { brand: 'Google Play', category: 'Digital Content', prices: ['15€', '25€', '50€', '100€'] },
@@ -129,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'ikea': { brand: 'IKEA', category: 'Home & Living Gift Cards', prices: ['10€', '25€', '50€', '100€', '150€'] },
         'douglas': { brand: 'Douglas', category: 'Beauty Gift Cards', prices: ['20€', '30€', '50€'] },
         'mediamarkt': { brand: 'MediaMarkt', category: 'Electronics Gift Cards', prices: ['10€', '50€', '100€'] },
+        'saturn': { brand: 'Saturn', category: 'Electronics Gift Cards', prices: ['10€', '50€', '100€'] },
         'cyberport': { brand: 'Cyberport', category: 'Tech Gift Cards', prices: ['25€', '50€', '100€'] },
         'jochen-schweizer': { brand: 'Jochen Schweizer', category: 'Experience Gift Cards', prices: ['50€', '100€'] },
         'eventim': { brand: 'Eventim', category: 'Event Gift Cards', prices: ['25€'] },
@@ -137,6 +147,13 @@ document.addEventListener('DOMContentLoaded', function() {
         'adidas': { brand: 'Adidas', category: 'Sports Gift Cards', prices: ['25€', '50€', '100€'] },
         'lush': { brand: 'Lush', category: 'Beauty Gift Cards', prices: ['25€', '50€', '100€'] },
         'cineplex': { brand: 'Cineplex', category: 'Cinema Gift Cards', prices: ['10€', '15€', '20€', '25€'] },
+        'tk-maxx': { brand: 'TK Maxx', category: 'Fashion Gift Cards', prices: ['25€', '50€', '100€'] },
+        'rossmann': { brand: 'Rossmann', category: 'Beauty & Health', prices: ['10€', '25€', '50€'] },
+        'tchibo': { brand: 'Tchibo', category: 'Lifestyle Gift Cards', prices: ['25€', '50€', '100€'] },
+        'otto-gutscheincode': { brand: 'Otto', category: 'Shopping Gift Cards', prices: ['25€', '50€', '100€'] },
+        'ticketmaster': { brand: 'Ticketmaster', category: 'Event Gift Cards', prices: ['25€', '50€', '100€'] },
+        'treatwell': { brand: 'Treatwell', category: 'Beauty & Wellness', prices: ['25€', '50€', '100€'] },
+        'uber': { brand: 'Uber', category: 'Transport Gift Cards', prices: ['15€', '25€', '50€'] },
         
         // Austrian Gift Cards
         'amazon-gutscheine-oesterreich': { brand: 'Amazon Österreich', category: 'Shopping Gift Cards Austria', prices: ['15€', '25€', '50€'] },
@@ -148,8 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
         'airbnb-osterreich': { brand: 'Airbnb Österreich', category: 'Travel Austria', prices: ['50€', '100€', '150€', '200€', '250€'] },
         'kobo-osterreich': { brand: 'Kobo Österreich', category: 'E-Books Austria', prices: ['15€', '25€', '50€'] },
         'mango-osterreich': { brand: 'Mango Österreich', category: 'Fashion Gift Cards Austria', prices: ['25€', '50€', '100€'] },
+        'nike-osterreich': { brand: 'Nike Österreich', category: 'Sports Gift Cards Austria', prices: ['25€', '50€', '100€'] },
+        'treatwell-osterreich': { brand: 'Treatwell Österreich', category: 'Beauty & Wellness Austria', prices: ['25€', '50€', '100€'] },
         
-        // Gaming
+        // Gaming Germany
         'steam': { brand: 'Steam', category: 'Gaming Cards', prices: ['5€', '10€', '20€', '25€', '35€', '50€', '100€'] },
         'xbox': { brand: 'Xbox', category: 'Gaming Cards', prices: ['5€', '10€', '15€', '20€', '25€', '30€', '50€', '75€', '80€', '100€'] },
         'playstation': { brand: 'PlayStation', category: 'Gaming Cards', prices: ['5€', '10€', '20€', '25€', '30€', '40€', '50€', '60€', '75€', '80€', '100€', '120€', '150€', '200€', '250€'] },
@@ -162,6 +181,21 @@ document.addEventListener('DOMContentLoaded', function() {
         'meta-quest': { brand: 'Meta Quest', category: 'VR Gaming', prices: ['15€', '100€'] },
         'fortnite': { brand: 'Fortnite', category: 'Gaming Cards', prices: ['13.99€', '27.99€'] },
         'candy-crush': { brand: 'Candy Crush', category: 'Mobile Gaming', prices: ['5€', '10€', '25€'] },
+        'razer-gold': { brand: 'Razer Gold', category: 'Gaming Cards', prices: ['10€', '25€', '50€'] },
+        'valorant': { brand: 'Valorant', category: 'Gaming Cards', prices: ['10€', '25€', '50€'] },
+        'pubg': { brand: 'PUBG', category: 'Gaming Cards', prices: ['10€', '25€', '50€'] },
+        
+        // Nintendo Games
+        'nintendo-switch-online': { brand: 'Nintendo Switch Online', category: 'Gaming Subscriptions', prices: ['20€', '35€'] },
+        'animal-crossing': { brand: 'Animal Crossing', category: 'Nintendo Games', prices: ['60€'] },
+        'pokemon-sword-shield': { brand: 'Pokémon Sword & Shield', category: 'Nintendo Games', prices: ['30€'] },
+        'zelda-tears-kingdom': { brand: 'Zelda: Tears of the Kingdom', category: 'Nintendo Games', prices: ['70€'] },
+        'zelda-breath-wild': { brand: 'Zelda: Breath of the Wild', category: 'Nintendo Games', prices: ['60€'] },
+        'super-mario-odyssey': { brand: 'Super Mario Odyssey', category: 'Nintendo Games', prices: ['60€'] },
+        'super-mario-kart': { brand: 'Mario Kart 8 Deluxe', category: 'Nintendo Games', prices: ['60€'] },
+        'splatoon-3': { brand: 'Splatoon 3', category: 'Nintendo Games', prices: ['60€'] },
+        'pokemon-scarlet': { brand: 'Pokémon Scarlet', category: 'Nintendo Games', prices: ['60€'] },
+        'pokemon-violet': { brand: 'Pokémon Violet', category: 'Nintendo Games', prices: ['60€'] },
         
         // Austrian Gaming
         'battlenet-guthabenkarte-oesterreich': { brand: 'Battle.net Österreich', category: 'Gaming Cards Austria', prices: ['20€', '50€'] },
@@ -169,19 +203,34 @@ document.addEventListener('DOMContentLoaded', function() {
         'hearthstone-code-oesterreich': { brand: 'Hearthstone Österreich', category: 'Gaming Cards Austria', prices: ['15€', '25€', '40€'] },
         'apex-legends-oesterreich': { brand: 'Apex Legends Österreich', category: 'Gaming Cards Austria', prices: ['10€', '20€', '40€'] },
         'free-fire-osterreich': { brand: 'Free Fire Österreich', category: 'Mobile Gaming Austria', prices: ['5€', '10€', '25€'] },
+        'steam-oesterreich': { brand: 'Steam Österreich', category: 'Gaming Cards Austria', prices: ['20€', '50€', '100€'] },
+        'razer-gold-osterreich': { brand: 'Razer Gold Österreich', category: 'Gaming Cards Austria', prices: ['10€', '25€', '50€'] },
+        'riot-points-oesterreich': { brand: 'Riot Points Österreich', category: 'Gaming Cards Austria', prices: ['10€', '25€', '50€'] },
+        'nintendo-eshop-card-oesterreich': { brand: 'Nintendo eShop Österreich', category: 'Gaming Cards Austria', prices: ['15€', '25€', '50€'] },
+        'playstation-plus-mitgliedschaft-oesterreich': { brand: 'PlayStation Plus Österreich', category: 'Gaming Subscriptions Austria', prices: ['25€', '60€', '120€'] },
+        'psn-card-oesterreich': { brand: 'PSN Card Österreich', category: 'Gaming Cards Austria', prices: ['25€', '50€', '75€'] },
+        'runescape-mitgliedschaft-oesterreich': { brand: 'RuneScape Österreich', category: 'Gaming Subscriptions Austria', prices: ['11€', '22€', '55€'] },
         
-        // Entertainment
+        // Entertainment Germany
         'netflix': { brand: 'Netflix', category: 'Streaming Gift Cards', prices: ['25€', '50€', '75€', '100€', '125€', '150€'] },
         'spotify': { brand: 'Spotify', category: 'Music Streaming', prices: ['10€', '30€', '60€', '120€'] },
         'disney-plus': { brand: 'Disney+', category: 'Streaming Gift Cards', prices: ['27€', '54€', '90€'] },
         'dazn': { brand: 'DAZN', category: 'Sports Streaming', prices: ['45€'] },
+        'tvnow': { brand: 'RTL+', category: 'Streaming Gift Cards', prices: ['30€', '60€'] },
+        'twitch-geschenkkarte': { brand: 'Twitch', category: 'Streaming Gift Cards', prices: ['25€', '50€', '100€'] },
+        'tinder-plus': { brand: 'Tinder Plus', category: 'Dating Apps', prices: ['10€', '30€', '60€'] },
+        'tinder-gold': { brand: 'Tinder Gold', category: 'Dating Apps', prices: ['15€', '45€', '90€'] },
         
         // Austrian Entertainment  
         'disney-plus-osterreich': { brand: 'Disney+ Österreich', category: 'Streaming Austria', prices: ['27€', '54€', '90€'] },
         'spotify-premium-code-oesterreich': { brand: 'Spotify Österreich', category: 'Music Streaming Austria', prices: ['10€', '30€', '60€'] },
         'deezer-at': { brand: 'Deezer Österreich', category: 'Music Streaming Austria', prices: ['10€', '30€', '60€'] },
+        'netflix-gutschein-oesterreich': { brand: 'Netflix Österreich', category: 'Streaming Austria', prices: ['25€', '50€', '100€'] },
+        'twitch-osterreich': { brand: 'Twitch Österreich', category: 'Streaming Austria', prices: ['25€', '50€', '100€'] },
+        'tinder-plus-osterreich': { brand: 'Tinder Plus Österreich', category: 'Dating Apps Austria', prices: ['10€', '30€', '60€'] },
+        'tinder-gold-osterreich': { brand: 'Tinder Gold Österreich', category: 'Dating Apps Austria', prices: ['15€', '45€', '90€'] },
         
-        // Payment Cards
+        // Payment Cards Germany
         'paysafecard': { brand: 'paysafecard', category: 'Prepaid Payment Cards', prices: ['10€', '25€', '50€', '100€'] },
         'cashlib': { brand: 'CashLib', category: 'Online Payment', prices: ['5€', '10€', '20€', '50€', '100€', '150€'] },
         'flexepin': { brand: 'Flexepin', category: 'Online Payment', prices: ['10€', '20€', '30€', '50€', '100€', '150€'] },
@@ -197,10 +246,20 @@ document.addEventListener('DOMContentLoaded', function() {
         'bitsa-oesterreich': { brand: 'Bitsa Österreich', category: 'Prepaid Cards Austria', prices: ['15€', '25€', '50€'] },
         'astropay-oesterreich': { brand: 'AstroPay Österreich', category: 'Online Payment Austria', prices: ['10€', '25€', '50€'] },
         'a-bon-osterreich': { brand: 'A-Bon Österreich', category: 'Prepaid Cards Austria', prices: ['10€', '25€', '50€'] },
+        'paysafecard-at': { brand: 'paysafecard Österreich', category: 'Prepaid Payment Cards Austria', prices: ['10€', '25€', '50€'] },
+        'neosurf-at': { brand: 'Neosurf Österreich', category: 'Online Payment Austria', prices: ['10€', '25€', '50€'] },
+        'transcash-oesterreich': { brand: 'Transcash Österreich', category: 'Prepaid Cards Austria', prices: ['25€', '50€', '100€'] },
+        'mifinity': { brand: 'MiFinity', category: 'E-Wallets', prices: ['25€', '50€', '100€'] },
+        'mint-prepaid-osterreich': { brand: 'Mint Prepaid Österreich', category: 'Prepaid Cards Austria', prices: ['15€', '25€', '50€'] },
+        'rewarble': { brand: 'Rewarble', category: 'Crypto Cards', prices: ['25€', '50€', '100€'] },
+        'pcs-oesterreich': { brand: 'PCS Österreich', category: 'Prepaid Cards Austria', prices: ['25€', '50€', '100€'] },
         
-        // Communication
+        // Communication & Other
         'libon': { brand: 'Libon', category: 'Communication', prices: ['5€', '10€', '20€'] },
         'eety-guthaben': { brand: 'Eety', category: 'Communication', prices: ['5€', '10€', '25€'] },
+        'microsoft-geschenkkarte': { brand: 'Microsoft', category: 'Tech Gift Cards', prices: ['25€', '50€', '100€'] },
+        'microsoft-geschenkkarte-oesterreich': { brand: 'Microsoft Österreich', category: 'Tech Gift Cards Austria', prices: ['25€', '50€', '100€'] },
+        'tiktok-de': { brand: 'TikTok', category: 'Social Media', prices: ['5€', '10€', '25€'] },
         
         // Travel
         'airbnb': { brand: 'Airbnb', category: 'Travel', prices: ['50€', '100€', '150€', '200€', '250€'] }
@@ -562,17 +621,195 @@ document.addEventListener('DOMContentLoaded', function() {
             return logos[slug] || null;
         };
 
-        const getColorFor = (slug) => brandColors[slug] || '#6b7280';
-        
         const getAvatarHtml = (product) => {
             const bg = getColorFor(product.slug);
-            const logo = getBrandLogo(product.slug);
-            if (logo) {
-                return `<div style="width: 48px; height: 48px; background: ${bg}; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">${logo}</div>`;
+            const iconUrl = getIconUrl(product.slug);
+            
+            if (iconUrl) {
+                return `<div style="width: 48px; height: 48px; background: ${bg}; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden;">
+                    <img src="${iconUrl}" alt="${product.brand}" style="width: 36px; height: 36px; object-fit: contain; border-radius: 6px;" onerror="this.style.display='none'; this.nextSibling.style.display='flex';">
+                    <div style="width: 36px; height: 36px; display: none; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 16px;">${(product.brand || product.slug || '?').charAt(0).toUpperCase()}</div>
+                </div>`;
             }
+            
             const letter = (product.brand || product.slug || '?').charAt(0).toUpperCase();
             return `<div style="width: 48px; height: 48px; background: ${bg}; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">${letter}</div>`;
         };
+
+        // Resolve icon URLs from local assets for each brand/slug
+        const ASSET_BASE = window.location.pathname.includes('/desktop/') ? './assets/' : 'desktop/assets/';
+        function getIconUrl(slug) {
+            const map = {
+                // Payment Cards
+                'paysafecard': 'w1080_q100_paysafecard.png',
+                'cashlib': 'w1080_q100_Cashlib.png',
+                'flexepin': 'w1080_q100_flexepin-cash-top-up.jpg',
+                'jeton-cash': 'w1080_q100_Jeton-LL.png',
+                'bitsa': 'w1080_q100_bitsa-ll.png',
+                'aplauz': 'w1080_q75_Aplauz.png',
+                'a-bon': 'w1080_q75_A-bon.png',
+                
+                // Mobile Networks
+                'telekom': 'w1080_q100_Telekom-Logo-product-card-1.png',
+                'vodafone': 'w1080_q100_Vodafone-MM.png',
+                'o2': 'w1080_q100_O2.png',
+                'lebara': 'w1080_q100_Lebara_ProductCard_CallCredit-1.png',
+                'lycamobile': 'w1080_q100_LycaMobile.png',
+                'congstar': 'w1080_q100_Congstar.png',
+                'aldi-talk': 'w1080_q100_aldi-talk.png',
+                'ay-yildiz': 'w1080_q100_Ay-Yildiz-LL.png',
+                'blau-de': 'w1080_q100_Blau1.png',
+                'blauworld': 'w1080_q100_Blauworld-LL.png',
+                'bildmobil': 'w1080_q100_Bild-Mobile-LL.png',
+                'e-plus': 'w1080_q100_NettoKom-LL.png',
+                'fonic': 'w1080_q100_Fonic-LL.png',
+                'fyve': 'w1080_q100_Fyve-LL.png',
+                'einfach-prepaid': 'w1080_q100_Einfach-LL.png',
+                'klarmobil': 'w1080_q100_Klarmobil-LL-.png',
+                'gt-mobile': 'w1080_q100_GT-Mobile-LL.png',
+                'lycamobile-oesterreich': 'w1080_q100_Lycamobile-Local-Labels.png',
+                'lifecell': 'w1080_q100_LIfecell-GTH1.png',
+                'bob-wertkarte': 'w1080_q75_3-banner.png',
+                'drei': 'w1080_q75_3-banner.png',
+                'b-free': 'w1080_q75_3-banner.png',
+                'ortel-mobile': 'w1080_q100_Ortel-Mobile-LL.png',
+                'otelo': 'w1080_q100_Otelo-LL.png',
+                'simyo': 'w1080_q100_Simyo-LL.png',
+                'toneo-first': 'w1080_q100_Toneo.png',
+                'rossmann-mobil': 'w1080_q100_Rossmann-gutschien-LL-.png',
+                'nettokom': 'w1080_q100_NettoKom-LL.png',
+                'netzclub': 'w1080_q100_NettoKom-LL.png',
+                'mobi': 'w1080_q100_Mobi-LL.png',
+                'turk-telekom': 'w1080_q100_Turk-Telekom-LL.png',
+                
+                // Shopping & Fashion
+                'amazon': 'w1080_q100_Amazon-DE.png',
+                'apple': 'w1080_q100_Apple-NB-Local-Labels.png',
+                'google-play': 'w1080_q100_Google-Play-LL-New.png',
+                'h-m': 'w1080_q100_Zalando-LL.png',
+                'zalando': 'w1080_q100_Zalando-LL.png',
+                'nike': 'w1080_q100_Nike.png',
+                'ikea': 'w1080_q100_IKEA.png',
+                'douglas': 'w1080_q100_douglas-ll.png',
+                'mediamarkt': 'w1080_q100_Saturn-LL.png',
+                'saturn': 'w1080_q100_Saturn-LL.png',
+                'cyberport': 'w1080_q100_Cyberport-Local-Labels.png',
+                'jochen-schweizer': 'w1080_q100_Jochen-Schweizer.png',
+                'eventim': 'w1080_q100_Eventim.png',
+                'lieferando': 'w1080_q100_Lieferando-AT-DE.png',
+                'ca-geschenkkarte': 'w1080_q100_Zalando-LL.png',
+                'adidas': 'w1080_q100_Adidas.png',
+                'lush': 'w1080_q100_douglas-ll.png',
+                'cineplex': 'w1080_q100_Cineplex-LL.png',
+                'airbnb': 'w1080_q100_Airbnb-LL.png',
+                'tk-maxx': 'w1080_q100_Tk-Maxx.png',
+                'rossmann': 'w1080_q100_Rossmann-gutschien-LL-.png',
+                'tchibo': 'w1080_q100_Saturn-LL.png',
+                'otto-gutscheincode': 'w1080_q100_Saturn-LL.png',
+                'ticketmaster': 'w1080_q100_Eventim.png',
+                'treatwell': 'w1080_q100_Treatwell-Local-labels.png',
+                'uber': 'w1080_q100_Uber-Gift-Card-LL.png',
+                
+                // Austrian Shopping
+                'amazon-gutscheine-oesterreich': 'w1080_q100_Amazon-DE.png',
+                'apple-gift-card-oesterreich': 'w1080_q100_Apple-NB-Local-Labels.png',
+                'google-play-card-oesterreich': 'w1080_q100_Google-Play-LL-New.png',
+                'h-m-geschenkcode-osterreich': 'w1080_q100_Zalando-LL.png',
+                'zalando-gutschein-oesterreich': 'w1080_q100_Zalando-LL.png',
+                'lieferando-osterreich': 'w1080_q100_Lieferando-AT-DE.png',
+                'airbnb-osterreich': 'w1080_q100_Airbnb-LL.png',
+                'kobo-osterreich': 'w1080_q100_Apple-NB-Local-Labels.png',
+                'mango-osterreich': 'w1080_q100_Zalando-LL.png',
+                'nike-osterreich': 'w1080_q100_Nike.png',
+                'treatwell-osterreich': 'w1080_q100_Treatwell-Local-labels.png',
+                
+                // Gaming
+                'steam': 'w1080_q100_Steam-LL.png',
+                'xbox': 'w1080_q100_xbox-shopping-bag.png',
+                'playstation': 'w1080_q100_playstation-store-LL.png',
+                'nintendo': 'w1080_q100_Nintendo-eShop-LL.png',
+                'roblox': 'w1080_q100_Roblox-LL.png',
+                'battlenet-guthabenkarte': 'w1080_q100_Blizzard-LL.png',
+                'ea-game-card': 'w1080_q100_EA-Origin-.png',
+                'league-of-legends-riot-points': 'w1080_q100_League-of-lEgends-LL.png',
+                'hearthstone-guthabenkarte': 'w1080_q100_Blizzard-LL.png',
+                'meta-quest': 'w1080_q100_Meta-Quest-DE-Local-Labels.png',
+                'fortnite': 'w1080_q100_fortnite-12-12.png',
+                'candy-crush': 'w1080_q100_Candy-Crush-LL.png',
+                'razer-gold': 'w1080_q100_Razer-Gold-LL.png',
+                'valorant': 'w1080_q100_Valorant-LL.png',
+                'pubg': 'w1080_q100_PUBG.png',
+                
+                // Austrian Gaming
+                'battlenet-guthabenkarte-oesterreich': 'w1080_q100_Blizzard-LL.png',
+                'ea-origin-oesterreich': 'w1080_q100_EA-Origin-.png',
+                'hearthstone-code-oesterreich': 'w1080_q100_Blizzard-LL.png',
+                'apex-legends-oesterreich': 'w1080_q75_Apex-GTH.png',
+                'free-fire-osterreich': 'w1080_q100_fortnite-12-12.png',
+                'steam-oesterreich': 'w1080_q100_Steam-LL.png',
+                'razer-gold-osterreich': 'w1080_q100_Razer-Gold-LL.png',
+                'riot-points-oesterreich': 'w1080_q100_League-of-lEgends-LL.png',
+                
+                // Entertainment
+                'spotify': 'w1080_q100_Spotify-MM.png',
+                'netflix': 'w1080_q100_MM_Netflix_2021.png',
+                'disney-plus': 'w1080_q100_DIS_Epay_RetailerKarten_digital_2024_DE.png',
+                'dazn': 'w1080_q100_DAZN-logo.png',
+                'tvnow': 'w1080_q100_RTL.png',
+                'twitch-geschenkkarte': 'w1080_q100_Twitch-LL.png',
+                'tinder-plus': 'w1080_q100_Tinder-Plus-1.png',
+                'tinder-gold': 'w1080_q100_Tinder-Gold-LL.png',
+                
+                // Austrian Entertainment  
+                'disney-plus-osterreich': 'w1080_q100_DIS_Epay_RetailerKarten_digital_2024_AT_plain.png',
+                'spotify-premium-code-oesterreich': 'w1080_q100_Spotify-MM.png',
+                'deezer-at': 'w1080_q100_Spotify-MM.png',
+                'netflix-gutschein-oesterreich': 'w1080_q100_netflix-LL.png',
+                'twitch-osterreich': 'w1080_q100_Twitch.png',
+                'tinder-plus-osterreich': 'w1080_q100_Tinder-Plus-1.png',
+                'tinder-gold-osterreich': 'w1080_q100_Tinder-Gold-LL.png',
+                
+                // Austrian Payment Cards
+                'cashlib-osterreich': 'w1080_q100_Cashlib-Local-Labels.png',
+                'flexepin-osterreich': 'w1080_q100_flexepin-cash-top-up.jpg',
+                'jeton-cash-oesterreich': 'w1080_q100_Jeton-LL.png',
+                'bitsa-oesterreich': 'w1080_q100_bitsa-ll.png',
+                'astropay-oesterreich': 'w1080_q75_Astropay-GTH.png',
+                'a-bon-osterreich': 'w1080_q75_A-bon.png',
+                'paysafecard-at': 'w1080_q100_paysafecard-product-card-local-labels.png',
+                'neosurf-at': 'w1080_q100_neosurf.png',
+                'transcash-oesterreich': 'w1080_q100_Transcash.png',
+                'mifinity': 'w1080_q100_Mifinity.png',
+                'mint-prepaid-osterreich': 'w1080_q100_Mint-LL.png',
+                'rewarble': 'w1080_q100_Card.png',
+                'pcs-oesterreich': 'w1080_q100_PCS.png',
+                
+                // Communication
+                'libon': 'w1080_q100_LIfecell-GTH1.png',
+                'eety-guthaben': 'w1080_q100_Mobi-LL.png',
+                
+                // Nintendo Games
+                'nintendo-switch-online': 'w1080_q100_Nintendo-Switch-LL.png',
+                'animal-crossing': 'w1080_q100_Animal-Crossing-De.png',
+                'pokemon-sword-shield': 'w1080_q100_pokemon-sword-shield-expansion-pass.jpg',
+                'zelda-tears-kingdom': 'w1080_q100_Zelda-Tears-of-the-Kingdom-DE-1.png',
+                'zelda-breath-wild': 'w1080_q100_Zelda-breath-of-the-wild-DE.png',
+                'super-mario-odyssey': 'w1080_q100_Super-Mario-Odyssey-DE.png',
+                'super-mario-kart': 'w1080_q100_Super-Mario-Kart-DE-1.png',
+                'splatoon-3': 'w1080_q100_Splatoon-3-DE.png',
+                'pokemon-scarlet': 'w1080_q100_Pokemon-Scarlet-DE.png',
+                'pokemon-violet': 'w1080_q100_Pokemon-Violet-DE.png',
+                
+                // Microsoft
+                'microsoft-geschenkkarte': 'w1080_q100_xbox-shopping-bag.png',
+                'microsoft-geschenkkarte-oesterreich': 'w1080_q100_xbox-shopping-bag.png',
+                
+                // TikTok
+                'tiktok-de': 'w1080_q100_TikTok-Local-Labels.png'
+            };
+            const file = map[slug];
+            return file ? (ASSET_BASE + file) : null;
+        }
 
         if (results.length === 0) {
             // Show popular items when no search results
@@ -676,7 +913,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Map slugs to correct file names
                 const slugToFile = {
-                    // Mobile Top-ups
+                    // Mobile Top-ups Germany
                     'telekom': 'telekom',
                     'vodafone': 'vodafone-aufladen',
                     'o2': 'o2-aufladen',
@@ -694,6 +931,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     'einfach-prepaid': 'einfach-prepaid-aufladen',
                     'klarmobil': 'klarmobil-aufladen',
                     'gt-mobile': 'gt-mobile-aufladen',
+                    'ortel-mobile': 'ortel-mobile-aufladen',
+                    'otelo': 'otelo-aufladen',
+                    'simyo': 'simyo',
+                    'toneo-first': 'toneo-first',
+                    'rossmann-mobil': 'rossmann-mobil-aufladen',
+                    'nettokom': 'nettokom-aufladen',
+                    'netzclub': 'netzclub-aufladen',
+                    'mobi': 'mobi-aufladen',
+                    'turk-telekom': 'turk-telekom-aufladen',
                     
                     // Austrian Mobile
                     'bob-wertkarte': 'bob-wertkarte',
@@ -702,7 +948,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     'lycamobile-oesterreich': 'lycamobile-oesterreich',
                     'lifecell': 'lifecell',
                     
-                    // Gift Cards
+                    // Gift Cards Germany
                     'amazon': 'amazon-gutschein',
                     'apple': 'apple-gift-card',
                     'google-play': 'google-play-guthaben',
@@ -712,6 +958,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     'ikea': 'ikea',
                     'douglas': 'douglas',
                     'mediamarkt': 'mediamarkt',
+                    'saturn': 'saturn',
                     'cyberport': 'cyberport',
                     'jochen-schweizer': 'jochen-schweizer',
                     'eventim': 'eventim',
@@ -720,6 +967,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     'adidas': 'adidas',
                     'lush': 'lush',
                     'cineplex': 'cineplex',
+                    'tk-maxx': 'tk-maxx',
+                    'rossmann': 'rossmann',
+                    'tchibo': 'tchibo',
+                    'otto-gutscheincode': 'otto-gutscheincode',
+                    'ticketmaster': 'ticketmaster',
+                    'treatwell': 'treatwell',
+                    'uber': 'uber',
                     
                     // Austrian Gift Cards
                     'amazon-gutscheine-oesterreich': 'amazon-gutscheine-oesterreich',
@@ -731,8 +985,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     'airbnb-osterreich': 'airbnb-osterreich',
                     'kobo-osterreich': 'kobo-osterreich',
                     'mango-osterreich': 'mango-osterreich',
+                    'nike-osterreich': 'nike-osterreich',
+                    'treatwell-osterreich': 'treatwell-osterreich',
                     
-                    // Gaming
+                    // Gaming Germany
                     'steam': 'steam',
                     'xbox': 'xbox-game-pass',
                     'playstation': 'playstation-plus-mitgliedschaft',
@@ -745,6 +1001,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     'meta-quest': 'meta-quest',
                     'fortnite': 'fortnite',
                     'candy-crush': 'candy-crush',
+                    'razer-gold': 'razer-gold',
+                    'valorant': 'valorant',
+                    'pubg': 'pubg-us',
+                    
+                    // Nintendo Games
+                    'nintendo-switch-online': 'nintendo-switch-online',
+                    'animal-crossing': 'nintendo-switch-spiele',
+                    'pokemon-sword-shield': 'nintendo-switch-spiele',
+                    'zelda-tears-kingdom': 'nintendo-switch-spiele',
+                    'zelda-breath-wild': 'nintendo-switch-spiele',
+                    'super-mario-odyssey': 'nintendo-switch-spiele',
+                    'super-mario-kart': 'nintendo-switch-spiele',
+                    'splatoon-3': 'nintendo-switch-spiele',
+                    'pokemon-scarlet': 'nintendo-switch-spiele',
+                    'pokemon-violet': 'nintendo-switch-spiele',
                     
                     // Austrian Gaming
                     'battlenet-guthabenkarte-oesterreich': 'battlenet-guthabenkarte-oesterreich',
@@ -752,19 +1023,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     'hearthstone-code-oesterreich': 'hearthstone-code-oesterreich',
                     'apex-legends-oesterreich': 'apex-legends-oesterreich',
                     'free-fire-osterreich': 'free-fire-osterreich',
+                    'steam-oesterreich': 'steam-oesterreich',
+                    'razer-gold-osterreich': 'razer-gold-osterreich',
+                    'riot-points-oesterreich': 'riot-points-oesterreich',
+                    'nintendo-eshop-card-oesterreich': 'nintendo-eshop-card-oesterreich',
+                    'playstation-plus-mitgliedschaft-oesterreich': 'playstation-plus-mitgliedschaft-oesterreich',
+                    'psn-card-oesterreich': 'psn-card-oesterreich',
+                    'runescape-mitgliedschaft-oesterreich': 'runescape-mitgliedschaft-oesterreich',
                     
-                    // Entertainment
+                    // Entertainment Germany
                     'netflix': 'netflix-geschenkkarte',
                     'spotify': 'spotify-premium-code-oesterreich',
                     'disney-plus': 'disney-plus',
                     'dazn': 'dazn',
+                    'tvnow': 'tvnow',
+                    'twitch-geschenkkarte': 'twitch-geschenkkarte',
+                    'tinder-plus': 'tinder-plus',
+                    'tinder-gold': 'tinder-gold',
                     
                     // Austrian Entertainment
                     'disney-plus-osterreich': 'disney-plus-osterreich',
                     'spotify-premium-code-oesterreich': 'spotify-premium-code-oesterreich',
                     'deezer-at': 'deezer-at',
+                    'netflix-gutschein-oesterreich': 'netflix-gutschein-oesterreich',
+                    'twitch-osterreich': 'twitch-osterreich',
+                    'tinder-plus-osterreich': 'tinder-plus-osterreich',
+                    'tinder-gold-osterreich': 'tinder-gold-osterreich',
                     
-                    // Payment Cards
+                    // Payment Cards Germany
                     'paysafecard': 'paysafecard',
                     'cashlib': 'cashlib',
                     'flexepin': 'flexepin',
@@ -780,10 +1066,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     'bitsa-oesterreich': 'bitsa-oesterreich',
                     'astropay-oesterreich': 'astropay-oesterreich',
                     'a-bon-osterreich': 'a-bon-osterreich',
+                    'paysafecard-at': 'paysafecard-at',
+                    'neosurf-at': 'neosurf-at',
+                    'transcash-oesterreich': 'transcash-oesterreich',
+                    'mifinity': 'mifinity',
+                    'mint-prepaid-osterreich': 'mint-prepaid-osterreich',
+                    'rewarble': 'rewarble',
+                    'pcs-oesterreich': 'pcs-oesterreich',
                     
-                    // Communication
+                    // Communication & Other
                     'libon': 'libon',
                     'eety-guthaben': 'eety-guthaben',
+                    'microsoft-geschenkkarte': 'microsoft-geschenkkarte',
+                    'microsoft-geschenkkarte-oesterreich': 'microsoft-geschenkkarte-oesterreich',
+                    'tiktok-de': 'tiktok-de',
                     
                     // Travel
                     'airbnb': 'airbnb'
