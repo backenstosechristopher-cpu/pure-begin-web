@@ -1,24 +1,43 @@
 // Enhanced search functionality for existing guthaben.de search input with ID 'search-field-input'
 console.debug('[search-enhancement] loaded');
 
-// Function to apply enhanced input styling
+// Function to apply modern search input styling
 function applyInputStyling() {
     const inputEl = document.getElementById('search-field-input');
     if (inputEl) {
         inputEl.style.cssText += `
-            padding: 16px 20px !important;
+            padding: 18px 24px !important;
             font-size: 16px !important;
-            line-height: 1.4 !important;
-            min-height: 48px !important;
+            line-height: 1.5 !important;
+            min-height: 56px !important;
+            border-radius: 16px !important;
+            border: 2px solid #e5e7eb !important;
+            background: #ffffff !important;
+            color: #1f2937 !important;
             box-sizing: border-box !important;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
         `;
         
-        // Also style the wrapper if it exists
+        // Enhanced focus states
+        inputEl.addEventListener('focus', function() {
+            this.style.borderColor = '#3b82f6 !important';
+            this.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1) !important';
+        });
+        
+        inputEl.addEventListener('blur', function() {
+            this.style.borderColor = '#e5e7eb !important';
+            this.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1) !important';
+        });
+        
+        // Style the wrapper
         const wrapper = inputEl.closest('.MuiInputBase-root');
         if (wrapper) {
             wrapper.style.cssText += `
                 padding: 0 !important;
-                min-height: 48px !important;
+                border-radius: 16px !important;
+                background: transparent !important;
+                overflow: visible !important;
             `;
         }
     }
@@ -197,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    // Create results container
+    // Create modern results container
     function createResultsContainer() {
         resultsContainer = document.createElement('div');
         resultsContainer.id = 'search-results-dropdown';
@@ -207,15 +226,37 @@ document.addEventListener('DOMContentLoaded', function() {
             left: 0;
             right: 0;
             background: #ffffff;
-            border: 1px solid #e1e7eb;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             z-index: 2147483647;
-            max-height: 400px;
+            max-height: 480px;
             overflow-y: auto;
             display: none;
-            margin-top: 8px;
+            margin-top: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         `;
+
+        // Custom scrollbar
+        const scrollbarStyle = document.createElement('style');
+        scrollbarStyle.textContent = `
+            #search-results-dropdown::-webkit-scrollbar {
+                width: 8px;
+            }
+            #search-results-dropdown::-webkit-scrollbar-track {
+                background: #f1f5f9;
+                border-radius: 10px;
+            }
+            #search-results-dropdown::-webkit-scrollbar-thumb {
+                background: #cbd5e1;
+                border-radius: 10px;
+            }
+            #search-results-dropdown::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+        `;
+        document.head.appendChild(scrollbarStyle);
 
         // Find the parent container of the search input
         const searchContainer = getWrapperEl();
@@ -350,82 +391,97 @@ document.addEventListener('DOMContentLoaded', function() {
             const bg = getColorFor(product.slug);
             const logo = getBrandLogo(product.slug);
             if (logo) {
-                return `<div style="width: 32px; height: 32px; background: ${bg}; border-radius: 8px; display: flex; align-items: center; justify-content: center;">${logo}</div>`;
+                return `<div style="width: 48px; height: 48px; background: ${bg}; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">${logo}</div>`;
             }
             const letter = (product.brand || product.slug || '?').charAt(0).toUpperCase();
-            return `<div style="width: 32px; height: 32px; background: ${bg}; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700;">${letter}</div>`;
+            return `<div style="width: 48px; height: 48px; background: ${bg}; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">${letter}</div>`;
         };
 
         if (results.length === 0) {
-            // Show popular items with brand logos when no search results
+            // Show popular items when no search results
+            const popularProducts = [
+                { brand: 'Amazon', category: 'Shopping Gift Cards', price: '25€', slug: 'amazon' },
+                { brand: 'Google Play', category: 'Digital Content', price: '25€', slug: 'google-play' },
+                { brand: 'Steam', category: 'Gaming Cards', price: '20€', slug: 'steam' },
+                { brand: 'Netflix', category: 'Streaming Gift Cards', price: '25€', slug: 'netflix' },
+                { brand: 'paysafecard', category: 'Prepaid Payment Cards', price: '25€', slug: 'paysafecard' },
+                { brand: 'Deutsche Telekom', category: 'Mobile Top-up', price: '15€', slug: 'telekom' }
+            ];
+            
             const popularHeader = `
-                <div style="padding: 16px 16px 8px 16px; border-bottom: 1px solid #f0f0f0;">
-                    <div style="font-weight: 600; font-size: 14px; color: #666; margin-bottom: 12px;">
-                        Popular
+                <div style="padding: 24px 24px 16px 24px; border-bottom: 1px solid #f1f5f9;">
+                    <div style="font-weight: 700; font-size: 16px; color: #374151; margin-bottom: 4px;">
+                        Beliebte Produkte
+                    </div>
+                    <div style="font-size: 14px; color: #6b7280;">
+                        Die meist gekauften Guthabenkarten
                     </div>
                 </div>
             `;
             
-            const popularItems = [
-                { brand: 'PaysafeCard', category: 'Popular products', slug: 'paysafecard' },
-                { brand: 'Google Play', category: 'Gamecards', slug: 'google-play' },
-                { brand: 'Apple', category: 'Entertainment cards', slug: 'apple' },
-                { brand: 'Amazon', category: 'Shopping cards', slug: 'amazon' },
-                { brand: 'Steam', category: 'Gaming cards', slug: 'steam' }
-            ];
-            
-            const itemsHtml = popularItems.map(pi => `
-                <div class="search-result-item"
-                     style="padding: 12px 16px; border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: space-between;"
-                     data-slug="${pi.slug}"
-                     onmouseover="this.style.backgroundColor='#f8f9fa'"
-                     onmouseout="this.style.backgroundColor='transparent'">
+            const itemsHtml = popularProducts.map((p, index) => `
+                <div class="search-result-item modern-card"
+                     style="padding: 20px 24px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: space-between; border-bottom: ${index === popularProducts.length - 1 ? 'none' : '1px solid #f1f5f9'}; position: relative; overflow: hidden;"
+                     data-slug="${p.slug}"
+                     onmouseover="this.style.backgroundColor='#f8fafc'; this.style.transform='translateY(-1px)'; this.querySelector('.arrow-icon').style.transform='translateX(4px)'"
+                     onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0px)'; this.querySelector('.arrow-icon').style.transform='translateX(0px)'">
                     <div style="display: flex; align-items: center; flex: 1;">
-                        <div style="width: 40px; height: 40px; background: ${getColorFor(pi.slug)}; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
-                            ${getBrandLogo(pi.slug) || pi.brand.charAt(0)}
-                        </div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px;">
-                                ${pi.brand}
+                        ${getAvatarHtml(p)}
+                        <div style="flex: 1; margin-left: 16px;">
+                            <div style="font-weight: 600; font-size: 16px; color: #111827; margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px;">
+                                ${p.brand} 
+                                <span style="color: #3b82f6; font-weight: 700; background: #eff6ff; padding: 2px 8px; border-radius: 8px; font-size: 14px;">${p.price}</span>
                             </div>
-                            <div style="font-size: 14px; color: #666; transform: translateY(-10px);">
-                                ${pi.category}
+                            <div style="font-size: 14px; color: #6b7280; font-weight: 500;">
+                                ${p.category}
                             </div>
                         </div>
                     </div>
-                    <div style="color: #ccc; font-size: 18px;">›</div>
+                    <div class="arrow-icon" style="color: #9ca3af; font-size: 18px; transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #f9fafb;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                    </div>
                 </div>
             `).join('');
 
             resultsContainer.innerHTML = popularHeader + itemsHtml;
         } else {
-            // Show actual search results with brand logos
+            // Show actual search results with modern design
             const resultsHeader = `
-                <div style="padding: 16px 16px 8px 16px; border-bottom: 1px solid #f0f0f0;">
-                    <div style="font-weight: 600; font-size: 14px; color: #666; margin-bottom: 12px;">
+                <div style="padding: 24px 24px 16px 24px; border-bottom: 1px solid #f1f5f9;">
+                    <div style="font-weight: 700; font-size: 16px; color: #374151; margin-bottom: 4px;">
                         Suchergebnisse
+                    </div>
+                    <div style="font-size: 14px; color: #6b7280;">
+                        ${results.length} ${results.length === 1 ? 'Ergebnis' : 'Ergebnisse'} gefunden
                     </div>
                 </div>
             `;
             
-            const itemsHtml = results.map(p => `
-                <div class="search-result-item"
-                     style="padding: 12px 16px; border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: space-between;"
+            const itemsHtml = results.map((p, index) => `
+                <div class="search-result-item modern-card"
+                     style="padding: 20px 24px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: space-between; border-bottom: ${index === results.length - 1 ? 'none' : '1px solid #f1f5f9'}; position: relative; overflow: hidden;"
                      data-slug="${p.slug}"
-                     onmouseover="this.style.backgroundColor='#f8f9fa'"
-                     onmouseout="this.style.backgroundColor='transparent'">
+                     onmouseover="this.style.backgroundColor='#f8fafc'; this.style.transform='translateY(-1px)'; this.querySelector('.arrow-icon').style.transform='translateX(4px)'"
+                     onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0px)'; this.querySelector('.arrow-icon').style.transform='translateX(0px)'">
                     <div style="display: flex; align-items: center; flex: 1;">
                         ${getAvatarHtml(p)}
-                        <div style="flex: 1; margin-left: 12px;">
-                            <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin: 0 0 8px 0; position: relative; top: 10px;">
-                                ${p.brand} <span style="color:#657080; font-weight:500;">• ${p.price}</span>
+                        <div style="flex: 1; margin-left: 16px;">
+                            <div style="font-weight: 600; font-size: 16px; color: #111827; margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px;">
+                                ${p.brand} 
+                                <span style="color: #3b82f6; font-weight: 700; background: #eff6ff; padding: 2px 8px; border-radius: 8px; font-size: 14px;">${p.price}</span>
                             </div>
-                            <div style="font-size: 14px; color: #666; margin-top: 85px;">
+                            <div style="font-size: 14px; color: #6b7280; font-weight: 500;">
                                 ${p.category}
                             </div>
                         </div>
                     </div>
-                    <div style="color: #ccc; font-size: 18px;">›</div>
+                    <div class="arrow-icon" style="color: #9ca3af; font-size: 18px; transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #f9fafb;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                    </div>
                 </div>
             `).join('');
 
@@ -607,9 +663,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateHighlight(items) {
         items.forEach((item, index) => {
             if (index === highlightedIndex) {
-                item.style.backgroundColor = '#e3f2fd';
+                item.style.backgroundColor = '#eff6ff';
+                item.style.transform = 'translateY(-1px)';
+                item.style.borderColor = '#3b82f6';
+                const arrow = item.querySelector('.arrow-icon');
+                if (arrow) arrow.style.transform = 'translateX(4px)';
             } else {
                 item.style.backgroundColor = 'transparent';
+                item.style.transform = 'translateY(0px)';
+                item.style.borderColor = 'transparent';
+                const arrow = item.querySelector('.arrow-icon');
+                if (arrow) arrow.style.transform = 'translateX(0px)';
             }
         });
     }
