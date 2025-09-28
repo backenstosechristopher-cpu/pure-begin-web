@@ -48,9 +48,27 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (_) {}
     
     // Reapply styling when input appears (for dynamic content)
-    const observer = new MutationObserver(() => {
+    const observer = new MutationObserver((mutations) => {
         applyInputStyling();
         neutralizeBackdrops();
+        
+        // Log any new dark elements being added
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType === 1) { // Element node
+                    const element = node;
+                    const cs = window.getComputedStyle(element);
+                    if (cs.position === 'fixed' && (cs.backgroundColor.includes('rgba(0, 0, 0') || cs.backgroundColor === 'black')) {
+                        console.log('[DEBUG] New dark overlay detected:', {
+                            element,
+                            className: element.className,
+                            backgroundColor: cs.backgroundColor,
+                            zIndex: cs.zIndex
+                        });
+                    }
+                }
+            });
+        });
     });
     observer.observe(document.body, { childList: true, subtree: true });
     
@@ -150,19 +168,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // Neutralize any external backdrops/overlays that might darken the page
     function neutralizeBackdrops() {
         try {
+            console.log('[DEBUG] Checking for dark backdrops...');
             const candidates = document.querySelectorAll(
                 '.MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop" i], [class*="backdrop" i], [style*="rgba(0, 0, 0" i]'
             );
-            candidates.forEach((el) => {
+            console.log('[DEBUG] Found backdrop candidates:', candidates.length);
+            candidates.forEach((el, index) => {
                 const cs = window.getComputedStyle(el);
                 const isFixed = cs.position === 'fixed';
                 const hasDarkBg = cs.backgroundColor.includes('rgba(0, 0, 0') || cs.backgroundColor === 'black';
+                console.log(`[DEBUG] Backdrop ${index}:`, {
+                    element: el,
+                    className: el.className,
+                    position: cs.position,
+                    backgroundColor: cs.backgroundColor,
+                    isFixed,
+                    hasDarkBg
+                });
                 if (isFixed && hasDarkBg) {
+                    console.log('[DEBUG] Neutralizing dark backdrop:', el);
                     el.style.setProperty('background', 'transparent', 'important');
                     el.style.setProperty('background-color', 'transparent', 'important');
                 }
             });
-        } catch (_) {}
+        } catch (e) {
+            console.error('[DEBUG] Error in neutralizeBackdrops:', e);
+        }
     }
 
 
@@ -251,6 +282,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show overlay (scrim + spotlight) - DISABLED
     function showOverlay() {
         // Overlay functionality disabled per user request
+        console.log('[DEBUG] showOverlay() called - but disabled');
+        neutralizeBackdrops();
         try { console.debug('[search] overlay disabled'); } catch (_) {}
     }
 
@@ -448,15 +481,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle focus (delegated)
     document.addEventListener('focusin', function(e) {
+        console.log('[DEBUG] Focus event on:', e.target);
         const inputEl = getInputEl();
         const wrapper = getWrapperEl(inputEl);
         if (!inputEl) return;
         if (!(e.target === inputEl || (wrapper && wrapper.contains(e.target)))) return;
         searchInput = inputEl;
+        console.log('[DEBUG] Calling showOverlay from focus event');
         showOverlay();
         
         // Show popular items immediately on focus when query is short
         const query = inputEl.value || '';
+        console.log('[DEBUG] Focus query length:', query.length);
         if (query.length >= 2) {
             const results = searchProducts(query, allProducts);
             showResults(results);
@@ -470,6 +506,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const directInputEl = getInputEl();
     if (directInputEl) {
         directInputEl.addEventListener('click', function() {
+            console.log('[DEBUG] Direct click on search input');
             showOverlay();
             isOpen = true;
         });
