@@ -135,11 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid #e1e7eb;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #333;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
             z-index: 10002;
             max-height: 400px;
             overflow-y: auto;
@@ -239,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show results
     function showResults(results) {
         if (!resultsContainer) createResultsContainer();
-        showOverlay();
+        // Don't show the overlay/spotlight, just show results
 
         // Helper: color per brand/slug
         const brandColors = {
@@ -296,8 +295,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (results.length === 0) {
             // Show popular items with brand logos when no search results
             const popularHeader = `
-                <div style="padding: 16px 16px 8px 16px; border-bottom: 1px solid #f0f0f0;">
-                    <div style="font-weight: 600; font-size: 14px; color: #666; margin-bottom: 12px;">
+                <div style="padding: 16px 16px 8px 16px; border-bottom: 1px solid #333;">
+                    <div style="font-weight: 600; font-size: 14px; color: #fff; margin-bottom: 12px;">
                         Popular
                     </div>
                 </div>
@@ -313,24 +312,24 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const itemsHtml = popularItems.map(pi => `
                 <div class="search-result-item"
-                     style="padding: 12px 16px; border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: space-between;"
+                     style="padding: 12px 16px; border-bottom: 1px solid #333; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: space-between;"
                      data-slug="${pi.slug}"
-                     onmouseover="this.style.backgroundColor='#f8f9fa'"
+                     onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'"
                      onmouseout="this.style.backgroundColor='transparent'">
                     <div style="display: flex; align-items: center; flex: 1;">
                         <div style="width: 40px; height: 40px; background: ${getColorFor(pi.slug)}; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
                             ${getBrandLogo(pi.slug) || pi.brand.charAt(0)}
                         </div>
                         <div style="flex: 1;">
-                            <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px;">
+                            <div style="font-weight: 600; font-size: 16px; color: #fff; margin-bottom: 2px;">
                                 ${pi.brand}
                             </div>
-                            <div style="font-size: 14px; color: #666; transform: translateY(-10px);">
+                            <div style="font-size: 14px; color: #ccc; transform: translateY(-10px);">
                                 ${pi.category}
                             </div>
                         </div>
                     </div>
-                    <div style="color: #ccc; font-size: 18px;">›</div>
+                    <div style="color: #666; font-size: 18px;">›</div>
                 </div>
             `).join('');
 
@@ -338,8 +337,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             // Show actual search results with brand logos
             const resultsHeader = `
-                <div style="padding: 16px 16px 8px 16px; border-bottom: 1px solid #f0f0f0;">
-                    <div style="font-weight: 600; font-size: 14px; color: #666; margin-bottom: 12px;">
+                <div style="padding: 16px 16px 8px 16px; border-bottom: 1px solid #333;">
+                    <div style="font-weight: 600; font-size: 14px; color: #fff; margin-bottom: 12px;">
                         Suchergebnisse
                     </div>
                 </div>
@@ -347,22 +346,22 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const itemsHtml = results.map(p => `
                 <div class="search-result-item"
-                     style="padding: 12px 16px; border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: space-between;"
+                     style="padding: 12px 16px; border-bottom: 1px solid #333; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: space-between;"
                      data-slug="${p.slug}"
-                     onmouseover="this.style.backgroundColor='#f8f9fa'"
+                     onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'"
                      onmouseout="this.style.backgroundColor='transparent'">
                     <div style="display: flex; align-items: center; flex: 1;">
                         ${getAvatarHtml(p)}
                         <div style="flex: 1; margin-left: 12px;">
-                            <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px;">
-                                ${p.brand} <span style="color:#657080; font-weight:500;">• ${p.price}</span>
+                            <div style="font-weight: 600; font-size: 16px; color: #fff; margin-bottom: 2px;">
+                                ${p.brand} <span style="color:#ccc; font-weight:500;">• ${p.price}</span>
                             </div>
-                            <div style="font-size: 14px; color: #666; transform: translateY(-10px);">
+                            <div style="font-size: 14px; color: #ccc; transform: translateY(-10px);">
                                 ${p.category}
                             </div>
                         </div>
                     </div>
-                    <div style="color: #ccc; font-size: 18px;">›</div>
+                    <div style="color: #666; font-size: 18px;">›</div>
                 </div>
             `).join('');
 
