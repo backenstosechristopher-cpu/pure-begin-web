@@ -209,19 +209,10 @@ document.addEventListener('DOMContentLoaded', function() {
         spotlight.style.display = 'block';
     }
 
-    // Show overlay (scrim + spotlight)
+    // Show overlay (scrim + spotlight) - DISABLED
     function showOverlay() {
-        if (!overlay) createOverlay();
-        if (!spotlight) createSpotlight();
-        overlay.style.display = 'block';
-        positionSpotlight();
-        // keep spotlight aligned on scroll/resize while active
-        if (!repositionSpotlightHandler) {
-            repositionSpotlightHandler = () => positionSpotlight();
-            window.addEventListener('resize', repositionSpotlightHandler, true);
-            window.addEventListener('scroll', repositionSpotlightHandler, true);
-        }
-        try { console.debug('[search] overlay shown'); } catch (_) {}
+        // Overlay functionality disabled per user request
+        try { console.debug('[search] overlay disabled'); } catch (_) {}
     }
 
     // Hide overlay
@@ -239,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show results
     function showResults(results) {
         if (!resultsContainer) createResultsContainer();
-        showOverlay();
+        // showOverlay(); // Disabled - no more black overlay
 
         // Helper: color per brand/slug
         const brandColors = {
