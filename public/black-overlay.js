@@ -10,7 +10,7 @@
   var s = overlay.style;
   s.setProperty('position', 'fixed', 'important');
   s.setProperty('inset', '0', 'important');
-  s.setProperty('top', '-260px', 'important');
+  s.setProperty('top', '-360px', 'important');
   s.setProperty('left', '0', 'important');
   s.setProperty('width', '100vw', 'important');
   s.setProperty('height', '100vh', 'important');
