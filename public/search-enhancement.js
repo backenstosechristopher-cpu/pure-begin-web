@@ -423,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="search-result-item modern-card"
                      style="padding: 20px 24px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: space-between; border-bottom: ${index === popularProducts.length - 1 ? 'none' : '1px solid #f1f5f9'}; position: relative; overflow: hidden;"
                      data-slug="${p.slug}"
+                     data-price="${p.price || ''}"
                      onmouseover="this.style.backgroundColor='#f8fafc'; this.style.transform='translateY(-1px)'; this.querySelector('.arrow-icon').style.transform='translateX(4px)'"
                      onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0px)'; this.querySelector('.arrow-icon').style.transform='translateX(0px)'">
                     <div style="display: flex; align-items: center; flex: 1;">
@@ -463,6 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="search-result-item modern-card"
                      style="padding: 20px 24px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: space-between; border-bottom: ${index === results.length - 1 ? 'none' : '1px solid #f1f5f9'}; position: relative; overflow: hidden;"
                      data-slug="${p.slug}"
+                     data-price="${p.price || ''}"
                      onmouseover="this.style.backgroundColor='#f8fafc'; this.style.transform='translateY(-1px)'; this.querySelector('.arrow-icon').style.transform='translateX(4px)'"
                      onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0px)'; this.querySelector('.arrow-icon').style.transform='translateX(0px)'">
                     <div style="display: flex; align-items: center; flex: 1;">
@@ -492,46 +494,61 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsContainer.querySelectorAll('.search-result-item').forEach(item => {
             item.addEventListener('click', function() {
                 const slug = this.dataset.slug;
-                if (slug) {
-                    // Map slugs to correct file names
-                    const slugToFile = {
-                        // Mobile Top-ups
-                        'telekom': 'telekom',
-                        'vodafone': 'vodafone-aufladen',
-                        'o2': 'o2-aufladen',
-                        'lebara': 'lebara-aufladen',
-                        'lycamobile': 'lycamobile-aufladen',
-                        'congstar': 'congstar-aufladen',
-                        'aldi-talk': 'aldi-talk-aufladen',
-                        
-                        // Gift Cards
-                        'amazon': 'amazon-gutschein',
-                        'apple': 'apple-gift-card',
-                        'google-play': 'google-play-guthaben',
-                        'h-m': 'h-m-geschenkcode',
-                        'zalando': 'zalando-gutschein-oesterreich',
-                        'nike': 'nike-gutscheincode',
-                        'ikea': 'ikea',
-                        
-                        // Gaming
-                        'steam': 'steam-oesterreich',
-                        'xbox': 'xbox-game-pass-oesterreich',
-                        'playstation': 'playstation-plus-mitgliedschaft-oesterreich',
-                        'nintendo': 'nintendo-eshop-card-oesterreich',
-                        'roblox': 'roblox-gift-card',
-                        
-                        // Entertainment
-                        'netflix': 'netflix-geschenkkarte',
-                        'spotify': 'spotify-premium-code-oesterreich',
-                        
-                        // Payment Cards
-                        'paysafecard': 'paysafecard'
-                    };
+                const priceRaw = this.dataset.price || '';
+                if (!slug) return;
+
+                // Map slugs to correct file names
+                const slugToFile = {
+                    // Mobile Top-ups
+                    'telekom': 'telekom',
+                    'vodafone': 'vodafone-aufladen',
+                    'o2': 'o2-aufladen',
+                    'lebara': 'lebara-aufladen',
+                    'lycamobile': 'lycamobile-aufladen',
+                    'congstar': 'congstar-aufladen',
+                    'aldi-talk': 'aldi-talk-aufladen',
                     
-                    const fileName = slugToFile[slug] || slug;
-                    const targetPath = `/desktop/guthaben.de_${fileName}.html`;
-                    console.log(`[DEBUG] Navigating from slug "${slug}" to file "${targetPath}"`);
-                    window.location.href = targetPath;
+                    // Gift Cards
+                    'amazon': 'amazon-gutschein',
+                    'apple': 'apple-gift-card',
+                    'google-play': 'google-play-guthaben',
+                    'h-m': 'h-m-geschenkcode',
+                    'zalando': 'zalando-gutschein-oesterreich',
+                    'nike': 'nike-gutscheincode',
+                    'ikea': 'ikea',
+                    
+                    // Gaming
+                    'steam': 'steam-oesterreich',
+                    'xbox': 'xbox-game-pass-oesterreich',
+                    'playstation': 'playstation-plus-mitgliedschaft-oesterreich',
+                    'nintendo': 'nintendo-eshop-card-oesterreich',
+                    'roblox': 'roblox-gift-card',
+                    
+                    // Entertainment
+                    'netflix': 'netflix-geschenkkarte',
+                    'spotify': 'spotify-premium-code-oesterreich',
+                    
+                    // Payment Cards
+                    'paysafecard': 'paysafecard'
+                };
+                
+                const baseName = slugToFile[slug] || slug;
+                const basePath = `/desktop/guthaben.de_${baseName}.html`;
+                const priceDigits = (priceRaw || '').toString().toLowerCase().replace(/[^0-9]/g, '');
+                const variantPath = priceDigits ? `/desktop/guthaben.de_${baseName}_${priceDigits}-eur.html` : '';
+
+                const navigate = (url) => {
+                    try { console.log(`[DEBUG] Navigating to: ${url} (slug: ${slug}, price: ${priceRaw})`); } catch (_) {}
+                    window.location.href = url;
+                };
+
+                if (variantPath) {
+                    // Try price-specific page first; fall back to base page if not found
+                    fetch(variantPath, { method: 'HEAD' })
+                        .then(r => r.ok ? navigate(variantPath) : navigate(basePath))
+                        .catch(() => navigate(basePath));
+                } else {
+                    navigate(basePath);
                 }
             });
         });
