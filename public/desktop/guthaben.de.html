@@ -39,9 +39,9 @@
     margin-top: 8px !important; /* additional space above category */
 }
 
-/* Hide native site autocomplete, use our custom dropdown */
-ul[role="listbox"],
-.MuiAutocomplete-popper { display: none !important; }
+/* Style native site autocomplete instead of hiding */
+.MuiAutocomplete-popper { z-index: 2147483647 !important; }
+ul[role="listbox"] { background: #ffffff !important; }
 
 .MuiAutocomplete-option {
   background: #ffffff !important;
