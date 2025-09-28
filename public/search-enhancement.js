@@ -35,7 +35,7 @@ function applyInputStyling() {
         });
         
         // Style the wrapper
-        const wrapper = inputEl.closest('.MuiInputBase-root');
+        const wrapper = getWrapperEl(inputEl);
         if (wrapper) {
             wrapper.style.cssText += `
                 padding: 0 !important;
