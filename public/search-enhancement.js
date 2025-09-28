@@ -535,21 +535,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const baseName = slugToFile[slug] || slug;
                 const basePath = `/desktop/guthaben.de_${baseName}.html`;
                 const priceDigits = (priceRaw || '').toString().toLowerCase().replace(/[^0-9]/g, '');
-                const variantPath = priceDigits ? `/desktop/guthaben.de_${baseName}_${priceDigits}-eur.html` : '';
 
-                const navigate = (url) => {
-                    try { console.log(`[DEBUG] Navigating to: ${url} (slug: ${slug}, price: ${priceRaw})`); } catch (_) {}
-                    window.location.href = url;
-                };
+                // Only these slugs have dedicated price-specific pages; others always use base page
+                const slugsWithVariants = new Set(['telekom','o2','lebara','lycamobile','congstar','aldi-talk']);
+                const hasVariant = priceDigits && slugsWithVariants.has(slug);
+                const targetPath = hasVariant ? `/desktop/guthaben.de_${baseName}_${priceDigits}-eur.html` : basePath;
 
-                if (variantPath) {
-                    // Try price-specific page first; fall back to base page if not found
-                    fetch(variantPath, { method: 'HEAD' })
-                        .then(r => r.ok ? navigate(variantPath) : navigate(basePath))
-                        .catch(() => navigate(basePath));
-                } else {
-                    navigate(basePath);
-                }
+                try { console.log(`[DEBUG] Navigating to: ${targetPath} (slug: ${slug}, price: ${priceRaw})`); } catch (_) {}
+                window.location.href = targetPath;
             });
         });
 
