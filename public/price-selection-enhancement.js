@@ -2,33 +2,63 @@
   // Price Selection Enhancement for Google Play pages
   // Adds blue border selection functionality to price buttons (5€, 25€, 100€)
   
+  console.log('Price selection enhancement script loading...');
+  
+  // More comprehensive selectors for price buttons
   const PRICE_BUTTON_SELECTORS = [
+    // MUI chip selectors
+    '.MuiChip-root',
+    // Button selectors with common patterns
     'button[data-testid*="price"]',
+    'button[data-testid*="amount"]',
     'button[aria-label*="€"]',
     'button[aria-label*="euro"]',
-    '[role="button"][data-value]',
-    '.MuiChip-root',
-    '.MuiButton-root:contains("€")',
-    'button:contains("5")',
-    'button:contains("25")',
-    'button:contains("100")',
+    'button[title*="€"]',
+    'button[title*="euro"]',
+    '[role="button"]',
+    'button',
+    // Data attributes
     '[data-price]',
+    '[data-value]',
+    // CSS classes
     '.price-button',
     '.amount-selector button',
     'button[class*="price"]',
-    'button[class*="amount"]'
+    'button[class*="amount"]',
+    'button[class*="Mui"]'
   ];
   
-  // Custom contains selector since it's not standard
   function findPriceButtons() {
     const buttons = [];
-    const allButtons = document.querySelectorAll('button, [role="button"], .MuiChip-root');
+    const potentialButtons = new Set();
     
-    allButtons.forEach(btn => {
-      const text = btn.textContent || btn.innerText || '';
+    // First, gather all potential buttons
+    PRICE_BUTTON_SELECTORS.forEach(selector => {
+      try {
+        document.querySelectorAll(selector).forEach(btn => potentialButtons.add(btn));
+      } catch (e) {
+        console.log('Invalid selector:', selector, e);
+      }
+    });
+    
+    console.log('Found potential buttons:', potentialButtons.size);
+    
+    // Then filter for price-related content
+    potentialButtons.forEach(btn => {
+      const text = (btn.textContent || btn.innerText || '').trim();
       const ariaLabel = btn.getAttribute('aria-label') || '';
       const title = btn.getAttribute('title') || '';
-      const allText = (text + ' ' + ariaLabel + ' ' + title).toLowerCase();
+      const dataValue = btn.getAttribute('data-value') || '';
+      const allText = (text + ' ' + ariaLabel + ' ' + title + ' ' + dataValue).toLowerCase();
+      
+      console.log('Checking button:', {
+        element: btn,
+        text: text,
+        ariaLabel: ariaLabel,
+        title: title,
+        dataValue: dataValue,
+        allText: allText
+      });
       
       // Check if button contains price-related content
       if (allText.includes('€') || 
@@ -36,28 +66,19 @@
           /\b(5|25|100)\b/.test(allText) ||
           btn.dataset.price ||
           btn.dataset.value ||
-          btn.classList.contains('MuiChip-root')) {
+          btn.classList.contains('MuiChip-root') ||
+          (text && /\d/.test(text))) {
         buttons.push(btn);
+        console.log('Added price button:', btn, 'Text:', text);
       }
     });
     
-    // Also try common selectors
-    PRICE_BUTTON_SELECTORS.forEach(selector => {
-      try {
-        document.querySelectorAll(selector).forEach(btn => {
-          if (!buttons.includes(btn)) {
-            buttons.push(btn);
-          }
-        });
-      } catch (e) {
-        // Ignore invalid selectors
-      }
-    });
-    
+    console.log('Final price buttons found:', buttons.length, buttons);
     return buttons;
   }
   
   function addSelectedStyle(button) {
+    console.log('Adding selected style to:', button);
     // Add blue border and selected state
     button.style.setProperty('border', '2px solid #2196F3', 'important');
     button.style.setProperty('box-shadow', '0 0 0 1px #2196F3', 'important');
@@ -66,6 +87,7 @@
   }
   
   function removeSelectedStyle(button) {
+    console.log('Removing selected style from:', button);
     // Remove blue border and selected state
     button.style.removeProperty('border');
     button.style.removeProperty('box-shadow');
@@ -74,6 +96,7 @@
   }
   
   function handlePriceSelection(clickedButton) {
+    console.log('Price button clicked:', clickedButton);
     const allPriceButtons = findPriceButtons();
     
     // Remove selection from all buttons
@@ -87,14 +110,31 @@
     console.log('Price selected:', clickedButton.textContent);
   }
   
+  function handlePriceClick(event) {
+    console.log('Click event on price button:', this, event);
+    event.preventDefault();
+    event.stopPropagation();
+    
+    handlePriceSelection(this);
+  }
+  
   function initializePriceButtons() {
+    console.log('Initializing price buttons...');
     const priceButtons = findPriceButtons();
     
-    priceButtons.forEach(button => {
+    if (priceButtons.length === 0) {
+      console.log('No price buttons found, will retry in 1 second...');
+      setTimeout(initializePriceButtons, 1000);
+      return;
+    }
+    
+    priceButtons.forEach((button, index) => {
+      console.log(`Setting up button ${index + 1}:`, button);
+      
       // Remove existing listeners to avoid duplicates
       button.removeEventListener('click', handlePriceClick);
       
-      // Add click listener
+      // Add click listener with capture to ensure we get the event first
       button.addEventListener('click', handlePriceClick, { capture: true });
       
       // Set initial ARIA state
@@ -111,23 +151,18 @@
     // Select first button by default if none are selected
     const selectedButton = priceButtons.find(btn => btn.getAttribute('data-selected') === 'true');
     if (!selectedButton && priceButtons.length > 0) {
+      console.log('Selecting first button by default:', priceButtons[0]);
       addSelectedStyle(priceButtons[0]);
     }
     
     console.log('Price selection enhancement initialized for', priceButtons.length, 'buttons');
   }
   
-  function handlePriceClick(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    handlePriceSelection(this);
-  }
-  
   // Add CSS for selected state animation
   function addStyles() {
     if (document.getElementById('price-selection-styles')) return;
     
+    console.log('Adding price selection styles...');
     const style = document.createElement('style');
     style.id = 'price-selection-styles';
     style.textContent = `
@@ -149,6 +184,7 @@
   
   // Initialize on page load and content changes
   function initialize() {
+    console.log('Price selection enhancement initializing...');
     addStyles();
     initializePriceButtons();
   }
@@ -182,6 +218,7 @@
       });
       
       if (shouldReinit) {
+        console.log('DOM changed, reinitializing price buttons...');
         setTimeout(initializePriceButtons, 100);
       }
     });
@@ -191,4 +228,6 @@
       subtree: true
     });
   }
+  
+  console.log('Price selection enhancement script loaded');
 })();
