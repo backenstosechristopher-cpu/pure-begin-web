@@ -10,27 +10,30 @@ const files = [
 ];
 
 files.forEach(filePath => {
+    if (!fs.existsSync(filePath)) {
+        console.log(`⚠ File not found: ${filePath}`);
+        return;
+    }
+    
     console.log(`Fixing paths in ${filePath}...`);
     
     let content = fs.readFileSync(filePath, 'utf8');
     
     // Fix various asset paths to point to guthaben.de
     content = content
-        // Fix /_next/image paths
-        .replace(/\/_next\/image/g, 'https://guthaben.de/_next/image')
-        // Fix assets/ paths  
-        .replace(/href="assets\//g, 'href="https://guthaben.de/assets/')
-        .replace(/src="assets\//g, 'src="https://guthaben.de/assets/')
+        // Fix /_next/image paths that aren't already absolute
+        .replace(/(?<!https:\/\/guthaben\.de)\/_next\/image/g, 'https://guthaben.de/_next/image')
+        // Fix assets/ paths that aren't already absolute
+        .replace(/href="(?!https:\/\/guthaben\.de)assets\//g, 'href="https://guthaben.de/assets/')
+        .replace(/src="(?!https:\/\/guthaben\.de)assets\//g, 'src="https://guthaben.de/assets/')
         // Fix canonical URLs
-        .replace(/href="assets"/g, 'href="https://guthaben.de/"')
-        .replace(/href="assets_"/g, 'href="https://guthaben.de/"')
+        .replace(/href="assets"(?!\/)(\s|>)/g, 'href="https://guthaben.de/"$1')
+        .replace(/href="assets_"(\s|>)/g, 'href="https://guthaben.de/"$1')
         // Fix preconnect URLs
         .replace(/href="assets" crossorigin/g, 'href="https://guthaben.de" crossorigin')
-        // Fix any remaining relative paths that might break
-        .replace(/src="\//g, 'src="https://guthaben.de/')
-        .replace(/href="\//g, 'href="https://guthaben.de/')
-        // Fix specific image domains that might be referenced
-        .replace(/static\.rapido\.com/g, 'static.rapido.com')
+        // Fix any remaining relative paths that might break (only if not already absolute)
+        .replace(/src="(?!https?:\/\/)\/(?!\/)/g, 'src="https://guthaben.de/')
+        .replace(/href="(?!https?:\/\/)\/(?!\/)/g, 'href="https://guthaben.de/')
         // Fix any http:// guthaben.de to https://
         .replace(/http:\/\/guthaben\.de/g, 'https://guthaben.de')
         // Fix guthaben.de_.html links to point to the correct file
