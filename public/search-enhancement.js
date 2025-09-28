@@ -38,7 +38,6 @@ function applyInputStyling() {
         const wrapper = getWrapperEl(inputEl);
         if (wrapper) {
             wrapper.style.cssText += `
-                position: relative !important;
                 padding: 0 !important;
                 border-radius: 16px !important;
                 background: transparent !important;
@@ -47,15 +46,7 @@ function applyInputStyling() {
                 border: none !important;
                 width: calc(100% + 200px) !important;
                 margin-left: -200px !important;
-                transform: translateX(-200px) !important;
             `;
-
-            // Ensure ancestors don't clip the widened input
-            let ancestor = wrapper.parentElement;
-            for (let i = 0; i < 3 && ancestor; i++) {
-                try { ancestor.style.overflow = 'visible'; } catch (_) {}
-                ancestor = ancestor.parentElement;
-            }
         }
     }
 }
