@@ -208,19 +208,19 @@ document.addEventListener('DOMContentLoaded', function() {
         spotlight.style.display = 'block';
     }
 
-    // Show overlay (scrim + spotlight)
+    // Show overlay (scrim only, no spotlight)
     function showOverlay() {
         if (!overlay) createOverlay();
-        if (!spotlight) createSpotlight();
+        // Keep spotlight hidden to avoid black fill around input
+        if (spotlight) spotlight.style.display = 'none';
         overlay.style.display = 'block';
-        positionSpotlight();
-        // keep spotlight aligned on scroll/resize while active
-        if (!repositionSpotlightHandler) {
-            repositionSpotlightHandler = () => positionSpotlight();
-            window.addEventListener('resize', repositionSpotlightHandler, true);
-            window.addEventListener('scroll', repositionSpotlightHandler, true);
+        // Remove any spotlight listeners if they were set previously
+        if (repositionSpotlightHandler) {
+            window.removeEventListener('resize', repositionSpotlightHandler, true);
+            window.removeEventListener('scroll', repositionSpotlightHandler, true);
+            repositionSpotlightHandler = null;
         }
-        try { console.debug('[search] overlay shown'); } catch (_) {}
+        try { console.debug('[search] overlay shown (no spotlight)'); } catch (_) {}
     }
 
     // Hide overlay
