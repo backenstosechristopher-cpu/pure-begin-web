@@ -26,10 +26,31 @@ function applyInputStyling() {
 document.addEventListener('DOMContentLoaded', function() {
     // Apply input styling on load
     applyInputStyling();
+
+    // Disable any search-related overlays globally (scrim/backdrop/spotlight)
+    try {
+        const style = document.createElement('style');
+        style.id = 'disable-search-overlays';
+        style.textContent = `
+            #search-overlay-scrim,
+            #search-spotlight-hole { display: none !important; }
+            .MuiBackdrop-root,
+            .MuiModal-backdrop,
+            .mui-style-1jtyhdp { background-color: transparent !important; }
+        `;
+        document.head.appendChild(style);
+
+        // Remove any leftover overlay elements if present
+        const existingScrim = document.getElementById('search-overlay-scrim');
+        const existingSpotlight = document.getElementById('search-spotlight-hole');
+        if (existingScrim) existingScrim.remove();
+        if (existingSpotlight) existingSpotlight.remove();
+    } catch (_) {}
     
     // Reapply styling when input appears (for dynamic content)
     const observer = new MutationObserver(() => {
         applyInputStyling();
+        neutralizeBackdrops();
     });
     observer.observe(document.body, { childList: true, subtree: true });
     
@@ -126,6 +147,25 @@ document.addEventListener('DOMContentLoaded', function() {
     let spotlight = null; // visual black fill with hole around input
     let isOpen = false;
 
+    // Neutralize any external backdrops/overlays that might darken the page
+    function neutralizeBackdrops() {
+        try {
+            const candidates = document.querySelectorAll(
+                '.MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop" i], [class*="backdrop" i], [style*="rgba(0, 0, 0" i]'
+            );
+            candidates.forEach((el) => {
+                const cs = window.getComputedStyle(el);
+                const isFixed = cs.position === 'fixed';
+                const hasDarkBg = cs.backgroundColor.includes('rgba(0, 0, 0') || cs.backgroundColor === 'black';
+                if (isFixed && hasDarkBg) {
+                    el.style.setProperty('background', 'transparent', 'important');
+                    el.style.setProperty('background-color', 'transparent', 'important');
+                }
+            });
+        } catch (_) {}
+    }
+
+
     // Create results container
     function createResultsContainer() {
         resultsContainer = document.createElement('div');
@@ -135,12 +175,11 @@ document.addEventListener('DOMContentLoaded', function() {
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: #ffffff;
             border: 1px solid #e1e7eb;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            z-index: 10002;
+            z-index: 10010;
             max-height: 400px;
             overflow-y: auto;
             display: none;
