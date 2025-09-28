@@ -135,7 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
             top: 100%;
             left: 0;
             right: 0;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border: 1px solid #e1e7eb;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
