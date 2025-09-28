@@ -495,28 +495,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (slug) {
                     // Map slugs to correct file names
                     const slugToFile = {
-                        'amazon': 'amazon-gutschein',
-                        'google-play': 'google-play-guthaben',
-                        'apple': 'apple-gift-card',
-                        'steam': 'steam-guthaben-karte',
-                        'xbox': 'xbox-live-gold',
-                        'playstation': 'playstation-store-guthaben',
-                        'nintendo': 'nintendo-eshop-karte',
-                        'netflix': 'netflix-geschenkkarte',
-                        'spotify': 'spotify-geschenkkarte',
-                        'paysafecard': 'paysafecard',
-                        'telekom': 'telekom-aufladen',
+                        // Mobile Top-ups
+                        'telekom': 'telekom',
                         'vodafone': 'vodafone-aufladen',
                         'o2': 'o2-aufladen',
-                        'congstar': 'congstar-aufladen',
-                        'aldi-talk': 'aldi-talk-aufladen',
                         'lebara': 'lebara-aufladen',
                         'lycamobile': 'lycamobile-aufladen',
+                        'congstar': 'congstar-aufladen',
+                        'aldi-talk': 'aldi-talk-aufladen',
+                        
+                        // Gift Cards
+                        'amazon': 'amazon-gutschein',
+                        'apple': 'apple-gift-card',
+                        'google-play': 'google-play-guthaben',
                         'h-m': 'h-m-geschenkcode',
-                        'zalando': 'zalando-geschenkgutschein',
-                        'nike': 'nike-geschenkkarte',
+                        'zalando': 'zalando-gutschein-oesterreich',
+                        'nike': 'nike-gutscheincode',
                         'ikea': 'ikea',
-                        'roblox': 'roblox-gift-card'
+                        
+                        // Gaming
+                        'steam': 'steam-oesterreich',
+                        'xbox': 'xbox-game-pass-oesterreich',
+                        'playstation': 'playstation-plus-mitgliedschaft-oesterreich',
+                        'nintendo': 'nintendo-eshop-card-oesterreich',
+                        'roblox': 'roblox-gift-card',
+                        
+                        // Entertainment
+                        'netflix': 'netflix-geschenkkarte',
+                        'spotify': 'spotify-premium-code-oesterreich',
+                        
+                        // Payment Cards
+                        'paysafecard': 'paysafecard'
                     };
                     
                     const fileName = slugToFile[slug] || slug;
