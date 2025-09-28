@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="display: flex; align-items: center; flex: 1;">
                         ${getAvatarHtml(p)}
                         <div style="flex: 1; margin-left: 16px;">
-                            <div style="font-weight: 600; font-size: 16px; color: #111827; margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px;">
+                            <div style="font-weight: 600; font-size: 16px; color: #111827; margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px; transform: translateY(-10px);">
                                 ${p.brand} 
                                 <span style="color: #3b82f6; font-weight: 700; background: #eff6ff; padding: 2px 8px; border-radius: 8px; font-size: 14px;">${p.price}</span>
                             </div>
@@ -468,7 +468,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="display: flex; align-items: center; flex: 1;">
                         ${getAvatarHtml(p)}
                         <div style="flex: 1; margin-left: 16px;">
-                            <div style="font-weight: 600; font-size: 16px; color: #111827; margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px;">
+                            <div style="font-weight: 600; font-size: 16px; color: #111827; margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px; transform: translateY(-10px);">
                                 ${p.brand} 
                                 <span style="color: #3b82f6; font-weight: 700; background: #eff6ff; padding: 2px 8px; border-radius: 8px; font-size: 14px;">${p.price}</span>
                             </div>
