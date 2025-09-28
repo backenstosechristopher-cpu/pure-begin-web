@@ -534,15 +534,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const baseName = slugToFile[slug] || slug;
                 const basePath = `/desktop/guthaben.de_${baseName}.html`;
-                const priceDigits = (priceRaw || '').toString().toLowerCase().replace(/[^0-9]/g, '');
 
-                // Only these slugs have dedicated price-specific pages; others always use base page
-                const slugsWithVariants = new Set(['telekom','o2','lebara','lycamobile','congstar','aldi-talk']);
-                const hasVariant = priceDigits && slugsWithVariants.has(slug);
-                const targetPath = hasVariant ? `/desktop/guthaben.de_${baseName}_${priceDigits}-eur.html` : basePath;
-
-                try { console.log(`[DEBUG] Navigating to: ${targetPath} (slug: ${slug}, price: ${priceRaw})`); } catch (_) {}
-                window.location.href = targetPath;
+                try { console.log(`[DEBUG] Navigating to base: ${basePath} (slug: ${slug})`); } catch (_) {}
+                window.location.href = basePath;
             });
         });
 
