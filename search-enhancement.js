@@ -1,34 +1,6 @@
 // Enhanced search functionality for existing guthaben.de search input with ID 'search-field-input'
 console.debug('[search-enhancement] loaded');
 
-// Apply full black overlay above all content
-(function applyBlackOverlay() {
-    const blackOverlay = document.createElement('div');
-    blackOverlay.id = 'full-black-overlay';
-    blackOverlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: #000000;
-        z-index: 999999;
-        pointer-events: none;
-    `;
-    
-    // Add overlay immediately
-    document.body.appendChild(blackOverlay);
-    
-    // Also add it when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            if (!document.getElementById('full-black-overlay')) {
-                document.body.appendChild(blackOverlay.cloneNode(true));
-            }
-        });
-    }
-})();
-
 // Function to apply enhanced input styling
 function applyInputStyling() {
     const inputEl = document.getElementById('search-field-input');
@@ -154,24 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let spotlight = null; // visual black fill with hole around input
     let isOpen = false;
 
-    // Inject CSS to disable any native site backdrops/overlays while search is active
-    let backdropStyleEl = null;
-    function ensureBackdropOverride() {
-        if (backdropStyleEl) return;
-        backdropStyleEl = document.createElement('style');
-        backdropStyleEl.id = 'search-backdrop-override';
-        backdropStyleEl.textContent = `
-            .MuiBackdrop-root, .MuiModal-backdrop, .mui-style-1jtyhdp {
-                display: none !important;
-                background: transparent !important;
-            }
-        `;
-        backdropStyleEl.disabled = true;
-        document.head.appendChild(backdropStyleEl);
-    }
-    function enableBackdropOverride() { ensureBackdropOverride(); backdropStyleEl.disabled = false; }
-    function disableBackdropOverride() { if (backdropStyleEl) backdropStyleEl.disabled = true; }
-
     // Create results container
     function createResultsContainer() {
         resultsContainer = document.createElement('div');
@@ -181,7 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
             top: 100%;
             left: 0;
             right: 0;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border: 1px solid #e1e7eb;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
@@ -254,27 +209,25 @@ document.addEventListener('DOMContentLoaded', function() {
         spotlight.style.display = 'block';
     }
 
-    // Show overlay (scrim only, no spotlight)
+    // Show overlay (scrim + spotlight)
     function showOverlay() {
         if (!overlay) createOverlay();
-        enableBackdropOverride();
-        // Keep spotlight hidden to avoid black fill around input
-        if (spotlight) spotlight.style.display = 'none';
+        if (!spotlight) createSpotlight();
         overlay.style.display = 'block';
-        // Remove any spotlight listeners if they were set previously
-        if (repositionSpotlightHandler) {
-            window.removeEventListener('resize', repositionSpotlightHandler, true);
-            window.removeEventListener('scroll', repositionSpotlightHandler, true);
-            repositionSpotlightHandler = null;
+        positionSpotlight();
+        // keep spotlight aligned on scroll/resize while active
+        if (!repositionSpotlightHandler) {
+            repositionSpotlightHandler = () => positionSpotlight();
+            window.addEventListener('resize', repositionSpotlightHandler, true);
+            window.addEventListener('scroll', repositionSpotlightHandler, true);
         }
-        try { console.debug('[search] overlay shown (no spotlight)'); } catch (_) {}
+        try { console.debug('[search] overlay shown'); } catch (_) {}
     }
 
     // Hide overlay
     function hideOverlay() {
         if (overlay) overlay.style.display = 'none';
         if (spotlight) spotlight.style.display = 'none';
-        disableBackdropOverride();
         if (repositionSpotlightHandler) {
             window.removeEventListener('resize', repositionSpotlightHandler, true);
             window.removeEventListener('scroll', repositionSpotlightHandler, true);
@@ -286,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show results
     function showResults(results) {
         if (!resultsContainer) createResultsContainer();
-        // Don't show the overlay/spotlight, just show results
+        showOverlay();
 
         // Helper: color per brand/slug
         const brandColors = {
