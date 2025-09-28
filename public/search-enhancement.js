@@ -518,10 +518,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     'ikea': 'ikea',
                     
                     // Gaming
-                    'steam': 'steam-oesterreich',
-                    'xbox': 'xbox-game-pass-oesterreich',
-                    'playstation': 'playstation-plus-mitgliedschaft-oesterreich',
-                    'nintendo': 'nintendo-eshop-card-oesterreich',
+                    'steam': 'steam',
+                    'xbox': 'xbox-game-pass',
+                    'playstation': 'playstation-plus-mitgliedschaft',
+                    'nintendo': 'nintendo-eshop-card',
                     'roblox': 'roblox-gift-card',
                     
                     // Entertainment
