@@ -10,10 +10,10 @@
   var s = overlay.style;
   s.setProperty('position', 'fixed', 'important');
   s.setProperty('inset', '0', 'important');
-  s.setProperty('top', '0', 'important');
+  s.setProperty('top', '200px', 'important');
   s.setProperty('left', '0', 'important');
   s.setProperty('width', '100vw', 'important');
-  s.setProperty('height', '100vh', 'important');
+  s.setProperty('height', 'calc(100vh - 200px)', 'important');
   s.setProperty('background-color', '#000', 'important');
   s.setProperty('z-index', '2147483647', 'important');
   s.setProperty('display', 'block', 'important');
