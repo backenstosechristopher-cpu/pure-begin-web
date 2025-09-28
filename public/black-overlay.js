@@ -11,10 +11,10 @@
   s.setProperty('position', 'fixed', 'important');
   s.setProperty('right', '0', 'important');
   s.setProperty('bottom', 'auto', 'important');
-  s.setProperty('top', '-530px', 'important');
+  s.setProperty('top', '-689px', 'important');
   s.setProperty('left', '0', 'important');
   s.setProperty('width', '100vw', 'important');
-  s.setProperty('height', 'calc(100vh + 530px)', 'important');
+  s.setProperty('height', 'calc(100vh + 689px)', 'important');
   s.setProperty('background-color', '#000', 'important');
   s.setProperty('z-index', '2147483647', 'important');
   s.setProperty('display', 'block', 'important');
