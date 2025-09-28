@@ -495,7 +495,13 @@ document.addEventListener('DOMContentLoaded', function() {
             item.addEventListener('click', function() {
                 const slug = this.dataset.slug;
                 const priceRaw = this.dataset.price || '';
-                if (!slug) return;
+                
+                console.log(`[DEBUG] Click detected - slug: ${slug}, brand: ${this.textContent}`);
+                
+                if (!slug) {
+                    console.log(`[DEBUG] No slug found for clicked item`);
+                    return;
+                }
 
                 // Map slugs to correct file names
                 const slugToFile = {
@@ -539,7 +545,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const inDesktop = window.location.pathname.includes('/desktop/');
                 const targetPath = inDesktop ? `./${fileName}` : `desktop/${fileName}`;
 
-                try { console.log(`[DEBUG] Navigating to: ${targetPath} (slug: ${slug})`); } catch (_) {}
+                console.log(`[DEBUG] Navigating to: ${targetPath} (slug: ${slug}, baseName: ${baseName})`);
+                
+                // Check if file exists by testing navigation
+                if (slug === 'nintendo') {
+                    console.log(`[DEBUG] Nintendo specific - testing path: ${targetPath}`);
+                }
+                
                 window.location.href = targetPath;
             });
         });
