@@ -533,10 +533,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
                 
                 const baseName = slugToFile[slug] || slug;
-                const basePath = `/desktop/guthaben.de_${baseName}.html`;
+                const fileName = `guthaben.de_${baseName}.html`;
 
-                try { console.log(`[DEBUG] Navigating to base: ${basePath} (slug: ${slug})`); } catch (_) {}
-                window.location.href = basePath;
+                // Build path relative to current location to work under preview subpaths
+                const inDesktop = window.location.pathname.includes('/desktop/');
+                const targetPath = inDesktop ? `./${fileName}` : `desktop/${fileName}`;
+
+                try { console.log(`[DEBUG] Navigating to: ${targetPath} (slug: ${slug})`); } catch (_) {}
+                window.location.href = targetPath;
             });
         });
 
