@@ -1,64 +1,32 @@
 // Enhanced search functionality for existing guthaben.de search input with ID 'search-field-input'
 console.debug('[search-enhancement] loaded');
 
-// Apply black theme to the entire page
-(function applyBlackTheme() {
-    const blackThemeCSS = `
-        body, html, #__next, [role="main"], main, .MuiContainer-root {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-        }
-        
-        .MuiPaper-root, .MuiCard-root, .MuiAppBar-root, header, .MuiToolbar-root {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-        }
-        
-        div[class*="mui-style"] {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-        }
-        
-        *, *::before, *::after {
-            color: #ffffff !important;
-        }
-        
-        a, .MuiLink-root {
-            color: #ffffff !important;
-        }
-        
-        .MuiTypography-root {
-            color: #ffffff !important;
-        }
-        
-        .MuiButton-root, .MuiIconButton-root {
-            color: #ffffff !important;
-            background-color: transparent !important;
-        }
-        
-        .MuiInputBase-root, .MuiTextField-root {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-        }
-        
-        .MuiInputBase-input {
-            color: #ffffff !important;
-        }
-        
-        .MuiOutlinedInput-notchedOutline {
-            border-color: #ffffff !important;
-        }
-        
-        section, article, aside, nav, footer {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-        }
+// Apply full black overlay above all content
+(function applyBlackOverlay() {
+    const blackOverlay = document.createElement('div');
+    blackOverlay.id = 'full-black-overlay';
+    blackOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000;
+        z-index: 999999;
+        pointer-events: none;
     `;
     
-    const styleEl = document.createElement('style');
-    styleEl.id = 'black-theme-override';
-    styleEl.textContent = blackThemeCSS;
-    document.head.appendChild(styleEl);
+    // Add overlay immediately
+    document.body.appendChild(blackOverlay);
+    
+    // Also add it when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!document.getElementById('full-black-overlay')) {
+                document.body.appendChild(blackOverlay.cloneNode(true));
+            }
+        });
+    }
 })();
 
 // Function to apply enhanced input styling
