@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="display: flex; align-items: center; flex: 1;">
                         ${getAvatarHtml(p)}
                         <div style="flex: 1; margin-left: 12px;">
-                            <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px;">
+                            <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px; transform: translateY(30px);">
                                 ${p.brand} <span style="color:#657080; font-weight:500;">• ${p.price}</span>
                             </div>
                             <div style="font-size: 14px; color: #666; transform: translateY(-10px);">
