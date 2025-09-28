@@ -427,40 +427,137 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Helper: color per brand/slug
         const brandColors = {
+            // Payment Cards
             'paysafecard': '#0066cc',
-            'google-play': '#4285F4',
-            'apple': '#000000',
-            'amazon': '#FF9900',
-            'steam': '#171A21',
+            'cashlib': '#1e40af',
+            'flexepin': '#7c3aed',
+            'jeton-cash': '#dc2626',
+            'bitsa': '#059669',
+            'aplauz': '#ea580c',
+            'a-bon': '#0891b2',
+            
+            // Mobile Top-ups
             'telekom': '#E20074',
             'vodafone': '#E60000',
             'o2': '#001A72',
+            'lebara': '#00b4d8',
+            'lycamobile': '#00a651',
             'congstar': '#000000',
             'aldi-talk': '#1F6DB6',
-            'spotify': '#1DB954',
-            'netflix': '#E50914',
+            'ay-yildiz': '#FFD700',
+            'blau-de': '#0066cc',
+            'blauworld': '#003d82',
+            'bildmobil': '#e60000',
+            'e-plus': '#00a651',
+            'fonic': '#0066cc',
+            'fyve': '#ff6b35',
+            'einfach-prepaid': '#006341',
+            'klarmobil': '#e60000',
+            'gt-mobile': '#1e40af',
+            'bob-wertkarte': '#ff6b00',
+            'drei': '#ff6b00',
+            'b-free': '#0066cc',
+            'lycamobile-oesterreich': '#00a651',
+            'lifecell': '#0066cc',
+            
+            // Gift Cards & Shopping
+            'amazon': '#FF9900',
+            'apple': '#000000',
+            'google-play': '#4285F4',
+            'h-m': '#E50010',
+            'zalando': '#FF6900',
+            'nike': '#111111',
+            'ikea': '#0058A3',
+            'douglas': '#000000',
+            'mediamarkt': '#e60000',
+            'cyberport': '#0066cc',
+            'jochen-schweizer': '#e60000',
+            'eventim': '#e60000',
+            'lieferando': '#ff8000',
+            'ca-geschenkkarte': '#e60000',
+            'adidas': '#000000',
+            'lush': '#00a651',
+            'cineplex': '#1e40af',
+            'airbnb': '#ff5a5f',
+            
+            // Gaming
+            'steam': '#171A21',
             'xbox': '#0E7A0D',
             'playstation': '#003087',
             'nintendo': '#E60012',
             'roblox': '#191919',
-            'ikea': '#0058A3',
-            'nike': '#111111',
-            'h-m': '#E50010',
-            'zalando': '#FF6900'
+            'battlenet-guthabenkarte': '#148eff',
+            'ea-game-card': '#ff6c11',
+            'league-of-legends-riot-points': '#c89b3c',
+            'hearthstone-guthabenkarte': '#f4d03f',
+            'meta-quest': '#1c1e21',
+            'fortnite': '#7b68ee',
+            'candy-crush': '#ff69b4',
+            
+            // Entertainment
+            'spotify': '#1DB954',
+            'netflix': '#E50914',
+            'disney-plus': '#113ccf',
+            'dazn': '#ffff00',
+            'deezer-at': '#ff6600',
+            
+            // Communication & Other
+            'libon': '#7c3aed',
+            'eety-guthaben': '#06b6d4'
         };
         
         const getBrandLogo = (slug) => {
             const logos = {
-                'paysafecard': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="6" width="20" height="12" rx="2" ry="2" stroke="white" stroke-width="2" fill="none"/><circle cx="7" cy="12" r="1" fill="white"/><circle cx="12" cy="12" r="1" fill="white"/><circle cx="17" cy="12" r="1" fill="white"/></svg>`,
-                'google-play': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.609 1.814L13.792 12L3.609 22.186a.996.996 0 01-.609-.92V2.734a.996.996 0 01.609-.92zm10.89 10.893l2.302 2.302 5.317-2.658c.377-.189.377-.664 0-.853L16.8 8.84l-2.302 2.302-.998.565zm3.199-3.602L15.396 12l2.302 2.302 5.317-2.658c.377-.189.377-.664 0-.853L17.698 9.105z"/></svg>`,
+                // Payment Cards
+                'paysafecard': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="6" width="20" height="12" rx="2" stroke="white" stroke-width="2" fill="none"/><circle cx="7" cy="12" r="1" fill="white"/><circle cx="12" cy="12" r="1" fill="white"/><circle cx="17" cy="12" r="1" fill="white"/></svg>`,
+                'cashlib': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="3" y="5" width="18" height="14" rx="3" stroke="white" stroke-width="2" fill="none"/><path d="M8 15l2-6h4l-2 6" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'flexepin': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="none"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24" stroke="white" stroke-width="2"/></svg>`,
+                'jeton-cash': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" stroke="white" stroke-width="2" fill="none"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'bitsa': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="6" width="20" height="12" rx="2" stroke="white" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="2" fill="white"/><path d="M6 10v4M18 10v4" stroke="white" stroke-width="2"/></svg>`,
+                
+                // Mobile Networks
+                'telekom': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="3" width="20" height="18" rx="2" fill="white"/><rect x="4" y="5" width="16" height="2" fill="#E20074"/><circle cx="12" cy="12" r="4" stroke="#E20074" stroke-width="2" fill="none"/></svg>`,
+                'vodafone': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="white" stroke-width="2" fill="none"/><path d="M8 9c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'o2': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="8" stroke="white" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'lebara': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'lycamobile': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="5" y="2" width="14" height="20" rx="2" stroke="white" stroke-width="2" fill="none"/><rect x="9" y="6" width="6" height="1" fill="white"/><rect x="9" y="8" width="6" height="1" fill="white"/></svg>`,
+                'congstar': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="12,2 15.09,8.26 22,9 17,14.74 18.18,21.02 12,17.77 5.82,21.02 7,14.74 2,9 8.91,8.26 12,2" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'aldi-talk': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="6" width="20" height="12" rx="2" stroke="white" stroke-width="2" fill="none"/><path d="M7 11h10M7 13h7" stroke="white" stroke-width="2"/></svg>`,
+                
+                // Tech & Digital
                 'apple': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>`,
+                'google-play': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.609 1.814L13.792 12L3.609 22.186a.996.996 0 01-.609-.92V2.734a.996.996 0 01.609-.92zm10.89 10.893l2.302 2.302 5.317-2.658c.377-.189.377-.664 0-.853L16.8 8.84l-2.302 2.302-.998.565zm3.199-3.602L15.396 12l2.302 2.302 5.317-2.658c.377-.189.377-.664 0-.853L17.698 9.105z"/></svg>`,
+                
+                // Shopping & Fashion
                 'amazon': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 8.4 3.208 12.653 3.208 3.706 0 8.192-1.022 12.133-3.115.246-.131.352-.073.352.174 0 .131-.063.246-.189.33-4.133 2.576-9.36 3.74-12.496 3.74-4.564 0-9.192-1.49-12.653-3.74-.116-.073-.189-.189-.148-.575zm1.085-2.636c.073-.131.188-.116.334-.022 4.244 2.213 9.69 3.366 14.471 3.366 2.896 0 6.487-.58 9.313-1.616.246-.087.437-.022.437.218 0 .131-.073.232-.218.305-3.234 1.297-7.169 1.983-10.105 1.983-4.826 0-10.41-1.065-14.08-3.16-.16-.087-.218-.189-.152-.074zm1.91-3.023c.087-.131.203-.102.363-.007 3.004 1.543 7.32 2.636 11.636 2.636 2.461 0 5.395-.407 7.856-1.258.218-.073.377.029.377.218 0 .116-.058.203-.189.276-2.664.992-5.773 1.401-8.234 1.401-4.682 0-9.364-1.065-11.636-2.636-.131-.087-.218-.189-.173-.63z"/></svg>`,
+                'h-m': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="3" y="6" width="18" height="12" rx="2" stroke="white" stroke-width="2" fill="none"/><path d="M7 10h4M7 14h10M15 10v4" stroke="white" stroke-width="2"/></svg>`,
+                'zalando': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="white" stroke-width="2" fill="none"/><path d="M7.5 4.21l4.5 2.6 4.5-2.6M12 6.81V17.5" stroke="white" stroke-width="2"/></svg>`,
+                'nike': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M2 18h20L12 6z" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'ikea': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2" fill="none"/><polyline points="9,22 9,12 15,12 15,22" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'douglas': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="none"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24" stroke="white" stroke-width="2"/></svg>`,
+                'mediamarkt': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="3" width="20" height="14" rx="2" stroke="white" stroke-width="2" fill="none"/><circle cx="8" cy="10" r="2" stroke="white" stroke-width="2" fill="none"/><path d="M16 21l-4-4-4 4" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'lieferando': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 6h13l-1.5 7H9L7 3H4" stroke="white" stroke-width="2" fill="none"/><circle cx="9" cy="20" r="1" stroke="white" stroke-width="2" fill="none"/><circle cx="20" cy="20" r="1" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'airbnb': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2" fill="none"/><polyline points="9,22 9,12 15,12 15,22" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                
+                // Gaming
                 'steam': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.029 4.524 4.524s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.632 20.307 6.504 24 11.979 24c6.624 0 11.999-5.375 11.999-12S18.603.001 11.979.001zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.457-.397.956-1.497 1.41-2.455 1.01zm8.555-9.45c0-1.663-1.352-3.015-3.015-3.015s-3.015 1.352-3.015 3.015 1.353 3.015 3.015 3.015 3.015-1.353 3.015-3.015z"/></svg>`,
-                'telekom': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="3" y="3" width="18" height="18" rx="2" fill="white"/><path d="M8 8h8v2H8V8zm0 4h8v2H8v-2zm0 4h5v2H8v-2z" fill="#E20074"/></svg>`,
-                'vodafone': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M8 10c2-2 6-2 8 0s2 6 0 8" stroke="white" stroke-width="2" fill="none"/></svg>`,
-                'o2': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="8" stroke="white" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'xbox': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M8 12s4-8 4-8 4 8 4 8-4 8-4 8-4-8-4-8z" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'playstation': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8.5 8.64L15.36 12L8.5 15.36V8.64zM21.98 12L8.5 5.5v13L21.98 12z" stroke="white" stroke-width="1.5" fill="none"/><rect x="2" y="9" width="4" height="6" fill="white"/></svg>`,
+                'nintendo': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="12" height="16" rx="6" stroke="white" stroke-width="2" fill="none"/><circle cx="10" cy="8" r="1.5" fill="white"/><circle cx="14" cy="16" r="1.5" fill="white"/><rect x="13" y="7" width="1" height="1" fill="white"/><rect x="15" y="7" width="1" height="1" fill="white"/><rect x="13" y="9" width="1" height="1" fill="white"/><rect x="15" y="9" width="1" height="1" fill="white"/></svg>`,
+                'roblox': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3 7l6-2 12 4-6 2L3 7z" stroke="white" stroke-width="2" fill="none"/><path d="M9 5v12l-6-2V3l6 2z" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                'battlenet-guthabenkarte': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" stroke="white" stroke-width="2" fill="none"/><polygon points="10,8 14,8 16,12 14,16 10,16 8,12 10,8" stroke="white" stroke-width="1.5" fill="none"/></svg>`,
+                'ea-game-card': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><polygon points="8,9 16,9 14,15 10,15 8,9" fill="white"/></svg>`,
+                'fortnite': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" stroke="white" stroke-width="2" fill="none"/><path d="M9 9l6 3-6 3V9z" fill="white"/></svg>`,
+                'meta-quest': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" stroke="white" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="none"/></svg>`,
+                
+                // Entertainment
                 'spotify': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10" fill="white"/><path d="M8 10.5c2-1 6-1 8 0M8 12.5c2-1 6-1 8 0M8 14.5c2-1 6-1 8 0" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round"/></svg>`,
-                'netflix': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="3" height="16" fill="white"/><rect x="15" y="4" width="3" height="16" fill="white"/><polygon points="6,4 15,20 18,20 9,4" fill="white"/></svg>`
+                'netflix': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="3" height="16" fill="white"/><rect x="15" y="4" width="3" height="16" fill="white"/><polygon points="6,4 15,20 18,20 9,4" fill="white"/></svg>`,
+                'disney-plus': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="white" stroke-width="2" fill="none"/><polygon points="10,8 10,16 14,12 10,8" fill="white"/></svg>`,
+                'dazn': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="2" y="3" width="20" height="14" rx="2" stroke="white" stroke-width="2" fill="none"/><polygon points="8,8 16,8 12,13 16,13 8,16 12,11 8,11 8,8" fill="white"/></svg>`,
+                
+                // Communication
+                'libon': `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="2" fill="none"/></svg>`
             };
             return logos[slug] || null;
         };
