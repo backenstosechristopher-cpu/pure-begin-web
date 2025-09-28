@@ -6,10 +6,10 @@ function applyInputStyling() {
     const inputEl = document.getElementById('search-field-input');
     if (inputEl) {
         inputEl.style.cssText += `
-            padding: 18px 24px !important;
-            font-size: 16px !important;
+            padding: 24px 32px !important;
+            font-size: 18px !important;
             line-height: 1.5 !important;
-            min-height: 56px !important;
+            min-height: 68px !important;
             border-radius: 16px !important;
             background: transparent !important;
             border: none !important;
