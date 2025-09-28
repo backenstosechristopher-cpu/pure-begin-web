@@ -4,10 +4,10 @@
     blackOverlay.id = 'full-black-overlay';
     blackOverlay.style.cssText = `
         position: fixed;
-        top: 0;
+        top: 40px;
         left: 0;
         width: 100vw;
-        height: 100vh;
+        height: calc(100vh - 40px);
         background-color: #000000;
         z-index: 999999;
         pointer-events: none;
