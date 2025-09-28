@@ -493,7 +493,36 @@ document.addEventListener('DOMContentLoaded', function() {
             item.addEventListener('click', function() {
                 const slug = this.dataset.slug;
                 if (slug) {
-                    window.location.href = `/desktop/guthaben.de_${slug}.html`;
+                    // Map slugs to correct file names
+                    const slugToFile = {
+                        'amazon': 'amazon-gutschein',
+                        'google-play': 'google-play-guthaben',
+                        'apple': 'apple-gift-card',
+                        'steam': 'steam-guthaben-karte',
+                        'xbox': 'xbox-live-gold',
+                        'playstation': 'playstation-store-guthaben',
+                        'nintendo': 'nintendo-eshop-karte',
+                        'netflix': 'netflix-geschenkkarte',
+                        'spotify': 'spotify-geschenkkarte',
+                        'paysafecard': 'paysafecard',
+                        'telekom': 'telekom-aufladen',
+                        'vodafone': 'vodafone-aufladen',
+                        'o2': 'o2-aufladen',
+                        'congstar': 'congstar-aufladen',
+                        'aldi-talk': 'aldi-talk-aufladen',
+                        'lebara': 'lebara-aufladen',
+                        'lycamobile': 'lycamobile-aufladen',
+                        'h-m': 'h-m-geschenkcode',
+                        'zalando': 'zalando-geschenkgutschein',
+                        'nike': 'nike-geschenkkarte',
+                        'ikea': 'ikea',
+                        'roblox': 'roblox-gift-card'
+                    };
+                    
+                    const fileName = slugToFile[slug] || slug;
+                    const targetPath = `/desktop/guthaben.de_${fileName}.html`;
+                    console.log(`[DEBUG] Navigating from slug "${slug}" to file "${targetPath}"`);
+                    window.location.href = targetPath;
                 }
             });
         });
