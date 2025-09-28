@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
             border: 1px solid #e1e7eb;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            z-index: 10010;
+            z-index: 2147483647;
             max-height: 400px;
             overflow-y: auto;
             display: none;
