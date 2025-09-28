@@ -11,23 +11,27 @@ function applyInputStyling() {
             line-height: 1.5 !important;
             min-height: 56px !important;
             border-radius: 16px !important;
-            border: 2px solid #e5e7eb !important;
-            background: #ffffff !important;
+            background: transparent !important;
+            border: none !important;
             color: #1f2937 !important;
             box-sizing: border-box !important;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+            transition: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            width: 100% !important;
         `;
         
-        // Enhanced focus states
+        // Enhanced focus states (kept transparent)
         inputEl.addEventListener('focus', function() {
-            this.style.borderColor = '#3b82f6 !important';
-            this.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1) !important';
+            this.style.border = 'none';
+            this.style.boxShadow = 'none';
+            this.style.outline = 'none';
         });
         
         inputEl.addEventListener('blur', function() {
-            this.style.borderColor = '#e5e7eb !important';
-            this.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1) !important';
+            this.style.border = 'none';
+            this.style.boxShadow = 'none';
+            this.style.outline = 'none';
         });
         
         // Style the wrapper
@@ -38,6 +42,10 @@ function applyInputStyling() {
                 border-radius: 16px !important;
                 background: transparent !important;
                 overflow: visible !important;
+                box-shadow: none !important;
+                border: none !important;
+                width: calc(100% + 120px) !important;
+                margin-left: -120px !important;
             `;
         }
     }
