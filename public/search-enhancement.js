@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div style="font-weight: 600; font-size: 16px; color: #1a1a1a; margin: 30px 0 8px 0;">
                                 ${p.brand} <span style="color:#657080; font-weight:500;">• ${p.price}</span>
                             </div>
-                            <div style="font-size: 14px; color: #666; margin-top: 100px;">
+                            <div style="font-size: 14px; color: #666; margin-top: 85px;">
                                 ${p.category}
                             </div>
                         </div>
