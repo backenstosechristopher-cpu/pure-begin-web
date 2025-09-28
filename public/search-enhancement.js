@@ -831,7 +831,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ];
             
             const popularHeader = `
-                <div style="padding: 24px 24px 16px 24px; border-bottom: 1px solid #f1f5f9;">
+                <div style="padding: 14px 24px 16px 24px; border-bottom: 1px solid #f1f5f9;">
                     <div style="font-weight: 700; font-size: 16px; color: #374151; margin-bottom: 4px;">
                         Beliebte Produkte
                     </div>
