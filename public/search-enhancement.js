@@ -44,8 +44,8 @@ function applyInputStyling() {
                 overflow: visible !important;
                 box-shadow: none !important;
                 border: none !important;
-                width: calc(100% + 120px) !important;
-                margin-left: -120px !important;
+                width: calc(100% + 130px) !important;
+                margin-left: -130px !important;
             `;
         }
     }
