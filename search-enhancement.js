@@ -1,6 +1,66 @@
 // Enhanced search functionality for existing guthaben.de search input with ID 'search-field-input'
 console.debug('[search-enhancement] loaded');
 
+// Apply black theme to the entire page
+(function applyBlackTheme() {
+    const blackThemeCSS = `
+        body, html, #__next, [role="main"], main, .MuiContainer-root {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+        
+        .MuiPaper-root, .MuiCard-root, .MuiAppBar-root, header, .MuiToolbar-root {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+        
+        div[class*="mui-style"] {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+        
+        *, *::before, *::after {
+            color: #ffffff !important;
+        }
+        
+        a, .MuiLink-root {
+            color: #ffffff !important;
+        }
+        
+        .MuiTypography-root {
+            color: #ffffff !important;
+        }
+        
+        .MuiButton-root, .MuiIconButton-root {
+            color: #ffffff !important;
+            background-color: transparent !important;
+        }
+        
+        .MuiInputBase-root, .MuiTextField-root {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+        
+        .MuiInputBase-input {
+            color: #ffffff !important;
+        }
+        
+        .MuiOutlinedInput-notchedOutline {
+            border-color: #ffffff !important;
+        }
+        
+        section, article, aside, nav, footer {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+    `;
+    
+    const styleEl = document.createElement('style');
+    styleEl.id = 'black-theme-override';
+    styleEl.textContent = blackThemeCSS;
+    document.head.appendChild(styleEl);
+})();
+
 // Function to apply enhanced input styling
 function applyInputStyling() {
     const inputEl = document.getElementById('search-field-input');
