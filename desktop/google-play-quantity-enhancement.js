@@ -212,6 +212,7 @@
     prime();
     hideBlockingOverlays();
     console.log('Universal quantity enhancement loaded for', document.querySelectorAll(BTN_SELECTOR).length, 'buttons');
+    try { console.log('[GP] Found', document.querySelectorAll('button.MuiToggleButton-root').length, 'toggle buttons'); } catch(_) {}
   }
 
   // Initial run and setup observers

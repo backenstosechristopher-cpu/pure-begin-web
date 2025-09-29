@@ -220,8 +220,10 @@
         style.textContent = `
 button.MuiToggleButton-root[aria-pressed="true"],
 button.MuiToggleButton-root.Mui-selected,
+button.MuiToggleButton-root.blue-border,
 button[id^="fixed_value_"][aria-pressed="true"],
-button[id^="fixed_value_"].lov-selected{
+button[id^="fixed_value_"].lov-selected,
+button[id^="fixed_value_"].blue-border{
   border: 2px solid #1976d2 !important;
   box-shadow: 0 0 0 2px rgba(25,118,210,0.18) inset !important;
 }
@@ -243,6 +245,7 @@ button[id^="fixed_value_"].lov-selected{
       }, true);
     }
     console.log('Universal quantity enhancement loaded for', document.querySelectorAll(BTN_SELECTOR).length, 'buttons');
+    try { console.log('[GP] Found', document.querySelectorAll('button.MuiToggleButton-root').length, 'toggle buttons'); } catch(_) {}
   }
 
   // Initial run and setup observers
