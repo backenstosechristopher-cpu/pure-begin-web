@@ -1168,7 +1168,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const results = searchProducts(query, allProducts);
             showResults(results);
         } else {
-            showResults([]);
+            // Show popular products on empty focus
+            const popularProducts = allProducts.slice(0, 8);
+            showResults(popularProducts.length > 0 ? popularProducts : []);
             isOpen = true;
         }
     });
