@@ -234,23 +234,41 @@
     const style = document.createElement('style');
     style.id = 'google-play-toggle-enhancement';
     style.textContent = `
-      /* Blue border for selected/pressed toggle buttons */
-      .MuiToggleButton-root[aria-pressed="true"] {
+      /* Blue border for selected/pressed toggle buttons - High specificity */
+      .MuiToggleButton-root.MuiToggleButton-root[aria-pressed="true"] {
         border: 2px solid #3b82f6 !important;
         box-shadow: 0 0 0 1px #3b82f6 !important;
         background-color: rgba(59, 130, 246, 0.1) !important;
+        position: relative !important;
+        z-index: 1 !important;
       }
       
       /* Hover effect for toggle buttons */
-      .MuiToggleButton-root:hover {
+      .MuiToggleButton-root.MuiToggleButton-root:hover {
         border-color: #93c5fd !important;
         background-color: rgba(59, 130, 246, 0.05) !important;
       }
       
       /* Focus state for accessibility */
-      .MuiToggleButton-root:focus {
+      .MuiToggleButton-root.MuiToggleButton-root:focus {
         outline: 2px solid #3b82f6 !important;
         outline-offset: 1px !important;
+      }
+      
+      /* Force override any MUI styles */
+      .MuiToggleButton-root.MuiToggleButton-root.MuiToggleButton-standard[aria-pressed="true"] {
+        border: 2px solid #3b82f6 !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 1px #3b82f6 !important;
+        background-color: rgba(59, 130, 246, 0.1) !important;
+      }
+      
+      /* Additional targeting with data attribute */
+      .MuiToggleButton-root[data-selected="true"] {
+        border: 2px solid #3b82f6 !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 1px #3b82f6 !important;
+        background-color: rgba(59, 130, 246, 0.1) !important;
       }
       
       /* Smooth transitions */
@@ -272,17 +290,30 @@
         
         button.addEventListener('click', function() {
           console.log('[GOOGLE PLAY] Button clicked:', this.value || this.textContent);
+          console.log('[GOOGLE PLAY] Button classes:', this.className);
+          console.log('[GOOGLE PLAY] Current aria-pressed:', this.getAttribute('aria-pressed'));
           
           // Small delay to allow MUI to update aria-pressed
           setTimeout(() => {
             const isPressed = this.getAttribute('aria-pressed') === 'true';
-            console.log('[GOOGLE PLAY] Button pressed state:', isPressed);
+            console.log('[GOOGLE PLAY] Button pressed state after delay:', isPressed);
+            console.log('[GOOGLE PLAY] Final aria-pressed:', this.getAttribute('aria-pressed'));
             
             if (isPressed) {
-              // Ensure the selected button has the blue border
+              // Ensure the selected button has the blue border with maximum specificity
               this.style.setProperty('border', '2px solid #3b82f6', 'important');
+              this.style.setProperty('border-color', '#3b82f6', 'important');
               this.style.setProperty('box-shadow', '0 0 0 1px #3b82f6', 'important');
               this.style.setProperty('background-color', 'rgba(59, 130, 246, 0.1)', 'important');
+              this.style.setProperty('position', 'relative', 'important');
+              this.style.setProperty('z-index', '1', 'important');
+              
+              // Also add a data attribute for additional CSS targeting
+              this.setAttribute('data-selected', 'true');
+              console.log('[GOOGLE PLAY] Applied blue border styles');
+            } else {
+              this.removeAttribute('data-selected');
+              console.log('[GOOGLE PLAY] Removed selection styles');
             }
           }, 50);
         });
@@ -294,6 +325,58 @@
     addToggleButtonStyles();
     enhanceToggleButtons();
     
+    // Force apply styles to any already-selected buttons on page load
+    setTimeout(() => {
+      const selectedButtons = document.querySelectorAll('.MuiToggleButton-root[aria-pressed="true"]');
+      console.log('[GOOGLE PLAY] Found pre-selected buttons on load:', selectedButtons.length);
+      selectedButtons.forEach(btn => {
+        btn.style.setProperty('border', '2px solid #3b82f6', 'important');
+        btn.style.setProperty('border-color', '#3b82f6', 'important');
+        btn.style.setProperty('box-shadow', '0 0 0 1px #3b82f6', 'important');
+        btn.style.setProperty('background-color', 'rgba(59, 130, 246, 0.1)', 'important');
+        btn.setAttribute('data-selected', 'true');
+      });
+    }, 200);
+    
+    // Another attempt after 1 second for dynamic content
+    setTimeout(() => {
+      const selectedButtons = document.querySelectorAll('.MuiToggleButton-root[aria-pressed="true"]');
+      console.log('[GOOGLE PLAY] Found pre-selected buttons after 1s:', selectedButtons.length);
+      selectedButtons.forEach(btn => {
+        btn.style.setProperty('border', '2px solid #3b82f6', 'important');
+        btn.style.setProperty('border-color', '#3b82f6', 'important');
+        btn.style.setProperty('box-shadow', '0 0 0 1px #3b82f6', 'important');
+        btn.style.setProperty('background-color', 'rgba(59, 130, 246, 0.1)', 'important');
+        btn.setAttribute('data-selected', 'true');
+      });
+    }, 1000);
+    
+    // Force apply styles to any already-selected buttons on page load
+    setTimeout(() => {
+      const selectedButtons = document.querySelectorAll('.MuiToggleButton-root[aria-pressed="true"]');
+      console.log('[GOOGLE PLAY] Found pre-selected buttons on load:', selectedButtons.length);
+      selectedButtons.forEach(btn => {
+        btn.style.setProperty('border', '2px solid #3b82f6', 'important');
+        btn.style.setProperty('border-color', '#3b82f6', 'important');
+        btn.style.setProperty('box-shadow', '0 0 0 1px #3b82f6', 'important');
+        btn.style.setProperty('background-color', 'rgba(59, 130, 246, 0.1)', 'important');
+        btn.setAttribute('data-selected', 'true');
+      });
+    }, 200);
+    
+    // Another attempt after 1 second for dynamic content
+    setTimeout(() => {
+      const selectedButtons = document.querySelectorAll('.MuiToggleButton-root[aria-pressed="true"]');
+      console.log('[GOOGLE PLAY] Found pre-selected buttons after 1s:', selectedButtons.length);
+      selectedButtons.forEach(btn => {
+        btn.style.setProperty('border', '2px solid #3b82f6', 'important');
+        btn.style.setProperty('border-color', '#3b82f6', 'important');
+        btn.style.setProperty('box-shadow', '0 0 0 1px #3b82f6', 'important');
+        btn.style.setProperty('background-color', 'rgba(59, 130, 246, 0.1)', 'important');
+        btn.setAttribute('data-selected', 'true');
+      });
+    }, 1000);
+    
     // Watch for dynamic changes
     if (window.MutationObserver) {
       const observer = new MutationObserver(function(mutations) {
@@ -304,12 +387,18 @@
             if (target.classList.contains('MuiToggleButton-root')) {
               console.log('[GOOGLE PLAY] Toggle button state changed');
               
-              // Force re-apply styles based on current state
+              // Force re-apply styles based on current state with maximum specificity
               const isPressed = target.getAttribute('aria-pressed') === 'true';
               if (isPressed) {
                 target.style.setProperty('border', '2px solid #3b82f6', 'important');
+                target.style.setProperty('border-color', '#3b82f6', 'important');
                 target.style.setProperty('box-shadow', '0 0 0 1px #3b82f6', 'important');
                 target.style.setProperty('background-color', 'rgba(59, 130, 246, 0.1)', 'important');
+                target.style.setProperty('position', 'relative', 'important');
+                target.style.setProperty('z-index', '1', 'important');
+                target.setAttribute('data-selected', 'true');
+              } else {
+                target.removeAttribute('data-selected');
               }
             }
           }
