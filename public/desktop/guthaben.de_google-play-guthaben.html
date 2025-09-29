@@ -167,15 +167,13 @@
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll(".MuiToggleButton-root");
-    buttons.forEach(button => {
-      button.addEventListener("click", function() {
-        buttons.forEach(b => b.classList.remove("blue-border"));
-        this.classList.add("blue-border");
-      });
-    });
-  });
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.MuiToggleButton-root');
+  if (!btn) return;
+  const group = btn.closest('.MuiToggleButtonGroup-root') || document;
+  group.querySelectorAll('.MuiToggleButton-root.blue-border').forEach(b => b.classList.remove('blue-border'));
+  btn.classList.add('blue-border');
+}, true);
 </script>
 
 </body></html>
