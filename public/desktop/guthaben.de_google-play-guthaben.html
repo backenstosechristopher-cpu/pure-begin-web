@@ -195,4 +195,36 @@ document.addEventListener('click', function(e) {
 }, true);
 </script>
 
+<script>
+// Remove all "Weiterlesen" buttons from the page
+document.addEventListener('DOMContentLoaded', function() {
+  // Find all elements that contain "Weiterlesen" text
+  const weiterlesenElements = Array.from(document.querySelectorAll('*')).filter(el => 
+    el.textContent && el.textContent.trim() === 'Weiterlesen'
+  );
+  
+  weiterlesenElements.forEach(el => {
+    // Remove the button or its parent container
+    if (el.tagName === 'BUTTON' || el.closest('button')) {
+      const button = el.tagName === 'BUTTON' ? el : el.closest('button');
+      button.remove();
+    } else if (el.tagName === 'A' || el.closest('a')) {
+      const link = el.tagName === 'A' ? el : el.closest('a');
+      link.remove();
+    } else {
+      // Remove the element itself
+      el.remove();
+    }
+  });
+  
+  // Also hide any elements with classes that might contain Weiterlesen
+  const possibleWeiterlesenContainers = document.querySelectorAll('[class*="read-more"], [class*="weiterlesen"], [class*="ReadMore"]');
+  possibleWeiterlesenContainers.forEach(el => {
+    if (el.textContent && el.textContent.includes('Weiterlesen')) {
+      el.remove();
+    }
+  });
+});
+</script>
+
 </body></html>
