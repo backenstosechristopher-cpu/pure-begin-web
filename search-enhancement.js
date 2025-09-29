@@ -1,5 +1,5 @@
 // Enhanced search functionality for existing guthaben.de search input with ID 'search-field-input'
-console.debug('[search-enhancement] loaded');
+console.log('[SEARCH] enhancement loaded');
 
 // Function to apply enhanced input styling
 function applyInputStyling() {
@@ -202,10 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsContainer = document.createElement('div');
         resultsContainer.id = 'search-results-dropdown';
         resultsContainer.style.cssText = `
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
+            position: fixed;
             background: #ffffff;
             border: 1px solid #e1e7eb;
             border-radius: 12px;
@@ -217,16 +214,22 @@ document.addEventListener('DOMContentLoaded', function() {
             margin-top: 8px;
         `;
 
-        // Find the parent container of the search input
-        const searchContainer = getWrapperEl();
-        if (searchContainer) {
-            // Make sure parent has relative positioning
-            const parentContainer = searchContainer.parentElement;
-            if (parentContainer) {
-                parentContainer.style.position = 'relative';
-                parentContainer.appendChild(resultsContainer);
-            }
-        }
+        // Attach to body so it isn't clipped by local containers
+        document.body.appendChild(resultsContainer);
+
+        // Keep the dropdown positioned under the input
+        window.addEventListener('resize', updateDropdownPosition, true);
+        window.addEventListener('scroll', updateDropdownPosition, true);
+    }
+
+    function updateDropdownPosition() {
+        const inputEl = getInputEl();
+        if (!inputEl || !resultsContainer) return;
+        const wrapper = getWrapperEl(inputEl) || inputEl;
+        const rect = wrapper.getBoundingClientRect();
+        resultsContainer.style.left = rect.left + 'px';
+        resultsContainer.style.top = (rect.bottom + 8) + 'px';
+        resultsContainer.style.width = rect.width + 'px';
     }
 
     // Create overlay (scrim)
@@ -302,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show results
     function showResults(results) {
         if (!resultsContainer) createResultsContainer();
-        // showOverlay(); // Disabled - no more black overlay
+        updateDropdownPosition();
 
         // Helper: color per brand/slug
         const brandColors = {
