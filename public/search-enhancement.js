@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsContainer.style.cssText = `
             position: absolute;
             top: 100%;
-            left: -120px;
+            left: 0;
             right: 0;
             background: #ffffff;
             border: 1px solid #e5e7eb;
