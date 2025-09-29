@@ -165,6 +165,25 @@
 		});
 	}
 </script>
+<script>
+(function() {
+  const GOOD_SRC = './assets/logo-recharge.5a7f6e2a.svg';
+  function setLogo(img){
+    if (!img) return;
+    if (!img.getAttribute('alt')) img.setAttribute('alt','Guthaben.de Logo');
+    img.onerror = function(){ this.src = GOOD_SRC; };
+    try {
+      const bad = !img.src || /lovable\.app|_files\/.+\.svg$/i.test(img.src);
+      if (bad) img.src = GOOD_SRC;
+    } catch(_) { img.src = GOOD_SRC; }
+  }
+  // Common candidates
+  const img1 = document.querySelector('img.mui-style-pi0yvt');
+  const img2 = document.querySelector('header img');
+  const img3 = document.querySelector('a[href="/"] img');
+  setLogo(img1 || img2 || img3);
+})();
+</script>
 
 <script>
 document.addEventListener('click', function(e) {
