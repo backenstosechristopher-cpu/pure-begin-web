@@ -101,6 +101,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     observer.observe(document.body, { childList: true, subtree: true });
     
+    // If no search input is found, inject a minimal floating search bar as a fallback
+    function ensureSearchInput() {
+        const existing = document.getElementById('search-field-input');
+        if (existing) return existing;
+        const any = document.querySelector('input[placeholder*="Suche" i], input[role="combobox"][aria-autocomplete="list"], input.MuiAutocomplete-input');
+        if (any) return any;
+        
+        const container = document.createElement('div');
+        container.id = 'injected-search-container';
+        container.style.cssText = `
+            position: fixed; left: 50%; top: 20px; transform: translateX(-50%);
+            z-index: 10050; background: #fff; border: 1px solid #e1e7eb; border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; width: min(90vw, 520px);
+        `;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'search-field-input';
+        input.placeholder = 'Suche nach Marken oder Produkten…';
+        input.autocomplete = 'off';
+        input.style.cssText = `
+            width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px;
+            font-size: 16px; line-height: 1.4; outline: none;
+        `;
+        input.addEventListener('focus', () => { input.style.borderColor = '#3b82f6'; });
+        input.addEventListener('blur', () => { input.style.borderColor = '#e5e7eb'; });
+        container.appendChild(input);
+        document.body.appendChild(container);
+        return input;
+    }
+    
+    // Ensure there is an input available after load
+    setTimeout(ensureSearchInput, 400);
+    setTimeout(ensureSearchInput, 1200);
+    
     // Product database from guthaben.de - Complete catalog
     const productDatabase = {
         // Mobile Top-ups Germany
