@@ -211,6 +211,22 @@
   function initialize(){
     prime();
     hideBlockingOverlays();
+    // Inject blue border style for selected ToggleButtons (Google Play fixed values)
+    try {
+      if (!document.getElementById('gp-toggle-blue-border')){
+        const style = document.createElement('style');
+        style.id = 'gp-toggle-blue-border';
+        style.textContent = `
+button.MuiToggleButton-root[aria-pressed="true"],
+button.MuiToggleButton-root.Mui-selected,
+button[id^="fixed_value_"][aria-pressed="true"]{
+  border: 2px solid #1976d2 !important;
+  box-shadow: 0 0 0 2px rgba(25,118,210,0.18) inset !important;
+}
+        `;
+        document.head.appendChild(style);
+      }
+    } catch(_){}
     console.log('Universal quantity enhancement loaded for', document.querySelectorAll(BTN_SELECTOR).length, 'buttons');
   }
 
