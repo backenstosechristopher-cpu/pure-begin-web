@@ -6,46 +6,38 @@ function applyInputStyling() {
     const inputEl = document.getElementById('search-field-input');
     if (inputEl) {
         inputEl.style.cssText += `
-            padding: 24px 32px !important;
-            font-size: 18px !important;
+            padding: 18px 24px !important;
+            font-size: 16px !important;
             line-height: 1.5 !important;
-            min-height: 68px !important;
+            min-height: 56px !important;
             border-radius: 16px !important;
-            background: transparent !important;
-            border: none !important;
+            border: 2px solid #e5e7eb !important;
+            background: #ffffff !important;
             color: #1f2937 !important;
             box-sizing: border-box !important;
-            transition: none !important;
-            box-shadow: none !important;
-            outline: none !important;
-            width: 100% !important;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
         `;
         
-        // Enhanced focus states (kept transparent)
+        // Enhanced focus states
         inputEl.addEventListener('focus', function() {
-            this.style.border = 'none';
-            this.style.boxShadow = 'none';
-            this.style.outline = 'none';
+            this.style.borderColor = '#3b82f6 !important';
+            this.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1) !important';
         });
         
         inputEl.addEventListener('blur', function() {
-            this.style.border = 'none';
-            this.style.boxShadow = 'none';
-            this.style.outline = 'none';
+            this.style.borderColor = '#e5e7eb !important';
+            this.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1) !important';
         });
         
         // Style the wrapper
-        const wrapper = getWrapperEl(inputEl);
+        const wrapper = inputEl.closest('.MuiInputBase-root');
         if (wrapper) {
             wrapper.style.cssText += `
                 padding: 0 !important;
                 border-radius: 16px !important;
                 background: transparent !important;
                 overflow: visible !important;
-                box-shadow: none !important;
-                border: none !important;
-                width: calc(100% + 200px) !important;
-                margin-left: -200px !important;
             `;
         }
     }
@@ -831,7 +823,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ];
             
             const popularHeader = `
-                <div style="padding: 14px 24px 16px 24px; border-bottom: 1px solid #f1f5f9;">
+                <div style="padding: 24px 24px 16px 24px; border-bottom: 1px solid #f1f5f9;">
                     <div style="font-weight: 700; font-size: 16px; color: #374151; margin-bottom: 4px;">
                         Beliebte Produkte
                     </div>
