@@ -179,8 +179,7 @@ function main() {
   console.log('\n✨ Scan complete!');
 }
 
-if (require.main === module) {
-  main();
-}
+// Execute the scan
+main();
 
 module.exports = { scanDirectory, main };
