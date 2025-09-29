@@ -223,3 +223,120 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialize, { once:true });
   window.addEventListener('load', initialize, { once:true });
 })();
+
+// Google Play Toggle Button Enhancement - Blue border for selected buttons
+(function() {
+  console.log('[GOOGLE PLAY] Toggle button enhancement loaded');
+  
+  function addToggleButtonStyles() {
+    if (document.getElementById('google-play-toggle-enhancement')) return;
+    
+    const style = document.createElement('style');
+    style.id = 'google-play-toggle-enhancement';
+    style.textContent = `
+      /* Blue border for selected/pressed toggle buttons */
+      .MuiToggleButton-root[aria-pressed="true"] {
+        border: 2px solid #3b82f6 !important;
+        box-shadow: 0 0 0 1px #3b82f6 !important;
+        background-color: rgba(59, 130, 246, 0.1) !important;
+      }
+      
+      /* Hover effect for toggle buttons */
+      .MuiToggleButton-root:hover {
+        border-color: #93c5fd !important;
+        background-color: rgba(59, 130, 246, 0.05) !important;
+      }
+      
+      /* Focus state for accessibility */
+      .MuiToggleButton-root:focus {
+        outline: 2px solid #3b82f6 !important;
+        outline-offset: 1px !important;
+      }
+      
+      /* Smooth transitions */
+      .MuiToggleButton-root {
+        transition: all 0.2s ease-in-out !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  function enhanceToggleButtons() {
+    const toggleButtons = document.querySelectorAll('.MuiToggleButton-root');
+    console.log('[GOOGLE PLAY] Found toggle buttons:', toggleButtons.length);
+    
+    toggleButtons.forEach(button => {
+      // Add click handler to ensure proper state management
+      if (!button.hasAttribute('data-enhanced')) {
+        button.setAttribute('data-enhanced', 'true');
+        
+        button.addEventListener('click', function() {
+          console.log('[GOOGLE PLAY] Button clicked:', this.value || this.textContent);
+          
+          // Small delay to allow MUI to update aria-pressed
+          setTimeout(() => {
+            const isPressed = this.getAttribute('aria-pressed') === 'true';
+            console.log('[GOOGLE PLAY] Button pressed state:', isPressed);
+            
+            if (isPressed) {
+              // Ensure the selected button has the blue border
+              this.style.setProperty('border', '2px solid #3b82f6', 'important');
+              this.style.setProperty('box-shadow', '0 0 0 1px #3b82f6', 'important');
+              this.style.setProperty('background-color', 'rgba(59, 130, 246, 0.1)', 'important');
+            }
+          }, 50);
+        });
+      }
+    });
+  }
+  
+  function initToggleEnhancement() {
+    addToggleButtonStyles();
+    enhanceToggleButtons();
+    
+    // Watch for dynamic changes
+    if (window.MutationObserver) {
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes' && 
+              (mutation.attributeName === 'aria-pressed' || mutation.attributeName === 'class')) {
+            const target = mutation.target;
+            if (target.classList.contains('MuiToggleButton-root')) {
+              console.log('[GOOGLE PLAY] Toggle button state changed');
+              
+              // Force re-apply styles based on current state
+              const isPressed = target.getAttribute('aria-pressed') === 'true';
+              if (isPressed) {
+                target.style.setProperty('border', '2px solid #3b82f6', 'important');
+                target.style.setProperty('box-shadow', '0 0 0 1px #3b82f6', 'important');
+                target.style.setProperty('background-color', 'rgba(59, 130, 246, 0.1)', 'important');
+              }
+            }
+          }
+          
+          // Check for new toggle buttons
+          if (mutation.addedNodes.length > 0) {
+            enhanceToggleButtons();
+          }
+        });
+      });
+      
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['aria-pressed', 'class']
+      });
+    }
+    
+    console.log('[GOOGLE PLAY] Toggle enhancement initialized');
+  }
+  
+  // Initialize toggle button enhancement
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initToggleEnhancement, { once: true });
+  } else {
+    initToggleEnhancement();
+  }
+  window.addEventListener('load', initToggleEnhancement, { once: true });
+})();
