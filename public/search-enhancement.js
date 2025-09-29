@@ -1,5 +1,6 @@
 // Enhanced search functionality for existing guthaben.de search input with ID 'search-field-input'
-console.debug('[search-enhancement] loaded');
+console.log('[SEARCH DEBUG] Search enhancement script loaded');
+console.log('[SEARCH DEBUG] Current URL:', window.location.href);
 
 // Function to apply modern search input styling
 function applyInputStyling() {
@@ -43,6 +44,15 @@ function applyInputStyling() {
     }
 }
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('[SEARCH DEBUG] DOM Content Loaded');
+    console.log('[SEARCH DEBUG] Looking for search input with ID: search-field-input');
+    const searchFieldInput = document.getElementById('search-field-input');
+    console.log('[SEARCH DEBUG] Found search field input:', searchFieldInput);
+    
+    // Also check for other possible inputs
+    const otherInputs = document.querySelectorAll('input[placeholder*="Suche" i], input[role="combobox"], input.MuiAutocomplete-input');
+    console.log('[SEARCH DEBUG] Found other search inputs:', otherInputs);
+    
     // Apply input styling on load
     applyInputStyling();
 
@@ -300,6 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Find the existing search input (may be injected later by the app)
     let searchInput = document.getElementById('search-field-input') || null;
+    console.log('[SEARCH DEBUG] Initial search input found:', searchInput);
 
     // Robust getters for input and wrapper (desktop/mobile)
     function getInputEl() {
@@ -1111,13 +1122,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle search input (delegated)
     let searchTimeout;
     document.addEventListener('input', function(e) {
+        console.log('[SEARCH DEBUG] Input event detected on:', e.target);
         const inputEl = getInputEl();
+        console.log('[SEARCH DEBUG] Found input element:', inputEl);
         if (!inputEl) return;
         const wrapper = getWrapperEl(inputEl);
         const isEventOnSearch = (e.target === inputEl) || (wrapper && wrapper.contains(e.target));
+        console.log('[SEARCH DEBUG] Is event on search?', isEventOnSearch);
         if (!isEventOnSearch) return;
         searchInput = inputEl;
         const query = inputEl.value || '';
+        console.log('[SEARCH DEBUG] Search query:', query);
 
         clearTimeout(searchTimeout);
         showOverlay();
@@ -1135,13 +1150,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle focus (delegated)
     document.addEventListener('focusin', function(e) {
-        console.log('[DEBUG] Focus event on:', e.target);
+        console.log('[SEARCH DEBUG] Focus event on:', e.target);
         const inputEl = getInputEl();
+        console.log('[SEARCH DEBUG] Input element found:', inputEl);
         const wrapper = getWrapperEl(inputEl);
+        console.log('[SEARCH DEBUG] Wrapper element found:', wrapper);
         if (!inputEl) return;
         if (!(e.target === inputEl || (wrapper && wrapper.contains(e.target)))) return;
         searchInput = inputEl;
-        console.log('[DEBUG] Calling showOverlay from focus event');
+        console.log('[SEARCH DEBUG] Calling showOverlay from focus event');
         showOverlay();
         
         // Show popular items immediately on focus when query is short
