@@ -195,6 +195,7 @@
         style.textContent = `
           .mui-style-1jtyhdp{ display:none !important; pointer-events:none !important; }
           .MuiBackdrop-root, .MuiModal-backdrop, [class*="Backdrop"]{ display:none !important; pointer-events:none !important; }
+          #main_product_description_read_more{ display:none !important; }
         `;
         document.head.appendChild(style);
       }
@@ -205,9 +206,21 @@
     } catch(_){};
   }
 
+  // Remove "Weiterlesen" button
+  function removeWeiterlesenButton(){
+    try {
+      const byId = document.getElementById('main_product_description_read_more');
+      if (byId) byId.remove();
+      document.querySelectorAll('button, a, span, div').forEach(el => {
+        if ((el.textContent || '').trim() === 'Weiterlesen') el.remove();
+      });
+    } catch(_){};
+  }
+
   // Keep buttons primed for ARIA and hide overlays
   function prime(){
     hideBlockingOverlays();
+    removeWeiterlesenButton();
     document.querySelectorAll(BTN_SELECTOR).forEach(b => {
       b.setAttribute('aria-haspopup','listbox');
       b.setAttribute('aria-expanded', currentBtn && currentBtn === b ? 'true' : 'false');
