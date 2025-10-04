@@ -5,7 +5,7 @@
   // - Fully isolated via Shadow DOM
   // - Auto-detects and enhances all quantity buttons on page load
 
-  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, [id^="product_card_quantity_select_"], [aria-label*="Quantity"], [aria-label*="quantity"], [aria-label*="Anzahl"], [data-testid*="quantity"], .MuiSelect-select[role="combobox"], .MuiInputBase-root .MuiSelect-select, [role="combobox"].MuiSelect-select, button.MuiButtonBase-root:has(+ .MuiSelect-icon), [role="button"][id^="product_card_quantity_select_"], button:has(.MuiSelect-icon)';
+  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
 
   // Host (fixed, top layer)
   const host = document.createElement('div');
@@ -142,15 +142,8 @@
   // Open on pointerdown or click (capture)
   function maybeOpen(e){
     const t = e.target;
-    const path = (typeof e.composedPath === 'function') ? e.composedPath() : [];
-    let btn = null;
-    // Try event path first for deeply nested icons/spans
-    for (const n of path){
-      if (n && n.matches && n.matches(BTN_SELECTOR)) { btn = n; break; }
-    }
-    if (!btn && t && t.closest) btn = t.closest(BTN_SELECTOR);
+    const btn = t && t.closest && t.closest(BTN_SELECTOR);
     if (!btn) return;
-
     // Prevent site handlers from reacting to this interaction
     e.preventDefault();
     e.stopPropagation();
@@ -237,7 +230,7 @@ button[id^="fixed_value_"].blue-border{
         `;
         document.head.appendChild(style);
       }
-    } catch(_){}
+    } catch(_){};
     // Bind click handler to simulate selection state via class if native state not applied
     if (!gpBindDone){
       gpBindDone = true;
@@ -248,11 +241,11 @@ button[id^="fixed_value_"].blue-border{
         try {
           document.querySelectorAll('button[id^="fixed_value_"]').forEach(b => b.classList.remove('lov-selected'));
           btn.classList.add('lov-selected');
-        } catch(_){}
+        } catch(_){};
       }, true);
     }
     console.log('Universal quantity enhancement loaded for', document.querySelectorAll(BTN_SELECTOR).length, 'buttons');
-    try { console.log('[Universal] Found', document.querySelectorAll('button.MuiToggleButton-root').length, 'toggle buttons'); } catch(_) {}
+    try { console.log('[Universal] Found', document.querySelectorAll('button.MuiToggleButton-root').length, 'toggle buttons'); } catch(_) {};
   }
 
   // Initial run and setup observers
