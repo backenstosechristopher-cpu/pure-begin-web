@@ -240,9 +240,7 @@
   function injectHTML() {
     // Find the existing search input (desktop and mobile)
     const existingInput =
-      document.getElementById('search-field-input') ||
-      document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
-      document.querySelector('.MuiAutocomplete-input');
+      document.getElementById('search-field-input');
     if (!existingInput) return;
     
     // Find the parent container
@@ -261,10 +259,7 @@
   // Initialize search functionality
   function initSearch() {
     // Use the existing search input
-    const searchInput = document.getElementById('search-field-input') ||
-      document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
-      document.querySelector('.MuiAutocomplete-input') ||
-      document.getElementById('guthaben-search-input');
+    const searchInput = document.getElementById('search-field-input');
     let searchResults = document.getElementById('guthaben-search-results') || (injectHTML(), document.getElementById('guthaben-search-results'));
     if (!searchInput || !searchResults) { console.log('[Search] init aborted: input/results missing'); return; }
     if (searchInput.dataset.gthBound === '1') { console.log('[Search] already bound'); return; }
@@ -330,8 +325,8 @@
       }
     });
     
-    searchInput.addEventListener('input', function(e) {
-      const query = String(e.target.value || '').toLowerCase().trim();
+    const handleInput = (raw) => {
+      const query = String(raw || '').toLowerCase().trim();
       positionDropdown();
       if (query.length > 80) { return; }
       if (query.length === 0) {
@@ -370,7 +365,13 @@
         `;
         searchResults.style.display = 'block';
       }
+    };
+
+    ['input','keyup','change','paste','compositionend'].forEach(evt => {
+      searchInput.addEventListener(evt, () => handleInput(searchInput.value));
     });
+    // In case MUI updates value on keydown before input event
+    searchInput.addEventListener('keydown', () => setTimeout(() => handleInput(searchInput.value), 0));
     
     ['resize','scroll'].forEach(evt => {
       window.addEventListener(evt, () => {
@@ -391,14 +392,21 @@
     let attempts = 0;
     const timer = setInterval(() => {
       injectHTML();
-      const input = document.getElementById('search-field-input') ||
-        document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
-        document.querySelector('.MuiAutocomplete-input') ||
-        document.getElementById('guthaben-search-input');
+      const input = document.getElementById('search-field-input');
       if (input) {
         clearInterval(timer);
         initSearch();
-      } else if (++attempts >= 20) {
+        // Re-bind if MUI re-renders/replaces the input element
+        try {
+          const mo = new MutationObserver(() => {
+            const el = document.getElementById('search-field-input');
+            if (el && el.dataset.gthBound !== '1') {
+              initSearch();
+            }
+          });
+          mo.observe(document.body, { childList: true, subtree: true });
+        } catch (e) { console.warn('[Search] observer error', e); }
+      } else if (++attempts >= 80) {
         clearInterval(timer);
         console.warn('[Search] input not found after retries');
       }
