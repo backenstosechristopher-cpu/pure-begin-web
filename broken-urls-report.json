@@ -1,0 +1,184 @@
+{
+  "timestamp": "2025-10-04T18:46:53.877Z",
+  "totalBrokenUrls": 24,
+  "brokenUrls": [
+    {
+      "url": "guthaben.de_xbox-live.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js",
+        "public/mobile/assets/guthaben-search.js",
+        "public/mobile/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_spotify.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js",
+        "public/mobile/assets/guthaben-search.js",
+        "public/mobile/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_steam-gift-card.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js",
+        "public/mobile/assets/guthaben-search.js",
+        "public/mobile/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_paypal-guthabenkarte.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js",
+        "public/mobile/assets/guthaben-search.js",
+        "public/mobile/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_nintendo-eshop.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js",
+        "public/mobile/assets/guthaben-search.js",
+        "public/mobile/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_roblox.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_valorant-riot-points.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_zalando.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_telekom-aufladen.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_youtube-premium.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_minecraft.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "guthaben.de_skype.html",
+      "referencedIn": [
+        "public/desktop/assets/guthaben-search.js",
+        "public/desktop/assets/universal-search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_xbox-live.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_spotify.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_steam-gift-card.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_paypal-guthabenkarte.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_nintendo-eshop.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_roblox.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_valorant-riot-points.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_zalando.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_telekom-aufladen.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_youtube-premium.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_minecraft.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    },
+    {
+      "url": "desktop/guthaben.de_skype.html",
+      "referencedIn": [
+        "public/guthaben-search.js",
+        "public/search.js"
+      ]
+    }
+  ]
+}
