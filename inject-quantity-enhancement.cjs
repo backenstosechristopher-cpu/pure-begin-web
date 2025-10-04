@@ -22,7 +22,13 @@ function hasQuantitySelectors(content) {
 }
 
 function hasEnhancementScript(content) {
-  return content.includes('universal-quantity-enhancement.js');
+  return content.includes('../shared/universal-quantity-enhancement.js');
+}
+
+function hasWrongPath(content) {
+  // Check if it has the old wrong path
+  return content.includes('shared/universal-quantity-enhancement.js') && 
+         !content.includes('../shared/universal-quantity-enhancement.js');
 }
 
 function injectScript(content, device) {
@@ -55,6 +61,13 @@ function processPage(pagePath) {
     
     if (!hasQuantitySelectors(content)) {
       return { status: 'no_selectors', path: pagePath };
+    }
+    
+    // Check if it needs fixing (wrong path)
+    if (hasWrongPath(content)) {
+      const fixedContent = content.replace(/src="shared\/universal-quantity-enhancement\.js"/g, 'src="../shared/universal-quantity-enhancement.js"');
+      fs.writeFileSync(fullPath, fixedContent, 'utf8');
+      return { status: 'fixed_path', path: pagePath };
     }
     
     if (hasEnhancementScript(content)) {
@@ -115,6 +128,7 @@ function main() {
   
   const results = {
     enhanced: [],
+    fixed_path: [],
     already_enhanced: [],
     no_selectors: [],
     not_found: [],
@@ -129,6 +143,7 @@ function main() {
     
     const icons = {
       enhanced: '✅',
+      fixed_path: '🔧',
       already_enhanced: '⏭️ ',
       no_selectors: '⚠️ ',
       not_found: '❌',
@@ -143,6 +158,7 @@ function main() {
   console.log('📊 SUMMARY');
   console.log('='.repeat(60));
   console.log(`✅ Enhanced:          ${results.enhanced.length}`);
+  console.log(`🔧 Fixed path:        ${results.fixed_path.length}`);
   console.log(`⏭️  Already enhanced:  ${results.already_enhanced.length}`);
   console.log(`⚠️  No selectors:      ${results.no_selectors.length}`);
   console.log(`❌ Not found:         ${results.not_found.length}`);
