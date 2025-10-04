@@ -72,7 +72,7 @@
         max-height: 500px;
         overflow-y: auto;
         display: none;
-        z-index: 1000;
+        z-index: 99999;
       }
       
       .search-category-header {
@@ -180,24 +180,24 @@
         .guthaben-search-section {
           padding: 24px 16px;
         }
-        
         .guthaben-search-wrapper {
           padding: 10px 16px;
         }
-        
         #guthaben-search-input {
           font-size: 15px;
         }
-        
         #guthaben-search-results {
           max-height: 400px;
         }
-        
         .result-icon {
           font-size: 24px;
           width: 36px;
           height: 36px;
         }
+      }
+      /* Body-attached dropdown positioning */
+      #guthaben-search-results.guthaben-search-results-existing {
+        position: fixed;
       }
     `;
     document.head.appendChild(style);
@@ -242,6 +242,7 @@
     // Find the existing search input (desktop and mobile)
     const existingInput =
       document.getElementById('search-field-input') ||
+      document.querySelector('input[placeholder*="Suche nach Produkten, Marken usw" i]') ||
       document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
       document.querySelector('.MuiAutocomplete-input');
     if (!existingInput) return;
@@ -255,9 +256,8 @@
       const resultsContainer = document.createElement('div');
       resultsContainer.id = 'guthaben-search-results';
       resultsContainer.className = 'guthaben-search-results-existing';
-      const host = inputContainer.parentElement || inputContainer;
-      host.style.position = host.style.position || 'relative';
-      host.appendChild(resultsContainer);
+      // Append to body to avoid clipping/overflow issues
+      document.body.appendChild(resultsContainer);
     }
   }
   
@@ -265,6 +265,7 @@
   function initSearch() {
     // Use the existing search input
     const searchInput = document.getElementById('search-field-input') ||
+      document.querySelector('input[placeholder*="Suche nach Produkten, Marken usw" i]') ||
       document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
       document.querySelector('.MuiAutocomplete-input') ||
       document.getElementById('guthaben-search-input');
@@ -291,8 +292,17 @@
         </div>
       `;
     }
-    // Prepopulate suggestions on load for visibility
+    // Prepopulate suggestions on load for visibility and position dropdown
+    const positionDropdown = () => {
+      const rect = searchInput.getBoundingClientRect();
+      Object.assign(searchResults.style, {
+        width: rect.width + 'px',
+        left: Math.round(rect.left) + 'px',
+        top: Math.round(rect.bottom + 8) + 'px'
+      });
+    };
     showPopularProducts();
+    positionDropdown();
     function showPopularProducts() {
       const popular = products.slice(0, 8);
       searchResults.innerHTML = `
@@ -313,41 +323,27 @@
       });
     }
     
-    searchInput.addEventListener('focus', function() {
-      if (searchInput.value.trim() === '') {
-        console.log('[Search] focus -> show popular');
-        showPopularProducts();
-      }
-    });
-    
-    searchInput.addEventListener('input', function(e) {
-      const query = String(e.target.value || '').toLowerCase().trim();
+    const handleInput = (raw) => {
+      const query = String(raw || '').toLowerCase().trim();
       if (query.length > 80) { return; }
-      
       if (query.length === 0) {
         showPopularProducts();
         return;
       }
-      
       const filtered = products
         .map(product => {
           const name = product.name.toLowerCase();
           const category = product.category.toLowerCase();
           let score = 0;
-          
           if (name === query) score += 100;
           else if (name.startsWith(query)) score += 50;
           else if (name.includes(query)) score += 25;
           else if (category.includes(query)) score += 10;
-          
           return { product, score };
         })
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score)
         .map(item => item.product);
-      
-      console.log('[Search] input:', query, 'results:', filtered.length);
-      
       if (filtered.length > 0) {
         searchResults.innerHTML = filtered.map(p => createResultHTML(p)).join('');
         searchResults.style.display = 'block';
@@ -365,14 +361,18 @@
         `;
         searchResults.style.display = 'block';
       }
-    });
-    
-    document.addEventListener('click', function(e) {
-      const container = searchInput.closest('.MuiInputBase-root') || document.querySelector('.guthaben-search-container');
-      if (container && !container.contains(e.target) && !searchResults.contains(e.target)) {
-        searchResults.style.display = 'none';
+    };
+
+    searchInput.addEventListener('focus', function() {
+      if (searchInput.value.trim() === '') {
+        showPopularProducts();
       }
     });
+
+    ['input','keyup','change','paste','compositionend'].forEach(evt => {
+      searchInput.addEventListener(evt, () => handleInput(searchInput.value));
+    });
+
   }
   
   // Initialize everything
