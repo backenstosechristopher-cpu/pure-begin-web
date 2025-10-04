@@ -292,6 +292,10 @@
         top: Math.round(rect.bottom + 8) + 'px'
       });
     };
+    
+    // Ensure results are hidden initially
+    searchResults.style.display = 'none';
+    searchResults.innerHTML = '';
     function showPopularProducts() {
       const popular = products.slice(0, 8);
       searchResults.innerHTML = `
