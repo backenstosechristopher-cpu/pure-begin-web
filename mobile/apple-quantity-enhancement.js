@@ -37,6 +37,7 @@
 
   let currentBtn = null;
   let minOpenUntil = 0;
+  let gpBindDone = false;
 
   function getCurrentValue(btn){
     const title = btn.getAttribute('title') || '';
@@ -211,7 +212,40 @@
   function initialize(){
     prime();
     hideBlockingOverlays();
+    // Inject blue border style for selected ToggleButtons (Apple fixed values)
+    try {
+      if (!document.getElementById('apple-toggle-blue-border')){
+        const style = document.createElement('style');
+        style.id = 'apple-toggle-blue-border';
+        style.textContent = `
+button.MuiToggleButton-root[aria-pressed="true"],
+button.MuiToggleButton-root.Mui-selected,
+button.MuiToggleButton-root.blue-border,
+button[id^="fixed_value_"][aria-pressed="true"],
+button[id^="fixed_value_"].lov-selected,
+button[id^="fixed_value_"].blue-border{
+  border: 2px solid #1976d2 !important;
+  box-shadow: 0 0 0 2px rgba(25,118,210,0.18) inset !important;
+}
+        `;
+        document.head.appendChild(style);
+      }
+    } catch(_){}
+    // Bind click handler to simulate selection state via class if native state not applied
+    if (!gpBindDone){
+      gpBindDone = true;
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        const btn = t && t.closest && t.closest('button[id^="fixed_value_"]');
+        if (!btn) return;
+        try {
+          document.querySelectorAll('button[id^="fixed_value_"]').forEach(b => b.classList.remove('lov-selected'));
+          btn.classList.add('lov-selected');
+        } catch(_){}
+      }, true);
+    }
     console.log('Universal quantity enhancement loaded for', document.querySelectorAll(BTN_SELECTOR).length, 'buttons');
+    try { console.log('[Apple] Found', document.querySelectorAll('button.MuiToggleButton-root').length, 'toggle buttons'); } catch(_) {}
   }
 
   // Initial run and setup observers
