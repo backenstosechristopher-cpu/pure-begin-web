@@ -26,7 +26,8 @@ function hasEnhancementScript(content) {
 }
 
 function injectScript(content, device) {
-  const scriptTag = `<script src="${device === 'mobile' ? '../' : ''}shared/universal-quantity-enhancement.js"></script>`;
+  // Always use relative path from device folder to shared folder
+  const scriptTag = `<script src="../shared/universal-quantity-enhancement.js"></script>`;
   
   // Try to inject before </body>
   if (content.includes('</body>')) {
