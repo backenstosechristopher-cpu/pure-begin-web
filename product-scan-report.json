@@ -1,9 +1,10 @@
 {
-  "timestamp": "2025-10-04T19:12:42.343Z",
+  "timestamp": "2025-10-04T19:19:16.553Z",
   "summary": {
     "totalProductsFound": 694,
+    "validProducts": 652,
     "productsInSearch": 26,
-    "missingFromSearch": 694,
+    "missingFromSearch": 652,
     "categoriesFound": 5
   },
   "byCategory": {
@@ -6121,14 +6122,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_a-bon_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Adidas Geschenkkarte kaufen | Gutscheincode online",
       "filename": "guthaben.de_adidas.html",
       "category": "Sonstiges",
@@ -6396,14 +6389,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_aplauz_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Sparen Sie Zeit mit der Guthaben.de App",
       "filename": "guthaben.de_app.html",
       "category": "Sonstiges",
@@ -6537,14 +6522,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_bildmobil-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "BITSA | Kaufe einen Code",
       "filename": "guthaben.de_bitsa-oesterreich.html",
       "category": "Sonstiges",
@@ -6598,14 +6575,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_bitsa_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Blau.de aufladen? Gutschein kaufen",
       "filename": "guthaben.de_blau-de-aufladen.html",
       "category": "Sonstiges",
@@ -6633,14 +6602,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_blau-de-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Blauworld aufladen? Blauworld Guthaben für 15 €",
       "filename": "guthaben.de_blauworld-aufladen.html",
       "category": "Sonstiges",
@@ -6656,14 +6617,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_blauworld-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -6764,14 +6717,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_cashlib_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Cineplex Gutschein kaufen? Digitale Geschenkkarte 10 €",
       "filename": "guthaben.de_cineplex.html",
       "category": "Sonstiges",
@@ -6817,14 +6762,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_cineplex_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Congstar prepaid aufladen? Kaufe Congstar Gutschein",
       "filename": "guthaben.de_congstar-aufladen.html",
       "category": "Sonstiges",
@@ -6861,14 +6798,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_congstar-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Cyberport Gutschein kaufen? Digitale Geschenkkarte 10 €",
       "filename": "guthaben.de_cyberport.html",
       "category": "Sonstiges",
@@ -6893,14 +6822,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_dazn_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -6953,14 +6874,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_disney-plus_faq.guthaben.de_hc_de.html",
-      "category": "Streaming",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -7041,14 +6954,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_e-plus-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -7149,30 +7054,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_eventim_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_faq.guthaben.de_hc_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Flexepin kaufen | Flexepin Voucher",
       "filename": "guthaben.de_flexepin-osterreich.html",
       "category": "Sonstiges",
@@ -7244,14 +7125,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_flexepin_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Fonic aufladen? Guthaben online kaufen",
       "filename": "guthaben.de_fonic-aufladen.html",
       "category": "Sonstiges",
@@ -7276,14 +7149,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_fonic-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -7625,14 +7490,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_jeton-cash_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Jochen Schweizer Gutschein kaufen | Guthaben Code",
       "filename": "guthaben.de_jochen-schweizer.html",
       "category": "Entertainment",
@@ -7657,14 +7514,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_jochen-schweizer_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -7701,14 +7550,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_klarmobil-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -7814,14 +7655,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_lebara-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -8103,14 +7936,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_lycamobile-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Lycamobile aufladen-Guthaben € online kaufen",
       "filename": "guthaben.de_lycamobile-aufladen_lyca-flat.html",
       "category": "Sonstiges",
@@ -8325,14 +8150,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_microsoft-geschenkkarte_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "MiFinity Voucher kaufen",
       "filename": "guthaben.de_mifinity.html",
       "category": "Sonstiges",
@@ -8375,14 +8192,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_mifinity_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -8439,14 +8248,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_mint-prepaid_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Mobi aufladen? Kaufe online für 15 €",
       "filename": "guthaben.de_mobi-aufladen.html",
       "category": "Sonstiges",
@@ -8462,14 +8263,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_mobi-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -8549,14 +8342,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_netflix-geschenkkarte_faq.guthaben.de_hc_de.html",
-      "category": "Streaming",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -8676,14 +8461,6 @@
     {
       "name": "Elden Ring: Nightreign — das neue Abenteuer 2025",
       "filename": "guthaben.de_neuigkeiten_elden-ring-nightreign-deutschland.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_neuigkeiten_faq.guthaben.de_hc_de.html",
       "category": "Sonstiges",
       "foundIn": [
         "public/desktop"
@@ -9125,14 +8902,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_ortel-mobile-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "otelo aufladen? otelo Guthaben kaufen",
       "filename": "guthaben.de_otelo-aufladen.html",
       "category": "Sonstiges",
@@ -9166,14 +8935,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_otelo-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -9371,14 +9132,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_pcs_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -9642,14 +9395,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_psn-card_faq.guthaben.de_hc_de.html",
-      "category": "Gaming",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "PUBG Mobile UC kaufen ab 10 USD",
       "filename": "guthaben.de_pubg-us.html",
       "category": "Gaming",
@@ -9763,14 +9508,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_rewarble-advanced_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -10084,14 +9821,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_spotify-premium_faq.guthaben.de_hc_de.html",
-      "category": "Streaming",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Steam Gutschein Kaufen Österreich | Guthaben Code",
       "filename": "guthaben.de_steam-oesterreich.html",
       "category": "Gaming",
@@ -10263,14 +9992,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_telekom_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Ticketmaster Gutschein kaufen? Digitale Geschenkkarte 15 €",
       "filename": "guthaben.de_ticketmaster.html",
       "category": "Sonstiges",
@@ -10332,14 +10053,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_tinder-gold_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Tinder Plus Abonnement Kaufen ab 9.99 €",
       "filename": "guthaben.de_tinder-plus-osterreich.html",
       "category": "Entertainment",
@@ -10363,14 +10076,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_tinder-plus_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -10482,14 +10187,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_toneo-first_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Transcash online kaufen",
       "filename": "guthaben.de_transcash-oesterreich.html",
       "category": "Sonstiges",
@@ -10540,14 +10237,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_transcash_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -10649,14 +10338,6 @@
       ]
     },
     {
-      "name": "Fehler",
-      "filename": "guthaben.de_tvnow_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
       "name": "Twitch Gutschein kaufen",
       "filename": "guthaben.de_twitch-geschenkkarte.html",
       "category": "Entertainment",
@@ -10726,14 +10407,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_twitch-geschenkkarte_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -10885,14 +10558,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_vodafone-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
@@ -13174,342 +12839,6 @@
       "foundIn": [
         "public/desktop",
         "public/mobile"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_a-bon_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_aplauz_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_bildmobil-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_bitsa_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_blau-de-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_blauworld-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_cashlib_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_cineplex_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_congstar-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_dazn_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_disney-plus_faq.guthaben.de_hc_de.html",
-      "category": "Streaming",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_e-plus-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_eventim_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_faq.guthaben.de_hc_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_flexepin_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_fonic-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_jeton-cash_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_jochen-schweizer_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_klarmobil-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_lebara-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_lycamobile-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_microsoft-geschenkkarte_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_mifinity_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_mint-prepaid_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_mobi-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_netflix-geschenkkarte_faq.guthaben.de_hc_de.html",
-      "category": "Streaming",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_neuigkeiten_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_ortel-mobile-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_otelo-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_pcs_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_psn-card_faq.guthaben.de_hc_de.html",
-      "category": "Gaming",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_rewarble-advanced_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_spotify-premium_faq.guthaben.de_hc_de.html",
-      "category": "Streaming",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_telekom_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_tinder-gold_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_tinder-plus_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_toneo-first_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_transcash_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_tvnow_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_twitch-geschenkkarte_faq.guthaben.de_hc_de.html",
-      "category": "Sonstiges",
-      "foundIn": [
-        "public/desktop"
-      ]
-    },
-    {
-      "name": "Fehler",
-      "filename": "guthaben.de_vodafone-aufladen_faq.guthaben.de_hc_de.html",
-      "category": "Mobilfunk",
-      "foundIn": [
-        "public/desktop"
       ]
     },
     {
