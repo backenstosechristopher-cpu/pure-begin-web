@@ -249,6 +249,15 @@ function main() {
     console.log('   Check product-scan-report.txt for details.');
   }
   
+  // Display raw product list in console
+  console.log('\n\n📋 RAW PRODUCT LIST:');
+  console.log('═══════════════════════════════════════════════════════\n');
+  allProducts
+    .map(p => p.name)
+    .sort()
+    .forEach(name => console.log(name));
+  console.log('\n═══════════════════════════════════════════════════════');
+  
   console.log('\n\n✅ Scan complete!\n');
 }
 
