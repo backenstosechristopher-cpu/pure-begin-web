@@ -1,0 +1,239 @@
+/* Modern Search Functionality Styles */
+
+.guthaben-search-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  z-index: 999;
+}
+
+.guthaben-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.guthaben-search-wrapper:focus-within {
+  border-color: #ffa81e;
+  box-shadow: 0 4px 16px rgba(255, 168, 30, 0.2);
+}
+
+.search-icon {
+  color: #666;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+#guthaben-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-family: 'sofia-pro', sans-serif;
+  color: #032e33;
+  background: transparent;
+}
+
+#guthaben-search-input::placeholder {
+  color: #999;
+}
+
+#guthaben-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  max-height: 500px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+}
+
+.search-category-header {
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #f8f8f8;
+  border-top: 1px solid #e0e0e0;
+}
+
+.search-category-header:first-child {
+  border-top: none;
+  border-radius: 12px 12px 0 0;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 12px;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+  border-radius: 0 0 12px 12px;
+}
+
+.search-result-item:hover {
+  background: #fff8f0;
+  padding-left: 24px;
+}
+
+.result-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+  border-radius: 8px;
+}
+
+.result-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.result-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #032e33;
+  margin-bottom: 4px;
+}
+
+.result-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: #666;
+}
+
+.result-category {
+  font-weight: 500;
+}
+
+.result-price {
+  color: #ffa81e;
+  font-weight: 600;
+}
+
+.result-arrow {
+  color: #ccc;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.search-result-item:hover .result-arrow {
+  transform: translateX(4px);
+  color: #ffa81e;
+}
+
+.search-no-results {
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.search-no-results svg {
+  margin: 0 auto 16px;
+  color: #ccc;
+}
+
+.search-no-results div {
+  font-size: 16px;
+  font-weight: 600;
+  color: #032e33;
+  margin-bottom: 8px;
+}
+
+.search-no-results small {
+  font-size: 14px;
+  color: #999;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .guthaben-search-container {
+    max-width: 100%;
+  }
+  
+  .guthaben-search-wrapper {
+    padding: 10px 16px;
+  }
+  
+  #guthaben-search-input {
+    font-size: 15px;
+  }
+  
+  #guthaben-search-results {
+    max-height: 400px;
+  }
+  
+  .search-result-item {
+    padding: 12px 16px;
+  }
+  
+  .result-icon {
+    font-size: 24px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .result-name {
+    font-size: 14px;
+  }
+  
+  .result-meta {
+    font-size: 12px;
+  }
+}
+
+/* Scrollbar styling */
+#guthaben-search-results::-webkit-scrollbar {
+  width: 8px;
+}
+
+#guthaben-search-results::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0 12px 12px 0;
+}
+
+#guthaben-search-results::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+#guthaben-search-results::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Search section wrapper */
+.guthaben-search-section {
+  padding: 32px 20px;
+  background: linear-gradient(135deg, #fff8f0 0%, #ffffff 100%);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .guthaben-search-section {
+    padding: 24px 16px;
+  }
+}
