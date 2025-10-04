@@ -39,6 +39,7 @@ function getScriptForPage(filename) {
   if (name.includes('lebara')) return 'lebara-quantity-enhancement.js';
   if (name.includes('congstar')) return 'congstar-quantity-enhancement.js';
   if (name.includes('klarmobil')) return 'klarmobil-quantity-enhancement.js';
+  if (name.includes('lifecell')) return 'universal-quantity-enhancement.js';
   
   return 'universal-quantity-enhancement.js';
 }
