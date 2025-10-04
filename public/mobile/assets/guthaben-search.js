@@ -4,21 +4,21 @@
   
   console.log('[Mobile Search] Initializing...');
   
-  // Product data
+  // Product data with URLs
   const products = [
-    { name: 'PlayStation Network', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
-    { name: 'Xbox Live', category: 'Gaming', price: '€15 - €100', icon: '🎮' },
-    { name: 'Google Play', category: 'Apps & Games', price: '€5 - €100', icon: '📱' },
-    { name: 'iTunes', category: 'Musik & Apps', price: '€10 - €100', icon: '🎵' },
-    { name: 'Amazon', category: 'Shopping', price: '€10 - €200', icon: '🛒' },
-    { name: 'Netflix', category: 'Streaming', price: '€15 - €50', icon: '📺' },
-    { name: 'Spotify', category: 'Musik', price: '€10 - €60', icon: '🎵' },
-    { name: 'Steam', category: 'Gaming', price: '€5 - €100', icon: '🎮' },
-    { name: 'PayPal', category: 'Zahlung', price: '€10 - €500', icon: '💳' },
-    { name: 'Nintendo eShop', category: 'Gaming', price: '€15 - €100', icon: '🎮' },
-    { name: 'Fortnite V-Bucks', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
-    { name: 'Vodafone', category: 'Mobilfunk', price: '€15 - €50', icon: '📱' },
-    { name: 'Disney+', category: 'Streaming', price: '€25 - €90', icon: '📺' }
+    { name: 'PlayStation Network', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'guthaben.de_playstation-network-psn-guthabenkarte.html' },
+    { name: 'Xbox Live', category: 'Gaming', price: '€15 - €100', icon: '🎮', url: 'guthaben.de_xbox-live.html' },
+    { name: 'Google Play', category: 'Apps & Games', price: '€5 - €100', icon: '📱', url: 'guthaben.de_google-play-guthaben.html' },
+    { name: 'iTunes', category: 'Musik & Apps', price: '€10 - €100', icon: '🎵', url: 'guthaben.de_apple-gift-card.html' },
+    { name: 'Amazon', category: 'Shopping', price: '€10 - €200', icon: '🛒', url: 'guthaben.de_amazon-gutschein.html' },
+    { name: 'Netflix', category: 'Streaming', price: '€15 - €50', icon: '📺', url: 'guthaben.de_netflix.html' },
+    { name: 'Spotify', category: 'Musik', price: '€10 - €60', icon: '🎵', url: 'guthaben.de_spotify.html' },
+    { name: 'Steam', category: 'Gaming', price: '€5 - €100', icon: '🎮', url: 'guthaben.de_steam-gift-card.html' },
+    { name: 'PayPal', category: 'Zahlung', price: '€10 - €500', icon: '💳', url: 'guthaben.de_paypal-guthabenkarte.html' },
+    { name: 'Nintendo eShop', category: 'Gaming', price: '€15 - €100', icon: '🎮', url: 'guthaben.de_nintendo-eshop.html' },
+    { name: 'Fortnite V-Bucks', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'guthaben.de_fortnite.html' },
+    { name: 'Vodafone', category: 'Mobilfunk', price: '€15 - €50', icon: '📱', url: 'guthaben.de_vodafone-aufladen.html' },
+    { name: 'Disney+', category: 'Streaming', price: '€25 - €90', icon: '📺', url: 'guthaben.de_disney-plus.html' }
   ];
   
   let searchOverlay = null;
@@ -161,7 +161,7 @@
   
   function createResultHTML(product) {
     return `
-      <div class="mobile-search-result" data-product="${product.name}" style="
+      <div class="mobile-search-result" data-product="${product.name}" data-url="${product.url || ''}" style="
         display: flex;
         align-items: center;
         padding: 14px;
@@ -207,9 +207,10 @@
         this.style.background = 'transparent';
       });
       item.addEventListener('click', function() {
-        const productName = this.dataset.product;
-        console.log('[Mobile Search] Selected:', productName);
-        closeSearch();
+        const productUrl = this.dataset.url;
+        if (productUrl) {
+          window.location.href = productUrl;
+        }
       });
     });
   }
