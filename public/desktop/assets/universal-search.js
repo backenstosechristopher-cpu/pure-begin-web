@@ -423,10 +423,13 @@
   
   function initSearch() {
     const searchInput = document.getElementById('search-field-input') ||
-                       document.querySelector('.MuiAutocomplete-input') ||
-                       document.querySelector('[role="combobox"]');
+                       document.querySelector('.MuiAutocomplete-input, .MuiInputBase-input, input[type="search"]') ||
+                       document.querySelector('[role="combobox"]') ||
+                       document.querySelector('input[placeholder*="Suche"], input[placeholder*="Such"], input[placeholder*="Search"]');
     if (!searchInput) return;
     if (!searchInput.id) searchInput.id = 'search-field-input';
+    try { console.log('[UniversalSearch/Desktop] bound to input', searchInput); } catch(_) {}
+
     
     let searchResults = document.getElementById('guthaben-search-results') || (injectHTML(), document.getElementById('guthaben-search-results'));
     if (!searchResults) return;
@@ -504,6 +507,7 @@
         .sort((a, b) => b.score - a.score)
         .map(item => item.product);
         
+      try { console.log('[UniversalSearch/Desktop] query', query, 'results', filtered.length); } catch(_) {}
       if (filtered.length > 0) {
         searchResults.innerHTML = filtered.map(p => createResultHTML(p)).join('');
         searchResults.style.display = 'block';
@@ -548,13 +552,15 @@
     const timer = setInterval(() => {
       injectHTML();
       const input = document.getElementById('search-field-input') || 
-                    document.querySelector('.MuiAutocomplete-input') ||
+                    document.querySelector('.MuiAutocomplete-input, .MuiInputBase-input, input[type="search"]') ||
                     document.querySelector('[role="combobox"]') ||
-                    document.querySelector('input[placeholder*="Suche"]');
+                    document.querySelector('input[placeholder*="Suche"], input[placeholder*="Such"], input[placeholder*="Search"]');
       if (input) {
         if (!input.id) input.id = 'search-field-input';
         clearInterval(timer);
         initSearch();
+        try { console.log('[UniversalSearch/Desktop] input detected, initialized'); } catch(_) {}
+
         try {
           const mo = new MutationObserver(() => {
             const el = document.getElementById('search-field-input') || 

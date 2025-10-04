@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 function isHtmlTarget(name) {
-  return name.startsWith('guthaben.de_') && name.endsWith('.html');
+  return name.startsWith('guthaben.de') && name.endsWith('.html');
 }
 
 function stripEnhancerTags(html) {
