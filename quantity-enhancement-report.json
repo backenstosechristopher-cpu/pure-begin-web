@@ -1,3611 +1,2377 @@
 {
-  "timestamp": "2025-10-04T21:42:17.038Z",
-  "processed": 901,
+  "timestamp": "2025-10-04T21:51:30.618Z",
+  "processed": 592,
   "results": {
     "enhanced": [
       {
         "status": "enhanced",
+        "path": "desktop/guthaben.de_a-bon.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_airbnb.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_aldi-talk-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_amazon-gutschein.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_apple-gift-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_ay-yildiz-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_battlenet-guthabenkarte.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_bildmobil-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_bitsa.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_blau-de-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_blauworld-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_cashlib.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_cashlib_100-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_cashlib_150-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_cashlib_5-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_cashlib_50-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_congstar-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_disney-plus.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_e-plus-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_einfach-prepaid-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_entertainment-cards.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_flexepin.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_fonic-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_fortnite.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_fyve-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_gamecards.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_google-play-guthaben.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_gt-mobile-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_handy-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_hearthstone-guthabenkarte.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_ikea.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_klarmobil-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_league-of-legends-riot-points.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_10-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_15-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_20-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_30-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_data-l.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_flexi-m.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_hello-m.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_hello-xl.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_turkei-l.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_turkei-m.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lebara-aufladen_turkei-xl.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lieferando.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_lycamobile-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_mint-prepaid.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_mobi-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_netflix-geschenkkarte.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_nettokom-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_netzclub-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_nike-gutscheincode.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_nintendo-eshop-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_nintendo-switch-online.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_o2-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_ortel-mobile-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_otelo-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_otto-gutscheincode.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_paysafecard-players-pass.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_paysafecard.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_pcs.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_psn-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_rewarble-advanced.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_roblox-gift-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_rossmann-mobil-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_shopping-gutscheine.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_simyo.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_spotify-premium.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_steam.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_tchibo.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_tinder-gold.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_tinder-plus.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_tk-maxx.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_toneo-first.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_turk-telekom-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_tvnow.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_uber.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_valorant.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_vodafone-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_wow-gamecard.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_xbox-gift-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "desktop/guthaben.de_zalando-gutscheincode.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_aldi-talk-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_amazon-gutschein.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_ay-yildiz-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_bildmobil-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_blau-de-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_blauworld-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_cashlib.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_congstar-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_disney-plus.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_e-plus-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_einfach-prepaid-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_fonic-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_fyve-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_gt-mobile-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_h-m-geschenkcode.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_klarmobil-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_10-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_15-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_20-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_30-eur.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_flexi-m.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_hello-m.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_hello-xl.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_turkei-l.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_turkei-m.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lebara-aufladen_turkei-xl.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_lycamobile-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_netflix-geschenkkarte.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_nettokom-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_netzclub-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_nike-gutscheincode.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_nintendo-eshop-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_nintendo-switch-online.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_o2-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_ortel-mobile-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_otelo-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_otto-gutscheincode.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_pcs.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_psn-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_roblox-gift-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_rossmann-mobil-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_simyo.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_spotify-premium.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_steam.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_tchibo.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_tinder-gold.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_tinder-plus.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_tk-maxx.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_toneo-first.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_transcash.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_turk-telekom-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_tvnow.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_uber.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_vodafone-aufladen.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_wow-gamecard.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_xbox-gift-card.html"
+      },
+      {
+        "status": "enhanced",
+        "path": "mobile/guthaben.de_zalando-gutscheincode.html"
+      }
+    ],
+    "fixed_path": [
+      {
+        "status": "fixed_path",
         "path": "desktop/guthaben.de.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_a-bon-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_a-bon_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_a-bon_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_a-bon_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_a-bon_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_a-bon_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_adidas.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_airbnb-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_airbnb_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_airbnb_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_airbnb_200-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_airbnb_250-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_airbnb_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_aldi-talk-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_aldi-talk-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_aldi-talk-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutscheine-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_100-euro.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_200-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_250-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_40-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_amazon-gutschein_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_apex-legends-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_aplauz.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_aplauz_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_aplauz_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_aplauz_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_aplauz_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_app.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_apple-gift-card-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_astropay-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ay-yildiz-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ay-yildiz-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_b-free-aufladen.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_battlenet-guthabenkarte-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_battlenet-guthabenkarte_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_battlenet-guthabenkarte_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_bildmobil-aufladen_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_bildmobil-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_bitsa-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_bitsa_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_bitsa_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_bitsa_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_bitsa_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_blau-de-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_blau-de-aufladen_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_blauworld-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_bob-wertkarte.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ca-geschenkkarte.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_candy-crush.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cashlib-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cashlib_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cashlib_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cineplex.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cineplex_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cineplex_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cineplex_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cineplex_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_congstar-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_congstar-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_congstar-aufladen_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cookie-hinweis.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_cyberport.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_datenschutzerklaerung.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_dazn.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_dazn_45-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_deezer-at.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_disney-plus-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_disney-plus_27-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_disney-plus_54-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_disney-plus_90-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_douglas.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_douglas_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_douglas_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_douglas_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_drei-aufladen.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_e-plus-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_e-plus-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_e-plus-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ea-game-card.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ea-game-card_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ea-origin-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_eety-guthaben.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_einfach-prepaid-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_einfach-prepaid-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_einfach-prepaid-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_eventim.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_eventim_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_flexepin-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_flexepin_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_flexepin_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_flexepin_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_flexepin_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_flexepin_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_flexepin_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_fonic-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_fonic-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_free-fire-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_fyve-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_fyve-aufladen_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_georg-aufladen.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_google-play-card-oesterreich.html"
       },
       {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_gt-mobile-aufladen_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_gt-mobile-aufladen_5-eur.html"
-      },
-      {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode_125-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_h-m-geschenkcode_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_hearthstone-code-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ikea_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ikea_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ikea_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ikea_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ikea_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_impressum.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jeton-cash-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jeton-cash.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jeton-cash_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jeton-cash_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jeton-cash_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jeton-cash_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jeton-cash_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jeton-cash_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jochen-schweizer.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jochen-schweizer_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_jochen-schweizer_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_klarmobil-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_klarmobil-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_klarmobil-aufladen_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_klax-aufladen.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_kobo-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_league-of-legends-riot-points_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_league-of-legends-riot-points_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_libon.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_libon_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_libon_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_libon_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lieferando-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lieferando_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lieferando_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lieferando_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lieferando_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lieferando_40-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lieferando_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lifecell.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lifecell_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lifecell_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lifecell_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_luckydeal.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_lush.html"
       },
       {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-aufladen_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-aufladen_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-aufladen_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-aufladen_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-aufladen_lyca-flat.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-aufladen_lyca-plus.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_lycamobile-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mango-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mediamarkt.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mediamarkt_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mediamarkt_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mediamarkt_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_meta-quest.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_meta-quest_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_meta-quest_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_meta-quest_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_meta-quest_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_meta-quest_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte-oesterreich_10-euro.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte-oesterreich_15-euro.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte-oesterreich_25-euro.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte-oesterreich_50-euro.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_microsoft-geschenkkarte_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mifinity.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mifinity_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mifinity_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mifinity_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mifinity_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mint-prepaid-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mint-prepaid_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mint-prepaid_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mint-prepaid_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mint-prepaid_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mobi-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_mtel.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neosurf-at.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netflix-geschenkkarte_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netflix-geschenkkarte_125-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netflix-geschenkkarte_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netflix-geschenkkarte_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netflix-geschenkkarte_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netflix-geschenkkarte_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netflix-gutschein-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nettokom-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nettokom-aufladen_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netzclub-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netzclub-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_netzclub-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_5-besten-dokumentationen-auf-netflix.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_beste-wetter-app-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_die-besten-zombie-filme-netflix.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_ea-fc-26-community-wuensche-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_elden-ring-nightreign-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_festivals-2025-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_filme-streamen-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_games-kaufen-ohne-persoenliche-daten-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_gaming-daten-sicherheit-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_gaming-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_geschenkkarte-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_gta-6-release-geruechte-rockstar-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_informationen-game-store-daten-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_kindersicherung-basics.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_kreditkarte-gaming-verknuepfen-deutschland.html"
       },
       {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_neuigkeiten_mobile-daten-deutschland-reisen.html"
-      },
-      {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_neosurf-deutschland-oesterreich-guthabenkarten.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_nintendo-switch-2-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_online-privatsphaere-gaming-2025-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_separate-email-gaming-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_spiele-online-kaufen-ohne-konto-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_spielverhalten-tracking-games-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_umweltfreundlich-reisen-in-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_warum-shops-telefonnummer-adresse-deutschland.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_neuigkeiten_wellness-gesund-leben-gesundheit.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_125-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_40-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-gutscheincode_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nike-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-eshop-card-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-eshop-card_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-eshop-card_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-eshop-card_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-eshop-card_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-eshop-card_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-switch-online_12-monate.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-switch-online_3-monate.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_nintendo-switch-spiele.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_o2-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_o2-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_o2-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_ortel-mobile-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_ortel-mobile-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "desktop/guthaben.de_ortel-mobile-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_otelo-aufladen_19-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_otelo-aufladen_29-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_otelo-aufladen_9-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_otto-gutscheincode_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_otto-gutscheincode_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_otto-gutscheincode_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_otto-gutscheincode_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-at.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-players-pass_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-players-pass_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-players-pass_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-players-pass_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-players-pass_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-players-pass_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-players-pass_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_paysafecard-players-pass_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_pcs-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_pcs_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_pcs_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_pcs_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_pcs_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_40-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_60-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_playstation-plus-mitgliedschaft_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_prepaid-zahlungsmittel.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_120-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_200-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_250-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_40-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_60-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_psn-card_80-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_pubg-us.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_razer-gold-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_razer-gold.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_razer-gold_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_razer-gold_10-usd.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_razer-gold_20-usd.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_razer-gold_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_razer-gold_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_razer-gold_5-usd.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_rewarble-advanced_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_rewarble-advanced_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_rewarble-advanced_60-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_rewarble-perfect-money-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_rewarble.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_riot-points-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_125-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_175-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_200-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_40-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_70-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_roblox-gift-card_80-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_rossmann-mobil-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_rossmann-mobil-aufladen_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_rossmann.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_runescape-mitgliedschaft-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_saturn.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_simyo_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_sitemap.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_spotify-premium-code-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_spotify-premium-code-oesterreich_10-euro.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_spotify-premium-code-oesterreich_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_spotify-premium-code-oesterreich_60-euro.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_spotify-premium_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_spotify-premium_120-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_spotify-premium_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_spotify-premium_60-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_steam-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_steam_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_steam_20-euro.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_steam_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_steam_35-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_steam_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tchibo_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tchibo_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tchibo_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tchibo_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_telekom.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_telekom_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_telekom_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_telekom_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_telekom_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_telekom_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_telekom_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ticketmaster.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tiktok-de.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tiktok-de_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tiktok-de_35-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tinder-gold-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tinder-gold_13-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tinder-plus-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tinder-plus_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tk-maxx_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tk-maxx_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tk-maxx_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tk-maxx_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_toneo-first_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_toneo-first_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_toneo-first_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_toneo-first_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_toneo-first_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_toneo-first_7-50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_transcash-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_transcash_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_transcash_160-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_transcash_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_transcash_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_treatwell-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_treatwell.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_turk-telekom-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_turk-telekom-aufladen_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_turk-telekom-aufladen_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tvnow_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tvnow_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tvnow_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_tvnow_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-geschenkkarte.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-geschenkkarte_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-geschenkkarte_125-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-geschenkkarte_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-geschenkkarte_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-geschenkkarte_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-geschenkkarte_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-geschenkkarte_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_twitch-osterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_uber_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_uber_125-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_uber_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_uber_200-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_uber_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_uber_250-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_uber_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_uber_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_ueber-uns.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_valorant_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_valorant_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_vodafone-aufladen_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_vodafone-aufladen_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_webseitenfunktion.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_widerrufsrecht.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_wow-gamecard-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_wow-gamecard_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_wow-gamecard_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_wowww-aufladen.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-game-pass-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-game-pass.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_5-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_75-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_xbox-gift-card_80-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_yesss-aufladen.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_yooopi.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zahlungsmethoden.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutschein-oesterreich.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_10-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_100-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_125-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_15-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_150-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_20-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_25-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_30-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_35-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_40-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_50-eur.html"
       },
       {
-        "status": "enhanced",
+        "status": "fixed_path",
         "path": "desktop/guthaben.de_zalando-gutscheincode_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_a-bon.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_a-bon_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_a-bon_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_a-bon_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_a-bon_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_a-bon_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_adidas.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_adidas_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_adidas_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_adidas_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_airbnb.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_airbnb_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_airbnb_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_airbnb_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_airbnb_250-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_airbnb_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aldi-talk-auf.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aldi-talk-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aldi-talk-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aldi-talk-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_100-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_250-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_amazon-gutschein_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aplauz.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aplauz_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aplauz_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aplauz_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_aplauz_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ay-yildiz-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ay-yildiz-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_battlenet-guthabenkarte-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_battlenet-guthabenkarte-oesterreich_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_battlenet-guthabenkarte-oesterreich_500-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_battlenet-guthabenkarte.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_battlenet-guthabenkarte_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_battlenet-guthabenkarte_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_bildmobil-aufladen_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_bildmobil-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_bitsa.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_bitsa_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_bitsa_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_bitsa_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_bitsa_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_blau-de-aufladen-enhanced.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_blau-de-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_blau-de-aufladen_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_blauworld-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ca-geschenkkarte.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ca-geschenkkarte_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ca-geschenkkarte_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ca-geschenkkarte_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ca-geschenkkarte_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ca-geschenkkarte_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_candy-crush.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_candy-crush_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cashlib_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cashlib_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cashlib_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cashlib_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cashlib_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cineplex.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cineplex_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cineplex_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cineplex_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_cineplex_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_congstar-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_congstar-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_congstar-aufladen_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_dazn.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_dazn_45-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_disney-plus_27-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_disney-plus_54-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_disney-plus_90-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_e-plus-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_e-plus-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_e-plus-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_einfach-prepaid-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_einfach-prepaid-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_einfach-prepaid-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_eventim.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_eventim_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_flexepin.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_flexepin_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_flexepin_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_flexepin_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_flexepin_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_flexepin_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_flexepin_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fonic-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fonic-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fortnite.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fortnite_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fortnite_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fortnite_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fortnite_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fortnite_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fortnite_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fortnite_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fyve-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_fyve-aufladen_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_gt-mobile-aufladen_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_gt-mobile-aufladen_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_h-m-geschenkcode_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_h-m-geschenkcode_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_h-m-geschenkcode_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_h-m-geschenkcode_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_h-m-geschenkcode_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_h-m-geschenkcode_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_h-m-geschenkcode_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_hearthstone-code-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_hearthstone-code-oesterreich_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_hearthstone-code-oesterreich_500-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_hearthstone-guthabenkarte.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_hearthstone-guthabenkarte_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_hearthstone-guthabenkarte_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ikea.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ikea_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ikea_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ikea_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ikea_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ikea_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_jeton-cash.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_jeton-cash_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_jeton-cash_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_jeton-cash_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_jochen-schweizer.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_jochen-schweizer_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_jochen-schweizer_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_klarmobil-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_klarmobil-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_klarmobil-aufladen_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_libon.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_libon_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_libon_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_libon_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lieferando.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lieferando_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lieferando_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lieferando_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lieferando_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lieferando_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lieferando_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lifecell.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lifecell_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lifecell_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lifecell_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lush.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lush_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lush_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lush_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lush_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lush_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lycamobile-aufladen_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lycamobile-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lycamobile-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lycamobile-aufladen_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lycamobile-aufladen_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lycamobile-aufladen_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lycamobile-aufladen_lyca-flat.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_lycamobile-aufladen_lyca-plus.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_meta-quest.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_meta-quest_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_meta-quest_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_meta-quest_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_meta-quest_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_meta-quest_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_microsoft-geschenkkarte.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_microsoft-geschenkkarte_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_microsoft-geschenkkarte_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_microsoft-geschenkkarte_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_microsoft-geschenkkarte_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_mifinity.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_mifinity_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_mifinity_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_mifinity_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_mobi-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netflix-geschenkkarte_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netflix-geschenkkarte_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netflix-geschenkkarte_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netflix-geschenkkarte_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netflix-geschenkkarte_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netflix-geschenkkarte_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nettokom-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nettokom-aufladen_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netzclub-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netzclub-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_netzclub-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nike-gutscheincode_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card-oesterreich_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card-oesterreich_15-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card-oesterreich_25-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card-oesterreich_50-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card-oesterreich_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-eshop-card_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-online_12-monate.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-online_3-monate.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_29-99-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_70-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_animal-crossing.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_mario-kart-8.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_pokemon-scarlet.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_pokemon-violet.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_splatoon-3.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_super-mario-maker.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_super-mario-odyssey.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_zelda-breath-of-the-wild.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_zelda-links-awakening.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_nintendo-switch-spiele_zelda-tears-of-the-kingdom.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_o2-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_o2-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_o2-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ortel-mobile-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ortel-mobile-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_ortel-mobile-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_otelo-aufladen_19-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_otelo-aufladen_29-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_otelo-aufladen_9-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_otto-gutscheincode_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_otto-gutscheincode_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_otto-gutscheincode_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_otto-gutscheincode_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_pcs_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_pcs_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_pcs_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_20-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_250-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_50-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_60-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_750-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft-oesterreich_80-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_60-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_playstation-plus-mitgliedschaft_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_120-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_250-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_60-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_psn-card_80-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_pubg-us.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_pubg-us_10-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_pubg-us_25-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_pubg-us_5-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_pubg-us_50-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_10-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_100-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_20-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_200-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_5-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_razer-gold_50-usd.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_175-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_70-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_roblox-gift-card_80-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_rossmann-mobil-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_rossmann-mobil-aufladen_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_simyo_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_spotify-premium-code-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_spotify-premium-code-oesterreich_10-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_spotify-premium-code-oesterreich_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_spotify-premium-code-oesterreich_60-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_spotify-premium_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_spotify-premium_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_spotify-premium_60-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam-oesterreich_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam-oesterreich_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam-oesterreich_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam-oesterreich_35-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam-oesterreich_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam_20-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam_35-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_steam_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tchibo_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tchibo_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tchibo_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_telekom.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_telekom_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_telekom_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_telekom_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_telekom_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_telekom_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_telekom_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tiktok-de.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tiktok-de_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tiktok-de_35-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tinder-gold_13-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tinder-plus_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tk-maxx_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tk-maxx_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tk-maxx_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tk-maxx_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_toneo-first_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_toneo-first_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_toneo-first_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_toneo-first_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_toneo-first_7-50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_transcash_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_transcash_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_transcash_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_treatwell.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_treatwell_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_treatwell_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_treatwell_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_treatwell_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_treatwell_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_treatwell_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_turk-telekom-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_turk-telekom-aufladen_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_turk-telekom-aufladen_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tvnow_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tvnow_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tvnow_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_tvnow_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_twitch-geschenkkarte.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_twitch-geschenkkarte_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_twitch-geschenkkarte_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_twitch-geschenkkarte_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_twitch-geschenkkarte_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_twitch-geschenkkarte_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_twitch-geschenkkarte_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_twitch-geschenkkarte_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_uber_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_uber_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_uber_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_uber_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_uber_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_uber_250-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_uber_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_uber_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_vodafone-aufladen_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_vodafone-aufladen_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_wow-gamecard-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_wow-gamecard-oesterreich_200-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_wow-gamecard-oesterreich_500-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_wow-gamecard_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_wow-gamecard_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-game-pass_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card-oesterreich_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card-oesterreich_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card-oesterreich_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card-oesterreich_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card-oesterreich_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card-oesterreich_80-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_5-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_75-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_xbox-gift-card_80-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutschein-oesterreich.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutschein-oesterreich_10-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutschein-oesterreich_15-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutschein-oesterreich_20-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutschein-oesterreich_25-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutschein-oesterreich_50-euro.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_10-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_100-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_125-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_15-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_150-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_20-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_25-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_30-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_35-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_40-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_50-eur.html"
-      },
-      {
-        "status": "enhanced",
-        "path": "mobile/guthaben.de_zalando-gutscheincode_75-eur.html"
       }
     ],
     "already_enhanced": [],
