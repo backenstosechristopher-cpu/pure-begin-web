@@ -1,4 +1,4 @@
-// Fix logo redirect to point to guthaben.de.html instead of /
+// Fix logo redirect to point to guthaben.de_.html instead of /
 (function() {
   'use strict';
   
@@ -10,8 +10,8 @@
     });
     
     logoLinks.forEach(link => {
-      link.href = 'guthaben.de.html';
-      console.log('[Logo Fix] Updated logo link to guthaben.de.html');
+      link.href = 'guthaben.de_.html';
+      console.log('[Logo Fix] Updated logo link to guthaben.de_.html');
     });
     
     // Also fix any direct image links
@@ -19,8 +19,8 @@
     logoImages.forEach(img => {
       const parentLink = img.closest('a');
       if (parentLink && parentLink.getAttribute('href') === '/') {
-        parentLink.href = 'guthaben.de.html';
-        console.log('[Logo Fix] Updated parent link to guthaben.de.html');
+        parentLink.href = 'guthaben.de_.html';
+        console.log('[Logo Fix] Updated parent link to guthaben.de_.html');
       }
     });
   }
