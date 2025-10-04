@@ -62,17 +62,16 @@
       
       #guthaben-search-results,
       .guthaben-search-results-existing {
-        position: absolute;
-        top: calc(100% + 8px);
+        position: fixed;
+        top: 0;
         left: 0;
-        right: 0;
         background: #fff;
         border-radius: 12px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
         max-height: 500px;
         overflow-y: auto;
         display: none;
-        z-index: 1000;
+        z-index: 2147483647;
       }
       
       .search-category-header {
@@ -255,9 +254,7 @@
       const resultsContainer = document.createElement('div');
       resultsContainer.id = 'guthaben-search-results';
       resultsContainer.className = 'guthaben-search-results-existing';
-      const host = inputContainer.parentElement || inputContainer;
-      host.style.position = host.style.position || 'relative';
-      host.appendChild(resultsContainer);
+      document.body.appendChild(resultsContainer);
     }
   }
   
@@ -291,8 +288,17 @@
         </div>
       `;
     }
-    // Prepopulate suggestions on load for visibility
+    // Prepopulate suggestions on load for visibility and position dropdown
+    const positionDropdown = () => {
+      const rect = searchInput.getBoundingClientRect();
+      Object.assign(searchResults.style, {
+        width: rect.width + 'px',
+        left: Math.round(rect.left) + 'px',
+        top: Math.round(rect.bottom + 8) + 'px'
+      });
+    };
     showPopularProducts();
+    positionDropdown();
     function showPopularProducts() {
       const popular = products.slice(0, 8);
       searchResults.innerHTML = `
@@ -300,6 +306,7 @@
         ${popular.map(product => createResultHTML(product)).join('')}
       `;
       searchResults.style.display = 'block';
+      positionDropdown();
       attachResultHandlers();
     }
     
@@ -314,40 +321,38 @@
     }
     
     searchInput.addEventListener('focus', function() {
+      positionDropdown();
       if (searchInput.value.trim() === '') {
         console.log('[Search] focus -> show popular');
         showPopularProducts();
+      } else {
+        searchResults.style.display = 'block';
       }
     });
     
     searchInput.addEventListener('input', function(e) {
       const query = String(e.target.value || '').toLowerCase().trim();
+      positionDropdown();
       if (query.length > 80) { return; }
-      
       if (query.length === 0) {
         showPopularProducts();
         return;
       }
-      
       const filtered = products
         .map(product => {
           const name = product.name.toLowerCase();
           const category = product.category.toLowerCase();
           let score = 0;
-          
           if (name === query) score += 100;
           else if (name.startsWith(query)) score += 50;
           else if (name.includes(query)) score += 25;
           else if (category.includes(query)) score += 10;
-          
           return { product, score };
         })
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score)
         .map(item => item.product);
-      
       console.log('[Search] input:', query, 'results:', filtered.length);
-      
       if (filtered.length > 0) {
         searchResults.innerHTML = filtered.map(p => createResultHTML(p)).join('');
         searchResults.style.display = 'block';
@@ -367,6 +372,11 @@
       }
     });
     
+    ['resize','scroll'].forEach(evt => {
+      window.addEventListener(evt, () => {
+        if (searchResults.style.display === 'block') positionDropdown();
+      }, { passive: true });
+    });
     document.addEventListener('click', function(e) {
       const container = searchInput.closest('.MuiInputBase-root') || document.querySelector('.guthaben-search-container');
       if (container && !container.contains(e.target) && !searchResults.contains(e.target)) {
