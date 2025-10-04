@@ -46,7 +46,7 @@ function getProductCategory(filename, content) {
   if (name.includes('playstation') || name.includes('xbox') || name.includes('nintendo') ||
       name.includes('steam') || name.includes('fortnite') || name.includes('roblox') ||
       name.includes('league') || name.includes('valorant') || name.includes('minecraft') ||
-      name.includes('ea-sports') || name.includes('blizzard')) {
+      name.includes('ea-sports') || name.includes('blizzard') || name.includes('psn')) {
     return 'Gaming';
   }
   
@@ -114,12 +114,30 @@ function scanAllProducts() {
       
       const productName = extractProductFromTitle(content);
       
-      if (productName && !productsMap.has(productName)) {
+      if (productName) {
         const category = getProductCategory(file, content);
         const icon = getCategoryIcon(category);
-        
-        // Generate URL: just the filename since search is loaded on pages in same directory
         const url = file;
+        
+        // Check if product already exists
+        if (productsMap.has(productName)) {
+          const existing = productsMap.get(productName);
+          // Prioritize non-country-specific files (shorter filenames without -oesterreich, -osterreich, -schweiz, etc.)
+          const isCountrySpecific = file.includes('-oesterreich') || file.includes('-osterreich') || file.includes('-schweiz');
+          const existingIsCountrySpecific = existing.file.includes('-oesterreich') || existing.file.includes('-osterreich') || existing.file.includes('-schweiz');
+          
+          if (isCountrySpecific && !existingIsCountrySpecific) {
+            // Keep existing non-country-specific file
+            console.log(`   ⏭️  Skipping ${file} (keeping ${existing.file})`);
+            return;
+          } else if (!isCountrySpecific && existingIsCountrySpecific) {
+            // Replace with non-country-specific file
+            console.log(`   🔄 Replacing ${existing.file} with ${file}`);
+          } else {
+            // Both same type, skip duplicate
+            return;
+          }
+        }
         
         productsMap.set(productName, {
           name: productName,
