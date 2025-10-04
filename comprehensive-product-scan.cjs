@@ -138,6 +138,36 @@ function getExistingSearchProducts() {
   return existingProducts;
 }
 
+// Generate icon based on category
+function getCategoryIcon(category) {
+  const iconMap = {
+    'Gaming': '🎮',
+    'Mobilfunk': '📱',
+    'Entertainment': '🎬',
+    'Streaming': '📺',
+    'Shopping': '🛒',
+    'Zahlung': '💳',
+    'Sonstiges': '🎁'
+  };
+  return iconMap[category] || '🎁';
+}
+
+// Generate JavaScript array for search integration
+function generateSearchArray(products) {
+  const jsArray = products
+    .filter(p => !p.name.includes('Fehler')) // Filter out error pages
+    .map(product => {
+      const icon = getCategoryIcon(product.category);
+      // Extract base price if available
+      const priceMatch = product.name.match(/€\s*(\d+)/);
+      const price = priceMatch ? `ab €${priceMatch[1]}` : 'Preis variabel';
+      
+      return `    { name: '${product.name.replace(/'/g, "\\'")}', category: '${product.category}', price: '${price}', icon: '${icon}', url: '${product.filename}' }`;
+    });
+  
+  return `const products = [\n${jsArray.join(',\n')}\n  ];`;
+}
+
 // Main execution
 function main() {
   console.log('Starting comprehensive product scan...\n');
@@ -159,32 +189,40 @@ function main() {
     categorized[product.category].push(product);
   });
   
+  // Filter valid products (no error pages)
+  const validProducts = allProducts.filter(p => !p.name.includes('Fehler'));
+  
   // Missing products analysis
-  const missingProducts = allProducts.filter(p => !existingProducts.has(p.name));
+  const missingProducts = validProducts.filter(p => !existingProducts.has(p.name));
   
   // Generate report
   const report = {
     timestamp: new Date().toISOString(),
     summary: {
       totalProductsFound: allProducts.length,
+      validProducts: validProducts.length,
       productsInSearch: existingProducts.size,
       missingFromSearch: missingProducts.length,
       categoriesFound: Object.keys(categorized).length
     },
     byCategory: categorized,
     missingProducts: missingProducts,
-    allProducts: allProducts.sort((a, b) => a.name.localeCompare(b.name))
+    allProducts: validProducts.sort((a, b) => a.name.localeCompare(b.name))
   };
   
   // Save reports
   fs.writeFileSync('product-scan-report.json', JSON.stringify(report, null, 2));
   
   // Generate simple raw list
-  const rawList = allProducts
+  const rawList = validProducts
     .map(p => p.name)
     .sort()
     .join('\n');
   fs.writeFileSync('products-raw-list.txt', rawList);
+  
+  // Generate JavaScript array for search integration
+  const searchArray = generateSearchArray(validProducts);
+  fs.writeFileSync('products-search-array.js', searchArray);
   
   // Generate human-readable report
   let textReport = '═══════════════════════════════════════════════════════\n';
@@ -196,6 +234,7 @@ function main() {
   textReport += '📊 SUMMARY\n';
   textReport += '─────────────────────────────────────────────────────\n';
   textReport += `Total Products Found:     ${report.summary.totalProductsFound}\n`;
+  textReport += `Valid Products:           ${report.summary.validProducts}\n`;
   textReport += `Products in Search:       ${report.summary.productsInSearch}\n`;
   textReport += `Missing from Search:      ${report.summary.missingFromSearch}\n`;
   textReport += `Categories Found:         ${report.summary.categoriesFound}\n\n`;
@@ -205,12 +244,15 @@ function main() {
   Object.entries(categorized)
     .sort((a, b) => b[1].length - a[1].length)
     .forEach(([category, products]) => {
-      textReport += `\n${category} (${products.length} products):\n`;
-      products.forEach(p => {
-        const inSearch = existingProducts.has(p.name) ? '✓' : '✗';
-        textReport += `  ${inSearch} ${p.name}\n`;
-        textReport += `     File: ${p.filename}\n`;
-      });
+      const validCategoryProducts = products.filter(p => !p.name.includes('Fehler'));
+      if (validCategoryProducts.length > 0) {
+        textReport += `\n${category} (${validCategoryProducts.length} products):\n`;
+        validCategoryProducts.forEach(p => {
+          const inSearch = existingProducts.has(p.name) ? '✓' : '✗';
+          textReport += `  ${inSearch} ${p.name}\n`;
+          textReport += `     File: ${p.filename}\n`;
+        });
+      }
     });
   
   if (missingProducts.length > 0) {
@@ -218,11 +260,15 @@ function main() {
     textReport += '─────────────────────────────────────────────────────\n';
     textReport += `The following ${missingProducts.length} products are NOT in search files:\n\n`;
     
-    missingProducts.forEach((p, i) => {
+    missingProducts.slice(0, 50).forEach((p, i) => {
       textReport += `${i + 1}. ${p.name}\n`;
       textReport += `   Category: ${p.category}\n`;
       textReport += `   File: ${p.filename}\n\n`;
     });
+    
+    if (missingProducts.length > 50) {
+      textReport += `... and ${missingProducts.length - 50} more\n\n`;
+    }
   }
   
   textReport += '\n═══════════════════════════════════════════════════════\n';
@@ -234,6 +280,7 @@ function main() {
   // Console output
   console.log('\n📊 SCAN RESULTS:\n');
   console.log(`✅ Total Products Found: ${report.summary.totalProductsFound}`);
+  console.log(`✅ Valid Products: ${report.summary.validProducts}`);
   console.log(`📋 Products in Search: ${report.summary.productsInSearch}`);
   console.log(`⚠️  Missing from Search: ${report.summary.missingFromSearch}`);
   console.log(`📂 Categories: ${report.summary.categoriesFound}`);
@@ -242,23 +289,32 @@ function main() {
   console.log('   • product-scan-report.json (detailed data)');
   console.log('   • product-scan-report.txt (human-readable)');
   console.log('   • products-raw-list.txt (simple list of all products)');
+  console.log('   • products-search-array.js (JavaScript array for search integration)');
   
   if (missingProducts.length > 0) {
     console.log('\n\n⚠️  ACTION REQUIRED:');
     console.log(`   ${missingProducts.length} products are missing from search files.`);
     console.log('   Check product-scan-report.txt for details.');
+    console.log('   Use products-search-array.js to update search files.');
   }
   
   // Display raw product list in console
-  console.log('\n\n📋 RAW PRODUCT LIST:');
+  console.log('\n\n📋 VALID PRODUCTS (first 100):');
   console.log('═══════════════════════════════════════════════════════\n');
-  allProducts
+  validProducts
+    .slice(0, 100)
     .map(p => p.name)
-    .sort()
     .forEach(name => console.log(name));
+  
+  if (validProducts.length > 100) {
+    console.log(`\n... and ${validProducts.length - 100} more products`);
+  }
+  
   console.log('\n═══════════════════════════════════════════════════════');
   
   console.log('\n\n✅ Scan complete!\n');
+  console.log('💡 Next step: Copy the contents of products-search-array.js');
+  console.log('   and replace the products array in public/search.js\n');
 }
 
 // Run the scan
