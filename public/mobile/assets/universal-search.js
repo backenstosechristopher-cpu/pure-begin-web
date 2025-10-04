@@ -504,9 +504,9 @@
     
     // Also try to find search input directly
     const searchInput = document.getElementById('search-field-input') ||
-                       document.querySelector('.MuiAutocomplete-input') ||
+                       document.querySelector('.MuiAutocomplete-input, .MuiInputBase-input, input[type="search"]') ||
                        document.querySelector('[role="combobox"]') ||
-                       document.querySelector('input[placeholder*="Suche"]');
+                       document.querySelector('input[placeholder*="Suche"], input[placeholder*="Such"], input[placeholder*="Search"]');
     
     if (searchSVG) {
       let clickTarget = searchSVG.parentElement;
@@ -523,6 +523,7 @@
     
     if (searchInput && !searchInput.dataset.searchBound) {
       searchInput.dataset.searchBound = '1';
+      try { console.log('[UniversalSearch/Mobile] input detected, binding overlay'); } catch(_) {}
       searchInput.addEventListener('focus', (e) => {
         e.preventDefault();
         openSearch();
