@@ -239,13 +239,18 @@
   
   // Inject HTML - Just add results container
   function injectHTML() {
-    // Find the existing search input (desktop and mobile)
+    // Find the existing search input (desktop and mobile) - comprehensive selectors
     const existingInput =
       document.getElementById('search-field-input') ||
       document.querySelector('input[placeholder*="Suche nach Produkten, Marken usw" i]') ||
       document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
-      document.querySelector('.MuiAutocomplete-input');
-    if (!existingInput) return;
+      document.querySelector('input[placeholder*="Suchen" i]') ||
+      document.querySelector('.MuiAutocomplete-input') ||
+      document.querySelector('input[type="search"]') ||
+      document.querySelector('input[role="searchbox"]') ||
+      document.querySelector('input[aria-label*="search" i]') ||
+      document.querySelector('input[name*="search" i]');
+    if (!existingInput) { console.log('[Search] No search input found on page:', window.location.pathname); return; }
     
     // Find the parent container
     const inputContainer = existingInput.closest('.MuiInputBase-root') || existingInput.parentElement;
@@ -263,17 +268,22 @@
   
   // Initialize search functionality
   function initSearch() {
-    // Use the existing search input
+    // Use the existing search input - more comprehensive selectors
     const searchInput = document.getElementById('search-field-input') ||
       document.querySelector('input[placeholder*="Suche nach Produkten, Marken usw" i]') ||
       document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
+      document.querySelector('input[placeholder*="Suchen" i]') ||
       document.querySelector('.MuiAutocomplete-input') ||
+      document.querySelector('input[type="search"]') ||
+      document.querySelector('input[role="searchbox"]') ||
+      document.querySelector('input[aria-label*="search" i]') ||
+      document.querySelector('input[name*="search" i]') ||
       document.getElementById('guthaben-search-input');
     let searchResults = document.getElementById('guthaben-search-results') || (injectHTML(), document.getElementById('guthaben-search-results'));
-    if (!searchInput || !searchResults) { console.log('[Search] init aborted: input/results missing'); return; }
-    if (searchInput.dataset.gthBound === '1') { console.log('[Search] already bound'); return; }
+    if (!searchInput || !searchResults) { console.log('[Search] init aborted: input/results missing', 'input:', !!searchInput, 'results:', !!searchResults); return; }
+    if (searchInput.dataset.gthBound === '1') { console.log('[Search] already bound to:', searchInput.id || searchInput.className); return; }
     searchInput.dataset.gthBound = '1';
-    console.log('[Search] initialized, input found:', !!searchInput, 'results:', !!searchResults);
+    console.log('[Search] initialized successfully on:', searchInput.id || searchInput.className, 'page:', window.location.pathname);
     
     function createResultHTML(product) {
       return `
@@ -380,18 +390,25 @@
   function init() {
     injectStyles();
     let attempts = 0;
+    const maxAttempts = 30; // Increased from 20
     const timer = setInterval(() => {
       injectHTML();
       const input = document.getElementById('search-field-input') ||
         document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
+        document.querySelector('input[placeholder*="Suchen" i]') ||
         document.querySelector('.MuiAutocomplete-input') ||
+        document.querySelector('input[type="search"]') ||
+        document.querySelector('input[role="searchbox"]') ||
+        document.querySelector('input[aria-label*="search" i]') ||
+        document.querySelector('input[name*="search" i]') ||
         document.getElementById('guthaben-search-input');
       if (input) {
         clearInterval(timer);
+        console.log('[Search] Found input after', attempts, 'attempts on', window.location.pathname);
         initSearch();
-      } else if (++attempts >= 20) {
+      } else if (++attempts >= maxAttempts) {
         clearInterval(timer);
-        console.warn('[Search] input not found after retries');
+        console.warn('[Search] Input not found after', maxAttempts, 'retries on page:', window.location.pathname);
       }
     }, 250);
   }
