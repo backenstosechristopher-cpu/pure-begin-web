@@ -1,15 +1,14 @@
 // Injects quantity enhancement script into specified pages
-// Usage: node inject-quantity-enhancement.cjs
+// Usage: 
+//   node inject-quantity-enhancement.cjs                    (auto-scan all pages)
+//   node inject-quantity-enhancement.cjs page1.html page2.html  (specific pages)
+//   node inject-quantity-enhancement.cjs desktop/page1.html mobile/page2.html
 
 const fs = require('fs');
 const path = require('path');
 
-// Add your list of pages here (relative paths from public/)
-const PAGES_TO_ENHANCE = [
-  'desktop/guthaben.de_lifecell_15-eur.html',
-  'mobile/guthaben.de_lifecell_15-eur.html',
-  // Add more pages here
-];
+// Get pages from command line arguments (skip first 2: node and script path)
+const CMD_PAGES = process.argv.slice(2);
 
 function hasQuantitySelectors(content) {
   const patterns = [
@@ -97,13 +96,15 @@ function main() {
   console.log('🚀 Quantity Enhancement Injector\n');
   console.log('='.repeat(60));
   
-  // If no pages specified, scan for all pages that need enhancement
-  let pagesToProcess = PAGES_TO_ENHANCE.filter(p => p && !p.startsWith('//'));
+  // Use command line arguments if provided, otherwise auto-scan
+  let pagesToProcess = CMD_PAGES.length > 0 ? CMD_PAGES : [];
   
   if (pagesToProcess.length === 0) {
     console.log('📋 No pages specified, scanning for all pages needing enhancement...\n');
     pagesToProcess = scanAllPages();
     console.log(`Found ${pagesToProcess.length} pages needing enhancement\n`);
+  } else {
+    console.log(`📋 Processing ${pagesToProcess.length} pages from command line\n`);
   }
   
   if (pagesToProcess.length === 0) {
