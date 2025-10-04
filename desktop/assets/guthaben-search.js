@@ -595,7 +595,7 @@
     
     function createResultHTML(product) {
       return `
-        <div class="search-result-item" data-product="${product.name}">
+        <div class="search-result-item" data-product="${product.name}" data-url="${product.url || ''}">
           <div class="result-icon">${product.icon}</div>
           <div class="result-content">
             <div class="result-name">${product.name}</div>
@@ -636,10 +636,19 @@
     
     function attachResultHandlers() {
       document.querySelectorAll('.search-result-item').forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          const productUrl = this.dataset.url;
           const productName = this.dataset.product;
-          searchInput.value = productName;
-          searchResults.style.display = 'none';
+          
+          if (productUrl && productUrl !== '') {
+            // Navigate to product page
+            window.location.href = productUrl;
+          } else {
+            // Fallback: just fill search input
+            searchInput.value = productName;
+            searchResults.style.display = 'none';
+          }
         });
       });
     }

@@ -117,17 +117,20 @@ function scanAllProducts() {
       if (productName && !productsMap.has(productName)) {
         const category = getProductCategory(file, content);
         const icon = getCategoryIcon(category);
+        // Generate URL based on directory (desktop or mobile)
+        const url = dir.includes('mobile') ? `../mobile/${file}` : `../${file}`;
         
         productsMap.set(productName, {
           name: productName,
           category: category,
           icon: icon,
           price: '€10 - €100', // Default price range
+          url: url,
           file: file
         });
         
         foundCount++;
-        console.log(`   ✅ ${productName} → ${category}`);
+        console.log(`   ✅ ${productName} → ${category} (${url})`);
       }
     });
     
@@ -175,7 +178,7 @@ function updateSearchFile(allProducts) {
   
   // Generate products array code
   const productsCode = allProducts
-    .map(p => `    { name: '${p.name}', category: '${p.category}', price: '${p.price}', icon: '${p.icon}' }`)
+    .map(p => `    { name: '${p.name}', category: '${p.category}', price: '${p.price}', icon: '${p.icon}', url: '${p.url || ''}' }`)
     .join(',\n');
   
   searchFiles.forEach(searchFile => {
