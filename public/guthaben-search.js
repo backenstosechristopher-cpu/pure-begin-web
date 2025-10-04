@@ -217,30 +217,47 @@
     { name: 'Nintendo eShop', category: 'Gaming', price: '€15 - €100', icon: '🎮' },
     { name: 'Fortnite V-Bucks', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
     { name: 'Roblox', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
+    { name: 'League of Legends', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
+    { name: 'Valorant', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
+    { name: 'Uber', category: 'Transport', price: '€15 - €100', icon: '🚗' },
+    { name: 'Zalando', category: 'Shopping', price: '€25 - €200', icon: '👗' },
+    { name: 'IKEA', category: 'Shopping', price: '€25 - €500', icon: '🛋️' },
+    { name: 'MediaMarkt', category: 'Elektronik', price: '€25 - €500', icon: '🔌' },
+    { name: 'Mobi', category: 'Mobilfunk', price: '€15', icon: '📞' },
+    { name: 'Vodafone', category: 'Mobilfunk', price: '€15 - €50', icon: '📱' },
+    { name: 'Telekom', category: 'Mobilfunk', price: '€15 - €50', icon: '📱' },
+    { name: 'O2', category: 'Mobilfunk', price: '€15 - €50', icon: '📱' },
     { name: 'Disney+', category: 'Streaming', price: '€25 - €90', icon: '📺' },
     { name: 'Apple Music', category: 'Musik', price: '€10 - €100', icon: '🎵' },
-    { name: 'YouTube Premium', category: 'Streaming', price: '€12 - €120', icon: '📺' }
+    { name: 'YouTube Premium', category: 'Streaming', price: '€12 - €120', icon: '📺' },
+    { name: 'Minecraft', category: 'Gaming', price: '€27', icon: '🎮' },
+    { name: 'EA Sports', category: 'Gaming', price: '€10 - €100', icon: '⚽' },
+    { name: 'Blizzard Battle.net', category: 'Gaming', price: '€20 - €100', icon: '🎮' },
+    { name: 'Paysafecard', category: 'Zahlung', price: '€10 - €100', icon: '💳' },
+    { name: 'Skype', category: 'Kommunikation', price: '€10 - €50', icon: '📞' }
   ];
   
   // Inject HTML - Just add results container
   function injectHTML() {
-    // Find the existing search input
-    const existingInput = document.getElementById('search-field-input');
+    // Find the existing search input (desktop and mobile)
+    const existingInput =
+      document.getElementById('search-field-input') ||
+      document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
+      document.querySelector('.MuiAutocomplete-input');
     if (!existingInput) return;
     
     // Find the parent container
-    const inputContainer = existingInput.closest('.MuiInputBase-root');
+    const inputContainer = existingInput.closest('.MuiInputBase-root') || existingInput.parentElement;
     if (!inputContainer) return;
     
-    // Create and add results container
-    const resultsContainer = document.createElement('div');
-    resultsContainer.id = 'guthaben-search-results';
-    resultsContainer.className = 'guthaben-search-results-existing';
-    
-    // Insert after the input container
-    if (inputContainer.parentElement) {
-      inputContainer.parentElement.style.position = 'relative';
-      inputContainer.parentElement.appendChild(resultsContainer);
+    // Create and add results container if not present
+    if (!document.getElementById('guthaben-search-results')) {
+      const resultsContainer = document.createElement('div');
+      resultsContainer.id = 'guthaben-search-results';
+      resultsContainer.className = 'guthaben-search-results-existing';
+      const host = inputContainer.parentElement || inputContainer;
+      host.style.position = host.style.position || 'relative';
+      host.appendChild(resultsContainer);
     }
   }
   
@@ -249,8 +266,8 @@
     // Use the existing search input
     const searchInput = document.getElementById('search-field-input') || document.getElementById('guthaben-search-input');
     const searchResults = document.getElementById('guthaben-search-results');
-    
-    if (!searchInput || !searchResults) return;
+    if (!searchInput || !searchResults) { console.log('[Search] init aborted: input/results missing'); return; }
+    console.log('[Search] initialized, input found:', !!searchInput, 'results:', !!searchResults);
     
     function createResultHTML(product) {
       return `
@@ -292,12 +309,14 @@
     
     searchInput.addEventListener('focus', function() {
       if (searchInput.value.trim() === '') {
+        console.log('[Search] focus -> show popular');
         showPopularProducts();
       }
     });
     
     searchInput.addEventListener('input', function(e) {
-      const query = e.target.value.toLowerCase().trim();
+      const query = String(e.target.value || '').toLowerCase().trim();
+      if (query.length > 80) { return; }
       
       if (query.length === 0) {
         showPopularProducts();
@@ -320,6 +339,8 @@
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score)
         .map(item => item.product);
+      
+      console.log('[Search] input:', query, 'results:', filtered.length);
       
       if (filtered.length > 0) {
         searchResults.innerHTML = filtered.map(p => createResultHTML(p)).join('');
@@ -352,7 +373,8 @@
   function init() {
     injectStyles();
     injectHTML();
-    setTimeout(initSearch, 100);
+    // Give the page a moment in case the search input renders late
+    setTimeout(initSearch, 200);
   }
   
   if (document.readyState === 'loading') {
