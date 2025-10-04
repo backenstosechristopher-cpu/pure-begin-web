@@ -4,36 +4,36 @@
   
   // Comprehensive product data for search with categories and pricing
   const products = [
-    { name: 'PlayStation Network', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
-    { name: 'Xbox Live', category: 'Gaming', price: '€15 - €100', icon: '🎮' },
-    { name: 'Google Play', category: 'Apps & Games', price: '€5 - €100', icon: '📱' },
-    { name: 'iTunes', category: 'Musik & Apps', price: '€10 - €100', icon: '🎵' },
-    { name: 'Amazon', category: 'Shopping', price: '€10 - €200', icon: '🛒' },
-    { name: 'Netflix', category: 'Streaming', price: '€15 - €50', icon: '📺' },
-    { name: 'Spotify', category: 'Musik', price: '€10 - €60', icon: '🎵' },
-    { name: 'Steam', category: 'Gaming', price: '€5 - €100', icon: '🎮' },
-    { name: 'PayPal', category: 'Zahlung', price: '€10 - €500', icon: '💳' },
-    { name: 'Nintendo eShop', category: 'Gaming', price: '€15 - €100', icon: '🎮' },
-    { name: 'Fortnite V-Bucks', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
-    { name: 'Roblox', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
-    { name: 'League of Legends', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
-    { name: 'Valorant', category: 'Gaming', price: '€10 - €100', icon: '🎮' },
-    { name: 'Uber', category: 'Transport', price: '€15 - €100', icon: '🚗' },
-    { name: 'Zalando', category: 'Shopping', price: '€25 - €200', icon: '👗' },
-    { name: 'IKEA', category: 'Shopping', price: '€25 - €500', icon: '🛋️' },
-    { name: 'MediaMarkt', category: 'Elektronik', price: '€25 - €500', icon: '🔌' },
-    { name: 'Mobi', category: 'Mobilfunk', price: '€15', icon: '📞' },
-    { name: 'Vodafone', category: 'Mobilfunk', price: '€15 - €50', icon: '📱' },
-    { name: 'Telekom', category: 'Mobilfunk', price: '€15 - €50', icon: '📱' },
-    { name: 'O2', category: 'Mobilfunk', price: '€15 - €50', icon: '📱' },
-    { name: 'Disney+', category: 'Streaming', price: '€25 - €90', icon: '📺' },
-    { name: 'Apple Music', category: 'Musik', price: '€10 - €100', icon: '🎵' },
-    { name: 'YouTube Premium', category: 'Streaming', price: '€12 - €120', icon: '📺' },
-    { name: 'Minecraft', category: 'Gaming', price: '€27', icon: '🎮' },
-    { name: 'EA Sports', category: 'Gaming', price: '€10 - €100', icon: '⚽' },
-    { name: 'Blizzard Battle.net', category: 'Gaming', price: '€20 - €100', icon: '🎮' },
-    { name: 'Paysafecard', category: 'Zahlung', price: '€10 - €100', icon: '💳' },
-    { name: 'Skype', category: 'Kommunikation', price: '€10 - €50', icon: '📞' }
+    { name: 'PlayStation Network', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'desktop/guthaben.de_playstation-network-psn-guthabenkarte.html' },
+    { name: 'Xbox Live', category: 'Gaming', price: '€15 - €100', icon: '🎮', url: 'desktop/guthaben.de_xbox-live.html' },
+    { name: 'Google Play', category: 'Apps & Games', price: '€5 - €100', icon: '📱', url: 'desktop/guthaben.de_google-play-guthaben.html' },
+    { name: 'iTunes', category: 'Musik & Apps', price: '€10 - €100', icon: '🎵', url: 'desktop/guthaben.de_apple-gift-card.html' },
+    { name: 'Amazon', category: 'Shopping', price: '€10 - €200', icon: '🛒', url: 'desktop/guthaben.de_amazon-gutschein.html' },
+    { name: 'Netflix', category: 'Streaming', price: '€15 - €50', icon: '📺', url: 'desktop/guthaben.de_netflix.html' },
+    { name: 'Spotify', category: 'Musik', price: '€10 - €60', icon: '🎵', url: 'desktop/guthaben.de_spotify.html' },
+    { name: 'Steam', category: 'Gaming', price: '€5 - €100', icon: '🎮', url: 'desktop/guthaben.de_steam-gift-card.html' },
+    { name: 'PayPal', category: 'Zahlung', price: '€10 - €500', icon: '💳', url: 'desktop/guthaben.de_paypal-guthabenkarte.html' },
+    { name: 'Nintendo eShop', category: 'Gaming', price: '€15 - €100', icon: '🎮', url: 'desktop/guthaben.de_nintendo-eshop.html' },
+    { name: 'Fortnite V-Bucks', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'desktop/guthaben.de_fortnite.html' },
+    { name: 'Roblox', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'desktop/guthaben.de_roblox.html' },
+    { name: 'League of Legends', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'desktop/guthaben.de_league-of-legends-riot-points.html' },
+    { name: 'Valorant', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'desktop/guthaben.de_valorant-riot-points.html' },
+    { name: 'Uber', category: 'Transport', price: '€15 - €100', icon: '🚗', url: 'desktop/guthaben.de_uber.html' },
+    { name: 'Zalando', category: 'Shopping', price: '€25 - €200', icon: '👗', url: 'desktop/guthaben.de_zalando.html' },
+    { name: 'IKEA', category: 'Shopping', price: '€25 - €500', icon: '🛋️', url: 'desktop/guthaben.de_ikea.html' },
+    { name: 'MediaMarkt', category: 'Elektronik', price: '€25 - €500', icon: '🔌', url: 'desktop/guthaben.de_mediamarkt.html' },
+    { name: 'Mobi', category: 'Mobilfunk', price: '€15', icon: '📞', url: 'desktop/guthaben.de_mobi-aufladen.html' },
+    { name: 'Vodafone', category: 'Mobilfunk', price: '€15 - €50', icon: '📱', url: 'desktop/guthaben.de_vodafone-aufladen.html' },
+    { name: 'Telekom', category: 'Mobilfunk', price: '€15 - €50', icon: '📱', url: 'desktop/guthaben.de_telekom-aufladen.html' },
+    { name: 'O2', category: 'Mobilfunk', price: '€15 - €50', icon: '📱', url: 'desktop/guthaben.de_o2-aufladen.html' },
+    { name: 'Disney+', category: 'Streaming', price: '€25 - €90', icon: '📺', url: 'desktop/guthaben.de_disney-plus.html' },
+    { name: 'Apple Music', category: 'Musik', price: '€10 - €100', icon: '🎵', url: 'desktop/guthaben.de_apple-gift-card.html' },
+    { name: 'YouTube Premium', category: 'Streaming', price: '€12 - €120', icon: '📺', url: 'desktop/guthaben.de_youtube-premium.html' },
+    { name: 'Minecraft', category: 'Gaming', price: '€27', icon: '🎮', url: 'desktop/guthaben.de_minecraft.html' },
+    { name: 'EA Sports', category: 'Gaming', price: '€10 - €100', icon: '⚽', url: 'desktop/guthaben.de_ea-game-card.html' },
+    { name: 'Blizzard Battle.net', category: 'Gaming', price: '€20 - €100', icon: '🎮', url: 'desktop/guthaben.de_battlenet-guthabenkarte.html' },
+    { name: 'Paysafecard', category: 'Zahlung', price: '€10 - €100', icon: '💳', url: 'desktop/guthaben.de_paysafecard.html' },
+    { name: 'Skype', category: 'Kommunikation', price: '€10 - €50', icon: '📞', url: 'desktop/guthaben.de_skype.html' }
   ];
   
   function initSearch() {
@@ -62,7 +62,7 @@
     
     function createResultHTML(product) {
       return `
-        <div class="search-result-item" data-product="${product.name}">
+        <div class="search-result-item" data-product="${product.name}" data-url="${product.url || ''}">
           <div class="result-icon">${product.icon}</div>
           <div class="result-content">
             <div class="result-name">${product.name}</div>
@@ -81,11 +81,10 @@
     function attachResultHandlers() {
       document.querySelectorAll('.search-result-item').forEach(item => {
         item.addEventListener('click', function() {
-          const productName = this.dataset.product;
-          searchInput.value = productName;
-          searchResults.style.display = 'none';
-          console.log('Selected product:', productName);
-          // Navigate or trigger product selection
+          const productUrl = this.dataset.url;
+          if (productUrl) {
+            window.location.href = productUrl;
+          }
         });
       });
     }
