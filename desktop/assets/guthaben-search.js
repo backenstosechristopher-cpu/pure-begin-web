@@ -283,7 +283,7 @@
         </div>
       `;
     }
-    // Prepopulate suggestions on load for visibility and position dropdown
+    // Position dropdown
     const positionDropdown = () => {
       const rect = searchInput.getBoundingClientRect();
       Object.assign(searchResults.style, {
@@ -292,8 +292,6 @@
         top: Math.round(rect.bottom + 8) + 'px'
       });
     };
-    showPopularProducts();
-    positionDropdown();
     function showPopularProducts() {
       const popular = products.slice(0, 8);
       searchResults.innerHTML = `
@@ -317,10 +315,7 @@
     
     searchInput.addEventListener('focus', function() {
       positionDropdown();
-      if (searchInput.value.trim() === '') {
-        console.log('[Search] focus -> show popular');
-        showPopularProducts();
-      } else {
+      if (searchInput.value.trim() !== '') {
         searchResults.style.display = 'block';
       }
     });
@@ -330,7 +325,7 @@
       positionDropdown();
       if (query.length > 80) { return; }
       if (query.length === 0) {
-        showPopularProducts();
+        searchResults.style.display = 'none';
         return;
       }
       const filtered = products

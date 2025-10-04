@@ -129,9 +129,6 @@
     searchOverlay.appendChild(header);
     searchOverlay.appendChild(searchResults);
     document.body.appendChild(searchOverlay);
-    
-    // Show popular products initially
-    showPopularProducts();
   }
   
   function openSearch() {
@@ -221,7 +218,7 @@
     const query = e.target.value.toLowerCase().trim();
     
     if (query.length === 0) {
-      showPopularProducts();
+      searchResults.innerHTML = '';
       return;
     }
     
