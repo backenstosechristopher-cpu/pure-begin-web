@@ -185,9 +185,14 @@
   }
   
   function initSearch() {
-    const searchInput = document.getElementById('search-field-input');
+    const searchInput = document.getElementById('search-field-input') ||
+                       document.querySelector('.MuiAutocomplete-input') ||
+                       document.querySelector('[role="combobox"]');
+    if (!searchInput) return;
+    if (!searchInput.id) searchInput.id = 'search-field-input';
+    
     let searchResults = document.getElementById('guthaben-search-results') || (injectHTML(), document.getElementById('guthaben-search-results'));
-    if (!searchInput || !searchResults) return;
+    if (!searchResults) return;
     if (searchInput.dataset.gthBound === '1') return;
     searchInput.dataset.gthBound = '1';
     
@@ -305,23 +310,32 @@
     let attempts = 0;
     const timer = setInterval(() => {
       injectHTML();
-      const input = document.getElementById('search-field-input');
+      const input = document.getElementById('search-field-input') || 
+                    document.querySelector('.MuiAutocomplete-input') ||
+                    document.querySelector('[role="combobox"]') ||
+                    document.querySelector('input[placeholder*="Suche"]');
       if (input) {
+        if (!input.id) input.id = 'search-field-input';
         clearInterval(timer);
         initSearch();
         try {
           const mo = new MutationObserver(() => {
-            const el = document.getElementById('search-field-input');
-            if (el && el.dataset.gthBound !== '1') {
-              initSearch();
+            const el = document.getElementById('search-field-input') || 
+                       document.querySelector('.MuiAutocomplete-input') ||
+                       document.querySelector('[role="combobox"]');
+            if (el) {
+              if (!el.id) el.id = 'search-field-input';
+              if (el.dataset.gthBound !== '1') {
+                initSearch();
+              }
             }
           });
           mo.observe(document.body, { childList: true, subtree: true });
         } catch (e) {}
-      } else if (++attempts >= 80) {
+      } else if (++attempts >= 100) {
         clearInterval(timer);
       }
-    }, 250);
+    }, 150);
   }
   
   if (document.readyState === 'loading') {

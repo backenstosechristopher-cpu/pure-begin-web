@@ -241,15 +241,23 @@
   }
   
   function bindSearchIcon() {
+    // Try multiple ways to find search icon/input
     const searchSVG = Array.from(document.querySelectorAll('svg')).find(svg => {
       const path = svg.querySelector('path[d*="15.0918"]');
       const circle = svg.querySelector('circle[cx="10.5"][cy="10.5"]');
       return path && circle;
     });
     
+    // Also try to find search input directly
+    const searchInput = document.getElementById('search-field-input') ||
+                       document.querySelector('.MuiAutocomplete-input') ||
+                       document.querySelector('[role="combobox"]') ||
+                       document.querySelector('input[placeholder*="Suche"]');
+    
     if (searchSVG) {
       let clickTarget = searchSVG.parentElement;
-      if (clickTarget) {
+      if (clickTarget && !clickTarget.dataset.searchBound) {
+        clickTarget.dataset.searchBound = '1';
         clickTarget.style.cursor = 'pointer';
         clickTarget.addEventListener('click', (e) => {
           e.preventDefault();
@@ -257,7 +265,17 @@
           openSearch();
         });
       }
-    } else {
+    }
+    
+    if (searchInput && !searchInput.dataset.searchBound) {
+      searchInput.dataset.searchBound = '1';
+      searchInput.addEventListener('focus', (e) => {
+        e.preventDefault();
+        openSearch();
+      });
+    }
+    
+    if (!searchSVG && !searchInput) {
       setTimeout(bindSearchIcon, 500);
     }
   }

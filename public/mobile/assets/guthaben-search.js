@@ -268,21 +268,26 @@
   }
   
   function bindSearchIcon() {
-    console.log('[Mobile Search] Looking for search SVG...');
+    console.log('[Mobile Search] Looking for search icon/input...');
     
-    // Find the search SVG icon
+    // Try multiple ways to find search icon/input
     const searchSVG = Array.from(document.querySelectorAll('svg')).find(svg => {
       const path = svg.querySelector('path[d*="15.0918"]');
       const circle = svg.querySelector('circle[cx="10.5"][cy="10.5"]');
       return path && circle;
     });
     
+    // Also try to find search input directly
+    const searchInput = document.getElementById('search-field-input') ||
+                       document.querySelector('.MuiAutocomplete-input') ||
+                       document.querySelector('[role="combobox"]') ||
+                       document.querySelector('input[placeholder*="Suche"]');
+    
     if (searchSVG) {
       console.log('[Mobile Search] Found search SVG, binding click handler');
-      
-      // Make the parent clickable
       let clickTarget = searchSVG.parentElement;
-      if (clickTarget) {
+      if (clickTarget && !clickTarget.dataset.searchBound) {
+        clickTarget.dataset.searchBound = '1';
         clickTarget.style.cursor = 'pointer';
         clickTarget.addEventListener('click', (e) => {
           e.preventDefault();
@@ -291,8 +296,19 @@
         });
         console.log('[Mobile Search] Successfully bound to SVG parent');
       }
-    } else {
-      console.log('[Mobile Search] Search SVG not found, retrying...');
+    }
+    
+    if (searchInput && !searchInput.dataset.mobileSearchBound) {
+      console.log('[Mobile Search] Found search input, binding focus handler');
+      searchInput.dataset.mobileSearchBound = '1';
+      searchInput.addEventListener('focus', (e) => {
+        e.preventDefault();
+        openSearch();
+      });
+    }
+    
+    if (!searchSVG && !searchInput) {
+      console.log('[Mobile Search] Search icon/input not found, retrying...');
       setTimeout(bindSearchIcon, 500);
     }
   }
