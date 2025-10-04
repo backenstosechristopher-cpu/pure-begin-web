@@ -561,8 +561,14 @@
   function injectHTML() {
     // Find the existing search input (desktop and mobile)
     const existingInput =
-      document.getElementById('search-field-input');
-    if (!existingInput) return;
+      document.getElementById('search-field-input') ||
+      document.querySelector('input[placeholder*="Suche nach Produkten" i]') ||
+      document.querySelector('.MuiAutocomplete-input') ||
+      document.querySelector('input[type="search"]') ||
+      document.querySelector('input[role="searchbox"]') ||
+      document.querySelector('input[aria-label*="search" i]') ||
+      document.querySelector('input[name*="search" i]');
+    if (!existingInput) { console.warn('[Search] No search input found on page:', window.location.pathname); return; }
     
     // Find the parent container
     const inputContainer = existingInput.closest('.MuiInputBase-root') || existingInput.parentElement;
