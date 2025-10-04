@@ -117,8 +117,9 @@ function scanAllProducts() {
       if (productName && !productsMap.has(productName)) {
         const category = getProductCategory(file, content);
         const icon = getCategoryIcon(category);
-        // Generate URL based on directory (desktop or mobile)
-        const url = dir.includes('mobile') ? `../mobile/${file}` : `../${file}`;
+        
+        // Generate URL: just the filename since search is loaded on pages in same directory
+        const url = file;
         
         productsMap.set(productName, {
           name: productName,
