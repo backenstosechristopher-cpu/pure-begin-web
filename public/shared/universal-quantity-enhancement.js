@@ -5,7 +5,7 @@
   // - Fully isolated via Shadow DOM
   // - Auto-detects and enhances all quantity buttons on page load
 
-  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon)';
+  const BTN_SELECTOR = 'button[role="combobox"].MuiSelect-root, button[id^="product_card_quantity_select_"], button[aria-label*="Quantity"], button[aria-label*="quantity"], button[aria-label*="Anzahl"], button[data-testid*="quantity"], .MuiSelect-select[role="combobox"], button.MuiButtonBase-root:has(+ .MuiSelect-icon), button:has(.MuiSelect-icon), button[role="combobox"]:has(small)';
 
   // Host (fixed, top layer)
   const host = document.createElement('div');
@@ -167,10 +167,22 @@
   });
 
   // Open listeners (capture) so we beat site handlers
-  ['pointerdown','click'].forEach(evt => {
+  ['pointerdown','mousedown','click'].forEach(evt => {
     window.addEventListener(evt, maybeOpen, true);
     document.addEventListener(evt, maybeOpen, true);
   });
+
+  // Keyboard open (Enter/Space) on quantity buttons
+  document.addEventListener('keydown', (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target) {
+      const btn = e.target.closest && e.target.closest(BTN_SELECTOR);
+      if (btn) {
+        e.preventDefault(); e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+        openFor(btn);
+      }
+    }
+  }, true);
 
   // ESC to close
   document.addEventListener('keydown', (e) => {
