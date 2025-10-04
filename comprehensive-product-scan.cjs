@@ -179,6 +179,13 @@ function main() {
   // Save reports
   fs.writeFileSync('product-scan-report.json', JSON.stringify(report, null, 2));
   
+  // Generate simple raw list
+  const rawList = allProducts
+    .map(p => p.name)
+    .sort()
+    .join('\n');
+  fs.writeFileSync('products-raw-list.txt', rawList);
+  
   // Generate human-readable report
   let textReport = '═══════════════════════════════════════════════════════\n';
   textReport += '           COMPREHENSIVE PRODUCT SCAN REPORT\n';
@@ -234,6 +241,7 @@ function main() {
   console.log('\n\n📁 Reports saved:');
   console.log('   • product-scan-report.json (detailed data)');
   console.log('   • product-scan-report.txt (human-readable)');
+  console.log('   • products-raw-list.txt (simple list of all products)');
   
   if (missingProducts.length > 0) {
     console.log('\n\n⚠️  ACTION REQUIRED:');
