@@ -56,37 +56,81 @@ function getAllHtmlFiles(dir) {
 
 // Remove cookie modals from content
 function removeCookieModals(content) {
-    let modifiedContent = content;
+    let html = content;
     const removedSections = [];
     let changed = false;
 
-    // Iterate multiple passes to handle nested/stacked wrappers
-    let pass = 0;
-    while (true) {
-        pass++;
-        let passChanged = false;
-
-        COOKIE_PATTERNS.forEach(({ pattern, name }) => {
-            const matches = modifiedContent.match(pattern);
-            if (matches && matches.length > 0) {
-                matches.forEach(match => {
-                    // Store a preview of what's being removed (first 100 chars)
-                    const preview = match.substring(0, 100).replace(/\n/g, ' ').trim();
-                    removedSections.push({
-                        type: name,
-                        preview: preview + (match.length > 100 ? '...' : '')
-                    });
-                });
-                modifiedContent = modifiedContent.replace(pattern, '');
-                passChanged = true;
-                changed = true;
+    // Helper: find end index of a balanced tag starting at `start` (e.g., <div ...>)
+    function findBalancedEnd(str, start, tagName) {
+        const openToken = `<${tagName}`;
+        const closeToken = `</${tagName}>`;
+        let i = start;
+        let depth = 0;
+        while (i < str.length) {
+            const nextOpen = str.indexOf(openToken, i);
+            const nextClose = str.indexOf(closeToken, i);
+            if (nextOpen !== -1 && (nextOpen < nextClose || nextClose === -1)) {
+                depth++;
+                i = nextOpen + openToken.length;
+                continue;
             }
-        });
-
-        if (!passChanged || pass >= 6) break; // safety cap
+            if (nextClose === -1) {
+                return str.length; // fallback if malformed
+            }
+            depth--;
+            i = nextClose + closeToken.length;
+            if (depth <= 0) return i;
+        }
+        return str.length;
     }
 
-    return { content: modifiedContent, removed: removedSections, changed };
+    // Helper: remove the tag that contains a given attribute (by regex), repeatedly
+    function removeTagContainingAttr(h, attrRegex, label) {
+        const re = new RegExp(attrRegex, 'i');
+        while (true) {
+            const m = re.exec(h);
+            if (!m) break;
+            const attrIndex = m.index;
+            const start = h.lastIndexOf('<', attrIndex);
+            if (start === -1) break;
+            const tagMatch = /^<\s*([a-zA-Z0-9]+)/.exec(h.slice(start));
+            const tagName = (tagMatch ? tagMatch[1] : 'div').toLowerCase();
+            const end = findBalancedEnd(h, start, tagName);
+            const snippet = h.substring(start, Math.min(end, start + 120)).replace(/\n/g, ' ').trim();
+            removedSections.push({ type: label, preview: snippet + (end - start > 120 ? '...' : '') });
+            h = h.slice(0, start) + h.slice(end);
+            changed = true;
+        }
+        return h;
+    }
+
+    // 1) Remove by specific IDs and ID prefixes (robust, tag-balanced)
+    html = removeTagContainingAttr(html, String.raw`\bid=["']cookiebanner["']`, 'Cookie Banner (#cookiebanner)');
+    html = removeTagContainingAttr(html, String.raw`\bid=["']cookie_wrapper["']`, 'Cookie Wrapper (#cookie_wrapper)');
+    html = removeTagContainingAttr(html, String.raw`\bid=["']cookie_body["']`, 'Cookie Body (#cookie_body)');
+    html = removeTagContainingAttr(html, String.raw`\bid=["']cookie_buttons_new["']`, 'Cookie Buttons Container (#cookie_buttons_new)');
+    html = removeTagContainingAttr(html, String.raw`\bid=["']CybotCookiebotDialog["']`, 'Cookiebot Dialog (#CybotCookiebotDialog)');
+    // Any id that starts with cookie_ (e.g., cookie_1, cookie_2, ...)
+    html = removeTagContainingAttr(html, String.raw`\bid=["']cookie_[^"']*["']`, 'Cookie Section (#cookie_*)');
+
+    // 2) Remove containers that include known cookie texts
+    html = removeTagContainingAttr(html, String.raw`This website uses cookies`, 'Cookie Text Container (EN)');
+    html = removeTagContainingAttr(html, String.raw`Diese Website verwendet Cookies`, 'Cookie Text Container (DE)');
+
+    // 3) Fallback: apply regex patterns (broad sweep, non-balanced)
+    COOKIE_PATTERNS.forEach(({ pattern, name }) => {
+        const matches = html.match(pattern);
+        if (matches && matches.length > 0) {
+            matches.forEach(match => {
+                const preview = match.substring(0, 100).replace(/\n/g, ' ').trim();
+                removedSections.push({ type: name, preview: preview + (match.length > 100 ? '...' : '') });
+            });
+            html = html.replace(pattern, '');
+            changed = true;
+        }
+    });
+
+    return { content: html, removed: removedSections, changed };
 }
 
 // Main execution
