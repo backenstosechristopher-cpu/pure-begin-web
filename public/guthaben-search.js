@@ -60,7 +60,8 @@
         color: #999;
       }
       
-      #guthaben-search-results {
+      #guthaben-search-results,
+      .guthaben-search-results-existing {
         position: absolute;
         top: calc(100% + 8px);
         left: 0;
@@ -221,39 +222,32 @@
     { name: 'YouTube Premium', category: 'Streaming', price: '€12 - €120', icon: '📺' }
   ];
   
-  // Inject HTML
+  // Inject HTML - Just add results container
   function injectHTML() {
-    const searchHTML = `
-      <div class="guthaben-search-section">
-        <div class="guthaben-search-container">
-          <div class="guthaben-search-wrapper">
-            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.35-4.35"></path>
-            </svg>
-            <input 
-              type="text" 
-              id="guthaben-search-input" 
-              placeholder="Suche nach Produkten... (z.B. PlayStation, Netflix, Amazon)"
-              autocomplete="off"
-            />
-          </div>
-          <div id="guthaben-search-results"></div>
-        </div>
-      </div>
-    `;
+    // Find the existing search input
+    const existingInput = document.getElementById('search-field-input');
+    if (!existingInput) return;
     
-    const header = document.querySelector('.mui-style-zggve2');
-    if (header && header.nextElementSibling) {
-      const div = document.createElement('div');
-      div.innerHTML = searchHTML;
-      header.parentNode.insertBefore(div.firstElementChild, header.nextElementSibling);
+    // Find the parent container
+    const inputContainer = existingInput.closest('.MuiInputBase-root');
+    if (!inputContainer) return;
+    
+    // Create and add results container
+    const resultsContainer = document.createElement('div');
+    resultsContainer.id = 'guthaben-search-results';
+    resultsContainer.className = 'guthaben-search-results-existing';
+    
+    // Insert after the input container
+    if (inputContainer.parentElement) {
+      inputContainer.parentElement.style.position = 'relative';
+      inputContainer.parentElement.appendChild(resultsContainer);
     }
   }
   
   // Initialize search functionality
   function initSearch() {
-    const searchInput = document.getElementById('guthaben-search-input');
+    // Use the existing search input
+    const searchInput = document.getElementById('search-field-input') || document.getElementById('guthaben-search-input');
     const searchResults = document.getElementById('guthaben-search-results');
     
     if (!searchInput || !searchResults) return;
@@ -347,8 +341,8 @@
     });
     
     document.addEventListener('click', function(e) {
-      const container = document.querySelector('.guthaben-search-container');
-      if (container && !container.contains(e.target)) {
+      const container = searchInput.closest('.MuiInputBase-root') || document.querySelector('.guthaben-search-container');
+      if (container && !container.contains(e.target) && !searchResults.contains(e.target)) {
         searchResults.style.display = 'none';
       }
     });
