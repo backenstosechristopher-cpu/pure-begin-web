@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Universal Search Loader Instructions</title>
+  <style>
+    body {
+      font-family: 'sofia-pro', Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #032e33;
+      border-bottom: 3px solid #ffa81e;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #ffa81e;
+      margin-top: 30px;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+    pre {
+      background: #032e33;
+      color: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .note {
+      background: #fff8f0;
+      border-left: 4px solid #ffa81e;
+      padding: 15px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Universal Search - Installation Guide</h1>
+    
+    <p>The universal search scripts are now created and ready to use on all pages of your website.</p>
+    
+    <h2>📁 Files Created:</h2>
+    <ul>
+      <li><strong>Desktop:</strong> <code>public/desktop/assets/universal-search.js</code></li>
+      <li><strong>Mobile:</strong> <code>public/mobile/assets/universal-search.js</code></li>
+      <li><strong>Logo Fix Desktop:</strong> <code>public/desktop/assets/logo-redirect-fix.js</code></li>
+      <li><strong>Logo Fix Mobile:</strong> <code>public/mobile/assets/logo-redirect-fix.js</code></li>
+    </ul>
+    
+    <h2>🚀 How to Add to Your Pages:</h2>
+    
+    <h3>For Desktop Pages:</h3>
+    <p>Add these script tags to the <code>&lt;head&gt;</code> or before closing <code>&lt;/body&gt;</code> tag:</p>
+    <pre>&lt;script src="assets/universal-search.js"&gt;&lt;/script&gt;
+&lt;script src="assets/logo-redirect-fix.js"&gt;&lt;/script&gt;</pre>
+    
+    <h3>For Mobile Pages:</h3>
+    <p>Add these script tags to the <code>&lt;head&gt;</code> or before closing <code>&lt;/body&gt;</code> tag:</p>
+    <pre>&lt;script src="assets/universal-search.js"&gt;&lt;/script&gt;
+&lt;script src="assets/logo-redirect-fix.js"&gt;&lt;/script&gt;</pre>
+    
+    <div class="note">
+      <strong>📝 Note:</strong> These scripts will automatically:
+      <ul>
+        <li>✅ Detect the search input field on any page</li>
+        <li>✅ Enable live search with product suggestions</li>
+        <li>✅ Navigate to correct product pages on click</li>
+        <li>✅ Fix logo redirect to guthaben.de_.html</li>
+        <li>✅ Work on both desktop and mobile versions</li>
+      </ul>
+    </div>
+    
+    <h2>⚙️ How It Works:</h2>
+    <ul>
+      <li><strong>Desktop:</strong> Search results appear in a dropdown below the search input</li>
+      <li><strong>Mobile:</strong> Clicking the search icon opens a full-screen search overlay</li>
+      <li><strong>Both:</strong> Type to filter products by name or category</li>
+      <li><strong>Both:</strong> Click any result to navigate to that product's page</li>
+    </ul>
+    
+    <h2>🎯 Product URLs:</h2>
+    <p>All search results link to pages like:</p>
+    <ul>
+      <li><code>guthaben.de_playstation-network-psn-guthabenkarte.html</code></li>
+      <li><code>guthaben.de_vodafone-aufladen.html</code></li>
+      <li><code>guthaben.de_amazon-gutschein.html</code></li>
+      <li>And many more...</li>
+    </ul>
+    
+    <h2>✨ Features:</h2>
+    <ul>
+      <li>Smart search with scoring algorithm</li>
+      <li>Category-based filtering</li>
+      <li>Beautiful hover effects</li>
+      <li>Responsive design</li>
+      <li>No dependencies - works standalone</li>
+      <li>Auto-initializes on any page</li>
+    </ul>
+  </div>
+</body>
+</html>
