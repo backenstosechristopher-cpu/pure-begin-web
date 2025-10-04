@@ -4,12 +4,12 @@
   
   // Comprehensive product data for search with categories and pricing
   const products = [
-    { name: 'PlayStation Network', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'desktop/guthaben.de_playstation-network-psn-guthabenkarte.html' },
+    { name: 'PlayStation Network', category: 'Gaming', price: '€10 - €100', icon: '🎮', url: 'desktop/guthaben.de_psn-card.html' },
     { name: 'Xbox Live', category: 'Gaming', price: '€15 - €100', icon: '🎮', url: 'desktop/guthaben.de_xbox-live.html' },
     { name: 'Google Play', category: 'Apps & Games', price: '€5 - €100', icon: '📱', url: 'desktop/guthaben.de_google-play-guthaben.html' },
     { name: 'iTunes', category: 'Musik & Apps', price: '€10 - €100', icon: '🎵', url: 'desktop/guthaben.de_apple-gift-card.html' },
     { name: 'Amazon', category: 'Shopping', price: '€10 - €200', icon: '🛒', url: 'desktop/guthaben.de_amazon-gutschein.html' },
-    { name: 'Netflix', category: 'Streaming', price: '€15 - €50', icon: '📺', url: 'desktop/guthaben.de_netflix.html' },
+    { name: 'Netflix', category: 'Streaming', price: '€15 - €50', icon: '📺', url: 'desktop/guthaben.de_netflix-geschenkkarte.html' },
     { name: 'Spotify', category: 'Musik', price: '€10 - €60', icon: '🎵', url: 'desktop/guthaben.de_spotify.html' },
     { name: 'Steam', category: 'Gaming', price: '€5 - €100', icon: '🎮', url: 'desktop/guthaben.de_steam-gift-card.html' },
     { name: 'PayPal', category: 'Zahlung', price: '€10 - €500', icon: '💳', url: 'desktop/guthaben.de_paypal-guthabenkarte.html' },
