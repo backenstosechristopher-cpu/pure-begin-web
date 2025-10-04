@@ -6,6 +6,9 @@ const SCAN_DIRS = ['public/desktop', 'public/mobile'];
 
 // Patterns to identify cookie modals/banners
 const COOKIE_PATTERNS = [
+    // Specific cookiebanner ID pattern (most specific first)
+    { pattern: /<div\s+id="cookiebanner"[^>]*>(?:(?!<div\s+id="cookiebanner").)*?<\/div>\s*<\/div>/gs, name: 'Cookie Banner (id="cookiebanner")' },
+    
     // Cookiebot specific
     { pattern: /<div[^>]*id="CybotCookiebotDialog"[^>]*>[\s\S]*?<\/div>\s*<\/div>/gi, name: 'Cookiebot Dialog' },
     { pattern: /<script[^>]*id="Cookiebot"[^>]*>[\s\S]*?<\/script>/gi, name: 'Cookiebot Script' },
