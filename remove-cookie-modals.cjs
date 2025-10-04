@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const cheerio = require('cheerio');
 
 // Directories to scan
 const SCAN_DIRS = ['public', 'mobile', 'desktop'];
@@ -54,83 +55,75 @@ function getAllHtmlFiles(dir) {
     return results;
 }
 
-// Remove cookie modals from content
+// Remove cookie modals from content (DOM parser based)
 function removeCookieModals(content) {
-    let html = content;
     const removedSections = [];
     let changed = false;
 
-    // Helper: find end index of a balanced tag starting at `start` (e.g., <div ...>)
-    function findBalancedEnd(str, start, tagName) {
-        const openToken = `<${tagName}`;
-        const closeToken = `</${tagName}>`;
-        let i = start;
-        let depth = 0;
-        while (i < str.length) {
-            const nextOpen = str.indexOf(openToken, i);
-            const nextClose = str.indexOf(closeToken, i);
-            if (nextOpen !== -1 && (nextOpen < nextClose || nextClose === -1)) {
-                depth++;
-                i = nextOpen + openToken.length;
-                continue;
-            }
-            if (nextClose === -1) {
-                return str.length; // fallback if malformed
-            }
-            depth--;
-            i = nextClose + closeToken.length;
-            if (depth <= 0) return i;
-        }
-        return str.length;
-    }
+    const docType = (content.match(/^<!DOCTYPE[^>]*>/i) || [])[0] || '';
+    const body = content.replace(/^<!DOCTYPE[^>]*>/i, '');
 
-    // Helper: remove the tag that contains a given attribute (by regex), repeatedly
-    function removeTagContainingAttr(h, attrRegex, label) {
-        const re = new RegExp(attrRegex, 'i');
-        while (true) {
-            const m = re.exec(h);
-            if (!m) break;
-            const attrIndex = m.index;
-            const start = h.lastIndexOf('<', attrIndex);
-            if (start === -1) break;
-            const tagMatch = /^<\s*([a-zA-Z0-9]+)/.exec(h.slice(start));
-            const tagName = (tagMatch ? tagMatch[1] : 'div').toLowerCase();
-            const end = findBalancedEnd(h, start, tagName);
-            const snippet = h.substring(start, Math.min(end, start + 120)).replace(/\n/g, ' ').trim();
-            removedSections.push({ type: label, preview: snippet + (end - start > 120 ? '...' : '') });
-            h = h.slice(0, start) + h.slice(end);
-            changed = true;
-        }
-        return h;
-    }
+    const $ = cheerio.load(body, { decodeEntities: false });
 
-    // 1) Remove by specific IDs and ID prefixes (robust, tag-balanced)
-    html = removeTagContainingAttr(html, String.raw`\bid=["']cookiebanner["']`, 'Cookie Banner (#cookiebanner)');
-    html = removeTagContainingAttr(html, String.raw`\bid=["']cookie_wrapper["']`, 'Cookie Wrapper (#cookie_wrapper)');
-    html = removeTagContainingAttr(html, String.raw`\bid=["']cookie_body["']`, 'Cookie Body (#cookie_body)');
-    html = removeTagContainingAttr(html, String.raw`\bid=["']cookie_buttons_new["']`, 'Cookie Buttons Container (#cookie_buttons_new)');
-    html = removeTagContainingAttr(html, String.raw`\bid=["']CybotCookiebotDialog["']`, 'Cookiebot Dialog (#CybotCookiebotDialog)');
-    // Any id that starts with cookie_ (e.g., cookie_1, cookie_2, ...)
-    html = removeTagContainingAttr(html, String.raw`\bid=["']cookie_[^"']*["']`, 'Cookie Section (#cookie_*)');
+    const selectors = [
+        '#cookiebanner',
+        '#cookie_wrapper',
+        '#cookie_body',
+        '#cookie_buttons_new',
+        '#CybotCookiebotDialog',
+        '[id^="cookie_"]',
+        '.cookie_main_title',
+        '.cookie_body_text',
+        '.cookie_title',
+        '.cookie_text',
+        '.cookie_hr_line',
+        '.cookie_input',
+        'script#Cookiebot',
+        'script[src*="consent.cookiebot.com"]'
+    ];
 
-    // 2) Remove containers that include known cookie texts
-    html = removeTagContainingAttr(html, String.raw`This website uses cookies`, 'Cookie Text Container (EN)');
-    html = removeTagContainingAttr(html, String.raw`Diese Website verwendet Cookies`, 'Cookie Text Container (DE)');
-
-    // 3) Fallback: apply regex patterns (broad sweep, non-balanced)
-    COOKIE_PATTERNS.forEach(({ pattern, name }) => {
-        const matches = html.match(pattern);
-        if (matches && matches.length > 0) {
-            matches.forEach(match => {
-                const preview = match.substring(0, 100).replace(/\n/g, ' ').trim();
-                removedSections.push({ type: name, preview: preview + (match.length > 100 ? '...' : '') });
+    selectors.forEach((sel) => {
+        const nodes = $(sel).toArray();
+        if (nodes.length) {
+            nodes.forEach((el) => {
+                const htmlStr = ($.html(el) || '');
+                const preview = htmlStr.replace(/\s+/g, ' ').slice(0, 120);
+                removedSections.push({ type: `Selector ${sel}`, preview: preview + (htmlStr.length > 120 ? '...' : '') });
             });
-            html = html.replace(pattern, '');
+            $(sel).remove();
             changed = true;
         }
     });
 
-    return { content: html, removed: removedSections, changed };
+    // Remove containers that visibly contain the cookie notice text
+    const phrases = ['This website uses cookies', 'Diese Website verwendet Cookies'];
+    phrases.forEach((txt) => {
+        $('*').filter((i, el) => $(el).text().toLowerCase().includes(txt.toLowerCase())).each((i, el) => {
+            // Prefer removing a nearby ancestor that clearly relates to cookies
+            let node = el;
+            let candidate = null;
+            for (let depth = 0; depth < 4 && node && node.parent; depth++) {
+                const id = ($(node).attr('id') || '').toLowerCase();
+                const cls = ($(node).attr('class') || '').toLowerCase();
+                if (id.includes('cookie') || cls.includes('cookie')) candidate = node;
+                node = node.parent;
+            }
+            const target = candidate || el;
+            const htmlStr = ($.html(target) || '');
+            const preview = htmlStr.replace(/\s+/g, ' ').slice(0, 120);
+            removedSections.push({ type: `Text "${txt}"`, preview: preview + (htmlStr.length > 120 ? '...' : '') });
+            $(target).remove();
+            changed = true;
+        });
+    });
+
+    // Final cleanup for any leftover containers by id
+    ['cookiebanner','cookie_wrapper','cookie_body','cookie_buttons_new'].forEach((id) => {
+        $(`#${id}`).remove();
+    });
+
+    const output = docType ? docType + $.html() : $.html();
+    return { content: output, removed: removedSections, changed };
 }
 
 // Main execution
