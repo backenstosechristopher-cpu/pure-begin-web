@@ -35,10 +35,12 @@ function findMissingPages() {
   console.log('🔍 SCANNING FOR PAGES MISSING QUANTITY SELECTORS');
   console.log('=================================================\n');
   
-  const directories = ['desktop', 'mobile'];
+  const directories = ['desktop', 'mobile', 'public/desktop', 'public/mobile'];
   const missing = {
     desktop: [],
-    mobile: []
+    mobile: [],
+    'public/desktop': [],
+    'public/mobile': []
   };
   
   directories.forEach(dir => {
@@ -72,26 +74,29 @@ function findMissingPages() {
   // Summary
   console.log('\n📋 SUMMARY');
   console.log('=========');
+  const totalMissing = Object.values(missing).reduce((sum, arr) => sum + arr.length, 0);
   console.log(`Desktop: ${missing.desktop.length} pages need enhancement`);
   console.log(`Mobile: ${missing.mobile.length} pages need enhancement`);
-  console.log(`Total: ${missing.desktop.length + missing.mobile.length} pages need enhancement`);
+  console.log(`Public/Desktop: ${missing['public/desktop'].length} pages need enhancement`);
+  console.log(`Public/Mobile: ${missing['public/mobile'].length} pages need enhancement`);
+  console.log(`Total: ${totalMissing} pages need enhancement`);
   
-  if (missing.desktop.length > 0) {
-    console.log('\n📱 DESKTOP PAGES MISSING ENHANCEMENT:');
-    missing.desktop.forEach(file => console.log(`   - ${file}`));
-  }
-  
-  if (missing.mobile.length > 0) {
-    console.log('\n📱 MOBILE PAGES MISSING ENHANCEMENT:');
-    missing.mobile.forEach(file => console.log(`   - ${file}`));
-  }
+  Object.keys(missing).forEach(dir => {
+    if (missing[dir].length > 0) {
+      console.log(`\n📱 ${dir.toUpperCase()} PAGES MISSING ENHANCEMENT:`);
+      missing[dir].forEach(file => console.log(`   - ${file}`));
+    }
+  });
   
   // Write report
+  const totalMissing = Object.values(missing).reduce((sum, arr) => sum + arr.length, 0);
   const report = {
     timestamp: new Date().toISOString(),
-    total: missing.desktop.length + missing.mobile.length,
+    total: totalMissing,
     desktop: missing.desktop,
-    mobile: missing.mobile
+    mobile: missing.mobile,
+    'public/desktop': missing['public/desktop'],
+    'public/mobile': missing['public/mobile']
   };
   
   fs.writeFileSync('missing-quantity-selectors-report.json', JSON.stringify(report, null, 2));

@@ -94,7 +94,7 @@ function getCategoryIcon(category) {
 
 // Scan all HTML files
 function scanAllProducts() {
-  const directories = ['desktop', 'mobile'];
+  const directories = ['desktop', 'mobile', 'public/desktop', 'public/mobile'];
   const productsMap = new Map();
   
   directories.forEach(dir => {

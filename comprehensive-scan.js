@@ -96,7 +96,7 @@ function comprehensiveScan() {
   console.log('🔍 COMPREHENSIVE QUANTITY ENHANCEMENT SCAN');
   console.log('==========================================\n');
   
-  const directories = ['desktop', 'mobile'];
+  const directories = ['desktop', 'mobile', 'public/desktop', 'public/mobile'];
   let totalScanned = 0;
   let totalWithSelectors = 0;
   let totalAlreadyEnhanced = 0;
