@@ -203,55 +203,41 @@ function updateSearchFile(allProducts) {
 
 // Main execution
 function main() {
-  console.log('📋 Step 1: Getting existing products...\n');
-  const existingProducts = getExistingProducts();
-  console.log(`Found ${existingProducts.length} existing products in search\n`);
-  
-  console.log('📋 Step 2: Scanning all HTML files...\n');
+  console.log('📋 Step 1: Scanning all HTML files...\n');
   const scannedProducts = scanAllProducts();
   console.log(`\n📊 Scanned ${scannedProducts.length} total products from HTML files\n`);
   
-  console.log('📋 Step 3: Finding missing products...\n');
-  const existingNames = new Set(existingProducts);
-  const missingProducts = scannedProducts.filter(p => !existingNames.has(p.name));
-  
-  if (missingProducts.length === 0) {
-    console.log('✅ All products are already in search!');
+  if (scannedProducts.length === 0) {
+    console.log('❌ No products found to update!');
     return;
   }
   
-  console.log(`Found ${missingProducts.length} products NOT in search:\n`);
-  missingProducts.forEach(p => {
-    console.log(`   ❌ ${p.name} (${p.category})`);
-  });
-  
-  console.log('\n📋 Step 4: Updating search files...\n');
-  
-  // Merge existing and new products
-  const allProducts = [...scannedProducts];
+  console.log('📋 Step 2: Sorting products...\n');
   
   // Sort by category then name
-  allProducts.sort((a, b) => {
+  scannedProducts.sort((a, b) => {
     if (a.category === b.category) {
       return a.name.localeCompare(b.name);
     }
     return a.category.localeCompare(b.category);
   });
   
-  updateSearchFile(allProducts);
+  console.log('📋 Step 3: Updating search files with URLs...\n');
+  updateSearchFile(scannedProducts);
   
   console.log('\n🎉 COMPLETE!');
-  console.log(`✨ Added ${missingProducts.length} missing products to search`);
-  console.log(`📊 Total products in search: ${allProducts.length}`);
+  console.log(`✨ Updated search with ${scannedProducts.length} products (all with URLs)`);
   
   // Save report
   const report = {
     timestamp: new Date().toISOString(),
-    existingProducts: existingProducts.length,
-    scannedProducts: scannedProducts.length,
-    missingProducts: missingProducts.length,
-    totalProducts: allProducts.length,
-    missing: missingProducts.map(p => ({ name: p.name, category: p.category, file: p.file }))
+    totalProducts: scannedProducts.length,
+    products: scannedProducts.map(p => ({ 
+      name: p.name, 
+      category: p.category, 
+      url: p.url,
+      file: p.file 
+    }))
   };
   
   fs.writeFileSync('search-products-report.json', JSON.stringify(report, null, 2));
