@@ -9,17 +9,34 @@
   }
   
   function init() {
-    // Retrieve order data from localStorage
-    const orderDataStr = localStorage.getItem('guthaben_order_data');
-    
-    if (!orderDataStr) {
-      console.log('No order data found in localStorage');
-      return;
+    // Prefer URL parameters, then fall back to localStorage
+    const params = new URLSearchParams(window.location.search);
+    const urlValue = params.get('value');
+    const urlQuantity = params.get('quantity');
+
+    let orderData = null;
+
+    if (urlValue) {
+      orderData = {
+        productName: 'Google Play',
+        productImage: 'https://static.rapido.com/cms/sites/21/2024/07/11151016/Google-Play-LL-New.png',
+        quantity: parseInt(urlQuantity || '1', 10),
+        value: parseInt(urlValue, 10),
+        timestamp: Date.now(),
+      };
+      try { localStorage.setItem('guthaben_order_data', JSON.stringify(orderData)); } catch (_) {}
+      console.log('Loaded order data from URL:', orderData);
+    } else {
+      // Retrieve order data from localStorage
+      const orderDataStr = localStorage.getItem('guthaben_order_data');
+      if (!orderDataStr) {
+        console.log('No order data found via URL or localStorage');
+        return;
+      }
+      orderData = JSON.parse(orderDataStr);
+      console.log('Retrieved order data from localStorage:', orderData);
     }
-    
-    const orderData = JSON.parse(orderDataStr);
-    console.log('Retrieved order data:', orderData);
-    
+
     // Find elements to update on payment page
     // Look for product name elements
     const productNameElements = document.querySelectorAll('[data-testid*="product-name"], [class*="product-name"], .product-title, h1, h2');

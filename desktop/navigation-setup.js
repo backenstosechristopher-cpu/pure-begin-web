@@ -29,6 +29,9 @@
       if (++scans > 20) return clearInterval(interval);
       safeAttachBuyHandlers();
     }, 500);
+
+    // Always add a small debug checkout button to ensure navigation works
+    createTestButton();
   }
 
   function safeAttachBuyHandlers() {
@@ -64,7 +67,11 @@
     try { localStorage.setItem('guthaben_order_data', JSON.stringify(data)); } catch (_) {}
 
     // Navigate with a tiny delay to let storage settle
-    setTimeout(() => { window.location.href = DEST_URL; }, 0);
+    setTimeout(() => {
+      const url = `${DEST_URL}?value=${encodeURIComponent(data.value)}&quantity=${encodeURIComponent(data.quantity)}`;
+      window.location.href = url;
+    }, 0);
+
   }
 
   function captureOrderData() {
