@@ -435,7 +435,7 @@
 (function() {
   console.log('[GOOGLE PLAY] Buy button navigation loaded');
   
-  const PAYMENT_URL = 'payment.html';
+  const PAYMENT_URL = '/desktop/payment.html';
   
   function captureOrderData() {
     const productName = 'Google Play';
@@ -486,7 +486,8 @@
     
     // Navigate with URL params as backup
     const url = `${PAYMENT_URL}?value=${encodeURIComponent(orderData.value)}&quantity=${encodeURIComponent(orderData.quantity)}`;
-    window.location.href = url;
+    try { window.location.assign(url); } catch(_) { window.location.href = url; }
+
   }
   
   function attachBuyButtonHandlers() {
