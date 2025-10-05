@@ -1,134 +1,110 @@
 (function() {
   'use strict';
-  
-  // Wait for DOM to be ready
+
+  const DEST_FILENAME = 'payment.html';
+  const PAGE_DIR = (function() {
+    const path = window.location.pathname;
+    const idx = path.lastIndexOf('/') + 1;
+    return path.slice(0, idx);
+  })();
+  const DEST_URL = PAGE_DIR + DEST_FILENAME; // always navigate within same /desktop/ dir
+
+  // Run as soon as possible and also after dynamic renders
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-  
+
   function init() {
-    console.log('Navigation setup initialized');
-    
-    // Find all "Jetzt kaufen" buttons and links
-    const allElements = Array.from(document.querySelectorAll('button, a, [role="button"]'));
-    const buyButtons = allElements.filter(el => {
-      const text = el.textContent.trim();
-      return text.includes('Jetzt kaufen') || 
-             text.includes('JETZT KAUFEN') ||
-             text === 'Kaufen' ||
-             el.getAttribute('data-testid')?.includes('buy') ||
-             el.getAttribute('aria-label')?.includes('kaufen');
-    });
-    
-    console.log(`Found ${buyButtons.length} buy button(s)`);
-    
-    // Remove existing event listeners and add new ones
-    buyButtons.forEach((button, index) => {
-      console.log(`Setting up buy button ${index + 1}:`, button);
-      
-      // Prevent default behavior
-      button.addEventListener('click', function(e) {
-        console.log('Buy button clicked!');
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Get selected quantity/value
-        const orderData = captureOrderData();
-        
-        // Store in localStorage
-        if (orderData.value) {
-          localStorage.setItem('guthaben_order_data', JSON.stringify(orderData));
-          console.log('Order data saved:', orderData);
-        }
-        
-        // Navigate to payment page
-        console.log('Navigating to payment.html');
-        window.location.href = 'payment.html';
-      }, true); // Use capture phase to intercept before other handlers
-    });
-    
-    // Also create a test button if none found
-    if (buyButtons.length === 0) {
-      console.log('No buy buttons found, creating test button');
-      createTestButton();
-    }
+    safeAttachBuyHandlers();
+
+    // MutationObserver to catch late-rendered buttons
+    const mo = new MutationObserver(() => safeAttachBuyHandlers());
+    mo.observe(document.documentElement || document.body, { childList: true, subtree: true });
+
+    // Fallback: periodic scan for a short time
+    let scans = 0;
+    const interval = setInterval(() => {
+      if (++scans > 20) return clearInterval(interval);
+      safeAttachBuyHandlers();
+    }, 500);
   }
-  
+
+  function safeAttachBuyHandlers() {
+    const candidates = Array.from(document.querySelectorAll('button, a, [role="button"]'));
+    const buyButtons = candidates.filter(el => {
+      const text = (el.textContent || '').trim();
+      const aria = (el.getAttribute('aria-label') || '').toLowerCase();
+      const testid = (el.getAttribute('data-testid') || '').toLowerCase();
+      return /jetzt\s*kaufen/i.test(text) ||
+             /^kaufen$/i.test(text) ||
+             aria.includes('kaufen') ||
+             testid.includes('buy') ||
+             testid.includes('checkout');
+    });
+
+    buyButtons.forEach(btn => {
+      if (btn.dataset._buyHandlerAttached) return; // avoid duplicates
+      btn.dataset._buyHandlerAttached = '1';
+
+      // If it's an anchor, rewrite the href for extra robustness
+      if (btn.tagName === 'A') {
+        try { btn.setAttribute('href', DEST_URL); btn.setAttribute('target', '_self'); } catch (_) {}
+      }
+
+      btn.addEventListener('click', onBuyClick, true); // capture phase to intercept frameworks
+    });
+  }
+
+  function onBuyClick(e) {
+    try { e.preventDefault(); e.stopPropagation(); } catch (_) {}
+
+    const data = captureOrderData();
+    try { localStorage.setItem('guthaben_order_data', JSON.stringify(data)); } catch (_) {}
+
+    // Navigate with a tiny delay to let storage settle
+    setTimeout(() => { window.location.href = DEST_URL; }, 0);
+  }
+
   function captureOrderData() {
-    const productName = 'Google Play';
-    const productImage = 'https://static.rapido.com/cms/sites/21/2024/07/11151016/Google-Play-LL-New.png';
+    // Product title from heading if available
+    const heading = document.querySelector('h1, [data-testid*="product-title"], .product-title');
+    const productName = heading ? heading.textContent.trim() : 'Google Play';
+
+    // Try to find product image
+    const productImgEl = document.querySelector('img[alt*="Google Play" i], img[alt*="product" i], .MuiBox-root img');
+    const productImage = productImgEl ? (productImgEl.currentSrc || productImgEl.src) : 'https://static.rapido.com/cms/sites/21/2024/07/11151016/Google-Play-LL-New.png';
+
     let selectedValue = null;
     let selectedQuantity = 1;
-    
-    // Try to get from URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const valueParam = urlParams.get('value');
-    const quantityParam = urlParams.get('quantity');
-    
-    if (valueParam) {
-      selectedValue = parseInt(valueParam) / 100; // Convert cents to euros
-      selectedQuantity = parseInt(quantityParam) || 1;
+
+    // 1) Prefer selected toggle button
+    const selectedBtn = document.querySelector('.MuiToggleButton-root.Mui-selected, .MuiToggleButton-root[aria-pressed="true"], button.blue-border');
+    if (selectedBtn) {
+      const txt = selectedBtn.textContent || '';
+      const m = txt.match(/(\d{1,4})\s*€|€\s*(\d{1,4})/);
+      if (m) selectedValue = parseInt(m[1] || m[2], 10);
     }
-    
-    // Try to find selected button
-    const selectedButton = document.querySelector('button.blue-border, button[aria-pressed="true"], .MuiToggleButton-root.Mui-selected');
-    if (selectedButton) {
-      const text = selectedButton.textContent.trim();
-      const match = text.match(/(\d+)\s*€|€\s*(\d+)/);
-      if (match) {
-        selectedValue = parseInt(match[1] || match[2]);
+
+    // 2) Fallback: custom numeric input near the amount section
+    if (!selectedValue) {
+      const amountInput = document.querySelector('input[type="number"], input[placeholder*="EUR" i], input[placeholder*="Wert" i]');
+      if (amountInput && amountInput.value) {
+        const iv = parseInt(amountInput.value.replace(/\D/g, ''), 10);
+        if (!isNaN(iv)) selectedValue = iv;
       }
     }
-    
-    // Fallback: use custom input
-    const customInput = document.querySelector('input[type="number"]');
-    if (customInput && customInput.value) {
-      selectedValue = parseInt(customInput.value);
-    }
-    
-    // Default to 5 EUR if nothing selected
-    if (!selectedValue) {
-      selectedValue = 5;
-    }
-    
+
+    // 3) Final fallback
+    if (!selectedValue) selectedValue = 5;
+
     return {
-      productName: productName,
-      productImage: productImage,
+      productName,
+      productImage,
       quantity: selectedQuantity,
       value: selectedValue,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
-  }
-  
-  function createTestButton() {
-    const testButton = document.createElement('button');
-    testButton.textContent = '🛒 Test: Go to Payment Page';
-    testButton.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 10000;
-      padding: 15px 25px;
-      background: #FFA81E;
-      color: #1F2226;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 168, 30, 0.4);
-    `;
-    
-    testButton.addEventListener('click', function() {
-      const orderData = captureOrderData();
-      localStorage.setItem('guthaben_order_data', JSON.stringify(orderData));
-      console.log('Test button: Navigating to payment.html with data:', orderData);
-      window.location.href = 'payment.html';
-    });
-    
-    document.body.appendChild(testButton);
-    console.log('Test button created');
   }
 })();
